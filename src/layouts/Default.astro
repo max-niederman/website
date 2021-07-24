@@ -1,0 +1,13 @@
+---
+const { content } = Astro.props;
+---
+
+<html>
+    <head>
+        <title>{content.title}</title>
+        <link rel="stylesheet" href="/styles/global.css">
+    </head>
+    <body>
+        <slot />
+    </body>
+</html>
