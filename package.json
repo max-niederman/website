@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "astro dev",
-    "build": "astro build"
+    "build": "astro build",
+    "prebuild": "cp -r node_modules/@fontsource public/fonts"
   },
   "devDependencies": {
     "@astrojs/renderer-react": "^0.1.5",
