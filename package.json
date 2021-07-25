@@ -12,6 +12,7 @@
     "@fontsource/eb-garamond": "^4.5.0",
     "@fontsource/fira-code": "^4.5.0",
     "astro": "^0.17.2",
+    "bootstrap-icons": "^1.5.0",
     "prettier": "^2.3.2",
     "prettier-plugin-svelte": "^2.3.1",
     "tailwindcss": "^2.2.5"

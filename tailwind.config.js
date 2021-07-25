@@ -13,6 +13,12 @@ module.exports = {
 			white: "white",
 		},
 		extend: {
+      minHeight: {
+        "screen": "100vh",
+      },
+      minWidth: {
+        "screen": "100vw",
+      },
 			fontFamily: {
 				serif: ["EB Garamond", ...fontFamily.serif],
         mono: ["Fira Code", ...fontFamily.mono],

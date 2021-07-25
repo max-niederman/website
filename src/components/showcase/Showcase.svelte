@@ -1,114 +1,89 @@
 <script>
   import { onMount } from "svelte";
+  import { fly } from "svelte/transition";
   import Nav from "./Nav.svelte";
+  import sections from "./sections";
 
-  let container;
-  let sections = [
-    {
-      title: null,
-      shortTitle: null,
-      link: "#name",
-      element: undefined,
-    },
-    {
-      title: "My Skills",
-      shortTitle: "Skills",
-      link: "#skills",
-      element: undefined,
-    },
-    {
-      title: "My Work",
-      shortTitle: "Work",
-      link: "#work",
-      element: undefined,
-    },
-    {
-      title: "My Writings",
-      shortTitle: "Writings",
-      link: "#writings",
-      element: undefined,
-    },
-  ];
-  let current;
+  let scrollContainer;
+  let current = sections[0];
+
+  function updatePosition() {
+    if (scrollContainer.scrollWidth > scrollContainer.clientWidth) {
+      sections.sort((a, b) => a.element.offsetLeft - b.element.offsetLeft);
+
+      current = sections.find(
+        ({ element }) => element.offsetLeft + 500 >= scrollContainer.scrollLeft
+      );
+    } else {
+      sections.sort((a, b) => a.element.offsetTop - b.element.offsetTop);
+
+      current = sections.find(
+        ({ element }) => element.offsetTop >= scrollContainer.scrollTop
+      );
+    }
+  }
 
   onMount(() => {
-    container.addEventListener("wheel", (e) => {
-      e.preventDefault();
-      container.scrollLeft += e.deltaY;
+    scrollContainer.addEventListener("wheel", (e) => {
+      if (scrollContainer.scrollWidth > scrollContainer.clientWidth) {
+        e.preventDefault();
+        scrollContainer.scrollLeft += e.deltaY * 2;
+      }
     });
 
-    container.addEventListener("scroll", ({ target }) => {
-      sections.sort((a, b) => a.element.offsetLeft - b.element.offsetLeft);
-      console.log(sections.map(({ element }) => element.offsetLeft));
-      current = sections.find(({ element }) => element.offsetLeft + 500 >= target.scrollLeft);
-    });
+    scrollContainer.addEventListener("scroll", updatePosition);
+    updatePosition();
   });
 </script>
 
 <Nav
   sections={sections
-    .filter(({ shortTitle }) => shortTitle !== null)
-    .map(({ shortTitle, link }) => ({ title: shortTitle, link }))}
+    .filter(({ shortTitle }) => shortTitle !== undefined)
+    .map(({ id, shortTitle }) => ({ title: shortTitle, link: `#${id}` }))}
+  home={`#${sections[0].id}`}
+  open={current === sections[0]}
 />
 
-<div class="fixed z-10 right-24 top-12">
-  <h1 class="text-6xl font-serif font-extrabold">{current?.title ?? ""}</h1>
+<div class="hidden lg:block fixed z-10 right-24 top-12">
+  {#each sections as section}
+    {#if current === section}
+      <h1 class="text-6xl font-serif font-extrabold" in:fly={{ y: -25, duration: 200 }} out:fly={{ duration: 0 }}>{section?.title ?? ""}</h1>
+    {/if}
+  {/each}
 </div>
 
-<div bind:this={container} class="showcase-container">
-  <div
-    bind:this={sections[0].element}
-    class="section h-screen w-screen"
-    id="name"
-  />
-  <div
-    bind:this={sections[1].element}
-    class="section h-screen w-screen"
-    id="skills"
-  />
-  <div
-    bind:this={sections[2].element}
-    class="section h-screen w-screen"
-    id="work"
-  />
-  <div
-    bind:this={sections[3].element}
-    class="section h-screen w-screen"
-    id="writings"
-  />
+<div bind:this={scrollContainer} class="scroll-container">
+  {#each sections as section}
+    <div bind:this={section.element} id={section.id}>
+      <svelte:component this={section.content} sections={sections} />
+    </div>
+  {/each}
 </div>
 
 <style lang="scss">
-  .showcase-container {
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
+  .scrollContainer {
+    scroll-behavior: smooth;
+  }
 
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
+  @media (min-width: 1024px) {
+    .scroll-container {
+      height: 100vh;
+      width: 100vw;
 
-    scrollbar-width: none;
+      overflow-x: scroll;
+      overflow-y: hidden;
 
-    .section {
-      display: inline-block;
-      margin: 0;
-      margin-right: -4px;
+      scrollbar-width: none;
 
-      &:nth-of-type(1) {
-        background: #ffa0a0;
-      }
 
-      &:nth-of-type(2) {
-        background: #a0ffa0;
-      }
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
 
-      &:nth-of-type(3) {
-        background: #a0a0ff;
-      }
-
-      &:nth-of-type(4) {
-        background: #a0f0ff;
+      * {
+        scroll-snap-align: start;
+        display: inline-block;
+        margin: 0;
       }
     }
   }
