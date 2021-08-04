@@ -9,7 +9,7 @@
 </script>
 
 <nav
-  class="fixed z-30 w-screen md:w-auto p-4 flex flex-row md:flex-col bg-white md:rounded-br-md"
+  class="fixed z-30 w-screen md:w-auto p-4 flex flex-row md:flex-col bg-white dark:bg-black md:rounded-br-md"
   on:mouseenter={() => (hovered = true)}
   on:mouseleave={() => (hovered = false)}
 >

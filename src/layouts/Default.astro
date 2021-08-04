@@ -1,5 +1,6 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
+import Nav from "../components/Nav.astro";
 
 import "../styles/global.scss";
 import "../styles/typography.scss";
@@ -17,8 +18,12 @@ const { content } = Astro.props;
         overflow-x: hidden;
       }
 
-      main {
-        max-width: 75ch;
+      .sidebar {
+        
+      }
+
+      .typography {
+        max-width: 80ch;
         margin: auto;
         padding: 0 16px;
 
@@ -32,10 +37,17 @@ const { content } = Astro.props;
     </style>
   </head>
   <body>
-    <main class="typography">
-      <h1 class="title">{content.title}</h1>
 
-      <slot />
+    <main class="typography">
+      <Nav />
+
+      <header>
+        <h1 class="title">{content.title}</h1>
+      </header>
+
+      <article>
+        <slot />
+      </article>
     </main>
   </body>
 </html>
