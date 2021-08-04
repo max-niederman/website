@@ -1,0 +1,40 @@
+$font-serif: "EB Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+$font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+// Syntax Highlighting
+@import "prism-themes/themes/prism-nord.css";
+
+$gutter: 4px;
+
+.typography {
+  font-size: 1.25rem;
+  font-family: $font-serif;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-variant: small-caps;
+    margin-left: -$gutter;
+    margin-right: -$gutter;
+  }
+
+  h1 {
+    text-align: right;
+    border-bottom: 1px solid var(--fg);
+  }
+
+  h2 {
+    border-bottom: 1px dotted var(--fg);
+  }
+
+  a {
+    color: inherit;
+
+    &:visited {
+      color: inherit;
+    }
+  }
+
+  code {
+    font-size: 1rem;
+    font-family: $font-mono;
+  }
+}

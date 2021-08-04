@@ -1,13 +1,41 @@
 ---
+import BaseHead from "../components/BaseHead.astro";
+
+import "../styles/global.scss";
+import "../styles/typography.scss";
+
 const { content } = Astro.props;
 ---
 
-<html>
-    <head>
-        <title>{content.title}</title>
-        <link rel="stylesheet" href="/styles/global.css">
-    </head>
-    <body>
-        <slot />
-    </body>
+<html lang={content.language ?? "en"}>
+  <head>
+    <BaseHead title={content.title ?? "Max Niederman"} description={content.description ?? ""} />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PrismJS/prism-themes/themes/prism-nord.css" />
+    <style lang="scss">
+      body {
+        overflow-x: hidden;
+      }
+
+      main {
+        max-width: 75ch;
+        margin: auto;
+        padding: 0 16px;
+
+        .title {
+          margin: 32px 0;
+          border-bottom: none;
+          text-align: center;
+          font-size: 3em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="typography">
+      <h1 class="title">{content.title}</h1>
+
+      <slot />
+    </main>
+  </body>
 </html>

@@ -9,14 +9,17 @@
 </script>
 
 <nav
-  class="fixed z-30 p-4 flex flex-row md:flex-col bg-white rounded-br-md"
+  class="fixed z-30 w-screen md:w-auto p-4 flex flex-row md:flex-col bg-white md:rounded-br-md"
   on:mouseenter={() => (hovered = true)}
   on:mouseleave={() => (hovered = false)}
 >
   <a href={home} class="text-4xl leading-6 font-serif font-extrabold">M</a>
 
   {#if open || hovered}
-    <div class="hidden md:flex flex-col items-center" transition:fly="{{ y: -15, duration: 50 }}">
+    <div
+      class="hidden md:flex flex-col items-center"
+      transition:fly={{ y: -15, duration: 50 }}
+    >
       {#each sections as { title, link }}
         {#if title !== null}
           <a
@@ -33,10 +36,7 @@
   <div class="flex md:hidden flex-row ml-6">
     {#each sections as { title, link }}
       {#if title !== null}
-        <a
-          href={link}
-          class="text-right text-xl font-mono font-bold"
-        >
+        <a href={link} class="text-right text-xl font-mono font-bold">
           {title}
         </a>
       {/if}

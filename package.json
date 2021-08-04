@@ -5,17 +5,31 @@
   "scripts": {
     "start": "astro dev",
     "build": "astro build",
-    "prebuild": "cp -r node_modules/@fontsource public/fonts"
+    "prebuild": "cp -r node_modules/@fontsource public/fonts",
+    "format": "npx prettier -w package.json *.config.{js,mjs} src/**/*.{js,jsx,ts,tsx,svelte}"
   },
   "devDependencies": {
-    "@astrojs/renderer-react": "^0.1.5",
+    "@astrojs/renderer-react": "^0.2.0",
     "@astrojs/renderer-svelte": "^0.1.1",
     "@fontsource/eb-garamond": "^4.5.0",
     "@fontsource/fira-code": "^4.5.0",
-    "astro": "^0.17.2",
+    "@silvenon/remark-smartypants": "^1.0.0",
+    "@snowpack/plugin-postcss": "^1.4.3",
+    "astro": "^0.18.5",
+    "autoprefixer": "^10.3.1",
     "bootstrap-icons": "^1.5.0",
     "prettier": "^2.3.2",
     "prettier-plugin-svelte": "^2.3.1",
+    "prism-themes": "^1.8.0",
+    "remark-footnotes": "^3.0.0",
+    "remark-gemoji": "^6.0.0",
+    "remark-gfm": "^1.0.0",
+    "remark-lint": "^8.0.0",
+    "remark-math": "^4.0.0",
+    "remark-slug": "^6.1.0",
     "tailwindcss": "^2.2.5"
+  },
+  "dependencies": {
+    "rehype-mathjax": "^3.1.0"
   }
 }

@@ -47,18 +47,24 @@
 <div class="hidden lg:block fixed z-10 right-24 top-12">
   {#each sections as section}
     {#if current === section}
-      <h1 class="text-6xl font-serif font-extrabold" in:fly={{ y: -25, duration: 200 }} out:fly={{ duration: 0 }}>{section?.title ?? ""}</h1>
+      <h1
+        class="text-6xl font-serif font-extrabold"
+        in:fly={{ y: -25, duration: 200 }}
+        out:fly={{ duration: 0 }}
+      >
+        {section?.title ?? ""}
+      </h1>
     {/if}
   {/each}
 </div>
 
-<div bind:this={scrollContainer} class="scroll-container">
+<main bind:this={scrollContainer} class="scroll-container">
   {#each sections as section}
-    <div bind:this={section.element} id={section.id}>
-      <svelte:component this={section.content} sections={sections} />
-    </div>
+    <section bind:this={section.element} id={section.id}>
+      <svelte:component this={section.content} {sections} />
+    </section>
   {/each}
-</div>
+</main>
 
 <style lang="scss">
   .scrollContainer {
@@ -74,7 +80,6 @@
       overflow-y: hidden;
 
       scrollbar-width: none;
-
 
       display: flex;
       flex-direction: row;

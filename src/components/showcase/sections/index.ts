@@ -18,7 +18,7 @@ const sections: Section[] = [
     title: "My Work",
     shortTitle: "Work",
     content: Work,
-  }
+  },
 ];
 
 export default sections;

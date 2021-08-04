@@ -1,0 +1,24 @@
+@use "theme";
+
+// Fonts
+@import "/fonts/eb-garamond/latin.css";
+@import "/fonts/fira-code/latin.css";
+
+:root {
+  @include theme.light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include theme.dark;
+  }
+}
+
+body {
+  min-height: 100vh;
+  min-width: 100vw;
+  margin: 0;
+
+  background: var(--bg);
+  color: var(--fg);
+}
