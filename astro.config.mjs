@@ -8,7 +8,7 @@ export default {
   },
   renderers: ["@astrojs/renderer-react", "@astrojs/renderer-svelte"],
   markdownOptions: {
-    remarkPlugins: [ 
+    remarkPlugins: [
       "remark-lint",
       "remark-gfm",
       "remark-slug",
@@ -17,8 +17,6 @@ export default {
       "@silvenon/remark-smartypants",
       "remark-gemoji",
     ],
-    rehypePlugins: [
-      "rehype-mathjax",
-    ]
-  }
+    rehypePlugins: ["rehype-mathjax"],
+  },
 };

@@ -15,7 +15,13 @@
 
   <div class="m-4 flex flex-row justify-between items-end">
     <a href="https://github.com/max-niederman" target="_blank" class="p-2">
-      <img src={github} alt="GitHub logo" class="h-10 w-10" />
+      <img
+        src={github}
+        alt="GitHub logo"
+        height="40"
+        width="40"
+        class="filter dark:invert"
+      />
     </a>
 
     <a

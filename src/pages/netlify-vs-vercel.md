@@ -1,12 +1,12 @@
 ---
 title: "Netlify vs. Vercel: A Comparison"
-published: "2020-10-02"
-updated: "2020-10-02"
+published: "2020-08-02"
+updated: "2020-08-02"
 description: "Which platform should you use: Netlify or Vercel?"
 tags:
-- Web Development
-- Hosting
-- Serverless
+- web development
+- hosting
+- serverless
 layout: "../layouts/Default.astro"
 ---
 
