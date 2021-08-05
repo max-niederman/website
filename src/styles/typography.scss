@@ -15,10 +15,12 @@ $gutter: 0.25em;
 
   h1 {
     text-align: right;
+    font-size: 2em;
     border-bottom: 1px solid var(--fg);
   }
 
   h2 {
+    font-size: 1.5em;
     border-bottom: 1px dotted var(--fg);
   }
 
@@ -28,6 +30,19 @@ $gutter: 0.25em;
     &:visited {
       color: inherit;
     }
+  }
+
+  ol {
+    list-style-type: decimal;
+    ol {
+      list-style-type: lower-alpha;
+    }
+  }
+
+  blockquote {
+    border-left: 1px solid var(--fg);
+    margin: 1.5em 0;
+    padding: 0.25em 12px;
   }
 
   code {
