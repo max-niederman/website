@@ -24,7 +24,7 @@
         {/each}
       </ul>
 
-      <a href="/writings" class="font-mono font-bold"> More => </a>
+      <a href="/writings" class="font-mono font-bold italic"> More => </a>
     </div>
   {/each}
 </div>
