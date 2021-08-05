@@ -21,7 +21,7 @@ const { content } = Astro.props;
       .typography {
         max-width: 80ch;
         margin: auto;
-        padding: 0 16px;
+        padding: 0 24px;
 
         .title {
           margin: 32px 0;
@@ -36,9 +36,11 @@ const { content } = Astro.props;
     <Nav />
 
     <main class="typography">
-      <header>
-        <h1 class="title">{content.title}</h1>
-      </header>
+      {content.title !== undefined && 
+        <header>
+          <h1 class="title">{content.title}</h1>
+        </header>
+      }
 
       <article>
         <slot />

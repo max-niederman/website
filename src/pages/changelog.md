@@ -1,9 +1,9 @@
 ---
 title: "Changelog"
-updated: "2020-08-04"
+updated: "2021-08-04"
 description: "A meta page listing changes to this website and detailing plans for future ones."
 tags:
-- meta
+- Meta
 layout: "../layouts/Default.astro"
 ---
 
@@ -26,6 +26,7 @@ Technical:
 
 - [X] Navigation
 - [ ] Tags
+- [ ] Extract resumé page into its own package
 - [ ] Labeled Links
 - [ ] Link Popups
 - [ ] Content Linting

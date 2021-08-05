@@ -1,10 +1,10 @@
 $font-serif: "EB Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 $font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
-$gutter: 4px;
+$gutter: 0.25em;
 
 .typography {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-family: $font-serif;
 
   h1, h2, h3, h4, h5, h6 {
