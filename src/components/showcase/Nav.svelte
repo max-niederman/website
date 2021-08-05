@@ -4,6 +4,7 @@
   export let sections;
   export let home = "/";
   export let open = true;
+  export let currentTitle;
 
   let hovered = false;
 </script>
@@ -24,7 +25,8 @@
         {#if title !== null}
           <a
             href={link}
-            class="my-4 text-xl font-mono font-bold writing-mode-ve-lr transform rotate-180"
+            class="mt-4 text-xl font-mono writing-mode-ve-lr transform rotate-180"
+            class:font-bold={currentTitle === title}
           >
             {title}
           </a>
@@ -36,7 +38,11 @@
   <div class="flex md:hidden flex-row ml-6">
     {#each sections as { title, link }}
       {#if title !== null}
-        <a href={link} class="text-right text-xl font-mono font-bold">
+        <a
+          href={link}
+          class="mr-4 text-right text-xl font-mono"
+          class:font-bold={currentTitle === title}
+        >
           {title}
         </a>
       {/if}

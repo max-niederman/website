@@ -18,7 +18,7 @@
       sections.sort((a, b) => a.element.offsetTop - b.element.offsetTop);
 
       current = sections.find(
-        ({ element }) => element.offsetTop >= scrollContainer.scrollTop
+        ({ element }) => element.offsetTop >= document.documentElement.scrollTop
       );
     }
   }
@@ -31,7 +31,7 @@
       }
     });
 
-    scrollContainer.addEventListener("scroll", updatePosition);
+    window.addEventListener("scroll", updatePosition);
     updatePosition();
   });
 </script>
@@ -42,6 +42,7 @@
     .map(({ id, shortTitle }) => ({ title: shortTitle, link: `#${id}` }))}
   home={`#${sections[0].id}`}
   open={current === sections[0]}
+  currentTitle={current.shortTitle}
 />
 
 <div class="hidden lg:block fixed z-10 right-24 top-12">

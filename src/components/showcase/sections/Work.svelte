@@ -1,5 +1,5 @@
 <script>
-  export let works = [
+  export let work = [
     {
       title: "ttyper",
       summary:
@@ -24,7 +24,7 @@
 <div
   class="min-w-screen min-h-screen p-2 sm:p-4 md:p-12 lg:p-48 flex flex-col lg:grid grid-rows-1 auto-cols-auto grid-flow-col"
 >
-  {#each works as { title, summary, links }}
+  {#each work as { title, summary, links }}
     <div class="flex-grow my-4 px-4 font-mono">
       <h2 class="text-5xl font-serif font-bold pb-4 mb-4 border-b-2">
         {title}

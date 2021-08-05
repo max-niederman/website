@@ -12,7 +12,7 @@ layout: "../layouts/Default.astro"
 ## August 2021
 
 Technical:
-- Created the site using [astro](https://astro.build) and the [unified](https://unifiedjs.com) suite for markdown processing.
+- Created the site using [astro](https://astro.build) and the [unified](https://unifiedjs.com) suite for Markdown processing.
 - Added dark mode.
 - Added syntax highlighting for code blocks using [Prism](https://prismjs.com).
 - Added a navigation sidebar to the reader.
