@@ -9,7 +9,7 @@ tags:
 layout: "../../layouts/Default.astro"
 ---
 
-In this article, I propose a novel new speedrun category, the "Geneva%." The Geneva% speedrun is completed by violating a provision of one of the Geneva Conventions or their Additional Protocols. The category is applicable to great number of games, but for example I use *Minecraft*.
+In this article, I propose a novel new speedrun category, the "Geneva%." The Geneva% speedrun is completed by violating a provision of one of the Geneva Conventions or their Additional Protocols. The category is applicable to a great number of games, but I provide a route for *Minecraft* as an example.
 
 # Provisions for Completion
 
@@ -152,3 +152,5 @@ Following is an example Geneva% route for *Minecraft*:
 3. Kill a villager.
 
 This is in violation of [Article 3 of Convention (1) of 1949](#article-3---conflicts-not-of-an-international-character), because the murdered villager was "not taking active part in the hostilities" and murder of such non-combatants is expressly forbidden.
+
+This route is probably extremely inefficient, as it requires waiting for night-time. I would recommend any runner reading this with the intention of running *Minecraft* Geneva% find a different route or create one themselves.
