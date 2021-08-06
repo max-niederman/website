@@ -1,7 +1,7 @@
 ---
 title: "The Geneva-Percent Speedrun"
 updated: "2021-08-05"
-description: "A proposal for a new speedrun category: the Geneva%, in which the runner attempts to violate every provision of the Geneva convention as quickly as possible."
+description: "A proposal for a new speedrun category: the Geneva%, in which the runner attempts to violate a provision of the Geneva convention as quickly as possible."
 tags:
   - Gaming
   - Speedrunning
@@ -9,20 +9,20 @@ tags:
 layout: "../../layouts/Default.astro"
 ---
 
-In this article, I'll be proposing a novel new speedrun category, the "Geneva%." The Geneva% speedrun is completed by violating a provision of one of the Geneva Conventions or their Additional Protocols. The category is applicable to great number of games, but for example I use *Minecraft*.
+In this article, I propose a novel new speedrun category, the "Geneva%." The Geneva% speedrun is completed by violating a provision of one of the Geneva Conventions or their Additional Protocols. The category is applicable to great number of games, but for example I use *Minecraft*.
 
 # Provisions for Completion
 
 In order for completion to be possible in games which do not portray the Geneva Conventions and its parties in-game, some provisions must be made. In most games, these will include:
 
-2. The in-game representation of the player is treated as a High Contracting Party to the Conventions.
-3. Other in-game entities may be treated as Parties to the Conventions.
+1. The in-game representation of the player is treated as a High Contracting Party to the Conventions.
+2. Other in-game entities may be treated as Parties to the Conventions.
 
 These provisions are inherently dependent on the nature of the game being ran, and as such they should be decided on a per-game basis.
 
 # Example Violations
 
-Following are examples of how each of the Articles of the first chapter of the first Geneva Convention of 1949 can be violated. These examples are provided as examples for aspiring runners in the Geneva% category. Better routes can be achieved by use of the other Conventions.
+Following are examples of how each of the Articles of the first chapter of the first Geneva Convention of 1949 can (or can't) be violated. These examples are provided as examples for aspiring runners in the Geneva% category. Better routes can be achieved by use of the other Conventions.
 
 ## Convention (1) of 1949
 
