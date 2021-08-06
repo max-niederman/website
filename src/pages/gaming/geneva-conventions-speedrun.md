@@ -151,4 +151,4 @@ Following is an example Geneva% route for *Minecraft*:
 2. Wait for night-time and fighting mobs. This constitutes a conflict among Powers.
 3. Kill a villager.
 
-This is in violation of [Article 3 of Convention (1) of 1949](#article-3), because the murdered villager was "not taking active part in the hostilities" and murder of such non-combatants is expressly forbidden.
+This is in violation of [Article 3 of Convention (1) of 1949](#article-3---conflicts-not-of-an-international-character), because the murdered villager was "not taking active part in the hostilities" and murder of such non-combatants is expressly forbidden.
