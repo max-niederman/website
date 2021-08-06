@@ -2,11 +2,11 @@
   export let categories = [
     {
       title: "Latest",
-      writings: [{ title: "Changelog", link: "/changelog" }],
+      writings: [{ title: "The Geneva-Percent Speedrun", link: "/gaming/geneva-convention-speedrun" }, { title: "Netlify vs. Vecel: A Comparison", link: "netlify-vs-vercel" }],
     },
     {
       title: "Notable",
-      writings: [{ title: "Changelog", link: "/changelog" }],
+      writings: [{ title: "The Geneva-Percent Speedrun", link: "/gaming/geneva-convention-speedrun" }, { title: "Netlify vs. Vecel: A Comparison", link: "netlify-vs-vercel" }],
     },
   ];
 </script>
@@ -20,11 +20,11 @@
 
       <ul class="m-4 list-disc">
         {#each writings as { title, link }}
-          <li><a class="underline" href={link}>{title}</a></li>
+          <li><a class="text-2xl underline" href={link}>{title}</a></li>
         {/each}
       </ul>
 
-      <a href="/writings" class="font-mono font-bold italic"> More => </a>
+      <a href="/writings" class="font-mono font-bold italic">See All =></a>
     </div>
   {/each}
 </div>

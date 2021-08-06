@@ -32,9 +32,9 @@
 
       <p class="my-2">{summary}</p>
 
-      <a href={links.internal} class="font-bold italic">Read More =></a>
+      <a href={links.internal} class="text-xl font-bold italic">Read More =></a>
       <br class="my-1" />
-      <a href={links.external} target="_blank" class="font-bold italic"
+      <a href={links.external} target="_blank" class="text-xl font-bold italic"
         >Open =>></a
       >
     </div>
