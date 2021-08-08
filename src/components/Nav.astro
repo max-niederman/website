@@ -2,7 +2,11 @@
   <a href="/">M</a>
 
   <hr />
-  <a href="/writings">Writings</a>
+  <a href="/me">Me</a>
+  <a href="/about">Site</a>
+  
+  <hr />
+  <a href="/changelog">Changes</a>
 </nav>
 
 <style lang="scss">
@@ -12,6 +16,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: flex-start;
 
     padding: 8px;
 
@@ -19,8 +24,7 @@
     font-family: typography.$font-serif;
 
     a {
-      margin: 0 8px;
-      flex-grow: 1;
+      margin: 0 12px;
 
       font-weight: 700;
       font-variant: small-caps;
@@ -49,7 +53,7 @@
       flex-direction: column;
       align-items: center;
 
-      margin: 0 24px;
+      margin: 24px;
 
       font-size: 1.5em;
       text-align: right;
@@ -64,12 +68,13 @@
         &[href="/"] {
           text-align: center;
           font-size: 4em;
+          line-height: 0.75em;
         }
       }
 
       hr {
         width: 100%;
-        margin-bottom: 0.75em;
+        margin: 0.5em 0;
         display: block;
       }
     }
