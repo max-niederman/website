@@ -5,6 +5,7 @@
   "scripts": {
     "start": "astro dev",
     "build": "astro build",
+    "serve": "caddy file-server -root dist/ -listen 0.0.0.0:3000",
     "prebuild": "cp -r node_modules/@fontsource public/fonts",
     "format": "npx prettier -w package.json *.config.{js,mjs} src/**/*.{js,jsx,ts,tsx,svelte}"
   },
@@ -26,8 +27,7 @@
     "remark-gfm": "^1.0.0",
     "remark-lint": "^8.0.0",
     "remark-math": "^4.0.0",
-    "remark-slug": "^6.1.0",
-    "tailwindcss": "^2.2.5"
+    "remark-slug": "^6.1.0"
   },
   "dependencies": {
     "rehype-mathjax": "^3.1.0"

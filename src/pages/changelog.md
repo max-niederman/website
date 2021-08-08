@@ -1,6 +1,6 @@
 ---
 title: "Changelog"
-updated: "2021-08-04"
+updated: "2021-08-05"
 description: "A meta page listing changes to this website and detailing plans for future ones."
 tags:
 - Meta
@@ -12,6 +12,7 @@ layout: "../layouts/Default.astro"
 ## August 2021
 
 - [The Geneva-Percent Speedrun](/gaming/geneva-conventions-speedrun) is a write-up on a novel speedrun category completed by violating any provision of a Geneva Convention.
+- Removed the resumé showcase page entirely, as it made navigation harder, wasn't very functional, buggy, and didn't work well without JavaScript.
 
 Technical:
 - Created the site using [astro](https://astro.build) and the [unified](https://unifiedjs.com) suite for Markdown processing.
@@ -28,7 +29,6 @@ Technical:
 
 - [X] Navigation
 - [ ] Tags
-- [ ] Extract resumé page into its own package
 - [ ] Make `<code>` styling consistent
 - [ ] Labeled Links
 - [ ] Link Popups

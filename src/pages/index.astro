@@ -1,16 +1,58 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Showcase from "../components/showcase/Showcase.svelte";
+import Layout from "../layouts/Default.astro";
+import { Markdown } from "astro/components";
 
-import "../styles/global.scss";
+const allPages = Astro.fetchContent("./**/*.md");
+const pages = allPages.filter(({ tags }) => !tags?.includes("Meta"));
+pages.sort((a, b) => new Date(b.published) - new Date(a.published));
 ---
 
-<html>
-    <head>
-      <BaseHead title="Max Niederman" description="" />
-      <link rel="stylesheet" href="/styles/tailwind.css" />
-    </head>
-    <body>
-        <Showcase client:load />
-    </body>
-</html>
+<Layout content={{}}>
+  <Markdown>
+    This is the website of Max Niederman, a high-school student and hobby developer. I write about programming, games, anime, and whatever else I find interesting.
+
+    For more information about me, you can view the [*About page*](/about). You can find a log of the changes made to this website on the [*Changelog*](/changelog).
+  </Markdown>
+
+  <div class="sections">
+    <section>
+      <h2>Latest</h2>
+      {pages.map(({ title, url }) => 
+        <li><a href={url}>{title}</a></li>
+      )}
+    </section>
+    <section>
+      <h2>Updated</h2>
+      {[...allPages].sort((a, b) => new Date(b.updated) - new Date(a.updated)).map(({ title, url }) => 
+        <li><a href={url}>{title}</a></li>
+      )}
+    </section>
+    <section>
+      <h2>Gaming</h2>
+      {pages.filter(({ tags }) => tags?.includes("Gaming")).map(({ title, url }) => 
+        <li><a href={url}>{title}</a></li>
+      )}
+    </section>
+    <section>
+      <h2>Web Development</h2>
+      {pages.filter(({ tags }) => tags?.includes("Web Development")).map(({ title, url }) => 
+        <li><a href={url}>{title}</a></li>
+      )}
+    </section>
+  </div>
+</Layout>
+
+<style lang="scss">
+  .sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+
+    section {
+      h2 {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  }
+</style>
