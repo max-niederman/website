@@ -1,13 +1,15 @@
 ---
-import Layout from "../layouts/Default.astro";
+import Layout from "$/layouts/Default.astro";
 import { Markdown } from "astro/components";
 
 const allPages = Astro.fetchContent("./**/*.md");
-const pages = allPages.filter(({ tags }) => !tags?.includes("Meta"));
+const pages = allPages.filter(({ tags }) => !tags?.includes("meta"));
 pages.sort((a, b) => new Date(b.published) - new Date(a.published));
 ---
 
-<Layout content={{}}>
+<Layout content={{
+  header: false,
+}}>
   <Markdown>
     This is the website of Max Niederman, a high-school student and hobby developer. I write about programming, games, anime, and whatever else I find interesting.
 
@@ -29,13 +31,13 @@ pages.sort((a, b) => new Date(b.published) - new Date(a.published));
     </section>
     <section>
       <h2>Gaming</h2>
-      {pages.filter(({ tags }) => tags?.includes("Gaming")).map(({ title, url }) => 
+      {pages.filter(({ tags }) => tags?.includes("gaming")).map(({ title, url }) => 
         <li><a href={url}>{title}</a></li>
       )}
     </section>
     <section>
       <h2>Web Development</h2>
-      {pages.filter(({ tags }) => tags?.includes("Web Development")).map(({ title, url }) => 
+      {pages.filter(({ tags }) => tags?.includes("web-development")).map(({ title, url }) => 
         <li><a href={url}>{title}</a></li>
       )}
     </section>

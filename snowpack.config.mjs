@@ -1,6 +1,6 @@
 export default {
   alias: {
-    "@app": "./src",
+    $: "./src",
   },
   mount: {
     "node_modules/@fontsource": {

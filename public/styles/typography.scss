@@ -1,5 +1,7 @@
-$font-serif: "EB Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-$font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-serif: "EB GaramondVariable", ui-serif, Georgia, Cambria,
+  "Times New Roman", Times, serif;
+$font-mono: "Fira CodeVariable", ui-monospace, SFMono-Regular, Menlo, Monaco,
+  Consolas, "Liberation Mono", "Courier New", monospace;
 
 $gutter: 0.25em;
 
@@ -7,7 +9,12 @@ $gutter: 0.25em;
   font-size: 1.35rem;
   font-family: $font-serif;
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-variant: small-caps;
     margin-left: -$gutter;
     margin-right: -$gutter;
@@ -47,6 +54,6 @@ $gutter: 0.25em;
 
   code {
     font-size: 1rem;
-    font-family: $font-mono;
+    font-family: $font-mono !important; // Must be !important because Prism themes try to set the font as well.
   }
 }

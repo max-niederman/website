@@ -1,12 +1,14 @@
 ---
 title: "The Geneva-Percent Speedrun"
-updated: "2021-08-05"
 description: "A proposal for a new speedrun category: the Geneva%, in which the runner attempts to violate a provision of the Geneva convention as quickly as possible."
+published: "2021-08-05"
+updated: "2021-08-05"
+status: "draft"
 tags:
-  - Gaming
-  - Speedrunning
-  - International Law
-layout: "../../layouts/Default.astro"
+  - gaming
+  - speedrunning
+  - law
+layout: "$/layouts/Default.astro"
 ---
 
 In this article, I propose a novel new speedrun category, the "Geneva%." The Geneva% speedrun is completed by violating a provision of one of the Geneva Conventions or their Additional Protocols. The category is applicable to a great number of games, but I provide a route for *Minecraft* as an example.

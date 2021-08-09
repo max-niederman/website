@@ -1,10 +1,12 @@
 ---
 title: "Changelog"
-updated: "2021-08-05"
 description: "A meta page listing changes to this website and detailing plans for future ones."
+published: "2021-08-02"
+updated: "2021-08-05"
+status: "in progress"
 tags:
-- Meta
-layout: "../layouts/Default.astro"
+- meta
+layout: "$/layouts/Default.astro"
 ---
 
 # 2021

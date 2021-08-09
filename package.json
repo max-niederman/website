@@ -6,8 +6,8 @@
     "start": "astro dev",
     "build": "astro build",
     "serve": "caddy file-server -root dist/ -listen 0.0.0.0:3000",
-    "prebuild": "cp -r node_modules/@fontsource public/fonts",
-    "format": "npx prettier -w package.json *.config.{js,mjs} src/**/*.{js,jsx,ts,tsx,svelte}"
+    "postinstall": "cp -r node_modules/@fontsource public/fonts",
+    "format": "npx prettier -w package.json *.config.{js,mjs} src/**/*.{js,jsx,ts,tsx,svelte} public/styles/**/*.{css,scss,sass}"
   },
   "devDependencies": {
     "@astrojs/renderer-react": "^0.2.0",

@@ -1,13 +1,14 @@
 ---
 title: "Netlify vs. Vercel: A Comparison"
+description: "Which platform should you use: Netlify or Vercel?"
 published: "2020-10-02"
 updated: "2021-08-02"
-description: "Which platform should you use: Netlify or Vercel?"
+status: "finished"
 tags:
-- Web Development
-- Hosting
-- Serverless
-layout: "../layouts/Default.astro"
+- web-development
+- hosting
+- serverless
+layout: "$/layouts/Default.astro"
 ---
 
 Netlify and Vercel are serverless deployment platforms for web applications, both designed to allow you to deploy as quickly and easily as possible. Both have very similar feature sets, so which one should you use? In this article, I'll be answering that question.

@@ -1,0 +1,65 @@
+---
+export interface Frontmatter {
+  title: string;
+  description: string;
+  published: Date;
+  updated: Date;
+  status: string;
+  tags: string[];
+}
+
+export interface Props {
+  content: Frontmatter;
+}
+
+const {
+  title,
+  published,
+  updated,
+  status,
+  tags,
+} = Astro.props.content;
+---
+
+<style lang="scss">
+  @use "../../public/styles/typography";
+
+  header {
+    text-align: center;
+    font-family: typography.$font-serif;
+  }
+
+  h1 {
+    margin: 0;
+
+    font-variant: small-caps;
+    text-align: center;
+    font-size: 2.75em;
+    hyphens: auto;
+  }
+
+  .tags {
+    a {
+      margin: 0 0.25em;
+      color: inherit;
+    }
+  }
+
+  .other {
+
+  }
+</style>
+
+<header>
+  <h1>{title}</h1>
+
+  <div class="tags">
+    {tags.map((tag) => 
+      <a href={`/tags/${tag}`}>{tag}</a>
+    )}
+  </div>
+
+  <div class="metadata">
+    
+  </div>
+</header>
