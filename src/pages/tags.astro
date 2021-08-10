@@ -1,0 +1,15 @@
+---
+import Layout from "$/layouts/Default.astro";
+
+const pages = Astro.fetchContent("./**/*.md");
+const tags = [...new Set(pages.flatMap(({ tags }) => tags))];
+---
+
+<Layout content={{
+  title: "Tags",
+  tags: ["meta"],
+}}>
+  <ul>
+    {tags.map((tag) => <li><a href={`/tags/${tag}`}>{tag}</a></li>)}
+  </ul>
+</Layout>

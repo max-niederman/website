@@ -1,0 +1,29 @@
+---
+export async function createCollection() {
+  const pages = Astro.fetchContent("./**/*.md");
+  const tags = [...new Set(pages.flatMap(({ tags }) => tags))];
+
+  return {
+    route: "/tags/:tag",
+    paths: () => tags.map((tag) => ({ params: { tag } })),
+    props: ({ params }) => ({
+      pages: pages.filter(({ tags }) => tags.includes(params.tag)),
+      ...params,
+    }),
+  }
+}
+
+import Layout from "$/layouts/Default.astro";
+
+const { tag, pages } = Astro.props;
+pages.sort((a, b) => new Date(b.published) - new Date(a.published));
+---
+
+<Layout content={{
+  title: `Tag: ${tag}`,
+  tags: [],
+}}>
+  <ul>
+    {pages.map(({ title, url }) => <li><a href={url}>{title}</a></li>)}
+  </ul>
+</Layout>

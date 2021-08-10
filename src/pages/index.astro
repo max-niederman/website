@@ -25,7 +25,7 @@ pages.sort((a, b) => new Date(b.published) - new Date(a.published));
     </section>
     <section>
       <h2>Updated</h2>
-      {[...allPages].sort((a, b) => new Date(b.updated) - new Date(a.updated)).map(({ title, url }) => 
+      {[...pages].sort((a, b) => new Date(b.updated) - new Date(a.updated)).map(({ title, url }) => 
         <li><a href={url}>{title}</a></li>
       )}
     </section>

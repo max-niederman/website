@@ -21,6 +21,7 @@ Technical:
 - Added dark mode.
 - Added syntax highlighting for code blocks using [Prism](https://prismjs.com).
 - Added a navigation sidebar to the reader.
+- Added a list of tags to the posts' headers.
 
 ## July 2021
 
@@ -30,7 +31,8 @@ Technical:
 # To-Do
 
 - [X] Navigation
-- [ ] Tags
+- [X] Tags
+- [ ] Post Metadata
 - [ ] Make `<code>` styling consistent
 - [ ] Labeled Links
 - [ ] Link Popups

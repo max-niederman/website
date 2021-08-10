@@ -17,7 +17,7 @@ const {
   published,
   updated,
   status,
-  tags,
+  tags = [],
 } = Astro.props.content;
 ---
 
@@ -55,7 +55,7 @@ const {
 
   <div class="tags">
     {tags.map((tag) => 
-      <a href={`/tags/${tag}`}>{tag}</a>
+      <a href={`/tags/${tag}`}><i>{tag}</i></a>
     )}
   </div>
 
