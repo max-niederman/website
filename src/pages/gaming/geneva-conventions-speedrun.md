@@ -20,7 +20,7 @@ In order for completion to be possible in games which do not portray the Geneva 
 1. The in-game representation of the player is treated as a High Contracting Party to the Conventions.
 2. Other in-game entities may be treated as Parties to the Conventions.
 
-These provisions are inherently dependent on the nature of the game being ran, and as such they should be decided on a per-game basis.
+These provisions are inherently dependent on the nature of the game being run, and as such they should be decided on a per-game basis.
 
 # Example Violations
 
