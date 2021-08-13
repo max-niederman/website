@@ -30,14 +30,20 @@ pages.sort((a, b) => new Date(b.published) - new Date(a.published));
       )}
     </section>
     <section>
-      <h2>Gaming</h2>
-      {pages.filter(({ tags }) => tags?.includes("gaming")).map(({ title, url }) => 
+      <h2>Programming</h2>
+      {pages.filter(({ tags }) => tags?.includes("programming")).map(({ title, url }) => 
         <li><a href={url}>{title}</a></li>
       )}
     </section>
     <section>
       <h2>Web Development</h2>
       {pages.filter(({ tags }) => tags?.includes("web-development")).map(({ title, url }) => 
+        <li><a href={url}>{title}</a></li>
+      )}
+    </section>
+    <section>
+      <h2>Gaming</h2>
+      {pages.filter(({ tags }) => tags?.includes("gaming")).map(({ title, url }) => 
         <li><a href={url}>{title}</a></li>
       )}
     </section>
