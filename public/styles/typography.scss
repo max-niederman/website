@@ -3,7 +3,9 @@ $font-serif: "EB GaramondVariable", ui-serif, Georgia, Cambria,
 $font-mono: "Fira CodeVariable", ui-monospace, SFMono-Regular, Menlo, Monaco,
   Consolas, "Liberation Mono", "Courier New", monospace;
 
+// Constants
 $gutter: 0.25em;
+$roundness: 0.25em;
 
 .typography {
   font-size: 1.35rem;
@@ -56,12 +58,26 @@ $gutter: 0.25em;
     padding: 0 1em;
   }
 
+
   code {
     font-size: 1rem;
     font-family: $font-mono !important; // Must be !important because Prism themes try to set the font as well.
   }
 
+  img {
+    width: 100%;
+    margin: 1em 0;
+
+    border-radius: $roundness;
+  }
+
   .footnotes {
     margin: 2em 0;
+  }
+
+  // Prism theme overrides
+
+  pre[class*="language-"] {
+    border-radius: $roundness !important;
   }
 }

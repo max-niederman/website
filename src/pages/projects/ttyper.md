@@ -26,8 +26,8 @@ Since there weren't any pre-existing tools which met my needs, I thought it woul
 
 I decided to go with a fairly simple, tried-and-true design: a list of words and an input box where you type each word one-by-one. I wanted an experience similar to [typings.gg](https://typings.gg/) or [10fastfingers](https://10fastfingers.com), but with the ability to return to a previous word after submission.
 
-Here's what the final interface for the test input looks like:
-![Test TUI](./input.png)
+Here's a short recording of the current interface for the test input:
+![Test TUI](https://github.com/max-niederman/ttyper/raw/main/resources/recording.gif)
 
 # Calculating Metrics
 
