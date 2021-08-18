@@ -36,14 +36,46 @@ A lacking theme application function is not *necessarily* a problem. For instanc
 
 None of the preceding problems are, in my opinion, reason enough to abandon pywal and use a different tool for palette extraction. What I do believe warrants this is the simple fact that pywal extracts ugly themes.
 
-Pywal's palette extraction works by a backend-frontend architecture. You can select from multiple backends. As of writing this, *all* of pywal's backends use a [k-means clustering]() algorithim to extract colors from an image.
+Pywal's palette extraction works by a backend-frontend architecture. You can select from multiple backends. As of writing this, *all* of pywal's backends use a [k-means clustering](https://en.wikipedia.org/wiki/K-means_clustering) algorithim to extract colors from an image.
 
 K-means clustering is well suited for extracting one or two accents for use in a UI, but for most images it will produce bad *system* colorschemes. This is primarily becuase k-means clustering can only extract colors which are actually in the image[^1].
 
 [^1]: Or the centroid of colors in the image, but it would be highly unusual for a color which isn't very near to one in the image to be found.
 
-It is for this reason that pywal only uses a list of accents instead of the far more useful named colors (red, green, blue, etc.). You want a dangerous action to be colored red? Well, sorry, you can't; it's "accent #3" or nothing.
+It is for this reason that pywal only uses a list of accents without an arguably more useful named color palette (red, green, blue, etc.). You want a dangerous action to be colored red? Well, sorry, you can't; it's "accent #3" or nothing.
 
 Even worse, the accents are often very similar colors which reduces contrast thereby making reading harder. This is only a big problem in images which are mostly one color, and it could probably be greatly improved by processing the colors for better contrast after the clustering step.
 
 Because pywal is primarily focused on extracting colors from images, this limitation will always plague it, severely limiting its uses.
+
+# Luthien
+
+Frustrated with the limitations of pywal, I decided to write my own tool with the following goals in mind:
+
+- Theme extraction should be modular and support at least image extraction and manual theme creation.
+- Theme application should be easily pluggable **at runtime**. These plugins should be language-agnostic and as easy as possible to write.
+- The theme format should include a named color palette, accents, a wallpaper, and be easily extensible.
+
+Luthien is not yet finished, but I hope that in the future it will make theme automation worth the effort for more people.
+
+## Extraction from Images
+
+Luthien's image extractor is different from all other tools I know of. Instead of a k-means-based algorithm, it uses a far simpler algorithm which simply finds the centroid, i.e. the multi-dimensional arithmetic mean, of all of the image's pixels in user-defined color ranges in the [CIE L\*a\*b\* color space](https://en.wikipedia.org/wiki/CIELAB_color_space).
+
+As of writing, if an image contains no pixels inside a target range, the center of the range is used. In the future, I plan to enable users to set a default or set it to algorithmically guess at a complementing color.
+
+## Plugins
+
+Luthien's plugin interface is very simple. First, the input is serialized to JSON and passed to the plugin process through the standard input. Then the plugin executes using this data and returns a response code indicative of its success. The standard error is also inherited from the parent process for logging.
+
+A Rust library for writing complex plugins is provided, as well as some first-party plugins which will cover most users' needs:
+
+- `luthien-terminal` generates terminal control sequences, sends them to open pseudoterminals, and saves them to a file to be read when new terminal are opened.
+- `luthien-templates` renders Jinja2-like templates with theme data.
+- `luthien-sass` exposes theme data to Sass modules and compiles them to CSS.
+
+# The Future
+
+The difficulty of installation and initial configuration must be reduced. As of writing, from-scratch configuration of a theming setup similar to my own could easily take >4 hours. The vast majority of this time is spent manually integrating with applications.
+
+Ideally, there would be a package manager-like tool to bootstrap integrations with minimal effort on the user's part. Unfortunately, such tooling would be quite difficult to create, especially for more complex integrations which can interfere with static configurations. Such a tool could also be used as a public theme repository, making it much easier to find and download themes.
