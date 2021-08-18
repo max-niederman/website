@@ -1,6 +1,6 @@
 ---
-title: "About This Site"
-description: "A description of this site's purpose and its technical details."
+title: "About This Website"
+description: "A description of this website's purpose and its technical details."
 published: "2021-08-11"
 updated: "2021-08-11"
 status: "draft"
@@ -12,7 +12,7 @@ layout: "$/layouts/Default.astro"
 
 # Purpose
 
-This site has three main purposes:
+This website has three main purposes:
 
 - as a place to publish my writings where they can be viewed and linked to by anyone. For this reason it must:
   - Be hosted in a highly-available manner.
@@ -23,14 +23,14 @@ This site has three main purposes:
   - Support a superset of the Markdown features I require.
   - Update to reflect changes within a couple seconds of a change in the source.
   - Have a portable development environment so that I can write from any device easily.
-- as a long-lasting archive for my writings. The content published to this site should survive as long as possible. It must:
+- as a long-lasting archive for my writings. The content published to this website should survive as long as possible. It must:
   - Be compatible with archiving services such as [the Internet Archive](https://archive.org).
   - Be readable as pure HTML. There should be no dependence even on CSS.
   - Institute measures to mitigate [link rot](https://en.wikipedia.org/wiki/Link_rot).
 
 # Design
 
-This site's design is *heavily* inspired by that of [Gwern.net](https://gwern.net). Currently it's more or less a copy lacking a few features such as
+This website's design is *heavily* inspired by that of [Gwern.net](https://gwern.net). Currently it's more or less a copy lacking a few features such as
 
 - Sidenotes
 - Link popups
@@ -40,7 +40,7 @@ In the future, I hope to change this by implementing some of those features as w
 
 ## Fonts
 
-Currently, EB Garamond is used for everything except codeblocks, which use Fira Code. In the future, this will probably change. If it doesn't prove prohibitively time-consuming, I may even work on my own fonts for this site.
+Currently, EB Garamond is used for everything except codeblocks, which use Fira Code. In the future, this will probably change. If it doesn't prove prohibitively time-consuming, I may even work on my own fonts for this website.
 
 # Technical
 
@@ -48,9 +48,9 @@ The source code is all public and can be viewed [here](https://github.com/max-ni
 
 ## Static Site Generation
 
-This site is statically generated using a variety of tools. Chief among them is [astro](https://astro.build). It uses an "islands architecture" to enable true components with completely opt-in JavaScript. Currently, it enables this site to use *zero* client-side JavaScript.
+This website is statically generated using a variety of tools. Chief among them is [astro](https://astro.build). It uses an "islands architecture" to enable true components with completely opt-in JavaScript. Currently, it enables this website to use *zero* client-side JavaScript.
 
-The Markdown documents which comprise the vast majority of this site are processed using the [unified](https://unifiedjs.com) content-processing software suite and styled using [Sass](https://sass-lang.com).
+The Markdown documents which comprise the vast majority of this website are processed using the [unified](https://unifiedjs.com) content-processing software suite and styled using [Sass](https://sass-lang.com).
 
 Remark Plugins:
 - `remark-gfm` for Github-flavored Markdown features.
@@ -65,4 +65,8 @@ Rehype Plugins:
 
 ## Hosting
 
-As the site is currently in development, it's hosted on [Vercel](https://vercel.com). Later, I plan to switch to [Cloudflare Pages](https://pages.cloudflare.com) for a better latency, HTTP/3, and unlimited free bandwidth.
+Currently, the website is hosted on [Cloudflare Pages](https://pages.cloudflare.com). This has numerous benefits:
+
+- Unlimited, free bandwidth
+- Low latency
+- HTTP/3 over QUIC
