@@ -1,8 +1,8 @@
 ---
 title: "Automatic Theming"
 description: "Software themes are an important part of any system, but traditionally a lot of work is necessary to theme a system consistently, especially with the increasing prevalence of webapps; to make it worse yet, this work must be repeated every time one desires a new aesthetic. Automatic theming tools are still young, but with some initial effort, they can enable theme switching over an entire system in seconds."
-published: "2021-08-14"
-updated: "2021-08-14"
+published: "2021-08-18"
+updated: "2021-08-18"
 status: "draft"
 tags:
   - aesthetics

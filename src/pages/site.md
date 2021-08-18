@@ -2,8 +2,8 @@
 title: "About This Website"
 description: "A description of this website's purpose and its technical details."
 published: "2021-08-11"
-updated: "2021-08-11"
-status: "draft"
+updated: "2021-08-18"
+status: "in progress"
 tags:
 - meta
 - web-development
