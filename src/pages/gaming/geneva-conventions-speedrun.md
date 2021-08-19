@@ -3,7 +3,7 @@ title: "The Geneva-Percent Speedrun"
 description: "A proposal for a new speedrun category: the Geneva%, in which the runner attempts to violate a provision of the Geneva convention as quickly as possible."
 published: "2021-08-05"
 updated: "2021-08-05"
-status: "draft"
+status: "mature draft"
 tags:
   - gaming
   - speedrunning

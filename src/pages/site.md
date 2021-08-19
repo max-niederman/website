@@ -52,6 +52,21 @@ Currently, this distinction is not represented in any way by the UI, but this is
 
 Tag names follow the same convention as slugs on this site: all lowercase and hyphenation for word seperation.
 
+### Dates
+
+The publication date I believe is self-explanatory; it's the date when the page was first live on this website.
+
+The update date is the date of the last *substantive* change to the page. This does not include changes which fix typoes or other trivial mistakes.
+
+### Status
+
+The status tag is used for the "completeness" of the page. Currently, the following statuses are used:
+
+- "draft" refers to a rough draft.
+- "mature draft" refers to a mature draft.
+- "in progress" refers to a page which is at the moment complete, but will become incomplete in the future. For instance, the [Changelog](/changelog) will never be "complete," only "in progress."
+- "complete" refers to a page which is complete and will always, bar modification, be so.
+
 ## User Interface
 
 This website's design is *very* inspired by that of [Gwern.net](https://gwern.net). Currently it's more or less a copy lacking a few features such as

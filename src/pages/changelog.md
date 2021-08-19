@@ -34,9 +34,10 @@ Technical:
 
 - [X] Navigation
 - [X] Tags
-- [ ] Post Metadata
-- [ ] Make `<code>` styling consistent
+- [X] Basic Post Metadata
+- [X] Make `<code>` styling consistent
 - [ ] Labeled Links
+- [ ] Tag Kind Differentiation
 - [ ] Link Popups
 - [ ] Content Linting
 - [ ] Sidenotes
