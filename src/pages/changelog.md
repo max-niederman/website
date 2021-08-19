@@ -2,7 +2,7 @@
 title: "Changelog"
 description: "A meta page listing changes to this website and detailing plans for future ones."
 published: "2021-08-02"
-updated: "2021-08-05"
+updated: "2021-08-18"
 status: "in progress"
 tags:
 - meta
@@ -13,6 +13,8 @@ layout: "$/layouts/Default.astro"
 
 ## August 2021
 
+- [Automatic Theming](/automatic-theming) is about the state of automatic system theming.
+- [ttyper: a Terminal-Based Typing Test](/projects/ttyper) and [Netlify vs. Vercel: A Comparison](/netlify-vs-vercel) are articles I ported over from my old site and slightly modified.
 - [The Geneva-Percent Speedrun](/gaming/geneva-conventions-speedrun) is a write-up on a novel speedrun category completed by violating any provision of a Geneva Convention.
 - Removed the resumé showcase page entirely, as it made navigation harder, wasn't very functional, buggy, and didn't work well without JavaScript.
 
