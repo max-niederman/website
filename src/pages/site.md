@@ -5,8 +5,8 @@ published: "2021-08-11"
 updated: "2021-08-18"
 status: "in progress"
 tags:
-- meta
-- web-development
+  - meta
+  - web-development
 layout: "$/layouts/Default.astro"
 ---
 
@@ -30,7 +30,31 @@ This website has three main purposes:
 
 # Design
 
-This website's design is *heavily* inspired by that of [Gwern.net](https://gwern.net). Currently it's more or less a copy lacking a few features such as
+## Slugs
+
+Each slug segment must contain only numbers, lowercase Latin letters, and hyphens exclusively for word seperation. Segment length should be kept to a minimum, but never at the cost of expressiveness.
+
+By default, a page is located by only one slug segment. Additional slug segments are used only when the following conditions are met:
+
+- Many pages (present or planned) share one essential, simple theme. 
+- This theme should not be complex, nor should it be in any way esoteric.
+
+## Post Metadata
+
+### Tags
+
+Tags on this website are of two kinds:
+
+- **Literal Tags** are tags which describe the page itself. For instance, this page has the [`meta` tag](/tags/meta). The page itself *is* meta, as opposed to being about or otherwise related to things which are meta.
+- **Subject Tags** are tags which describe the subject of the page. For instance, one of this page's *subjects* is the development of this website, wherefore it has the [`web-development` tag](/tags/web-development).
+
+Currently, this distinction is not represented in any way by the UI, but this is a planned feature. Often, but not always, literal tags will be adjectives and subject tags nouns.
+
+Tag names follow the same convention as slugs on this site: all lowercase and hyphenation for word seperation.
+
+## User Interface
+
+This website's design is *very* inspired by that of [Gwern.net](https://gwern.net). Currently it's more or less a copy lacking a few features such as
 
 - Sidenotes
 - Link popups
@@ -38,7 +62,7 @@ This website's design is *heavily* inspired by that of [Gwern.net](https://gwern
 
 In the future, I hope to change this by implementing some of those features as well as altering the design so as to be more distinctive.
 
-## Fonts
+### Fonts
 
 Currently, EB Garamond is used for everything except codeblocks, which use Fira Code. In the future, this will probably change. If it doesn't prove prohibitively time-consuming, I may even work on my own fonts for this website.
 
