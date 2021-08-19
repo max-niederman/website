@@ -32,13 +32,9 @@ Technical:
 
 # To-Do
 
-- [X] Navigation
-- [X] Tags
-- [X] Basic Post Metadata
-- [X] Make `<code>` styling consistent
-- [ ] Labeled Links
-- [ ] Tag Kind Differentiation
-- [ ] Link Popups
-- [ ] Content Linting
-- [ ] Sidenotes
-- [ ] Auto-generate changelog from Git
+- Labeled Links
+- Tag Kind Differentiation
+- Link Popups
+- Content Linting
+- Sidenotes
+- Auto-generate changelog from Git
