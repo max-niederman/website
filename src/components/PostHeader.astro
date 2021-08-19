@@ -2,8 +2,8 @@
 export interface Frontmatter {
   title: string;
   description: string;
-  published: Date;
-  updated: Date;
+  published: string;
+  updated: string;
   status: string;
   tags: string[];
 }
@@ -46,15 +46,15 @@ const {
     hyphens: auto;
   }
 
-  .tags {
-    a {
-      margin: 0 0.25em;
-      color: inherit;
-    }
+  div {
+    margin: 0.5em 0;
   }
 
-  .other {
-
+  .tags {
+    a {
+      margin-right: 0.25em;
+      color: inherit;
+    }
   }
 </style>
 
@@ -71,5 +71,8 @@ const {
   </div>
 
   <div class="other">
+    published: {published},
+    updated: {updated},
+    status: {status}
   </div>
 </header>
