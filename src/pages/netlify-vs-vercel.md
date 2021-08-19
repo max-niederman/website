@@ -5,9 +5,9 @@ published: "2020-10-02"
 updated: "2021-08-02"
 status: "finished"
 tags:
-- web-development
-- hosting
-- serverless
+  - web-development
+  - hosting
+  - serverless
 layout: "$/layouts/Default.astro"
 ---
 

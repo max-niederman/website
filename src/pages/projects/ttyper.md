@@ -67,7 +67,7 @@ For the test contents, I added an optional argument to specify a file to read, w
 
 If you want to try ttyper our for yourself, you can install it with Cargo:
 
-```sh
+```bash
 cargo install ttyper
 ```
 
