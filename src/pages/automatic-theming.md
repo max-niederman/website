@@ -18,7 +18,7 @@ Fortunately, with great effort, it is possible to achieve a relatively high degr
 
 This is not ideal; it takes a huge time commitment to do something like this. The worst part, in my opinion, is that once you've done this, you have to do it *again* if you want to change up the look of your system.
 
-Of course, this obvious solution is just automate it, that is create a tool which accepts themes in a common format, adapts them to various applications, and applies the adapted themes to them; however, this is easier said than done. In order for a solution to be adopted, it must be able to theme a significant subset of its users' applications, and in order to do that, there must be users to contribute support for their applications.
+Of course, the obvious solution is just automate it, that is create a tool which accepts themes in a common format, adapts them to various applications, and applies the adapted themes to them; however, this is easier said than done. In order for a solution to be adopted, it must be able to theme a significant subset of its users' applications, and in order to do that, there must be users to contribute support for their applications.
 
 For this reason, automatic theming has a very high barrier of entry. The only people who can achieve it are those with the skills to roll support for their applications themselves. Combined with the large time commitment and the fact that the benefits of even a completely consistent solution are small (primarily reduced context-switching).
 
@@ -32,7 +32,7 @@ Pywal is very simple, and because of this simplicity, it is quite easy to use. H
 
 A lacking theme application function is not *necessarily* a problem. For instance, as the UNIX philosophy dictates, we could use pywal only for palette extraction and another tool for theme application. This is, more or less, what I did myself when I was using pywal. Unfortunately no such tool currently exists, and even if it did that solution would only *raise* the barrier of entry.
 
-## The Fatal Limitation
+## Limitations
 
 None of the preceding problems are, in my opinion, reason enough to abandon pywal and use a different tool for palette extraction. What I do believe warrants this is the simple fact that pywal extracts ugly themes.
 
@@ -74,7 +74,7 @@ A Rust library for writing complex plugins is provided, as well as some first-pa
 - `luthien-templates` renders Jinja2-like templates with theme data.
 - `luthien-sass` exposes theme data to Sass modules and compiles them to CSS.
 
-# The Future
+# Future Improvements
 
 The difficulty of installation and initial configuration must be reduced. As of writing, from-scratch configuration of a theming setup similar to my own could easily take >4 hours. The vast majority of this time is spent manually integrating with applications.
 

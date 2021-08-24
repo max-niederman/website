@@ -16,3 +16,9 @@ yarn-error.log*
 
 # macOS-specific files
 .DS_Store
+
+# editors
+.vimrc
+.nvimrc
+.vim/
+.obsidian/
