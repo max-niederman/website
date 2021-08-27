@@ -13,10 +13,10 @@ layout: "$/layouts/Default.astro"
 
 ## August 2021
 
-- [Automatic Theming](/automatic-theming) is about the state of automatic system theming.
-- [ttyper: a Terminal-Based Typing Test](/projects/ttyper) and [Netlify vs. Vercel: A Comparison](/netlify-vs-vercel) are articles I ported over from my old site and slightly modified.
-- [The Geneva-Percent Speedrun](/gaming/geneva-conventions-speedrun) is a write-up on a novel speedrun category completed by violating any provision of a Geneva Convention.
 - Removed the resumé showcase page entirely, as it made navigation harder, wasn't very functional, buggy, and didn't work well without JavaScript.
+- [The Geneva-Percent Speedrun](/gaming/geneva-conventions-speedrun) is a write-up on a novel speedrun category completed by violating any provision of a Geneva Convention.
+- [ttyper: a Terminal-Based Typing Test](/projects/ttyper) and [Netlify vs. Vercel: A Comparison](/netlify-vs-vercel) are articles I ported over from my old site and slightly modified.
+- [Automatic Theming](/automatic-theming) is about the state of automatic system theming.
 
 Technical:
 - Created the site using [astro](https://astro.build) and the [unified](https://unifiedjs.com) suite for Markdown processing.
@@ -24,11 +24,12 @@ Technical:
 - Added syntax highlighting for code blocks using [Prism](https://prismjs.com).
 - Added a navigation sidebar to the reader.
 - Added a list of tags to the posts' headers.
+- Added the page's description to its header.
 
 ## July 2021
 
 - Decided to remake my personal website.
-- Designed the first version of [the showcase page](/) in [Figma](https://figma.com) and made decisions on the reader design.
+- Designed the first version of the "resumé" page in [Figma](https://figma.com) and made decisions on the reader design.
 
 # To-Do
 
