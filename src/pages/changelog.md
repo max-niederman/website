@@ -3,7 +3,7 @@ title: "Changelog"
 description: "A meta page listing changes to this website and detailing plans for future ones."
 published: "2021-08-02"
 updated: "2021-08-18"
-status: "in progress"
+status: "updated"
 tags:
   - meta
 layout: "$/layouts/Default.astro"
@@ -19,6 +19,7 @@ layout: "$/layouts/Default.astro"
 - [Automatic Theming](/automatic-theming) is about the state of automatic system theming.
 
 Technical:
+
 - Created the site using [astro](https://astro.build) and the [unified](https://unifiedjs.com) suite for Markdown processing.
 - Added dark mode.
 - Added syntax highlighting for code blocks using [Prism](https://prismjs.com).

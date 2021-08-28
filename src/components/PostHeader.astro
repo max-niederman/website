@@ -1,4 +1,6 @@
 ---
+import { format } from 'fecha';
+
 export interface Frontmatter {
   title: string;
   description: string;
@@ -19,11 +21,12 @@ const {
   updated,
   status,
   tags = [],
+  headerMeta = []
 } = Astro.props.content;
 ---
 
 <style lang="scss">
-  @use "../../public/styles/theme";
+  @use "../styles/theme";
 
   header {
     font-size: 0.90em;
@@ -52,7 +55,7 @@ const {
 
   .tags {
     a {
-      margin-right: 0.25em;
+      margin-right: 0r.25em;
       color: inherit;
     }
   }
@@ -63,16 +66,21 @@ const {
 
   <p>{description}</p>
 
-  <div class="tags">
-    {tags.slice(0, -1).map((tag) => 
-      <a href={`/tags/${tag}`}>{tag},</a>
-    )}
-    <a href={`/tags/${tags.slice(-1)}`}>{tags.slice(-1)}</a>
-  </div>
+  <!--- There are two conditional JSX expressions here because of an Astro bug with fragments -->
+  {headerMeta &&
+    <div class="tags">
+      {tags.slice(0, -1).map((tag) => 
+        <span><a href={`/tags/${tag}`}>{tag}</a>, </span>
+      )}
+      <a href={`/tags/${tags.slice(-1)}`}>{tags.slice(-1)}</a>
+    </div>
+  }
 
-  <div class="other">
-    published: {published},
-    updated: {updated},
-    status: {status}
-  </div>
+  {headerMeta &&
+    <div class="other">
+      published: {format(published, "isoDate")},
+      updated: {format(updated, "isoDate")},
+      status: {status}
+    </div>
+  }
 </header>

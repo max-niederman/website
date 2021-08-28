@@ -3,7 +3,7 @@ title: "About This Website"
 description: "A description of this website's purpose and its technical details."
 published: "2021-08-11"
 updated: "2021-08-18"
-status: "in progress"
+status: "updated"
 tags:
   - meta
   - web-development
@@ -36,7 +36,7 @@ Each slug segment must contain only numbers, lowercase Latin letters, and hyphen
 
 By default, a page is located by only one slug segment. Additional slug segments are used only when the following conditions are met:
 
-- Many pages (present or planned) share one essential, simple theme. 
+- Many pages (present or planned) share one essential, simple theme.
 - This theme should not be complex, nor should it be in any way esoteric.
 
 ## Post Metadata
@@ -45,8 +45,8 @@ By default, a page is located by only one slug segment. Additional slug segments
 
 Tags on this website are of two kinds:
 
-- **Literal Tags** are tags which describe the page itself. For instance, this page has the [`meta` tag](/tags/meta). The page itself *is* meta, as opposed to being about or otherwise related to things which are meta.
-- **Subject Tags** are tags which describe the subject of the page. For instance, one of this page's *subjects* is the development of this website, wherefore it has the [`web-development` tag](/tags/web-development).
+- **Literal Tags** are tags which describe the page itself. For instance, this page has the [`meta` tag](/tags/meta). The page itself _is_ meta, as opposed to being about or otherwise related to things which are meta.
+- **Subject Tags** are tags which describe the subject of the page. For instance, one of this page's _subjects_ is the development of this website, wherefore it has the [`web-development` tag](/tags/web-development).
 
 Currently, this distinction is not represented in any way by the UI, but this is a planned feature. Often, but not always, literal tags will be adjectives and subject tags nouns.
 
@@ -56,7 +56,7 @@ Tag names follow the same convention as slugs on this site: all lowercase and hy
 
 The publication date I believe is self-explanatory; it's the date when the page was first live on this website.
 
-The update date is the date of the last *substantive* change to the page. This does not include changes which fix typoes or other trivial mistakes.
+The update date is the date of the last _substantive_ change to the page. This does not include changes which fix typoes or other trivial mistakes.
 
 ### Status
 
@@ -64,12 +64,12 @@ The status tag is used for the "completeness" of the page. Currently, the follow
 
 - "draft" refers to a rough draft.
 - "mature draft" refers to a mature draft.
-- "in progress" refers to a page which is at the moment complete, but will become incomplete in the future. For instance, the [Changelog](/changelog) will never be "complete," only "in progress."
+- "updated" refers to a page which is at the moment complete, but will become incomplete in the future. For instance, the [Changelog](/changelog) will never be "complete," only "updated."
 - "complete" refers to a page which is complete and will always, bar modification, be so.
 
 ## User Interface
 
-This website's design is *very* inspired by that of [Gwern.net](https://gwern.net). Currently it's more or less a copy lacking a few features such as
+This website's design is _very_ inspired by that of [Gwern.net](https://gwern.net). Currently it's more or less a copy lacking a few features such as
 
 - Sidenotes
 - Link popups
@@ -87,11 +87,12 @@ The source code is all public and can be viewed [here](https://github.com/max-ni
 
 ## Static Site Generation
 
-This website is statically generated using a variety of tools. Chief among them is [astro](https://astro.build). It uses an "islands architecture" to enable true components with completely opt-in JavaScript. Currently, it enables this website to use *zero* client-side JavaScript.
+This website is statically generated using a variety of tools. Chief among them is [astro](https://astro.build). It uses an "islands architecture" to enable true components with completely opt-in JavaScript. Currently, it enables this website to use _zero_ client-side JavaScript.
 
 The Markdown documents which comprise the vast majority of this website are processed using the [unified](https://unifiedjs.com) content-processing software suite and styled using [Sass](https://sass-lang.com).
 
 Remark Plugins:
+
 - `remark-gfm` for Github-flavored Markdown features.
 - `remark-slug` for heading anchors.
 - `remark-math` to create math nodes using inline Markdown.
@@ -100,6 +101,7 @@ Remark Plugins:
 - `@silvenon/remark-smartypants` for smart punctuation.
 
 Rehype Plugins:
+
 - `rehype-mathjax` to render the aforementioned math nodes.
 
 ## Hosting
@@ -108,4 +110,4 @@ Currently, the website is hosted on [Cloudflare Pages](https://pages.cloudflare.
 
 - Unlimited, free bandwidth
 - Low latency
-- HTTP/3 over QUIC
+- Support for HTTP/3 over QUIC

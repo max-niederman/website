@@ -68,4 +68,3 @@ Forms get 100 free submissions, then cost "\$19+ when exceeded." Identity gives 
 # Conclusion
 
 We can see a clear divergence of interests between Netlify and Vercel, two extremely similar products at first glance. Netlify is focused on making it easy to create client-side, static applications, and delivers on that goal wonderfully. Vercel, on the other hand, focuses on making back-end work simple. If you're creating a static site, Netlify is the clear choice, but if you need more server-side functionality and you don't mind spending a little time, Vercel is the way to go.
-

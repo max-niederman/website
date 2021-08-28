@@ -1,9 +1,9 @@
 export default {
   buildOptions: {
-    site: "http://maxniederman.com", // Your public domain, e.g.: https://my-site.dev/. Used to generate sitemaps and canonical URLs.
-    sitemap: true, // Generate sitemap (set to "false" to disable)
+    site: "http://maxniederman.com",
+    sitemap: true,
   },
-  renderers: ["@astrojs/renderer-react", "@astrojs/renderer-svelte"],
+  renderers: ["@astrojs/renderer-svelte"],
   markdownOptions: {
     remarkPlugins: [
       "remark-lint",

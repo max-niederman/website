@@ -1,0 +1,31 @@
+---
+export async function getStaticPaths() {
+  const pages = Astro.fetchContent("../**/*.md");
+  pages.sort((a, b) => new Date(b.published) - new Date(a.published));
+
+  const tags = [...new Set(pages.flatMap(({ tags }) => tags))];
+  
+  return tags.map((tag) => {
+    return {
+      params: { tag },
+      props: {
+        pages: pages.filter(({ tags }) => tags.includes(tag)),
+      },
+    }
+  });
+}
+
+import Layout from "$/layouts/Default.astro";
+
+const { tag } = Astro.request.params;
+const { pages } = Astro.props;
+---
+
+<Layout content={{
+  title: `Tag: ${tag}`,
+  headerMeta: false,
+}}>
+  <ul>
+    {pages.map(({ title, url }) => <li><a href={url}>{title}</a></li>)}
+  </ul>
+</Layout>

@@ -51,6 +51,7 @@ struct Test {
     words: Vec<Word>,
 }
 ```
+
 _You can read the real code [here](https://github.com/max-niederman/ttyper/blob/main/src/test/mod.rs)._
 
 In this way, each "event" (keypress) can have a correctness value. Then, to find the accuracy, we can divide the number of correct events by the total number of events with correctness.

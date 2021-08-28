@@ -11,7 +11,7 @@ tags:
 layout: "$/layouts/Default.astro"
 ---
 
-In this article, I propose a novel new speedrun category, the "Geneva%." The Geneva% speedrun is completed by violating a provision of one of the Geneva Conventions or their Additional Protocols. The category is applicable to a great number of games, but I provide a route for *Minecraft* as an example.
+In this article, I propose a novel new speedrun category, the "Geneva%." The Geneva% speedrun is completed by violating a provision of one of the Geneva Conventions or their Additional Protocols. The category is applicable to a great number of games, but I provide a route for _Minecraft_ as an example.
 
 # Provisions for Completion
 
@@ -49,13 +49,16 @@ This widens the scope the Convention's provisions, making it easier for the runn
 ### Article 3 - Conflicts not of an International Character
 
 > In the case of armed conflict not of an international character occurring in the territory of one of the High Contracting Parties, each Party to the conflict shall be bound to apply, as a minimum, the following provisions:
+>
 > 1. Persons taking no active part in the hostilities, including members of armed forces who have laid down their arms and those placed hors de combat by sickness, wounds, detention, or any other cause, shall in all circumstances be treated humanely, without any adverse distinction founded on race, colour, religion or faith, sex, birth or wealth, or any other similar criteria.
 >
->     To this end, the following acts are and shall remain prohibited at any time and in any place whatsoever with respect to the above-mentioned persons:
->     1. Violence to life and person, in particular murder of all kinds, mutilation, cruel treatment and torture;
->     2. Taking of hostages;
->     3. Outrages upon personal dignity, in particular humiliating and degrading treatment;
->     4. The passing of sentences and the carrying out of executions without previous judgment pronounced by a regularly constituted court, affording all the judicial guarantees which are recognized as indispensable by civilized peoples.
+>    To this end, the following acts are and shall remain prohibited at any time and in any place whatsoever with respect to the above-mentioned persons:
+>
+>    1. Violence to life and person, in particular murder of all kinds, mutilation, cruel treatment and torture;
+>    2. Taking of hostages;
+>    3. Outrages upon personal dignity, in particular humiliating and degrading treatment;
+>    4. The passing of sentences and the carrying out of executions without previous judgment pronounced by a regularly constituted court, affording all the judicial guarantees which are recognized as indispensable by civilized peoples.
+>
 > 2. The wounded and sick shall be collected and cared for.
 >
 > An impartial humanitarian body, such as the International Committee of the Red Cross, may offer its services to the Parties to the conflict.
@@ -65,16 +68,17 @@ This widens the scope the Convention's provisions, making it easier for the runn
 > The application of the preceding provisions shall not affect the legal status of the Parties to the conflict.
 
 In short, the runner should
+
 1. Fight in a war.
 2. Wait for an enemy soldier to surrender or be otherwise incapacitated.
 3. Take them hostage.
 4. Humiliate them.
 5. Wound them if necessary.
-7. Don't care for their wounds.
-5. Charge them using a military court.
-6. Murder or torture them.
-8. ???
-9. Profit.
+6. Don't care for their wounds.
+7. Charge them using a military court.
+8. Murder or torture them.
+9. ???
+10. Profit.
 
 ### Article 4 - Application by Neutral Powers
 
@@ -100,7 +104,7 @@ To violate this article, the runner should make an agreement with another party 
 
 > Wounded and sick, as well as members of the medical personnel and chaplains, may in no circumstances renounce in part or in entirety the rights secured to them by the present Convention, and by the special agreements referred to in the foregoing Article, if such there be.
 
-It's arguable whether this article is even *possible* to break, since the rights it ensures cannot be renounced are provided by the Convention itself; this is fortunate for us because breaking it would make for an extremely boring run.
+It's arguable whether this article is even _possible_ to break, since the rights it ensures cannot be renounced are provided by the Convention itself; this is fortunate for us because breaking it would make for an extremely boring run.
 
 ### Article 8 - Protecting Powers
 
@@ -145,9 +149,9 @@ There are multiple ways to violate this article, but the simplest is for the run
 
 The runner must refuse to meet another Power after a Protecting Party proposes a meeting with that Power.
 
-# *Minecraft* Route
+# _Minecraft_ Route
 
-Following is an example Geneva% route for *Minecraft*:
+Following is an example Geneva% route for _Minecraft_:
 
 1. Go to a village.
 2. Wait for night-time and fighting mobs. This constitutes a conflict among Powers.
@@ -155,4 +159,4 @@ Following is an example Geneva% route for *Minecraft*:
 
 This is in violation of [Article 3 of Convention (1) of 1949](#article-3---conflicts-not-of-an-international-character), because the murdered villager was "not taking active part in the hostilities" and murder of such non-combatants is expressly forbidden.
 
-This route is probably extremely inefficient, as it requires waiting for night-time. I would recommend any runner reading this with the intention of running *Minecraft* Geneva% find a different route or create one themselves.
+This route is probably extremely inefficient, as it requires waiting for night-time. I would recommend any runner reading this with the intention of running _Minecraft_ Geneva% find a different route or create one themselves.
