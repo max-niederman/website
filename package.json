@@ -3,14 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "astro dev",
+    "dev": "astro dev",
     "build": "astro build",
     "serve": "caddy file-server -root dist/ -listen 0.0.0.0:3000",
     "format": "npx prettier -w package.json *.config.{js,mjs} src/**/*.{md,js,jsx,ts,tsx,svelte,css,scss,sass}",
     "prebuild": "cp -r node_modules/@fontsource public/fonts",
     "postinstall": "cp -r node_modules/@fontsource public/fonts"
   },
-  "devDependencies": {
+  "dependencies": {
     "@astrojs/renderer-svelte": "^0.1.1",
     "@fontsource/eb-garamond": "^4.5.0",
     "@fontsource/fira-code": "^4.5.0",
@@ -19,8 +19,6 @@
     "astro": "^0.20.2",
     "autoprefixer": "^10.3.3",
     "fecha": "^4.2.1",
-    "prettier": "^2.3.2",
-    "prettier-plugin-svelte": "^2.3.1",
     "prism-themes": "^1.8.0",
     "rehype-mathjax": "^4.0.0",
     "remark-footnotes": "^3.0.0",
@@ -29,5 +27,9 @@
     "remark-lint": "^8.0.0",
     "remark-math": "^4.0.0",
     "remark-slug": "^6.1.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.3.2",
+    "prettier-plugin-svelte": "^2.3.1"
   }
 }
