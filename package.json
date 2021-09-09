@@ -1,5 +1,5 @@
 {
-  "name": "@example/starter",
+  "name": "@niederman/website",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,8 +7,8 @@
     "build": "astro build",
     "serve": "caddy file-server -root dist/ -listen 0.0.0.0:3000",
     "format": "npx prettier -w package.json *.config.{js,mjs} src/**/*.{md,js,jsx,ts,tsx,svelte,css,scss,sass}",
-    "prebuild": "cp -r node_modules/@fontsource public/fonts",
-    "postinstall": "cp -r node_modules/@fontsource public/fonts"
+    "prebuild": "cp -Lr node_modules/@fontsource public/fonts",
+    "postinstall": "cp -Lr node_modules/@fontsource public/fonts"
   },
   "dependencies": {
     "@astrojs/renderer-svelte": "^0.1.1",
