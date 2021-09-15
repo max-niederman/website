@@ -3,7 +3,7 @@ export default {
     site: "http://maxniederman.com",
     sitemap: true,
   },
-  renderers: ["@astrojs/renderer-svelte"],
+  renderers: [],
   markdownOptions: {
     remarkPlugins: [
       "remark-lint",

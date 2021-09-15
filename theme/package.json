@@ -1,0 +1,10 @@
+{
+    "name": "@niederman/website-theme",
+    "version": "0.1.0",
+    "exports": {
+        "./components": "./src/components/index.js",
+        "./layouts": "./src/layouts/index.js",
+        "./pages": "./src/pages/index.js",
+        "./pages/tags": "./src/pages/tags/index.js"
+    }
+}

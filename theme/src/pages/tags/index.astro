@@ -1,7 +1,8 @@
 ---
 import Layout from "$/layouts/Default.astro";
 
-const pages = Astro.fetchContent("../**/*.md");
+const { pages } = Astro.props;
+
 const tags = [...new Set(pages.flatMap(({ tags }) => tags))];
 ---
 

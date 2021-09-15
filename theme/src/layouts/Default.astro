@@ -1,7 +1,11 @@
 ---
-import BaseHead from "$/components/BaseHead.astro";
-import Nav from "$/components/Nav.astro";
-import Header from "$/components/PostHeader.astro";
+import BaseHead from "../components/BaseHead.astro";
+import Nav from "../components/Nav.astro";
+import Header from "../components/PostHeader.astro";
+
+import "../styles/global.scss";
+import "../styles/typography.scss";
+import "../styles/code.scss";
 
 let { header = true, content } = Astro.props;
 
@@ -19,9 +23,7 @@ const { language = "en", title, description } = content;
   <head>
     <BaseHead title={title} description={description} />
 
-    <link rel="stylesheet" href={Astro.resolve("../styles/global.css")}>
-    <link rel="stylesheet" href={Astro.resolve("../styles/typography.css")}>
-    <link rel="stylesheet" href={Astro.resolve("../styles/code.css")}>
+    <slot name="head" />
   </head>
   <body>
     <Nav />

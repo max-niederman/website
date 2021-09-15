@@ -15,17 +15,7 @@ export async function getStaticPaths() {
   });
 }
 
-import Layout from "$/layouts/Default.astro";
-
-const { tag } = Astro.request.params;
-const { pages } = Astro.props;
+import { Tag } from "@niederman/website-theme/pages/tags";
 ---
 
-<Layout content={{
-  title: `Tag: ${tag}`,
-  headerMeta: false,
-}}>
-  <ul>
-    {pages.map(({ title, url }) => <li><a href={url}>{title}</a></li>)}
-  </ul>
-</Layout>
+<Tag {...Astro.props} />
