@@ -1,5 +1,4 @@
 {
-  "name": "@niederman/website",
   "private": true,
   "scripts": {
     "dev": "astro dev",

@@ -1,0 +1,7 @@
+---
+import { Index } from "@niederman/website-theme/pages/tags";
+
+const pages = Astro.fetchContent("../**/*.md");
+---
+
+<Index pages={pages} />
