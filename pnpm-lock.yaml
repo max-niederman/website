@@ -8,8 +8,6 @@ importers:
       '@fontsource/fira-code': ^4.5.0
       '@niederman/website-theme': workspace:^0.1.0
       '@silvenon/remark-smartypants': ^1.0.0
-      '@snowpack/plugin-postcss': ^1.4.3
-      '@snowpack/plugin-sass': ^1.4.0
       astro: ^0.20.2
       fecha: ^4.2.1
       prettier: ^2.3.2
@@ -20,13 +18,12 @@ importers:
       remark-lint: ^8.0.0
       remark-math: ^4.0.0
       remark-slug: ^6.1.0
+      sass: ^1.42.1
     dependencies:
       '@fontsource/eb-garamond': 4.5.0
       '@fontsource/fira-code': 4.5.1
       '@niederman/website-theme': link:../theme
       '@silvenon/remark-smartypants': 1.0.0
-      '@snowpack/plugin-postcss': 1.4.3
-      '@snowpack/plugin-sass': 1.4.0
       astro: 0.20.4
       fecha: 4.2.1
       rehype-mathjax: 4.0.1
@@ -36,6 +33,7 @@ importers:
       remark-lint: 8.0.0
       remark-math: 4.0.0
       remark-slug: 6.1.0
+      sass: 1.42.1
     devDependencies:
       prettier: 2.3.2
 
@@ -652,19 +650,6 @@ packages:
   /@sindresorhus/is/4.0.1:
     resolution: {integrity: sha512-Qm9hBEBu18wt1PO2flE7LPb30BHMQt1eQgbV76YntdNk73XZGpn3izvGTYxbGgzXKgbCjiia0uxTd3aTNQrY/g==}
     engines: {node: '>=10'}
-    dev: false
-
-  /@snowpack/plugin-postcss/1.4.3:
-    resolution: {integrity: sha512-RJGYagse6Pi86Bqm8vPukhCwFVa92VIB81qP3PXPQ/ITQy5gVWDYi4oU+r1A6hsEZ9scUNZevfw6ISya+oiMNQ==}
-    peerDependencies:
-      postcss: '*'
-    dependencies:
-      minimatch: 3.0.4
-      normalize-path: 3.0.0
-      postcss-load-config: 3.1.0
-      workerpool: 6.1.5
-    transitivePeerDependencies:
-      - ts-node
     dev: false
 
   /@snowpack/plugin-postcss/1.4.3_postcss@8.3.6:
@@ -5065,6 +5050,14 @@ packages:
 
   /sass/1.39.0:
     resolution: {integrity: sha512-F4o+RhJkNOIG0b6QudYU8c78ZADKZjKDk5cyrf8XTKWfrgbtyVVXImFstJrc+1pkQDCggyidIOytq6gS4gCCZg==}
+    engines: {node: '>=8.9.0'}
+    hasBin: true
+    dependencies:
+      chokidar: 3.5.2
+    dev: false
+
+  /sass/1.42.1:
+    resolution: {integrity: sha512-/zvGoN8B7dspKc5mC6HlaygyCBRvnyzzgD5khiaCfglWztY99cYoiTUksVx11NlnemrcfH5CEaCpsUKoW0cQqg==}
     engines: {node: '>=8.9.0'}
     hasBin: true
     dependencies:

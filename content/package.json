@@ -14,8 +14,6 @@
     "@fontsource/fira-code": "^4.5.0",
     "@niederman/website-theme": "workspace:^0.1.0",
     "@silvenon/remark-smartypants": "^1.0.0",
-    "@snowpack/plugin-postcss": "^1.4.3",
-    "@snowpack/plugin-sass": "^1.4.0",
     "astro": "^0.20.2",
     "fecha": "^4.2.1",
     "rehype-mathjax": "^4.0.0",
@@ -24,7 +22,8 @@
     "remark-gfm": "^1.0.0",
     "remark-lint": "^8.0.0",
     "remark-math": "^4.0.0",
-    "remark-slug": "^6.1.0"
+    "remark-slug": "^6.1.0",
+    "sass": "^1.42.1"
   },
   "devDependencies": {
     "prettier": "^2.3.2"
