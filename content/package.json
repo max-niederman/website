@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "serve": "caddy file-server -root dist/ -listen 0.0.0.0:3000",
+    "preview": "astro preview",
     "format": "npx prettier -w package.json *.config.{js,mjs} src/**/*.{md,js,jsx,ts,tsx,svelte,css,scss,sass}",
     "prebuild": "cp -Lr node_modules/@fontsource public/fonts",
     "postinstall": "cp -Lr node_modules/@fontsource public/fonts"
@@ -17,6 +17,7 @@
     "@snowpack/plugin-postcss": "^1.4.3",
     "@snowpack/plugin-sass": "^1.4.0",
     "astro": "^0.20.2",
+    "fecha": "^4.2.1",
     "rehype-mathjax": "^4.0.0",
     "remark-footnotes": "^3.0.0",
     "remark-gemoji": "^6.0.0",

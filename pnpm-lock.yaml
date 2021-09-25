@@ -2,6 +2,9 @@ lockfileVersion: 5.3
 
 importers:
 
+  .:
+    specifiers: {}
+
   content:
     specifiers:
       '@fontsource/eb-garamond': ^4.5.0
@@ -11,7 +14,6 @@ importers:
       '@snowpack/plugin-postcss': ^1.4.3
       '@snowpack/plugin-sass': ^1.4.0
       astro: ^0.20.2
-      autoprefixer: ^10.3.3
       fecha: ^4.2.1
       prettier: ^2.3.2
       rehype-mathjax: ^4.0.0
@@ -29,7 +31,6 @@ importers:
       '@snowpack/plugin-postcss': 1.4.3
       '@snowpack/plugin-sass': 1.4.0
       astro: 0.20.4
-      autoprefixer: 10.3.4
       fecha: 4.2.1
       rehype-mathjax: 4.0.1
       remark-footnotes: 3.0.0
@@ -1189,21 +1190,6 @@ packages:
 
   /asynckit/0.4.0:
     resolution: {integrity: sha1-x57Zf380y48robyXkLzDZkdLS3k=}
-    dev: false
-
-  /autoprefixer/10.3.4:
-    resolution: {integrity: sha512-EKjKDXOq7ug+jagLzmnoTRpTT0q1KVzEJqrJd0hCBa7FiG0WbFOBCcJCy2QkW1OckpO3qgttA1aWjVbeIPAecw==}
-    engines: {node: ^10 || ^12 || >=14}
-    hasBin: true
-    peerDependencies:
-      postcss: ^8.1.0
-    dependencies:
-      browserslist: 4.17.0
-      caniuse-lite: 1.0.30001255
-      colorette: 1.4.0
-      fraction.js: 4.1.1
-      normalize-range: 0.1.2
-      postcss-value-parser: 4.1.0
     dev: false
 
   /autoprefixer/10.3.4_postcss@8.3.6:
