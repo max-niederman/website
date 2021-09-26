@@ -11,6 +11,12 @@ layout: "$/layouts/Default.astro"
 
 # 2021
 
+## September 2021
+
+Technical:
+
+- Split the site into seperate NPM packages for the theme and content.
+
 ## August 2021
 
 - Removed the resumé showcase page entirely, as it made navigation harder, wasn't very functional, buggy, and didn't work well without JavaScript.
