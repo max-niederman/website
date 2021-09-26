@@ -10,21 +10,20 @@
   },
   "dependencies": {
     "@fontsource/eb-garamond": "^4.5.0",
-    "@fontsource/fira-code": "^4.5.0",
-    "@niederman/website-theme": "workspace:^0.1.0",
+    "@fontsource/fira-code": "^4.5.1",
+    "@niederman/website-theme": "workspace:^0.1.1",
     "@silvenon/remark-smartypants": "^1.0.0",
-    "astro": "^0.20.2",
+    "astro": "^0.20.7",
     "fecha": "^4.2.1",
-    "rehype-mathjax": "^4.0.0",
-    "remark-footnotes": "^3.0.0",
-    "remark-gemoji": "^6.0.0",
-    "remark-gfm": "^1.0.0",
-    "remark-lint": "^8.0.0",
-    "remark-math": "^4.0.0",
-    "remark-slug": "^6.1.0",
+    "rehype-mathjax": "^4.0.1",
+    "remark-footnotes": "^4.0.1",
+    "remark-gemoji": "^7.0.0",
+    "remark-gfm": "^2.0.0",
+    "remark-math": "^5.1.0",
+    "remark-slug": "^7.0.0",
     "sass": "^1.42.1"
   },
   "devDependencies": {
-    "prettier": "^2.3.2"
+    "prettier": "^2.4.1"
   }
 }

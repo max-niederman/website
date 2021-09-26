@@ -22,7 +22,7 @@ Of course, the obvious solution is just automate it, that is create a tool which
 
 For this reason, automatic theming has a very high barrier of entry. The only people who can achieve it are those with the skills to roll support for their applications themselves. Combined with the large time commitment and the fact that the benefits of even a completely consistent solution are small (primarily reduced context-switching).
 
-# Pywal
+## Pywal
 
 By far the most-used automatic theming tool is [pywal](https://github.com/dylanaraps/pywal). It was created by Dylan Araps of Neofetch fame. Pywal's basic function is to extract a color palette from an image. After it extracts the palette, it sets open terminal colors with it and renders user-defined templates.
 
@@ -32,7 +32,7 @@ Pywal is very simple, and because of this simplicity, it is quite easy to use. H
 
 A lacking theme application function is not _necessarily_ a problem. For instance, as the UNIX philosophy dictates, we could use pywal only for palette extraction and another tool for theme application. This is, more or less, what I did myself when I was using pywal. Unfortunately no such tool currently exists, and even if it did that solution would only _raise_ the barrier of entry.
 
-## Limitations
+### Limitations
 
 None of the preceding problems are, in my opinion, reason enough to abandon pywal and use a different tool for palette extraction. What I do believe warrants this is the simple fact that pywal extracts ugly themes.
 
@@ -48,7 +48,7 @@ Even worse, the accents are often very similar colors which reduces contrast the
 
 Because pywal is primarily focused on extracting colors from images, this limitation will always plague it, severely limiting its uses.
 
-# Luthien
+## Luthien
 
 Frustrated with the limitations of pywal, I decided to write my own tool with the following goals in mind:
 
@@ -58,13 +58,13 @@ Frustrated with the limitations of pywal, I decided to write my own tool with th
 
 Luthien is not yet finished, but I hope that in the future it will make theme automation worth the effort for more people.
 
-## Extraction from Images
+### Extraction from Images
 
 Luthien's image extractor is different from all other tools I know of. Instead of a k-means-based algorithm, it uses a far simpler algorithm which simply finds the centroid, i.e. the multi-dimensional arithmetic mean, of all of the image's pixels in user-defined color ranges in the [CIE L\*a\*b\* color space](https://en.wikipedia.org/wiki/CIELAB_color_space).
 
 As of writing, if an image contains no pixels inside a target range, the center of the range is used. In the future, I plan to enable users to set a default or set it to algorithmically guess at a complementing color.
 
-## Plugins
+### Plugins
 
 Luthien's plugin interface is very simple. First, the input is serialized to JSON and passed to the plugin process through the standard input. Then the plugin executes using this data and returns a response code indicative of its success. The standard error is also inherited from the parent process for logging.
 
@@ -74,7 +74,7 @@ A Rust library for writing complex plugins is provided, as well as some first-pa
 - `luthien-templates` renders Jinja2-like templates with theme data.
 - `luthien-sass` exposes theme data to Sass modules and compiles them to CSS.
 
-# Future Improvements
+## Future Improvements
 
 The difficulty of installation and initial configuration must be reduced. As of writing, from-scratch configuration of a theming setup similar to my own could easily take >4 hours. The vast majority of this time is spent manually integrating with applications.
 

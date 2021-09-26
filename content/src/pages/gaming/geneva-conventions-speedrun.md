@@ -13,7 +13,7 @@ layout: "$/layouts/Default.astro"
 
 In this article, I propose a novel new speedrun category, the "Geneva%." The Geneva% speedrun is completed by violating a provision of one of the Geneva Conventions or their Additional Protocols. The category is applicable to a great number of games, but I provide a route for _Minecraft_ as an example.
 
-# Provisions for Completion
+## Provisions for Completion
 
 In order for completion to be possible in games which do not portray the Geneva Conventions and its parties in-game, some provisions must be made. In most games, these will include:
 
@@ -22,21 +22,21 @@ In order for completion to be possible in games which do not portray the Geneva 
 
 These provisions are inherently dependent on the nature of the game being run, and as such they should be decided on a per-game basis.
 
-# Example Violations
+## Example Violations
 
 Following are examples of how each of the Articles of the first chapter of the first Geneva Convention of 1949 can (or can't) be violated. These examples are provided as examples for aspiring runners in the Geneva% category. Better routes can be achieved by use of the other Conventions.
 
-## Convention (1) of 1949
+### Convention (1) of 1949
 
 The first Geneva Convention of 1949, entitled the "Geneva Convention for the Amelioration of the Condition of the Wounded and Sick in Armed Forces in the Field," provides (unsurprisingly) for those who fall ill or are wounded on the battlefield, as well as the medical infrastructure supporting them.
 
-### Article 1 - Respect for the Convention
+#### Article 1 - Respect for the Convention
 
 > The High Contracting Parties undertake to respect and to ensure respect for the present Convention in all circumstances.
 
 This article is violated if and only if another article is violated, making it utterly useless for the runner.
 
-### Article 2 - Application of the Convention
+#### Article 2 - Application of the Convention
 
 > In addition to the provisions which shall be implemented in peacetime, the present Convention shall apply to all cases of declared war or of any other armed conflict which may arise between two or more of the High Contracting Parties, even if the state of war is not recognized by one of them.
 >
@@ -46,7 +46,7 @@ This article is violated if and only if another article is violated, making it u
 
 This widens the scope the Convention's provisions, making it easier for the runner to violate other articles.
 
-### Article 3 - Conflicts not of an International Character
+#### Article 3 - Conflicts not of an International Character
 
 > In the case of armed conflict not of an international character occurring in the territory of one of the High Contracting Parties, each Party to the conflict shall be bound to apply, as a minimum, the following provisions:
 >
@@ -80,19 +80,19 @@ In short, the runner should
 9. ???
 10. Profit.
 
-### Article 4 - Application by Neutral Powers
+#### Article 4 - Application by Neutral Powers
 
 > Neutral Powers shall apply by analogy the provisions of the present Convention to the wounded and sick, and to members of the medical personnel and to chaplains of the armed forces of the Parties to the conflict, received or interned in their territory, as well as to dead persons found.
 
 This will be difficult or impossible in most games, as there is often no Neutral Party to speak of. Even when there is, if they follow the conventions there may nothing that can be done about it, since forcing them to break the Conventions almost certainly nullifies their neutrality.
 
-### Article 5 - Duration of Application
+#### Article 5 - Duration of Application
 
 > For the protected persons who have fallen into the hands of the enemy, the present Convention shall apply until their final repatriation.
 
 Like Articles 1, 2, and 4 before it, this article serves merely to widen the scope of the Convention.
 
-### Article 6 - Special Agreements
+#### Article 6 - Special Agreements
 
 > In addition to the agreements expressly provided for in Articles 10, 15, 23, 28, 31, 36, 37 and 52, the High Contracting Parties may conclude other special agreements for all matters concerning which they may deem it suitable to make separate provision. No special agreement shall adversely affect the situation of the wounded and sick, of members of the medical personnel or of chaplains, as defined by the present Convention, nor restrict the rights which it confers upon them.
 >
@@ -100,13 +100,13 @@ Like Articles 1, 2, and 4 before it, this article serves merely to widen the sco
 
 To violate this article, the runner should make an agreement with another party which causes adversely affects the wounded, sick, or medical personnel.
 
-### Article 7 - Non-Renunciation of Rights
+#### Article 7 - Non-Renunciation of Rights
 
 > Wounded and sick, as well as members of the medical personnel and chaplains, may in no circumstances renounce in part or in entirety the rights secured to them by the present Convention, and by the special agreements referred to in the foregoing Article, if such there be.
 
 It's arguable whether this article is even _possible_ to break, since the rights it ensures cannot be renounced are provided by the Convention itself; this is fortunate for us because breaking it would make for an extremely boring run.
 
-### Article 8 - Protecting Powers
+#### Article 8 - Protecting Powers
 
 > The present Convention shall be applied with the cooperation and under the scrutiny of the Protecting Powers whose duty it is to safeguard the interests of the Parties to the conflict. For this purpose, the Protecting Powers may appoint, apart from their diplomatic or consular staff, delegates from amongst their own nationals or the nationals of other neutral Powers. The said delegates shall be subject to the approval of the Power with which they are to carry out their duties.
 >
@@ -119,13 +119,13 @@ The runner must do two things:
 - Become a [Protecting Power](https://en.wikipedia.org/wiki/Protecting_power) and appoint a delegate for the purposes of Protection without the approval of the Protected Power.
 - As a Party to a Conflict, fail to facilitate the tasks of the delegates to themselves of a Protecting Party.
 
-### Article 9 - Activites of the International Committee of the Red Cross
+#### Article 9 - Activites of the International Committee of the Red Cross
 
 > The provisions of the present Convention constitute no obstacle to the humanitarian activities which the International Committee of the Red Cross or any other impartial humanitarian organization may, subject to the consent of the Parties to the conflict concerned, undertake for the protection of wounded and sick, medical personnel and chaplains, and for their relief.
 
 The [International Committee of the Red Cross](https://en.wikipedia.org/wiki/International_Committee_of_the_Red_Cross), or a similar humanitarian organization must administer aid without the consent of the an aided Party.
 
-### Article 10 - Substitutes for Protecting Powers
+#### Article 10 - Substitutes for Protecting Powers
 
 > The High Contracting Parties may at any time agree to entrust to an organization which offers all guarantees of impartiality and efficacy the duties incumbent on the Protecting Powers by virtue of the present Convention.
 >
@@ -141,7 +141,7 @@ The [International Committee of the Red Cross](https://en.wikipedia.org/wiki/Int
 
 There are multiple ways to violate this article, but the simplest is for the runner to form an agreement with a Power with which they are at war which derogates the other provisions of the Article. For example, a treaty stipulating that a Protecting Power not be substituted under any circumstances.
 
-### Article 11 - Conciliation Procedure
+#### Article 11 - Conciliation Procedure
 
 > In cases where they deem it advisable in the interest of protected persons, particularly in cases of disagreement between the Parties to the conflict as to the application or interpretation of the provisions of the present Convention, the Protecting Powers shall lend their good offices with a view to settling the disagreement.
 >
@@ -149,7 +149,7 @@ There are multiple ways to violate this article, but the simplest is for the run
 
 The runner must refuse to meet another Power after a Protecting Party proposes a meeting with that Power.
 
-# _Minecraft_ Route
+## _Minecraft_ Route
 
 Following is an example Geneva% route for _Minecraft_:
 

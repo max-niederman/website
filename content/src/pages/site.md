@@ -10,7 +10,7 @@ tags:
 layout: "$/layouts/Default.astro"
 ---
 
-# Purpose
+## Purpose
 
 This website has three main purposes:
 
@@ -28,9 +28,9 @@ This website has three main purposes:
   - Be readable as pure HTML. There should be no dependence even on CSS.
   - Institute measures to mitigate [link rot](https://en.wikipedia.org/wiki/Link_rot).
 
-# Design
+## Design
 
-## Slugs
+### Slugs
 
 Each slug segment must contain only numbers, lowercase Latin letters, and hyphens exclusively for word seperation. Segment length should be kept to a minimum, but never at the cost of expressiveness.
 
@@ -39,9 +39,9 @@ By default, a page is located by only one slug segment. Additional slug segments
 - Many pages (present or planned) share one essential, simple theme.
 - This theme should not be complex, nor should it be in any way esoteric.
 
-## Post Metadata
+### Post Metadata
 
-### Tags
+#### Tags
 
 Tags on this website are of two kinds:
 
@@ -52,13 +52,13 @@ Currently, this distinction is not represented in any way by the UI, but this is
 
 Tag names follow the same convention as slugs on this site: all lowercase and hyphenation for word seperation.
 
-### Dates
+#### Dates
 
 The publication date I believe is self-explanatory; it's the date when the page was first live on this website.
 
 The update date is the date of the last _substantive_ change to the page. This does not include changes which fix typoes or other trivial mistakes.
 
-### Status
+#### Status
 
 The status tag is used for the "completeness" of the page. Currently, the following statuses are used:
 
@@ -67,7 +67,7 @@ The status tag is used for the "completeness" of the page. Currently, the follow
 - "updated" refers to a page which is at the moment complete, but will become incomplete in the future. For instance, the [Changelog](/changelog) will never be "complete," only "updated."
 - "complete" refers to a page which is complete and will always, bar modification, be so.
 
-## User Interface
+### User Interface
 
 This website's design is _very_ inspired by that of [Gwern.net](https://gwern.net). Currently it's more or less a copy lacking a few features such as
 
@@ -77,15 +77,15 @@ This website's design is _very_ inspired by that of [Gwern.net](https://gwern.ne
 
 In the future, I hope to change this by implementing some of those features as well as altering the design so as to be more distinctive.
 
-### Fonts
+#### Fonts
 
 Currently, EB Garamond is used for everything except codeblocks, which use Fira Code. In the future, this will probably change. If it doesn't prove prohibitively time-consuming, I may even work on my own fonts for this website.
 
-# Technical
+## Technical
 
 The source code is all public and can be viewed [here](https://github.com/max-niederman/website) on [my GitHub](https://github.com/max-niederman).
 
-## Static Site Generation
+### Static Site Generation
 
 This website is statically generated using a variety of tools. Chief among them is [astro](https://astro.build). It uses an "islands architecture" to enable true components with completely opt-in JavaScript. Currently, it enables this website to use _zero_ client-side JavaScript.
 
@@ -104,7 +104,7 @@ Rehype Plugins:
 
 - `rehype-mathjax` to render the aforementioned math nodes.
 
-## Hosting
+### Hosting
 
 Currently, the website is hosted on [Cloudflare Pages](https://pages.cloudflare.com). This has numerous benefits:
 

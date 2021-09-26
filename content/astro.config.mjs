@@ -6,7 +6,6 @@ export default {
   renderers: [],
   markdownOptions: {
     remarkPlugins: [
-      "remark-lint",
       "remark-gfm",
       "remark-slug",
       "remark-math",

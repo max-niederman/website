@@ -9,15 +9,15 @@ tags:
 layout: "$/layouts/Default.astro"
 ---
 
-# 2021
+## 2021
 
-## September 2021
+### September 2021
 
 Technical:
 
 - Split the site into seperate NPM packages for the theme and content.
 
-## August 2021
+### August 2021
 
 - Removed the resumé showcase page entirely, as it made navigation harder, wasn't very functional, buggy, and didn't work well without JavaScript.
 - [The Geneva-Percent Speedrun](/gaming/geneva-conventions-speedrun) is a write-up on a novel speedrun category completed by violating any provision of a Geneva Convention.
@@ -33,12 +33,12 @@ Technical:
 - Added a list of tags to the posts' headers.
 - Added the page's description to its header.
 
-## July 2021
+### July 2021
 
 - Decided to remake my personal website.
 - Designed the first version of the "resumé" page in [Figma](https://figma.com) and made decisions on the reader design.
 
-# To-Do
+## To-Do
 
 - Epigraphs
 - Labeled Links
