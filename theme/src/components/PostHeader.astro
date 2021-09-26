@@ -21,7 +21,7 @@ const {
   updated,
   status,
   tags = [],
-} = Astro.props.content;
+} = Astro.props.content as Frontmatter;
 ---
 
 <style lang="scss">

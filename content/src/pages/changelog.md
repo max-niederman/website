@@ -40,6 +40,7 @@ Technical:
 
 # To-Do
 
+- Epigraphs
 - Labeled Links
 - Tag Kind Differentiation
 - Link Popups

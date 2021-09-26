@@ -1,9 +1,19 @@
-<nav>
-  <a href="/">M</a>
+---
+export interface Props {
+  links: {
+    title: string;
+    href: string;
+  }[];
+}
 
+const { links } = Astro.props as Props;
+const first = links.shift();
+---
+
+<nav>
+  <a href={first.href}>{first.title}</a>
   <hr />
-  <a href="/site">Site</a>
-  <a href="/changelog">Changes</a>
+  {links.map(({ title, href }) => <a href={href}>{title}</a>)}
 </nav>
 
 <style lang="scss">
