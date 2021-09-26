@@ -6,7 +6,6 @@
     "build": "astro build",
     "preview": "astro preview",
     "format": "npx prettier -w package.json *.config.{js,mjs} src/**/*.{md,js,jsx,ts,tsx,svelte,css,scss,sass}",
-    "prebuild": "cp -Lr node_modules/@fontsource public/fonts",
     "postinstall": "cp -Lr node_modules/@fontsource public/fonts"
   },
   "dependencies": {
