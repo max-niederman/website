@@ -5,12 +5,12 @@
 @use "@fontsource/fira-code/scss/mixins" as FiraCode;
 
 @include EBGaramond.fontFaceVariable(
-  $fontDir: "/fonts/@fontsource/eb-garamond/files",
+  $fontDir: "/fonts/eb-garamond/files",
   $type: "wghtOnly"
 );
 
 @include FiraCode.fontFaceVariable(
-  $fontDir: "/fonts/@fontsource/fira-code/files",
+  $fontDir: "/fonts/fira-code/files",
   $type: "wghtOnly"
 );
 

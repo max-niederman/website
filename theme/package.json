@@ -1,6 +1,6 @@
 {
     "name": "@niederman/website-theme",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "exports": {
         "./components": "./src/components/index.js",
         "./layouts": "./src/layouts/index.js",
