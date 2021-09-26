@@ -30,9 +30,9 @@ const { language = "en", title, description } = content;
 
     <main>
       {header &&
-        <header>
+        <div class="header-wrapper">
           <Header content={content} />
-        </header>
+        </div>
       }
 
       <article class="typography">
@@ -54,7 +54,7 @@ const { language = "en", title, description } = content;
     font-size: 1.35rem;
     max-width: 70ch;
 
-    header {
+    .header-wrapper {
       margin-top: 16px;
       border-bottom: none;
     }

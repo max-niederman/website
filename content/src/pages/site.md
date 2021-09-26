@@ -10,6 +10,10 @@ tags:
 layout: "$/layouts/Default.astro"
 ---
 
+## Copyright
+
+This site and its content is, unless otherwise noted, licensed under the Creative Commons Attribution 4.0 International license. You can read the full text [here](/license).
+
 ## Purpose
 
 This website has three main purposes:

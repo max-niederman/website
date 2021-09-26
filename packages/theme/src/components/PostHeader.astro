@@ -4,10 +4,11 @@ import { format } from 'fecha';
 export interface Frontmatter {
   title: string;
   description: string;
-  published: string;
-  updated: string;
-  status: string;
-  tags: string[];
+  author?: string;
+  published?: string;
+  updated?: string;
+  status?: string;
+  tags?: string[];
 }
 
 export interface Props {
@@ -17,12 +18,36 @@ export interface Props {
 const {
   title,
   description,
+  author,
   published,
   updated,
   status,
   tags = [],
 } = Astro.props.content as Frontmatter;
 ---
+
+<header>
+  <h1>{title}</h1>
+
+  <p>{description}</p>
+
+  {author && <p>author: {author}</p>}
+
+  {tags &&
+    <div class="tags">
+      {tags.slice(0, -1).map((tag) => 
+        <span><a href={`/tags/${tag}`}>{tag}</a>, </span>
+      )}
+      <a href={`/tags/${tags.slice(-1)}`}>{tags.slice(-1)}</a>
+    </div>
+  }
+
+  <div class="other">
+    {published && <span>published: {format(published, "isoDate")}, </span>}
+    {updated && <span>updated: {format(updated, "isoDate")}, </span>}
+    {status && <span>status: {status}</span>}
+  </div>
+</header>
 
 <style lang="scss">
   @use "../styles/theme";
@@ -59,24 +84,3 @@ const {
     }
   }
 </style>
-
-<header>
-  <h1>{title}</h1>
-
-  <p>{description}</p>
-
-  {tags &&
-    <div class="tags">
-      {tags.slice(0, -1).map((tag) => 
-        <span><a href={`/tags/${tag}`}>{tag}</a>, </span>
-      )}
-      <a href={`/tags/${tags.slice(-1)}`}>{tags.slice(-1)}</a>
-    </div>
-  }
-
-  <div class="other">
-    {published && <span>published: {format(published, "isoDate")}, </span>}
-    {updated && <span>updated: {format(updated, "isoDate")}, </span>}
-    {status && <span>status: {status}</span>}
-  </div>
-</header>
