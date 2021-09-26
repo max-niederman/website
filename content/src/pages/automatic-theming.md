@@ -40,7 +40,7 @@ Pywal's palette extraction works by a backend-frontend architecture. You can sel
 
 K-means clustering is well suited for extracting one or two accents for use in a UI, but for most images it will produce bad _system_ colorschemes. This is primarily becuase k-means clustering can only extract colors which are actually in the image[^1].
 
-[^1]: Or the centroid of colors in the image, but it would be highly unusual for a color which isn't very near to one in the image to be found.
+[^1]: This is technically not true. Lloyd's algorithm can also extract the centroid of colors in the image, but it would be highly unusual for a color which isn't very near to one in the image to be found.
 
 It is for this reason that pywal only uses a list of accents without an arguably more useful named color palette (red, green, blue, etc.). You want a dangerous action to be colored red? Well, sorry, you can't; it's "accent #3" or nothing.
 

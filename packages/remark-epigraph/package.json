@@ -1,0 +1,7 @@
+{
+  "name": "remark-epigraph",
+  "version": "0.1.0",
+  "description": "Remark plugin which adds classes to blockquotes immediately following headers.",
+  "author": "Max Niederman <max@maxniederman.com>",
+  "license": "MIT"
+}

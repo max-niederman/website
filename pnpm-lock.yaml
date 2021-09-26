@@ -21,7 +21,7 @@ importers:
     dependencies:
       '@fontsource/eb-garamond': 4.5.0
       '@fontsource/fira-code': 4.5.1
-      '@niederman/website-theme': link:../theme
+      '@niederman/website-theme': link:../packages/theme
       '@silvenon/remark-smartypants': 1.0.0
       astro: 0.20.7
       fecha: 4.2.1
@@ -35,7 +35,10 @@ importers:
     devDependencies:
       prettier: 2.4.1
 
-  theme:
+  packages/remark-epigraph:
+    specifiers: {}
+
+  packages/theme:
     specifiers: {}
 
 packages:
