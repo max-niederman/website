@@ -18,31 +18,31 @@ pages.sort((a, b) => new Date(b.published) - new Date(a.published));
 
   <div class="sections">
     <section>
-      <h2>Latest</h2>
+      <h3>Latest</h3>
       {pages.map(({ title, url }) => 
         <li><a href={url}>{title}</a></li>
       )}
     </section>
     <section>
-      <h2>Updated</h2>
+      <h3>Updated</h3>
       {[...pages].sort((a, b) => new Date(b.updated) - new Date(a.updated)).map(({ title, url }) => 
         <li><a href={url}>{title}</a></li>
       )}
     </section>
     <section>
-      <h2>Programming</h2>
+      <h3>Programming</h3>
       {pages.filter(({ tags }) => tags?.includes("programming")).map(({ title, url }) => 
         <li><a href={url}>{title}</a></li>
       )}
     </section>
     <section>
-      <h2>Web Development</h2>
+      <h3>Web Development</h3>
       {pages.filter(({ tags }) => tags?.includes("web-development")).map(({ title, url }) => 
         <li><a href={url}>{title}</a></li>
       )}
     </section>
     <section>
-      <h2>Gaming</h2>
+      <h3>Gaming</h3>
       {pages.filter(({ tags }) => tags?.includes("gaming")).map(({ title, url }) => 
         <li><a href={url}>{title}</a></li>
       )}
@@ -57,7 +57,7 @@ pages.sort((a, b) => new Date(b.published) - new Date(a.published));
     gap: 16px;
 
     section {
-      h2 {
+      h3 {
         margin-left: 0;
         margin-right: 0;
       }
