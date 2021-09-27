@@ -11,6 +11,7 @@ importers:
       astro: ^0.20.7
       fecha: ^4.2.1
       prettier: ^2.4.1
+      rehype-epigraph: workspace:^0.1.0
       rehype-mathjax: ^4.0.1
       remark-footnotes: ^4.0.1
       remark-gemoji: ^7.0.0
@@ -25,6 +26,7 @@ importers:
       '@silvenon/remark-smartypants': 1.0.0
       astro: 0.20.7
       fecha: 4.2.1
+      rehype-epigraph: link:../packages/rehype-epigraph
       rehype-mathjax: 4.0.1
       remark-footnotes: 4.0.1
       remark-gemoji: 7.0.0
@@ -35,8 +37,13 @@ importers:
     devDependencies:
       prettier: 2.4.1
 
-  packages/remark-epigraph:
-    specifiers: {}
+  packages/rehype-epigraph:
+    specifiers:
+      unist-util-is: ^5.1.1
+      unist-util-visit: ^4.1.0
+    dependencies:
+      unist-util-is: 5.1.1
+      unist-util-visit: 4.1.0
 
   packages/theme:
     specifiers: {}

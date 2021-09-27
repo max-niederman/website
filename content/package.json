@@ -15,6 +15,7 @@
     "@silvenon/remark-smartypants": "^1.0.0",
     "astro": "^0.20.7",
     "fecha": "^4.2.1",
+    "rehype-epigraph": "workspace:^0.1.0",
     "rehype-mathjax": "^4.0.1",
     "remark-footnotes": "^4.0.1",
     "remark-gemoji": "^7.0.0",

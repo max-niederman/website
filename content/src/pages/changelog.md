@@ -16,6 +16,7 @@ layout: "$/layouts/Default.astro"
 Technical:
 
 - Split the site into seperate NPM packages for the theme and content.
+- Added epigraph styling.
 
 ### August 2021
 
@@ -40,7 +41,8 @@ Technical:
 
 ## To-Do
 
-- Epigraphs
+- Citations
+- Italicization in Titles (for titles referencing other works)
 - Labeled Links
 - Tag Kind Differentiation
 - Link Popups

@@ -7,12 +7,15 @@ export default {
   markdownOptions: {
     remarkPlugins: [
       "remark-gfm",
+      "remark-gemoji",
       "remark-slug",
       "remark-math",
-      "remark-footnotes",
       "@silvenon/remark-smartypants",
-      "remark-gemoji",
+      "remark-footnotes",
     ],
-    rehypePlugins: ["rehype-mathjax"],
+    rehypePlugins: [
+      "rehype-mathjax",
+      import("rehype-epigraph"), // No idea why we have to `import` it but it doesn't work otherwise
+    ],
   },
 };
