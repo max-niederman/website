@@ -1,0 +1,51 @@
+
+I hereby claim:
+
+  * I am an admin of https://maxniederman.com
+  * I am niederman (https://keybase.io/niederman) on keybase.
+  * I have a public key ASAYtxrAX5OmtlaqmNWn0VMJto4564-7hxMjrgm-rnKGrAo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "012018b71ac05f93a6b656aa98d5a7d15309b68e39eb8fbb871323ae09beae7286ac0a",
+      "host": "keybase.io",
+      "kid": "012018b71ac05f93a6b656aa98d5a7d15309b68e39eb8fbb871323ae09beae7286ac0a",
+      "uid": "8088817bf1f5c5cc1adeef85079eab19",
+      "username": "niederman"
+    },
+    "merkle_root": {
+      "ctime": 1632794838,
+      "hash": "6520fa20d62931616ca4a8c14f6a2bd7e56c9677e8cee5c1be60493aad55906179ca046b622bca8168227e5f5b19343afa3b34325175daf17d41a1ca9936e723",
+      "hash_meta": "abd628135fe08726ab288aa5b5d4a62f086fd3f2d6f6f7771f96fcd7930299dc",
+      "seqno": 20857035
+    },
+    "service": {
+      "entropy": "dTtzFonLZg8QoT/NLdXdwTqm",
+      "hostname": "maxniederman.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "5.7.1"
+  },
+  "ctime": 1632794820,
+  "expire_in": 504576000,
+  "prev": "2630051d3323082c08fea77e550eb816ecacca5ed51edf2a4668ee08db460817",
+  "seqno": 6,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgGLcawF+TprZWqpjVp9FTCbaOOeuPu4cTI64Jvq5yhqwKp3BheWxvYWTESpcCBsQgJjAFHTMjCCwI/qd+VQ64Fuysyl7VHt8qRmjuCNtGCBfEIDIyaUq3r20gZC1fpnAa2NZMI/JgcR82li0xGfd3aO2zAgHCo3NpZ8RAY41oBhsAZX5fr78lMFvH4rWdCxF8TVMYviSKLljlhz39n1SWCXj0R475UTp6ZxwswmeNyGVN7G0MXuCDN4kqA6hzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIMxcidbaJ2W1UP1uFuSMpb1lp9obOSleBC0Sf4mrb/M6o3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/niederman
