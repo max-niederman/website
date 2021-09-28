@@ -1,6 +1,6 @@
 ---
 title: "About Me"
-description: "A short autobiography."
+description: "Who I am."
 published: "2021-09-25"
 updated: "2021-09-25"
 status: "draft"
@@ -9,3 +9,101 @@ tags:
   - biography
 layout: "$/layouts/Default.astro"
 ---
+
+I'm a high-school student and hobby developer. You can view my programming projects [on GitHub](https://github.com/max-niederman).
+
+I dislike writing, but I want to get better at it and I certainly have no shortage of things to write, so I'm doing it anyway.
+## Contact
+
+- E-mail: [max@maxniederman.com](mailto://max@maxniederman.com)
+- Discord: `Aquild#0001`
+
+### PGP Public Key
+
+On Keybase: [niederman](https://keybase.io/niederman)
+
+<details>
+  <summary>Show</summary>
+  <pre class="slim">
+    <code>
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQGNBGEysUABDAC8qRcWMsEs03uZbrgae+y1jWElJirhTKJ1hFvoDDlN/VD2SbHH
+0QjyZStpfkra5eL4/BV5P1oxmz45o9rztpC1mvgJGkp5v9/qcg6Z+XW+wczuL/hw
+lCrd/+ERxx7LCMCKFRWp1Ap72klZBuxu0VregkxxCNi22f9D8ZDnWdSAKu4PY7aA
+Av3QABlZjWVxpAgaHitMO6aJPlQ4XNQ8diBXLjmtMFCyaCMArMBz++82YZwVW79J
+qzsNxOqCXiAQyD7wW5fKZmgIsc+I+Gsvn1swGf0IPhTFt2SCeblCRZx3YPLn4woi
+6QXPqDVfpopcBxzQrqCNT+WPqsn4D2JfiBSRh8TKAFUHUf0SdaLZ0kc5qd4GTAsd
+xl0lZkNIWCTJYZ0hxvl0aZq6xxnnViTuYRd3lu2TmtIrGDoFt3AXbGiPjT4ZY2B2
+0zPxf+N7L695rEg1zwi08P6kbofmFyIxPgRmcZf+LhyDCGL3Ev//KfPnT5VCRgzx
+rATGsdaoQz71zsMAEQEAAbQkTWF4IE5pZWRlcm1hbiA8bWF4QG1heG5pZWRlcm1h
+bi5jb20+iQHUBBMBCAA+FiEEHeRCTb93EZJdxM9emu2IFIHYRE4FAmEysUACGwMF
+CQPCZwAFCwkIBwIGFQoJCAsCBBYCAwECHgECF4AACgkQmu2IFIHYRE7XWgv9HMBH
+5TdKQCXZoIVk4Bspo4r++kqRnxR8CCluhUmdzVffIlUzNH0Tb8YChV5jYgsSQw9y
+LXJL8HZiNFDmpa6wrGz7+xRtiP72zQ8nycDV5HwSZ9jad9HjuknT0pGLMcV4MmZ4
+9CV9nNLErqecMMWH4rY7mTn1Em0/Au7o1ZCfuwAuta0cMMCbC/y5QNo4oqLFS+qW
+7QsL3eZgOQFDFKR+koVsnoFmPlIcL7IokArynmAVuIPY4UBi6/YDQYllMLdsBnji
+wkOummqQpo5qrAG4ryy3MEXJKTtb+Id1OSQiDHryIpeMrLB0rlx4uspzd2B7nSpB
+JnxavbhFbLJpxrQ21squeLkDcEGcmBvmr9B3RH0iE++cMEyMWtA3xfKpnuQhlc4u
+DXhx2ayuTZTvrqH7HK199kWsX40W4QGZSlBVdZ2G/iIfiTDlqi3/BX4RNzBkFN+t
+zV5/4bTtZ8ukFEWREOkyV6UtxYYsSSlCSCn/DWRAJtvlOsPxR6cRKWNCp8G0uQGN
+BGEysUABDADV7llihdjAXyiu9CIr4JWfSNO17q8yvakkPcfDo1Z0MUupt17rPfWM
+kuw6c+0OfNZELers/YaZYD6lGkXD2D6t0QymrAprJmsQjk08ff0KbNVM43S7arbt
+WdnZ6TeRfkU3JiOTXDX0RGg0lw6ti3NhaYXAjWeJbfF2IhaZlbXqgEX6YOYkTGlR
+Imn4aanqWll9zK5UTdQkS2Bbj+rgpXEdmP+eWK1V3i4JxBrJaWXswVtymb6xtvwr
+yZowBhhOo7ra8KzXFzIgxCM51mzKvQUlicoOSNYrbrRLD2x+cJT0MOSQ5S8YgJov
+h61dofHGq1XAM/21H57pifGTGolkxRiSN6S+9u0HvQ94TMSqySk5SCeEj8sZftcP
+dEJlLrgOkuWZubEJq9gdGgkaxyj68PuhHEPhk7BUb1NSwoLBPRjGLZV3+h7vTOy6
+or5obKy/OXRauvCw67Q3HVFn+MRLn8NBWYlJrTSZhKYyj9OvsxyjUUUOZ+63rDsE
+jdmANDDYN28AEQEAAYkBvAQYAQgAJhYhBB3kQk2/dxGSXcTPXprtiBSB2EROBQJh
+MrFAAhsMBQkDwmcAAAoJEJrtiBSB2EROzGoL/3fOtR35SRXsCkLSqaTnTodM0bv0
+5bh8nqBDnVnrTRmDUCVL0dLOXXZtY4xxPiRiK+4uiK7apDeIuaB2+ILhnHVX1+1k
+XpHShSlSuKWAjKzxMS5VNkiWGYV5pCq8Hs6XN7PEh7tvfzbJzelizHY71P+fijCZ
+TRPCw03ftHptyteK+ZqHIhLCIYsUfi/e7KRHyylr9g3IG5xpqsfaqmqLRoaZRCeS
+hV5jnmNpvKrz7BwPIcz5R8dbb7vxcLXClC7kDxBblt5l4u/qs9Ef41NFLSAGwU5f
+gUX1S+OHKAM5ZwIZs1NOr2+EmdTA5rr9vLSolvKDWWr4i08uWzs2W48nqZongHu9
+Dz9Xf70P0Rh38+j43SEWAx0DzqF8YNZdrBAN+EuxQs6R3Hn6e61WCA+D6wzVV+hU
+Mmyye9bgkAF/udKfdacehr2f+n/IxCrc/AQCaO1BUJCQVtGgfDAfYaCQngLS5025
+RWrNRNGQ3Tdh/B/mAYYXuDr08bYM4g65PTHx6JkBjQRhMrJYAQwA6kSVrAvQQk26
+uiKQtL3X5udUPbLEEcJ/0p7/cgNxjV22XMSLFTp9A2JTvSGYUyiUS3zGK1Cw5LxP
+OaisbOfWxiRyZmX5A5bQB2iNKeIkuED06b4C2EU8+Ys7ha6QYoMAnnwmAAiQA/u4
+NNYGfvrvn3ymBxuPjUAt99xkrqtdt+9qymrEoRyWFNF4Bblu0nmTS55zadHz/7Qe
+jYlsaVnCpE3AmyEaFQ8e1ONRxb/FJD3oUoVk/38shj+aCRARQvNovBiUmjHlI6gC
+VphwvKfbTtk1hVjfA0MbKg+e54Ex4OmQC/0GkyU/2KWGmRbkgwSPdTCn7vEEVh7J
+J31eZfLNCVOxY/3a4UnVhCPFIN3y33TNmNASGbdPnpGpTFB8hBP9140Tlot0eRZv
+DuVqUhb03nL0DqJwGV1bHSbMtz6hGJcV5d/798bfm7ANK93mThdJFtaeMZaI/mLe
+GnrftbupW2yqdnrHWaBbvMNmpUQeWzGH+HqGt06SHHTKa11revTNABEBAAG0JE1h
+eCBOaWVkZXJtYW4gPG1heEBtYXhuaWVkZXJtYW4uY29tPokB1AQTAQgAPhYhBDw8
+e4/u+YsteovHT8LrJDkOCsD/BQJhMrJYAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQW
+AgMBAh4BAheAAAoJEMLrJDkOCsD/bnEL/3K/7K8Gok8ggI+lV2qd9TvsFcDHQx8v
+kwsAUs18+M9crOPFXwIzqIYgAcjbo+f3LOE8linvrgtgX0zoCz1NlQoguvh+lCA2
+TKywp1yso0ly22DZHpXx0v6yif9wgzkB3zV4awBJ2LG8JrUzKJFNxfx06IK84u5m
+utFOVd59xelvNusIzfIYs0Q4A8OpFSS7kmHjOKFnJuH7zvXGBWW5mADdtZikIjGE
+LBZiTXPxQurwzxomiKjCmLxvuiBkyKPGlMq7OgcGj7rh+mpcAOonA3RL6Grt02ds
+gp+LauLRH3ksLArl6D3KAweCYQGSXtHHXvBSapY6i7O16E4N8PTYvZ1HCR76JomS
+Z9KLE0ZYDuZgcwByXTHKjbs2qEK2CJ5pZgiyrZSaFuw8Ula2NdDEUpv+YabhqO/Z
+rERdEroIuIFyEqIkAu7ZR3vjBXOnBC+cMfxxlEhgwlpax/Dsjhgq59ylXoHSwbmd
+yx0VVteEx4Aa+JzhZZZEP+kpMNKF5HFHBLkBjQRhMrJYAQwAqNDlGOoKTgV6V8X9
+WM2CxlA14BH2azLOfehkfwThto7ooO1QJb+FvTLWkZzI+ENIDdzVqqIJrbbdLgMm
+mmpmFpgAjxk9qwo6he+O76CnInrqd2ebPPjkdWJMdY2Yk9aFwHJjQ+Ekv1mvRT5F
+PNL9D2b++LSSYHGGMe1m1kZrfvamrLHbjcKv9mQRgZMnZ8o1Q+ozEkcsV4+yQvk1
+1Kb8p2S3bId6ZBkZEOlGAH6+C0XOoplfI8LQkjyBsnSRomGTxNZm96NDHwsKEvvs
+vPZHv3CDQ8MZHjwt1m07EYa2Q6r1mErN2WYn6k6g1/+m9bR9Y1f1bdyA3MHouQ6K
+FbdLguefTzU5SnmU4dYFApbo2ClU0ezEz9An//mG/ojphiW8qQ4/ohu+M6mHW/bt
+omIGwcRVvwIZjSGtgNLu4dXadFGIieHAbp2oIsoPqYLszG9E9COiV3YZGtpYv4IQ
+IBq9tjoLcqO2ViFChpDF39q2oDNh/My3hw6ooqcv+y2W1i4zABEBAAGJAbwEGAEI
+ACYWIQQ8PHuP7vmLLXqLx0/C6yQ5DgrA/wUCYTKyWAIbDAUJA8JnAAAKCRDC6yQ5
+DgrA/0QMC/0QRdQzWuQ5Lb6HXxQ/AZ4wBDu3omjjO7PMTiOw8zI2/FQDNNEYgHwM
+vOSHwhN0z9GuFPIKNt2uRon2S4kEfli3IrTXuujNtsZ1QOkTuTvRAPxeG8dd+qby
+SYDjTfdbNdT4gq7GQDLDOaLO4HRYfjKcy98bI9WNqZJB6jx4ZFk3tIWQvdU9zDf9
+mXIIDzcHycVflrOjg2VFsWgbbrxbVKI6/qMILlOw3v2tnK6qibS1MGQvdkRdDbn8
+YH6lAqbeAcwnD4vJYnxKChkGr2Wrv4Ko9qGC/whRKbxBdHncJ4CI7BzSPXDik3Jl
+ywZe62+m/GN4NMKG1K+O4JoW4TfyAoCfG5Cmh/Uyn+TPmutRH4pZgWEfegXTTs/W
+ylplwaHz9NWqgsFPro+pBnSwWNoG2tUQc7kHul/Qfd7I7tusuytCUR/kTjZlYYkp
+OJQeRvUiU/yIgtqMu1ffkBRKMtfzj8OytINQiWc7uBpfDesFPJTKH0m4Vja4Vw5K
+VNfGWWpty9M=
+=jbTy
+-----END PGP PUBLIC KEY BLOCK-----
+    </code>
+  </pre>
+</details>
