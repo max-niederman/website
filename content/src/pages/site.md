@@ -10,10 +10,6 @@ tags:
 layout: "$/layouts/Default.astro"
 ---
 
-## Copyright
-
-This site and its content is, unless otherwise noted, licensed under the Creative Commons Attribution 4.0 International license. You can read the full text [here](/license).
-
 ## Purpose
 
 This website has three main purposes:
@@ -85,28 +81,33 @@ In the future, I hope to change this by implementing some of those features as w
 
 Currently, EB Garamond is used for everything except codeblocks, which use Fira Code. In the future, this will probably change. If it doesn't prove prohibitively time-consuming, I may even work on my own fonts for this website.
 
+## Copyright
+
+This site and its content is, unless otherwise noted, licensed under the Creative Commons Attribution 4.0 International license. You can read the full text [here](/license).
+
 ## Technical
 
 The source code is all public and can be viewed [here](https://github.com/max-niederman/website) on [my GitHub](https://github.com/max-niederman).
 
 ### Static Site Generation
 
-This website is statically generated using a variety of tools. Chief among them is [astro](https://astro.build). It uses an "islands architecture" to enable true components with completely opt-in JavaScript. Currently, it enables this website to use _zero_ client-side JavaScript.
+This website is statically generated using a variety of tools. Chief among them is [astro](https://astro.build). It uses an "islands architecture" to enable true components with completely opt-in JavaScript. Currently, it enables this website to function with _zero_ client-side JavaScript.
 
 The Markdown documents which comprise the vast majority of this website are processed using the [unified](https://unifiedjs.com) content-processing software suite and styled using [Sass](https://sass-lang.com).
 
 Remark Plugins:
 
 - `remark-gfm` for Github-flavored Markdown features.
+- `remark-gemoji` for emoji shortcode transformation.
 - `remark-slug` for heading anchors.
 - `remark-math` to create math nodes using inline Markdown.
-- `remark-footnotes` to make footnotes.
-- `remark-gemoji` for emoji shortcode transformation.
 - `@silvenon/remark-smartypants` for smart punctuation.
+- `remark-footnotes` to make footnotes.
 
 Rehype Plugins:
 
 - `rehype-mathjax` to render the aforementioned math nodes.
+- `rehype-epigraph` to style blockquotes following headers as epigraphs.
 
 ### Hosting
 
