@@ -19,7 +19,7 @@ This website has three main purposes:
   - Be usable without JavaScript and with other uncommon browsers/configurations.
   - Be accessible to those with color-blindness, using screen-readers, etc.
   - Load quickly even on non-ideal Internet connections.
-- as a part of my writing workflow. I write in Github-flavored Markdown with some other extensions, mostly from Pandoc. While writing, I like to see the Markdown source as well as the final typeset document. To this end it must:
+- as a part of my writing workflow. I write in GitHub-flavored Markdown with some other miscellaneous extensions. While writing, I like to see the Markdown source as well as the final typeset document. To this end it must:
   - Support a superset of the Markdown features I require.
   - Update to reflect changes within a couple seconds of a change in the source.
   - Have a portable development environment so that I can write from any device easily.
@@ -67,9 +67,29 @@ The status tag is used for the "completeness" of the page. Currently, the follow
 - "updated" refers to a page which is at the moment complete, but will become incomplete in the future. For instance, the [Changelog](/changelog) will never be "complete," only "updated."
 - "complete" refers to a page which is complete and will always, bar modification, be so.
 
+### Quotations
+
+There are four types of quotes on this site:
+
+- "Inline 'double/single' quotes" are used how you would expect. I use the American mode of outside double-quotes.
+
+- `Raw inline quotes` are used for inline code or most anything else which is not human [^1] language or spoken.
+
+- > Blockquotes
+
+  are used for longer quotes which deserver their own lines.
+
+- ```
+  Raw blockquotes
+  ```
+
+  are used for the same purposes as raw inline quotes, but for longer quotes. Primarily, they are used for syntax-highlighted code samples.
+
+[^1]: When I say "human," I really mean "biological" tongues; Elvish and similar fictional tongues are included.
+
 ### User Interface
 
-This website's design is _very_ inspired by that of [Gwern.net](https://gwern.net). Currently it's more or less a copy lacking a few features such as
+This website's UI design is _very_ inspired by that of [Gwern.net](https://gwern.net). Currently it's more or less a copy lacking a few features such as
 
 - Sidenotes
 - Link popups

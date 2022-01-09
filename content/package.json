@@ -11,9 +11,9 @@
   "dependencies": {
     "@fontsource/eb-garamond": "^4.5.0",
     "@fontsource/fira-code": "^4.5.1",
-    "@niederman/website-theme": "workspace:^0.1.1",
+    "@niederman/website-theme": "workspace:^0.2.0",
     "@silvenon/remark-smartypants": "^1.0.0",
-    "astro": "^0.20.7",
+    "astro": "^0.22.9",
     "fecha": "^4.2.1",
     "rehype-epigraph": "workspace:^0.1.0",
     "rehype-mathjax": "^4.0.1",
