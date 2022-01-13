@@ -3,7 +3,8 @@
 npm i -g pnpm
 pnpm install
 
-cd content
+pushd content
 pnpm run build
+popd
 
-mv ./dist ../
+mv ./content/dist ./

@@ -18,9 +18,7 @@ TL;DR: [here](https://github.com/max-niederman/ttyper)'s the project on GitHub a
 
 I was already pretty happy with the typing test I used to use, [monkeytype](https://monkeytype.com); however, I'm a big fan of CLI tools, so I wanted to be able to practice my typing without reaching for a browser or even a native application. I searched around for terminal-based typing tests, but none of them were quite what I had in mind.
 
-Since there weren't any pre-existing tools which met my needs, I thought it would be a good opportunity to learning about [TUIs](https://en.wikipedia.org/wiki/Text-based_user_interface)[^1] to make one myself. I decided to use Rust with [tui-rs](https://github.com/fdehau/tui-rs), after being inspired by tools built with it such as [gitui](https://github.com/extrawurst/gitui), [bandwhich](https://github.com/imsnif/bandwhich), and [diskonaut](https://github.com/imsnif/diskonaut).
-
-[^1]: As the Wikipedia article notes, 'TUI' can stand either for "text-based user interface" or for "terminal user interface." I use the latter here because tui-rs uses it and I personally prefer it.
+Since there weren't any pre-existing tools which met my needs, I thought it would be a good opportunity to learning about [TUIs](https://en.wikipedia.org/wiki/Text-based_user_interface) to make one myself. I decided to use Rust with [tui-rs](https://github.com/fdehau/tui-rs), after being inspired by tools built with it such as [gitui](https://github.com/extrawurst/gitui), [bandwhich](https://github.com/imsnif/bandwhich), and [diskonaut](https://github.com/imsnif/diskonaut).
 
 ## Design
 

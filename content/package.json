@@ -9,6 +9,7 @@
     "postinstall": "cp -Lr node_modules/@fontsource public/fonts"
   },
   "dependencies": {
+    "@astrojs/renderer-react": "^0.4.0",
     "@fontsource/eb-garamond": "^4.5.0",
     "@fontsource/fira-code": "^4.5.1",
     "@niederman/website-theme": "workspace:^0.2.0",

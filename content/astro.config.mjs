@@ -3,7 +3,9 @@ export default {
     site: "http://maxniederman.com",
     sitemap: true,
   },
-  renderers: [],
+  renderers: [
+    "@astrojs/renderer-react",
+  ],
   markdownOptions: {
     render: [
       "@astrojs/markdown-remark",

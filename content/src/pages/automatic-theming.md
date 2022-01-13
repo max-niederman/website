@@ -7,7 +7,6 @@ status: "draft"
 tags:
   - aesthetics
   - theming
-  - linux
   - programming
 layout: "$/layouts/Default.astro"
 ---
