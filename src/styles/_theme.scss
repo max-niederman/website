@@ -1,0 +1,16 @@
+$font-serif: "Roboto Serif", ui-serif, Georgia, Cambria,
+  "Times New Roman", Times, serif;
+$font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco,
+  Consolas, "Liberation Mono", "Courier New", monospace;
+
+$roundness: 0.25em;
+
+@mixin light {
+  --fg: black;
+  --bg: white;
+}
+
+@mixin dark {
+  --fg: white;
+  --bg: black;
+}
