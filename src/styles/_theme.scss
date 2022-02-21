@@ -1,16 +1,8 @@
-$font-serif: "Roboto Serif", ui-serif, Georgia, Cambria,
-  "Times New Roman", Times, serif;
-$font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco,
-  Consolas, "Liberation Mono", "Courier New", monospace;
+// fontfaces
+$font-sans: "Inter", ui-sans-serif, sans-serif;
+$font-mono: "Fira Code", ui-monospace, serif;
 
-$roundness: 0.25em;
-
-@mixin light {
-  --fg: black;
-  --bg: white;
-}
-
-@mixin dark {
-  --fg: white;
-  --bg: black;
-}
+// colors
+$color-fg: hsl(65, 43%, 95%);
+$color-bg: hsl(0, 0%, 4%);
+$color-accent: hsl(257, 62%, 71%);

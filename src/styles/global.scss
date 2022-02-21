@@ -1,20 +1,9 @@
 @use "theme";
 
-:root {
-  @include theme.light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    @include theme.dark;
-  }
-}
-
 body {
-  min-height: 100vh;
-  min-width: 100vw;
   margin: 0;
 
-  background: var(--bg);
-  color: var(--fg);
+  font-family: theme.$font-sans;
+  background: theme.$color-bg;
+  color: theme.$color-fg;
 }
