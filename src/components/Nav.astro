@@ -1,0 +1,32 @@
+<nav>
+    <a href="/" class="logo">
+        <div class="monogram">MN</div>
+    </a>
+</nav>
+
+<style lang="scss">
+    @use "../styles/theme";
+
+    nav {
+        position: absolute;
+        top: 0;
+
+        display: flex;
+        flex-direction: row;
+
+        padding: 8px 16px;
+
+        a, a:visited, a:hover {
+            color: theme.$color-accent;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+
+        .monogram {
+            font-size: 1.25em;
+            font-family: theme.$font-serif;
+            font-weight: 900;
+            letter-spacing: -0.125rem;
+        }
+    }
+</style>
