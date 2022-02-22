@@ -13,7 +13,7 @@
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
             # dependencies
-            nodePackages.pnpm
+            nodePackages.yarn
           ];
         };
       }
