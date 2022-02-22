@@ -7,29 +7,6 @@ $gutter: 0.25em;
   font-size: 1.25rem;
   font-family: theme.$font-sans;
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: theme.$font-serif;
-    font-variant: small-caps;
-    margin-left: -$gutter;
-    margin-right: -$gutter;
-  }
-
-  h2 {
-    text-align: right;
-    font-size: 2em;
-    border-bottom: 1px solid theme.$color-accent;
-  }
-
-  h3 {
-    font-size: 1.5em;
-    border-bottom: 1px dotted theme.$color-fg;
-  }
-
   a,
   a:visited {
     color: color.scale(theme.$color-accent, $lightness: 25%);
@@ -74,6 +51,36 @@ $gutter: 0.25em;
   }
 }
 
+@mixin typography-headers {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: theme.$font-serif;
+    font-variant: small-caps;
+    margin-left: -$gutter;
+    margin-right: -$gutter;
+  }
+
+  h2 {
+    text-align: right;
+    font-size: 2em;
+    border-bottom: 1px solid theme.$color-accent;
+  }
+
+  h3 {
+    font-size: 1.5em;
+    border-bottom: 1px dotted theme.$color-fg;
+  }
+}
+
 .typography {
   @include typography;
+}
+
+.typography-full {
+  @include typography;
+  @include typography-headers;
 }
