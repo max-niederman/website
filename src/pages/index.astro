@@ -5,6 +5,7 @@ import BaseHead from "../components/BaseHead.astro";
 import "../styles/global.scss";
 
 const posts = await Astro.fetchContent("./posts/**/*.md");
+posts.sort((a, b) => new Date(b.published).valueOf() - new Date(a.published).valueOf());
 ---
 
 <html lang="en">
@@ -328,7 +329,7 @@ const posts = await Astro.fetchContent("./posts/**/*.md");
 
         .blog-section {
             max-width: 65ch;
-            margin: auto;
+            margin: 64px auto;
             text-align: left;
 
             a {
