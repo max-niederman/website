@@ -3,6 +3,8 @@ import { Markdown } from "astro/components";
 import BaseHead from "../components/BaseHead.astro";
 
 import "../styles/global.scss";
+
+const posts = await Astro.fetchContent("./posts/**/*.md");
 ---
 
 <html lang="en">
@@ -177,6 +179,21 @@ import "../styles/global.scss";
                     </Markdown>
                 </section>
             </div>
+
+            <h1>Blog</h1>
+
+            <p>My writings.</p>
+
+            <section class="blog-section">
+                {posts.map(({ title, published, url }) => (
+                    <a href={url}>
+                        <div class="post">
+                            <h2>{title}</h2>
+                            <p>published: {published}</p>
+                        </div>
+                    </a>
+                ))}
+            </section>
         </main>
     </body>
 </html>
@@ -306,6 +323,37 @@ import "../styles/global.scss";
                         right: $offset;
                     }
                 }
+            }
+        }
+
+        .blog-section {
+            max-width: 65ch;
+            margin: auto;
+            text-align: left;
+
+            a {
+                color: inherit;
+                text-decoration: none;
+
+                h2 {
+                    text-decoration: dashed underline;
+                    color: color.scale(theme.$color-accent, $lightness: 25%);
+                }
+
+                &:hover {
+                    h2 {
+                        color: theme.$color-accent;
+                    }
+                }
+            }
+
+            h2 {
+                margin-bottom: 0.5em;
+            }
+
+            p {
+                font-style: italic;
+                opacity: 0.8;
             }
         }
     }
