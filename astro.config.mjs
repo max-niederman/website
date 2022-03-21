@@ -24,6 +24,11 @@ export default /** @type {import('astro').AstroUserConfig} */ ({
 				rehypePlugins: [
 					"rehype-mathjax",
 				],
+
+				syntaxHighlight: "shiki",
+				shikiConfig: {
+					theme: "dracula",
+				}
 			}
 		],
 	},

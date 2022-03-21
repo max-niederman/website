@@ -2,6 +2,7 @@
 @use "sass:color";
 
 $gutter: 0.25em;
+$breakpoint-tablet: 768px;
 
 @mixin typography {
   font-size: 1.25rem;
@@ -33,6 +34,24 @@ $gutter: 0.25em;
 
   strong {
     color: theme.$color-accent;
+  }
+
+  .math-display {
+    text-align: center;
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      overflow-x: scroll;
+      mask-image: linear-gradient(
+        to right,
+        white 90%,
+        transparent 100%,
+      );
+    }
+  }
+
+  pre.astro-code {
+    padding: 0.75em;
+    border-radius: 0.25em;
   }
 
   code {

@@ -10,9 +10,10 @@
   },
   "devDependencies": {
     "@silvenon/remark-smartypants": "^1.0.0",
-    "astro": "^0.23.0",
+    "astro": "^0.24.3",
     "autoprefixer": "^10.4.2",
     "rehype-mathjax": "^4.0.1",
+    "rehype-prism": "^2.1.0",
     "remark-footnotes": "^4.0.1",
     "remark-gemoji": "^7.0.0",
     "remark-gfm": "^2.0.0",
