@@ -1,24 +1,41 @@
-# direnv
-.direnv/
+# environment
+.direnv
 
-# build output
+# editor
+.vscode
+
+# nix
+result
+result-*
+
+# haskell and cabal
 dist
+dist-*
+cabal-dev
+*.o
+*.hi
+*.hie
+*.chi
+*.chs.h
+*.dyn_o
+*.dyn_hi
+.hpc
+.hsenv
+.cabal-sandbox/
+cabal.sandbox.config
+*.prof
+*.aux
+*.hp
+*.eventlog
+.stack-work/
+cabal.project.local
+cabal.project.local~
+.HTF/
+.ghc.environment.*
 
-# dependencies
-node_modules/
-
-# logs
-npm-debug.log*
-pnpm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# environment variables
-.env
-.env.production
-
-# macOS-specific files
-.DS_Store
+# hakyll
+_site/
+_cache/
 
 # editors
 .vimrc
