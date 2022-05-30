@@ -2,3 +2,6 @@ cradle:
   cabal:
     - path: "app/Main.hs"
       component: "gen:exe:gen"
+
+    - path: "app/Markdown.hs"
+      component: "gen:exe:gen"

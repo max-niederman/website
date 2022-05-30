@@ -30,6 +30,8 @@
 
                       # non-haskell tools
                       buildInputs = with pkgs; [
+                        mold
+
                         # for `digest`
                         zlib-ng
 
@@ -43,7 +45,7 @@
 
           scripts = rec {
             gen = pkgs.writeShellScriptBin "gen" ''
-              runghc ./app/Main.hs $@
+              runghc -iapp ./app/Main.hs -- $@
             '';
 
             watch-content = pkgs.writeShellScriptBin "watch-content" ''
@@ -52,7 +54,7 @@
             '';
 
             watch-all = pkgs.writeShellScriptBin "watch-all" ''
-              ${pkgs.watchexec}/bin/watchexec -w app -w content -r ${watch-content}/bin/watch-content
+              ${pkgs.watchexec}/bin/watchexec -w app -r ${watch-content}/bin/watch-content
             '';
           };
 
@@ -64,17 +66,37 @@
 
           flake = pkgs.gen.flake { };
         in
-        flake // {
-          defaultPackage = flake.packages."gen:exe:gen";
+        lib.attrsets.recursiveUpdate
+          flake
+          {
+            packages = rec {
+              gen = flake.packages."gen:exe:gen";
 
-          apps = rec {
-            gen = {
-              type = "app";
-              program = "${flake.packages."gen:exe:gen"}/bin/gen";
+              site = pkgs.stdenv.mkDerivation {
+                pname = "site";
+                version = "2022.05.30";
+
+                src = ./.;
+
+                buildPhase = ''
+                  ${gen}/bin/gen build
+                '';
+
+                installPhase = ''
+                  cp -r _site $out
+                '';
+              };
+              default = site;
             };
 
-            default = gen;
-          };
-        }
+            apps = rec {
+              gen = {
+                type = "app";
+                program = "${flake.packages."gen:exe:gen"}/bin/gen";
+              };
+
+              default = gen;
+            };
+          }
       );
 }
