@@ -1,0 +1,45 @@
+name: Deploy
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v2.4.0
+
+      - name: Setup | Nix
+        uses: cachix/install-nix-action@v15
+        with:
+          extra_nix_config: |
+            trusted-public-keys = hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+            substituters = https://hydra.iohk.io https://cache.nixos.org/
+            experimental-features = nix-command flakes
+
+      - name: Build | Generator
+        id: build_generator
+        run: |
+          nix build .#gen
+          echo ::set-output name=path::$(readlink ./result)
+          echo ::set-output name=name::$(basename $(readlink ./result))
+      
+      - name: Upload | Generator
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ steps.build_generator.outputs.name }}
+          path: ${{ steps.build_generator.outputs.path }}
+
+      - name: Build | Site
+        id: build_site
+        run: |
+          nix build .#site
+          echo ::set-output name=result::$(readlink ./result)
+      
+      - name: Upload | Site
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ steps.build_site.outputs.name }}
+          path: ${{ steps.build_site.outputs.path }}
