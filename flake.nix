@@ -31,6 +31,7 @@
                       # non-haskell tools
                       buildInputs = with pkgs; [
                         mold
+                        nodePackages.sass
 
                         # for `digest`
                         zlib-ng
@@ -77,6 +78,10 @@
                 version = "2022.05.30";
 
                 src = ./.;
+
+                nativeBuildInputs = with pkgs; [
+                  sass
+                ];
 
                 buildPhase = ''
                   ${gen}/bin/gen build

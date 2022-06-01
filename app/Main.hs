@@ -11,15 +11,24 @@ import           Markdown
 
 main :: IO ()
 main = do
-    setLocaleEncoding utf8
-    hakyllWith config $ do
-        match "static/*" $ do
-            route $ stripPrefixRoute "static/"
-            compile copyFileCompiler
+  setLocaleEncoding utf8
+  hakyllWith config $ do
+    match "templates/**" $ compile templateBodyCompiler
 
-        match "**/*.md" $ do
-            route $ setExtension "html"
-            compile $ documentCompiler >>= relativizeUrls
+    match ("styles/**.sass" .||. "styles/**.scss") $ do
+        route   $ setExtension "css"
+        compile $ getResourceString >>= withItemBody (unixFilter "sass" ["--stdin", "-I", "content/styles"])
+    match "styles/**.css" $ do
+      route idRoute
+      compile compressCssCompiler
+
+    match "static/**" $ do
+      route $ stripPrefixRoute "static/"
+      compile copyFileCompiler
+
+    match "**.md" $ do
+      route $ setExtension "html"
+      compile $ documentCompiler >>= loadAndApplyTemplate "templates/page.html" defaultContext >>= relativizeUrls
 
 config :: Configuration
 config = defaultConfiguration {providerDirectory = "content"}

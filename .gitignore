@@ -37,6 +37,9 @@ cabal.project.local~
 _site/
 _cache/
 
+# sass
+.sass-cache
+
 # editors
 .vimrc
 .nvimrc

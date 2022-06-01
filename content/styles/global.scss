@@ -1,0 +1,16 @@
+:root {
+    --color-fg: black;
+    --color-bg: white;
+
+    @media screen and (prefers-color-scheme: dark) {
+        --color-fg: white;
+        --color-bg: black;
+    }
+}
+
+body {
+    margin: 0;
+
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+}
