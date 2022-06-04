@@ -1,6 +1,28 @@
 @use "type";
+@use "code";
 
 main {
-    margin: auto;
-    max-width: 75ch;
+  margin: auto;
+  max-width: 75ch;
+  padding: 0 32px;
+
+  @include type.main;
+  @include type.headers;
+
+  .title {
+    font-size: 4em;
+    padding: 0 16px;
+  }
+
+  .description {
+    padding: 0 0.5em;
+    font-size: 0.85em;
+    font-style: italic;
+  }
+
+  .meta-sep {
+    color: var(--color-fg);
+    width: 100px;
+    margin: 32px auto;
+  }
 }

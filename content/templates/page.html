@@ -8,12 +8,15 @@
     <meta name="title" content="$title$" />
     <meta name="description" content="$description$" />
 
-    <link rel="stylesheet" href="/styles/global.css" />
     <link rel="stylesheet" href="/styles/page.css" />
+    $partial("templates/base-head.html")$
   </head>
   <body>
     <main>
-      <h1>$title$</h1>
+      <h1 class="title">$title$</h1>
+      <p class="description">$description$</p>
+      <hr class="meta-sep" />
+
       $body$
     </main>
   </body>

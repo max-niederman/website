@@ -1,0 +1,31 @@
+// fontfaces
+$font-body: "Playfair", ui-serif, serif;
+$font-heading: "Playfair Display", ui-serif, serif;
+$font-mono: "Fira Code", ui-monospace, monospace;
+
+// colors
+@mixin light {
+  --color-bg: white;
+  --color-fg: black;
+  --color-primary: #98971a;
+  
+  --color-red: #cc241d;
+  --color-green: #98971a;
+  --color-yellow: #d79921;
+  --color-blue: #458588;
+  --color-purple: #b16286;
+  --color-aqua: #689d6a;
+}
+
+@mixin dark {
+  --color-bg: #1d2021;
+  --color-fg: #ebdbb2;
+  --color-primary: #98971a;
+
+  --color-red: #cc241d;
+  --color-green: #98971a;
+  --color-yellow: #d79921;
+  --color-blue: #458588;
+  --color-purple: #b16286;
+  --color-aqua: #689d6a;
+}
