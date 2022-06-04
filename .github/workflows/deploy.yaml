@@ -11,12 +11,6 @@ jobs:
       - name: Setup | Checkout
         uses: actions/checkout@v2.4.0
 
-      - name: Setup | Nix Store Cache
-        uses: actions/cache@v3
-        with:
-            path: ~/nix/store
-            key: nix
-
       - name: Setup | Nix
         uses: cachix/install-nix-action@v15
         with:
@@ -28,7 +22,7 @@ jobs:
       - name: Build | Generator
         id: build_generator
         run: |
-          nix build --store ~ .#gen
+          nix build .#gen
           echo ::set-output name=path::$(readlink ./result)
           echo ::set-output name=name::$(basename $(readlink ./result))
       
@@ -41,7 +35,7 @@ jobs:
       - name: Build | Site
         id: build_site
         run: |
-          nix build --store ~ .#site
+          nix build .#site
           echo ::set-output name=path::$(readlink ./result)
           echo ::set-output name=name::$(basename $(readlink ./result))
       
