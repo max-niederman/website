@@ -1,9 +1,9 @@
-cabal-version:      2.4
-name:               gen
-version:            0.1.0.0
-license:            CC-BY-4.0
-author:             Max Niederman
-maintainer:         max@maxniederman.com
+cabal-version: 2.4
+name:          gen
+version:       0.1.0.0
+license:       CC-BY-4.0
+author:        Max Niederman
+maintainer:    max@maxniederman.com
 
 executable gen
   main-is:          Main.hs
@@ -12,7 +12,6 @@ executable gen
     , containers    ^>=0.6.5.1
     , hakyll        ^>=4.15.1.1
     , pandoc        ^>=2.18
-    , text          ^>=1.2.4.1
     , transformers  ^>=0.5.6.2
 
   other-modules:    Document

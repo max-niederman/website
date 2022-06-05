@@ -8,7 +8,6 @@ tags:
   - theming
   - linux
   - programming
-layout: "$/layouts/Post.astro"
 ---
 
 There is a fundamental lack of consistency in the aesthetics of software. With a few exceptions, each and every application uses its own themes because there is no standard. The best we can hope for is vaguely similar dark and light themes.

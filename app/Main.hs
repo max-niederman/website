@@ -36,6 +36,10 @@ main = do
     match "**.md" $ do
       route $ setExtension "html"
       compile $ loadBody "templates/page.html" >>= documentCompiler >>= relativizeUrls
+    
+    match "**.md" $ version "raw" $ do
+      route idRoute
+      compile copyFileCompiler
 
 config :: Configuration
 config = defaultConfiguration {providerDirectory = "content"}

@@ -15,8 +15,12 @@
     $partial("templates/nav.html")$
 
     <main>
-      <h1 class="title">$title$</h1>
-      <p class="description">$description$</p>
+      <div class="meta">
+        <h1 class="title">$title$</h1>
+
+        <p class="tags">$tags$</p>
+        <p class="description">$description$</p>
+      </div>
       <hr class="meta-sep" />
 
       $body$
