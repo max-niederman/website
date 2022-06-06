@@ -8,7 +8,6 @@ tags:
   - command-line
   - tui
   - rust
-layout: "$/layouts/Post.astro"
 ---
 
 TL;DR: [here](https://github.com/max-niederman/ttyper)'s the project on GitHub and it's installable as `ttyper` from Crates.io.

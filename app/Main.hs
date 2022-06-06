@@ -2,12 +2,14 @@
 
 module Main where
 
-import qualified Data.List       as List
-import qualified Data.Maybe      as Maybe
-import           Debug.Trace     (traceId)
+import           Data.Functor                  ((<&>))
+import qualified Data.List                     as List
+import qualified Data.Maybe                    as Maybe
+import           Data.String                   (IsString (..))
 import           GHC.IO.Encoding
 import           Hakyll
-import           Markdown
+import           Hakyll.Core.Compiler.Internal as CI
+import           Document
 
 main :: IO ()
 main = do
@@ -15,10 +17,15 @@ main = do
   hakyllWith config $ do
     match "templates/**" $ compile templateBodyCompiler
 
-    match ("styles/**.sass" .||. "styles/**.scss") $ do
+    match "styles/_*.scss" $ return ()
+    match "styles/*.scss" $ do
         route   $ setExtension "css"
-        compile $ getResourceString >>= withItemBody (unixFilter "sass" ["--stdin", "-I", "content/styles"])
-    match "styles/**.css" $ do
+        compile $ do
+          source <- getResourceString
+          makePatternDependency "styles/_*.scss"
+          compiled <- withItemBody (unixFilter "sass" ["--stdin", "-I", "content/styles"]) source
+          return $ compressCss <$> compiled
+    match "styles/*.css" $ do
       route idRoute
       compile compressCssCompiler
 
@@ -28,7 +35,11 @@ main = do
 
     match "**.md" $ do
       route $ setExtension "html"
-      compile $ documentCompiler >>= loadAndApplyTemplate "templates/page.html" defaultContext >>= relativizeUrls
+      compile $ loadBody "templates/page.html" >>= documentCompiler >>= relativizeUrls
+    
+    match "**.md" $ version "raw" $ do
+      route idRoute
+      compile copyFileCompiler
 
 config :: Configuration
 config = defaultConfiguration {providerDirectory = "content"}

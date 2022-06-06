@@ -13,19 +13,19 @@ jobs:
       - name: Setup | Checkout
         uses: actions/checkout@v2.4.0
 
-      - name: Setup | Nix Store Cache
-        uses: actions/cache@v3
-        with:
-            path: /nix/store
-            key: nix
-
       - name: Setup | Nix
         uses: cachix/install-nix-action@v15
         with:
           extra_nix_config: |
-            trusted-public-keys = hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
-            substituters = https://hydra.iohk.io https://cache.nixos.org/
+            trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+            substituters = https://cache.iog.io https://cache.nixos.org/
             experimental-features = nix-command flakes
+      
+      - name: Setup | Cachix
+        uses: cachix/cachix-action@v10
+        with:
+          name: niederman
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       
       - name: Build | Generator
         id: build_generator
@@ -55,17 +55,22 @@ jobs:
     
   publish:
     runs-on: ubuntu-latest
+    needs: [build]
     steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v2.4.0
+
       - name: Setup | Download Artifact
         uses: actions/download-artifact@v2
         with:
-          name: ${{ jobs.build.outputs.site_artifact }}
+          name: ${{ needs.build.outputs.site_artifact }}
+          path: _site
       
       - name: Publish | Cloudflare Pages
         uses: cloudflare/pages-action@1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: 71c44cb1cb827ecf067d827bdc726efa
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: maxniederman
-          directory: .
+          directory: _site
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}

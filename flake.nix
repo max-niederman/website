@@ -30,11 +30,10 @@
 
                       # non-haskell tools
                       buildInputs = with pkgs; [
-                        mold
                         nodePackages.sass
+                        chroma
 
-                        # for `digest`
-                        zlib-ng
+                        python310Packages.livereload
 
                         stylish-haskell
                         nixpkgs-fmt
@@ -46,16 +45,17 @@
 
           scripts = rec {
             gen = pkgs.writeShellScriptBin "gen" ''
+              export TARGET=development
               runghc -iapp ./app/Main.hs -- $@
             '';
 
             watch-content = pkgs.writeShellScriptBin "watch-content" ''
               ${gen}/bin/gen clean
-              ${gen}/bin/gen watch
+              ${gen}/bin/gen watch $@
             '';
 
             watch-all = pkgs.writeShellScriptBin "watch-all" ''
-              ${pkgs.watchexec}/bin/watchexec -w app -r ${watch-content}/bin/watch-content
+              ${pkgs.watchexec}/bin/watchexec -w app -r "${watch-content}/bin/watch-content $@"
             '';
           };
 
@@ -80,7 +80,8 @@
                 src = ./.;
 
                 nativeBuildInputs = with pkgs; [
-                  sass
+                  nodePackages.sass
+                  chroma
                 ];
 
                 buildPhase = ''
