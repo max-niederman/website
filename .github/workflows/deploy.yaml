@@ -7,6 +7,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      site_artifact: ${{ steps.build_site.outputs.name }}
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v2.4.0
@@ -51,3 +53,24 @@ jobs:
           name: ${{ steps.build_site.outputs.name }}
           path: ${{ steps.build_site.outputs.path }}
     
+  publish:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v2.4.0
+
+      - name: Setup | Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ needs.build.outputs.site_artifact }}
+          path: _site
+      
+      - name: Publish | Cloudflare Pages
+        uses: cloudflare/pages-action@1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: maxniederman
+          directory: _site
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
