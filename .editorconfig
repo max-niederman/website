@@ -1,0 +1,2 @@
+[*.{css,sass,scss}]
+indent_size = 2

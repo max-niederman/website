@@ -1,0 +1,144 @@
+---
+import { Icon } from "astro-icon";
+
+import "@fontsource/source-serif-4";
+import "@fontsource/source-serif-4/400-italic.css";
+import "@fontsource/source-serif-4/800.css";
+import "@fontsource/source-serif-4/600-italic.css";
+
+import "../styles/global.scss";
+---
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width" />
+	<title>Max Niederman</title>
+</head>
+
+<body>
+	<div class="masthead">
+		<h1>Max<br />Niederman</h1>
+
+		<div id="tldr">
+			<h2>TL;DR</h2>
+			<p>I am a student with a passion for programming and a habit of writing.</p>
+			<div class="links">
+				<a href="#writings" class="link-self">Writings</a>
+				<a href="#writings">GitHub</a>
+			</div>
+		</div>
+
+		<div class="scroll links">
+			<a href="#">Scroll ↓</a>
+		</div>
+	</div>
+</body>
+
+</html>
+
+<style lang="scss">
+	$breakpoint-tablet: 900px;
+	$breakpoint-phone: 768px;
+
+	.masthead {
+		@mixin dims-and-padding($padding) {
+			height: calc(100vh - 2 * $padding);
+			width: calc(100vw - 2 * $padding);
+			padding: $padding;
+		}
+
+		@include dims-and-padding(100px);
+
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: flex-start;
+
+		h1 {
+			font-size: 128px;
+			font-weight: 600;
+			font-style: italic;
+		}
+
+		#tldr {
+			align-self: flex-end;
+			max-width: 350px;
+
+			font-size: 24px;
+
+			h2 {
+				font-size: 40px;
+				font-style: italic;
+				text-transform: lowercase;
+
+				margin-bottom: 10px;
+			}
+
+			p {
+				margin-bottom: 6px;
+			}
+		}
+
+		.scroll {
+			position: absolute;
+			bottom: 50px;
+			left: 50px;
+		}
+
+		@media screen and (max-width: $breakpoint-tablet) {
+			@include dims-and-padding(64px);
+
+			h1 {
+				font-size: 96px;
+			}
+		}
+
+		@media screen and (max-width: $breakpoint-phone) {
+			@include dims-and-padding(24px);
+
+			align-items: stretch;
+
+			h1 {
+				font-size: 64px;
+
+				padding-bottom: 12px;
+				border-bottom: 2px solid currentColor;
+			}
+
+			#tldr {
+				max-width: unset;
+				flex-grow: 1;
+
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-end;
+			}
+
+			.scroll {
+				position: static;
+				margin-top: 32px;
+
+				text-align: right;
+			}
+		}
+	}
+
+	.links {
+		font-size: 24px;
+		font-variant: all-small-caps;
+		font-weight: bold;
+
+		display: flex;
+		flex-direction: row;
+
+		* {
+			margin-right: 12px;
+		}
+
+		a {
+			text-decoration: dotted underline;
+		}
+	}
+</style>
