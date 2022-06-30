@@ -1,0 +1,24 @@
+---
+import Page from "$/layouts/Page.astro";
+
+const pages = (await Astro.glob("/src/pages/**/*.md")).filter(({ frontmatter }) => frontmatter.index ?? true);
+const tags: string[] = Array.from(new Set(pages.map(({ frontmatter }) => frontmatter.tags ?? []).flat())).sort();
+---
+
+<Page>
+    <header>
+        <h1>Tags</h1>
+    </header>
+
+    <ul>
+        {tags.map((tag) => <li>
+            <a href={`/tags/${tag}`}>{tag}</a>
+        </li>)}
+    </ul>
+</Page>
+
+<style lang="scss">
+    ul {
+        list-style: disc;
+    }
+</style>

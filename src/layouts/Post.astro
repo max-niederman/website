@@ -1,0 +1,91 @@
+---
+import { Markdown } from "astro/components";
+import Page from "./Page.astro";
+import "katex/dist/katex.min.css";
+
+export interface Props {
+	content: {
+		title: string;
+		author?: string;
+		description?: string;
+		tags?: string[];
+	};
+}
+const { content } = Astro.props as Props;
+const { title, author, description, tags } = content;
+---
+
+<Page>
+	<meta slot="head" name="author" content={author ?? "Max Niederman"} />
+	<meta slot="head" name="description" content={description ?? "Blog post on Max Niederman's website."} />
+	<title slot="head">{title}</title>
+
+	<header>
+		<h1>{title}</h1>
+		<table class="meta">
+			<tbody>
+				{author && <tr>
+					<th>Author</th>
+					<td>{author}</td>
+				</tr>}
+				{tags && <tr>
+					<th>Tags</th>
+					<td>
+						<ul>{tags.map((tag) =>
+							<li><a href={`/tags/${tag}`}>{tag}</a></li>)}
+						</ul>
+					</td>
+				</tr>}
+				{description && <tr>
+					<th>Description</th>
+					<td>
+						<Markdown>{description}</Markdown>
+					</td>
+				</tr>}
+			</tbody>
+		</table>
+	</header>
+
+	<slot />
+</Page>
+
+<style lang="scss">
+	header {
+		table.meta {
+			table-layout: fixed;
+
+			font-style: italic;
+
+			td {
+				ul {
+					display: inline;
+					list-style: none;
+
+					li {
+						display: inline;
+
+						&::before {
+							content: ", ";
+						}
+
+						&:first-child::before {
+							content: none;
+						}
+					}
+				}
+			}
+
+			th {
+				width: min-content;
+				padding-right: 1em;
+
+				text-align: right;
+				text-transform: lowercase;
+
+				&::after {
+					content: ":";
+				}
+			}
+		}
+	}
+</style>

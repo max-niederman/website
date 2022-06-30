@@ -1,0 +1,46 @@
+---
+import "$/styles/global.scss";
+import "@fontsource/source-serif-4";
+import "@fontsource/source-serif-4/400-italic.css";
+import "@fontsource/source-serif-4/800.css";
+---
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width" />
+	<slot name="head" />
+</head>
+
+<body>
+	<main>
+		<slot />
+	</main>
+</body>
+
+</html>
+
+<style is:global lang="scss">
+	@use "../styles/type" with ($gutter: 0.2em);
+
+	html body {
+		padding: 24px;
+	}
+
+	main {
+		margin: auto;
+		max-width: 60ch;
+
+		@include type.basic;
+		@include type.headings;
+		@include type.links;
+
+		header {
+			h1 {
+				text-align: center;
+				border-bottom: none;
+			}
+		}
+	}
+</style>

@@ -1,0 +1,42 @@
+---
+import Page from "$/layouts/Page.astro";
+import type { MarkdownInstance } from "astro";
+
+export async function getStaticPaths() {
+    const pages = (await Astro.glob("/src/pages/**/*.md")).filter(({ frontmatter }) => frontmatter.index ?? true);
+
+    const tags: Record<string, MarkdownInstance<Record<string, any>>[]> = {};
+    pages.forEach((page) => {
+        page.frontmatter.tags.forEach((tag: string) => {
+            tags[tag] = tags[tag] ?? [];
+            tags[tag].push(page);
+        });
+    });
+
+    return Object.entries(tags).map(([tag, pages]) => ({
+        params: { tag, },
+        props: { pages },
+    }));
+}
+
+const { tag } = Astro.params;
+const { pages } = Astro.props;
+---
+
+<Page>
+    <header>
+        <h1>Tag: {tag}</h1>
+    </header>
+
+    <ul>
+        {pages.map((page) => <li>
+            <a href={page.url}>{page.frontmatter.title}</a>
+        </li>)}
+    </ul>
+</Page>
+
+<style lang="scss">
+    ul {
+        list-style: disc;
+    }
+</style>
