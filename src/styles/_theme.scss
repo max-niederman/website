@@ -1,9 +1,21 @@
+@use "sass:color";
+
+@mixin theme(
+  $bg,
+  $fg,
+  $border: $fg,
+  $border-secondary: color.mix($fg, $bg, 50%)
+) {
+  --color-fg: #{$fg};
+  --color-bg: #{$bg};
+  --color-border: #{$border};
+  --color-border-secondary: #{$border-secondary};
+}
+
 @mixin light {
-    --color-bg: white;
-    --color-fg: black;
+  @include theme(color.adjust(white, $lightness: -10%), black);
 }
 
 @mixin dark {
-    --color-bg: black;
-    --color-fg: white;
+  @include theme(color.adjust(black, $lightness: 5%), white);
 }

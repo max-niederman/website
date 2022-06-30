@@ -1,0 +1,125 @@
+---
+import { Markdown } from "astro/components";
+
+import "$/styles/global.scss";
+import "@fontsource/source-serif-4";
+import "@fontsource/source-serif-4/400-italic.css";
+import "@fontsource/source-serif-4/800.css";
+import "katex/dist/katex.min.css";
+
+export interface Props {
+	content: {
+		title: string;
+		author?: string;
+		description?: string;
+		tags?: string[];
+	};
+}
+const { content } = Astro.props as Props;
+const { title, author, description, tags } = content;
+---
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width" />
+	<meta name="author" content={author} />
+	<meta name="description" content={description} />
+	<title>{title}</title>
+</head>
+
+<body>
+	<main>
+		<header>
+			<h1>{title}</h1>
+			<table class="meta">
+				<tbody>
+					<tr>
+						<th>Author</th>
+						<td>{author}</td>
+					</tr>
+					<tr>
+						<th>Tags</th>
+						<td>
+							<ul>{tags.map((tag) =>
+								<li><a href={`/tags/${tag}`}>{tag}</a></li>)}
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>
+							<Markdown>{description}</Markdown>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</header>
+
+		<slot />
+	</main>
+</body>
+
+</html>
+
+<style is:global lang="scss">
+	@use "../styles/type" with ($gutter: 0.2em);
+
+	body {
+		padding: 24px !important;
+	}
+
+	main {
+		margin: auto;
+		max-width: 60ch;
+
+		@include type.basic;
+		@include type.headings;
+		@include type.links;
+	}
+
+	header {
+		h1 {
+			text-align: center;
+			border-bottom: none;
+		}
+
+		table.meta {
+			table-layout: fixed;
+
+			font-style: italic;
+
+			td {
+				ul {
+					display: inline;
+					list-style: none;
+
+					li {
+						display: inline;
+
+						&::before {
+							content: ", ";
+						}
+
+						&:first-child::before {
+							content: none;
+						}
+					}
+				}
+			}
+
+			th {
+				width: min-content;
+				padding-right: 1em;
+
+				text-align: right;
+				text-transform: lowercase;
+
+				&::after {
+					content: ":";
+				}
+			}
+		}
+	}
+</style>

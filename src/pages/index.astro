@@ -1,12 +1,10 @@
 ---
-import { Icon } from "astro-icon";
-
 import "@fontsource/source-serif-4";
 import "@fontsource/source-serif-4/400-italic.css";
 import "@fontsource/source-serif-4/800.css";
 import "@fontsource/source-serif-4/600-italic.css";
 
-import "../styles/global.scss";
+import "$/styles/global.scss";
 ---
 
 <html lang="en">
@@ -18,22 +16,26 @@ import "../styles/global.scss";
 </head>
 
 <body>
-	<div class="masthead">
-		<h1>Max<br />Niederman</h1>
+	<section class="masthead">
+		<h1>
+			Max
+			<br />
+			Niederman
+		</h1>
 
 		<div id="tldr">
 			<h2>TL;DR</h2>
 			<p>I am a student with a passion for programming and a habit of writing.</p>
 			<div class="links">
-				<a href="#writings" class="link-self">Writings</a>
-				<a href="#writings">GitHub</a>
+				<a href="#writings">Writings</a>
+				<a href="https://github.com/max-niederman">GitHub</a>
 			</div>
 		</div>
 
 		<div class="scroll links">
 			<a href="#">Scroll ↓</a>
 		</div>
-	</div>
+	</section>
 </body>
 
 </html>
@@ -41,6 +43,12 @@ import "../styles/global.scss";
 <style lang="scss">
 	$breakpoint-tablet: 900px;
 	$breakpoint-phone: 768px;
+
+	body {
+		@media (max-width: $breakpoint-tablet) {
+			padding: 24px;
+		}
+	}
 
 	.masthead {
 		@mixin dims-and-padding($padding) {
@@ -97,6 +105,7 @@ import "../styles/global.scss";
 
 		@media screen and (max-width: $breakpoint-phone) {
 			@include dims-and-padding(24px);
+			padding: 0; // handled by the body padding
 
 			align-items: stretch;
 
@@ -104,7 +113,7 @@ import "../styles/global.scss";
 				font-size: 64px;
 
 				padding-bottom: 12px;
-				border-bottom: 2px solid currentColor;
+				border-bottom: 2px solid var(--color-border);
 			}
 
 			#tldr {
@@ -118,7 +127,7 @@ import "../styles/global.scss";
 
 			.scroll {
 				position: static;
-				margin-top: 32px;
+				margin-top: 48px;
 
 				text-align: right;
 			}

@@ -11,5 +11,10 @@
     "isolatedModules": true,
     // Add type definitions for our Vite runtime.
     "types": ["vite/client"],
+
+    "baseUrl": ".",
+    "paths": {
+      "$/*": ["src/*"]
+    }
   }
 }
