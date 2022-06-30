@@ -1,0 +1,41 @@
+---
+import { Markdown } from "astro/components";
+import Page from "$/layouts/Page.astro";
+
+const pages = (await Astro.glob("/src/pages/**/*.md")).filter(({ frontmatter }) => frontmatter.index ?? true);
+pages.sort((a, b) => new Date(b.frontmatter.published).valueOf() - new Date(a.frontmatter.published).valueOf());
+---
+
+<Page>
+    <header>
+        <h1>Posts</h1>
+    </header>
+
+    <ul>
+        {pages.slice(0, 3).map(({ frontmatter, url }) => (
+        <li>
+            <time>{frontmatter.published}</time>
+            <a href={url}>
+                <Markdown>{frontmatter.title}</Markdown>
+            </a>
+        </li>
+        ))}
+    </ul>
+</Page>
+
+<style lang="scss">
+    li {
+        margin-bottom: 24px;
+
+        time {
+            display: block;
+            font-style: italic;
+        }
+
+        a {
+            font-size: 1.25em;
+            font-weight: 800;
+            text-decoration: dotted underline;
+        }
+    }
+</style>

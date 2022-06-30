@@ -16,17 +16,21 @@ const { title, author, description, tags } = content;
 ---
 
 <Page>
-	<meta slot="head" name="author" content={author ?? "Max Niederman"} />
-	<meta slot="head" name="description" content={description ?? "Blog post on Max Niederman's website."} />
+	<meta slot="head" name="author" content={author ?? "Max Niederman" } />
+	<meta slot="head" name="description" content={description ?? "Blog post on Max Niederman's website." } />
 	<title slot="head">{title}</title>
 
 	<header>
-		<h1>{title}</h1>
+		<h1>
+			<Markdown>{title}</Markdown>
+		</h1>
 		<table class="meta">
 			<tbody>
 				{author && <tr>
 					<th>Author</th>
-					<td>{author}</td>
+					<td>
+						{author}
+					</td>
 				</tr>}
 				{tags && <tr>
 					<th>Tags</th>

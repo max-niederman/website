@@ -85,6 +85,6 @@ $gutter: 0 !default;
 @mixin links {
   // TODO: add indicators for different kinds of links
   a {
-    text-decoration: underline;
+    text-decoration: dotted underline;
   }
 }

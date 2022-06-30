@@ -1,10 +1,14 @@
 ---
+import { Markdown } from "astro/components";
+
+import "$/styles/global.scss";
 import "@fontsource/source-serif-4";
 import "@fontsource/source-serif-4/400-italic.css";
 import "@fontsource/source-serif-4/800.css";
 import "@fontsource/source-serif-4/600-italic.css";
 
-import "$/styles/global.scss";
+const pages = (await Astro.glob("/src/pages/**/*.md")).filter(({ frontmatter }) => frontmatter.index ?? true);
+pages.sort((a, b) => new Date(b.frontmatter.published).valueOf() - new Date(a.frontmatter.published).valueOf());
 ---
 
 <html lang="en">
@@ -16,7 +20,7 @@ import "$/styles/global.scss";
 </head>
 
 <body>
-	<section class="masthead">
+	<div class="masthead">
 		<h1>
 			Max
 			<br />
@@ -27,7 +31,7 @@ import "$/styles/global.scss";
 			<h2>TL;DR</h2>
 			<p>I am a student with a passion for programming and a habit of writing.</p>
 			<div class="links">
-				<a href="#writings">Writings</a>
+				<a href="#writing">Writing</a>
 				<a href="https://github.com/max-niederman">GitHub</a>
 			</div>
 		</div>
@@ -35,12 +39,33 @@ import "$/styles/global.scss";
 		<div class="scroll links">
 			<a href="#">Scroll ↓</a>
 		</div>
-	</section>
+	</div>
+
+	<div class="main-type">
+		<div id="writing">
+			<h2>Writing</h2>
+
+			<ul>
+				{pages.slice(0, 3).map(({ frontmatter, url }) => (
+				<li>
+					<time>{frontmatter.published}</time>
+					<a href={url}>
+						<Markdown>{frontmatter.title}</Markdown>
+					</a>
+				</li>
+				))}
+			</ul>
+
+			<a href="/posts" class="links">More</a>
+		</div>
+	</div>
 </body>
 
 </html>
 
 <style lang="scss">
+	@use "../styles/type" with ($gutter: 8px);
+
 	$breakpoint-tablet: 900px;
 	$breakpoint-phone: 768px;
 
@@ -48,6 +73,15 @@ import "$/styles/global.scss";
 		@media (max-width: $breakpoint-phone) {
 			padding: 24px;
 		}
+	}
+
+	.main-type {
+		max-width: 500px;
+		margin: auto;
+		padding: 100px 0;
+
+		@include type.basic;
+		@include type.headings;
 	}
 
 	.masthead {
@@ -134,20 +168,34 @@ import "$/styles/global.scss";
 		}
 	}
 
+	#writing {
+		li {
+			margin-bottom: 24px;
+
+			time {
+				display: block;
+				font-style: italic;
+			}
+
+			a {
+				font-size: 1.25em;
+				font-weight: 800;
+				text-decoration: dotted underline;
+			}
+		}
+	}
+
 	.links {
 		font-size: 24px;
 		font-variant: all-small-caps;
 		font-weight: bold;
+		text-decoration: dotted underline;
 
 		display: flex;
 		flex-direction: row;
 
 		* {
 			margin-right: 12px;
-		}
-
-		a {
-			text-decoration: dotted underline;
 		}
 	}
 </style>
