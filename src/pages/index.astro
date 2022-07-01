@@ -37,7 +37,7 @@ pages.sort((a, b) => new Date(b.frontmatter.published).valueOf() - new Date(a.fr
 		</div>
 
 		<div class="scroll links">
-			<a href="#">Scroll ↓</a>
+			<a href="#writing">Scroll ↓</a>
 		</div>
 	</div>
 
@@ -64,13 +64,11 @@ pages.sort((a, b) => new Date(b.frontmatter.published).valueOf() - new Date(a.fr
 </html>
 
 <style lang="scss">
+	@use "../styles/breakpoint";
 	@use "../styles/type" with ($gutter: 8px);
 
-	$breakpoint-tablet: 900px;
-	$breakpoint-phone: 768px;
-
 	html body {
-		@media (max-width: $breakpoint-phone) {
+		@include breakpoint.query(breakpoint.$phone) {
 			padding: 24px;
 		}
 	}
@@ -129,7 +127,7 @@ pages.sort((a, b) => new Date(b.frontmatter.published).valueOf() - new Date(a.fr
 			left: 50px;
 		}
 
-		@media screen and (max-width: $breakpoint-tablet) {
+		@include breakpoint.query(breakpoint.$tablet) {
 			@include dims-and-padding(64px);
 
 			h1 {
@@ -137,7 +135,7 @@ pages.sort((a, b) => new Date(b.frontmatter.published).valueOf() - new Date(a.fr
 			}
 		}
 
-		@media screen and (max-width: $breakpoint-phone) {
+		@include breakpoint.query(breakpoint.$phone) {
 			@include dims-and-padding(24px);
 			padding: 0; // handled by the body padding
 

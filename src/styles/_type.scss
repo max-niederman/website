@@ -85,6 +85,11 @@ $gutter: 0 !default;
 @mixin links {
   // TODO: add indicators for different kinds of links
   a {
+    color: var(--color-link);
     text-decoration: dotted underline;
+
+    &:hover {
+      color: var(--color-link-hover);
+    }
   }
 }

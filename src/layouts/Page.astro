@@ -1,4 +1,5 @@
 ---
+import Nav from "$/components/Nav.astro";
 import "$/styles/global.scss";
 import "@fontsource/source-serif-4";
 import "@fontsource/source-serif-4/400-italic.css";
@@ -14,6 +15,8 @@ import "@fontsource/source-serif-4/800.css";
 </head>
 
 <body>
+	<Nav />
+
 	<main>
 		<slot />
 	</main>
@@ -39,6 +42,7 @@ import "@fontsource/source-serif-4/800.css";
 		header {
 			h1 {
 				text-align: center;
+				padding-bottom: 0;
 				border-bottom: none;
 			}
 		}

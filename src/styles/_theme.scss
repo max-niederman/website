@@ -4,12 +4,16 @@
   $bg,
   $fg,
   $border: $fg,
-  $border-secondary: color.mix($fg, $bg, 50%)
+  $border-secondary: color.mix($fg, $bg, 50%),
+  $color-link: $fg,
+  $color-link-hover: color.mix($fg, $bg, 70%),
 ) {
   --color-fg: #{$fg};
   --color-bg: #{$bg};
   --color-border: #{$border};
   --color-border-secondary: #{$border-secondary};
+  --color-link: #{$color-link};
+  --color-link-hover: #{$color-link-hover};
 }
 
 @mixin light {
