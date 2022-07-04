@@ -56,14 +56,25 @@ const { title, author, description, tags } = content;
 <style lang="scss">
 	header {
 		table.meta {
+			margin: auto;
 			table-layout: fixed;
 
 			font-style: italic;
+			color: var(--color-meta);
+
+			a {
+				color: var(--color-meta);
+
+				&:hover {
+					color: var(--color-link);
+				}
+			}
 
 			td {
 				ul {
 					display: inline;
 					list-style: none;
+					margin: 0;
 
 					li {
 						display: inline;
@@ -81,7 +92,7 @@ const { title, author, description, tags } = content;
 
 			th {
 				width: min-content;
-				padding-right: 1em;
+				padding-right: 0.5em;
 
 				text-align: right;
 				text-transform: lowercase;

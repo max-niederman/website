@@ -5,15 +5,17 @@
   $fg,
   $border: $fg,
   $border-secondary: color.mix($fg, $bg, 50%),
-  $color-link: $fg,
-  $color-link-hover: color.mix($fg, $bg, 70%),
+  $meta: color.mix($fg, $bg, 60%),
+  $link: $fg,
+  $link-hover: color.mix($fg, $bg, 70%),
 ) {
   --color-fg: #{$fg};
   --color-bg: #{$bg};
   --color-border: #{$border};
   --color-border-secondary: #{$border-secondary};
-  --color-link: #{$color-link};
-  --color-link-hover: #{$color-link-hover};
+  --color-meta: #{$meta};
+  --color-link: #{$link};
+  --color-link-hover: #{$link-hover};
 }
 
 @mixin light {

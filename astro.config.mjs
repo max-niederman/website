@@ -20,7 +20,7 @@ export default defineConfig({
 
 		syntaxHighlight: "shiki",
 		shikiConfig: {
-			theme: "dracula",
+			theme: "one-dark-pro",
 		}
 	},
 });
