@@ -18,7 +18,7 @@ import "@fontsource/source-serif-4/800.css";
 <body>
 	<Nav />
 
-	<main>
+	<main class="dropcap">
 		<slot />
 	</main>
 </body>
@@ -28,16 +28,17 @@ import "@fontsource/source-serif-4/800.css";
 <style is:global lang="scss">
 	@use "../styles/type" with ($gutter: 8px);
 
+
 	body {
 		padding: 24px !important;
 	}
 
 	main {
 		margin: auto;
-		max-width: 60ch;
+		max-width: 65ch;
 
 		@include type.basic;
-		@include type.headings;
+		@include type.structural;
 		@include type.links;
 
 		header {

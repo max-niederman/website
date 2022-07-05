@@ -85,7 +85,7 @@ $gutter: 0 !default;
   }
 }
 
-@mixin headings {
+@mixin structural {
   h1,
   h2,
   h3,
@@ -118,6 +118,17 @@ $gutter: 0 !default;
 
   #footnote-label {
     text-transform: lowercase;
+  }
+
+  .dropcap {
+    &::first-letter,
+    > p:first-child::first-letter {
+      float: left;
+      font-family: "Kanzlei Initialen";
+      font-size: 4em;
+      padding-top: 0.125em;
+      padding-right: 0.125em;
+    }
   }
 }
 

@@ -85,7 +85,7 @@ def show_file():
   print(result.stdout.decode())
 ```
 
-So just making a symlink pointing to the flag in the Git repository doesn't work, because it resolves links using `os.path.realpath` before checking if the path is in the repository.
+So just making a symlink pointing to the flag in the Git repository doesn't work, because `show_file` would resolve it with `os.path.realpath` before checking if the file is in the repository.
 
 Also, the fact that it uses `cat` to read the file made us very suspicious that symlinks are involved, since `cat` will resolve them a second time. We decided to look at the documentation for `os.path.join` and `os.path.realpath` to see if they have any unintuitive behavior.
 

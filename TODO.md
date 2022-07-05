@@ -2,6 +2,7 @@
 
 - [ ] Atom feed
 - [ ] Sidenotes
+- [ ] Better dropcaps
 - [ ] Link target indicators
 - [ ] Citations (special sidenotes?)
 - [ ] Pop-ins

@@ -7,12 +7,13 @@ export interface Props {
 	content: {
 		title: string;
 		author?: string;
+		published?: string;
 		description?: string;
 		tags?: string[];
 	};
 }
 const { content } = Astro.props as Props;
-const { title, author, description, tags } = content;
+const { title, author, published, description, tags } = content;
 ---
 
 <Page>
@@ -22,7 +23,7 @@ const { title, author, description, tags } = content;
 
 	<header>
 		<h1>
-			<Markdown>{title}</Markdown>
+			{title}
 		</h1>
 		<table class="meta">
 			<tbody>
@@ -30,6 +31,12 @@ const { title, author, description, tags } = content;
 					<th>Author</th>
 					<td>
 						{author}
+					</td>
+				</tr>}
+				{published && <tr>
+					<th>Published</th>
+					<td>
+						{new Date(published).toLocaleDateString()}
 					</td>
 				</tr>}
 				{tags && <tr>
@@ -50,7 +57,9 @@ const { title, author, description, tags } = content;
 		</table>
 	</header>
 
-	<slot />
+	<div class="dropcap">
+		<slot />
+	</div>
 </Page>
 
 <style lang="scss">
@@ -92,7 +101,7 @@ const { title, author, description, tags } = content;
 
 			th {
 				width: min-content;
-				padding-right: 0.5em;
+				padding-right: 1em;
 
 				text-align: right;
 				text-transform: lowercase;
@@ -102,5 +111,10 @@ const { title, author, description, tags } = content;
 				}
 			}
 		}
+	}
+
+	@font-face {
+		font-family: "Kanzlei Initialen";
+		src: url("/fonts/Kanzlei-Initialen.ttf");
 	}
 </style>

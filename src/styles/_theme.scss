@@ -19,7 +19,7 @@
 }
 
 @mixin light {
-  @include theme(color.adjust(white, $lightness: -10%), black);
+  @include theme(color.adjust(white, $lightness: -10%), black, $meta: color.mix(black, white, 80%));
 }
 
 @mixin dark {

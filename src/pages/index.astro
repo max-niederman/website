@@ -79,7 +79,11 @@ pages.sort((a, b) => new Date(b.frontmatter.published).valueOf() - new Date(a.fr
 		padding: 100px 0;
 
 		@include type.basic;
-		@include type.headings;
+		@include type.structural;
+
+		div {
+			margin-top: 100px;
+		}
 	}
 
 	.masthead {
