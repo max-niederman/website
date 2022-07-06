@@ -1,7 +1,14 @@
 # Todo List
 
-- [ ] Atom feed
+- [X] Atom feed
+- [ ] Aggregator/forum links
+  - [ ] Hacker News
+  - [ ] LessWrong
+  - [ ] Reddit
 - [ ] Sidenotes
+- [ ] Refactor post location
+  - [ ] Move out of `src`
+  - [ ] Shorten slugs
 - [ ] Better dropcaps
 - [ ] Link target indicators
 - [ ] Citations (special sidenotes?)
