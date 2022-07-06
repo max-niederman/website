@@ -14,7 +14,7 @@ setup: |
 
 A couple days ago, a few friends and I competed in the Google CTF. It was our first time doing a CTF, so we weren't sure how well we were going to do. Although we were only able to find four flags, I had a great time; there's something unrivaled about the feeling of finally cracking a puzzle you've been working on for hours.
 
-We ended the competition in 76th place, putting us in the top 20% of teams who found at least one flag. All things considered, I'm very happy with that result and I'm excited to play more CTFs in the future.
+We ended the competition in 76th place, putting us in the top 20% of teams that found at least one flag. All things considered, I'm very happy with that result and I'm excited to play more CTFs in the future.
 
 I only wrote up three of the four flags, because I honestly don't fully understand the other one, JS Safe 4.0. All I know is that solving it involves a lot of horrifying JavaScript.
 
