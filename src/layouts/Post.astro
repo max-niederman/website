@@ -1,4 +1,5 @@
 ---
+import dayjs from "dayjs";
 import { Markdown } from "astro/components";
 import Page from "./Page.astro";
 import "katex/dist/katex.min.css";
@@ -36,7 +37,7 @@ const { title, author, published, description, tags } = content;
 				{published && <tr>
 					<th>Published</th>
 					<td>
-						{new Date(published).toLocaleDateString()}
+						{published}
 					</td>
 				</tr>}
 				{tags && <tr>
