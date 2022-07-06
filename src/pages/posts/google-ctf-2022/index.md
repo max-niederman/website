@@ -91,7 +91,7 @@ Also, the fact that it uses `cat` to read the file made us very suspicious that 
 
 And, as it turns out, they do! By default, `os.path.realpath` tries to resolve symlinks, but if resolution fails, it gives up and stops resolving symlinks in the rest of the path. There's a `strict` mode which raises the error up to the caller, but it's not used here.
 
-Symlink resolution fails if a cycle is detected, so I created a repository with the following symlinks:
+Symlink resolution fails if a cycle is detected, so we created a repository with the following symlinks:
 
 ```
 cycle => ./cycle
