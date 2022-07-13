@@ -72,6 +72,8 @@ pages.sort((a, b) => new Date(b.frontmatter.published).valueOf() - new Date(a.fr
 	@use "../styles/type" with ($gutter: 8px);
 
 	html body {
+		padding: 0;
+
 		@include breakpoint.query(breakpoint.$phone) {
 			padding: 24px;
 		}
