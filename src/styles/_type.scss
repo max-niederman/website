@@ -14,6 +14,7 @@ $gutter: 0 !default;
   p,
   ul,
   ol,
+  figure,
   math[display="block"],
   code,
   pre.astro-code,
@@ -58,6 +59,12 @@ $gutter: 0 !default;
     font-variant-position: sub;
   }
 
+  figcaption {
+    text-align: center;
+    font-style: italic;
+    margin-top: 0.5em;
+  }
+
   img {
     display: block;
     margin-left: auto;
@@ -74,6 +81,7 @@ $gutter: 0 !default;
   code {
     font-family: "Fira Code", monospace;
     font-size: 0.85em;
+    white-space: nowrap;
   }
   pre.astro-code {
     padding: 12px;
@@ -128,7 +136,7 @@ $gutter: 0 !default;
       font-size: 4em;
       line-height: 0.75em;
       padding-top: 0.125em;
-      padding-right: 0.125em;
+      padding-right: 0.0625em;
     }
   }
 }
