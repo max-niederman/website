@@ -48,9 +48,9 @@ But we still needed an instance of the class to call the methods. This is where 
 
 ```python
 class Functions:
-    __add__ = open
+    __add__ = print
     __sub__ = iter
-    __mul__ = print
+    __mul__ = open
 
 try:
     raise Functions
