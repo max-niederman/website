@@ -50,7 +50,7 @@ pages.sort((a, b) => new Date(b.frontmatter.published).valueOf() - new Date(a.fr
 			<h2>Writing</h2>
 
 			<ul>
-				{pages.slice(0, 3).map(({ frontmatter, url }) => (
+				{pages.slice(0, 5).map(({ frontmatter, url }) => (
 				<li>
 					<time>{frontmatter.published}</time>
 					<a href={url}>
