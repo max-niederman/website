@@ -8,16 +8,17 @@ $gutter: 0 !default;
 
   em {
     font-style: italic;
-
-    strong {
-      font-style: normal;
-      font-variant: small-caps;
-      letter-spacing: .1em;
-    }
   }
 
   strong {
     font-weight: 800;
+  }
+
+  strong em,
+  em strong {
+    font-style: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
   }
 
   i {
