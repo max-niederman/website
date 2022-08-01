@@ -10,10 +10,11 @@ export interface Props {
 		published?: string;
 		description?: string;
 		tags?: string[];
+		dropcap?: boolean;
 	};
 }
 const { content } = Astro.props as Props;
-const { title, author, published, description, tags } = content;
+const { title, author, published, description, tags, dropcap = true } = content;
 ---
 
 <Page>
@@ -57,7 +58,7 @@ const { title, author, published, description, tags } = content;
 		</table>
 	</header>
 
-	<div class="dropcap">
+	<div class:list={{ dropcap }}>
 		<slot />
 	</div>
 </Page>
