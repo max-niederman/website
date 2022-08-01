@@ -6,7 +6,7 @@ published: "2022-07-04"
 tags:
   - hacking
   - ctf
-  - google-ctf
+  - ctf/google
 layout: "$/layouts/Post.astro"
 setup: |
   import engraverAnimation from "./engraver-animation.gif"
