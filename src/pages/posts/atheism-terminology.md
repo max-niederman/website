@@ -1,7 +1,7 @@
 ---
 title: "Terminology: Atheism and Agnosticism"
 author: "Max Niederman"
-description: 'The difference between atheism, agnosticism, and "agnostic atheism."'
+description: 'The difference between atheism, agnosticism, and "agnostic atheism".'
 published: "2022-07-17"
 tags:
   - theism

@@ -18,8 +18,6 @@ But it's nearly impossible to pretend something so often without starting to bel
 
 These beliefs were in direct contradiction to my factual beliefs about my intelligence, which are that I am significantly better than average at academic tasks (especially tests), even with much less study than my peers, but in other tasks (e.g. social tasks) I am typically average or worse. I also believe that my academic capability will likely not translate well into practical ability after I finish my education.
 
-But it doesn't end there. As praise grew sparser over time, I began to develop a _third_ set of beliefs regarding my intelligence. To maintain the sense of specialness I had because of my intelligence, I began to fantasize that I was a "genius" -- a person on par with the greats. Over time, some of this fantasy became belief and I had a third set of beliefs: I had the potential to be truly great in an academic field like mathematics or computer science.
-
-Whenever I made concrete predictions, I would use my factual beliefs. Whenever I talked to others, I would use my self-deprecating beliefs. Whenever I was depressed or down, I would use my fantastical beliefs. But occasionally, I would get them mixed up. Eventually, I noticed this happening and after many hours of introspection, I started to realize what I was doing.
+Whenever I made concrete predictions, I would use my factual beliefs. Whenever I talked to others, I would use my self-deprecating beliefs. But occasionally, I would get them mixed up. Eventually, I noticed this happening and after many hours of introspection, I started to realize what I was doing.
 
 It fascinates me that the human mind is able to do this. I had heard of cognitive dissonance before, but to notice it in myself gave me a totally new understanding of it. Now, I can't help but wonder what other dissonant beliefs I hold.

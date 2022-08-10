@@ -9,7 +9,7 @@ tags:
 layout: "$/layouts/Post.astro"
 ---
 
-If you're reading this, there's a good chance that you've seen at least on VPN advertisement before. Almost all of them claim to improve "privacy" and "security" for their users. These claims _can_ be true, but they are intentionally misleading.
+If you're reading this, there's a good chance that you've seen at least one VPN advertisement before. Almost all of them claim to improve "privacy" and "security" for their users. These claims _can_ be true, but they are intentionally misleading.
 
 For the vast majority of users, a VPN is useless. All a VPN does is tunnel your internet traffic through their network, hiding it from your ISP and masking your IP address from its destination. But most traffic you use is _already_ encrypted with HTTPS, so in these cases a VPN makes no difference.
 
