@@ -8,7 +8,7 @@ import "@fontsource/source-serif-4/400-italic.css";
 import "@fontsource/source-serif-4/800.css";
 import "@fontsource/source-serif-4/600-italic.css";
 
-const pages = (await Astro.glob("/src/pages/**/*.md")).filter(({ frontmatter }) => frontmatter.index ?? true);
+const pages = (await Astro.glob("/src/pages/**/*.mdx")).filter(({ frontmatter }) => frontmatter.index ?? true);
 pages.sort((a, b) => new Date(b.frontmatter.published).valueOf() - new Date(a.frontmatter.published).valueOf());
 ---
 

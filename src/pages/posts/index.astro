@@ -2,7 +2,7 @@
 import Markdown from "@astrojs/markdown-component";
 import Page from "$/layouts/Page.astro";
 
-const pages = (await Astro.glob("/src/pages/**/*.md")).filter(({ frontmatter }) => frontmatter.index ?? !frontmatter.draft);
+const pages = (await Astro.glob("/src/pages/**/*.mdx")).filter(({ frontmatter }) => frontmatter.index ?? !frontmatter.draft);
 pages.sort((a, b) => new Date(b.frontmatter.published).valueOf() - new Date(a.frontmatter.published).valueOf());
 ---
 

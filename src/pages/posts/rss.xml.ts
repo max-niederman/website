@@ -1,6 +1,6 @@
 import rss from "@astrojs/rss";
 
-const posts = Object.values(import.meta.globEager("./**/*.md"));
+const posts = Object.values(import.meta.globEager("./**/*.mdx"));
 
 export const get = () =>
   rss({

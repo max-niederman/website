@@ -12,7 +12,7 @@
       {
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
-            nodejs
+            nodejs-18_x
 
             # dependencies
             nodePackages.yarn
