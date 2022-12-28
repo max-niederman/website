@@ -1,5 +1,5 @@
 ---
-import { Markdown } from "astro/components";
+import Markdown from "@astrojs/markdown-component";
 import Page from "$/layouts/Page.astro";
 
 const pages = (await Astro.glob("/src/pages/**/*.md")).filter(({ frontmatter }) => frontmatter.index ?? !frontmatter.draft);

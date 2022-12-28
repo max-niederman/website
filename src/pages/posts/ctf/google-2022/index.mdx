@@ -8,9 +8,8 @@ tags:
   - ctf
   - ctf/google
 layout: "$/layouts/Post.astro"
-setup: |
-  import engraverAnimation from "./engraver-animation.gif"
 ---
+import engraverAnimation from "./engraver-animation.gif"
 
 A couple days ago, a few friends and I competed in the Google CTF. It was our first time doing a CTF, so we weren't sure how well we were going to do. Although we were only able to find four flags, I had a great time; there's something unrivaled about the feeling of finally cracking a puzzle you've been working on for hours.
 
@@ -116,6 +115,6 @@ Some research on the bot shown in the picture yielded[^1] a GitHub repository wi
 
 At that point, we had all the data we needed to find the flag, but it wasn't really possible to read it in that format. We wrote a program in Rust to generate an animated GIF of the lines the arm would draw.
 
-<img src={engraverAnimation} alt="animation of arm movement">
+<img src={engraverAnimation} alt="animation of arm movement" />
 
 It required a bit of frame-by-frame analysis to read what the arm was writing, but we did figure it out eventually.

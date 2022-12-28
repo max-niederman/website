@@ -2,7 +2,7 @@
 import Logo from "./Logo.astro";
 ---
 
-<nav>
+<nav class="main-nav">
     <a href="/">
         <Logo width="64px" />
     </a>
@@ -15,7 +15,7 @@ import Logo from "./Logo.astro";
     @use "../styles/breakpoint";
     @use "../styles/type";
 
-    nav {
+    .main-nav {
         position: absolute;
         top: 0;
         left: 0;

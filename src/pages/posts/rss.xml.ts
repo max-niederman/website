@@ -12,7 +12,6 @@ export const get = () =>
       link: post.url,
       title: post.frontmatter.title,
       pubDate: post.frontmatter.published,
-      description: post.compiledContent(),
     })),
     customData: `<language>en-us</language>`,
   });

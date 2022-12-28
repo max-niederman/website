@@ -1,5 +1,5 @@
 {
-  "name": "@example/minimal",
+  "name": "website",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -9,12 +9,13 @@
     "preview": "astro preview"
   },
   "devDependencies": {
-    "@astrojs/rss": "^0.2.0",
-    "@fontsource/fira-code": "^4.5.10",
-    "@fontsource/source-serif-4": "^4.5.12",
-    "astro": "^1.0.0-beta.56",
-    "astro-analytics": "^2.2.0",
-    "katex": "^0.16.0",
+    "@astrojs/markdown-component": "^1.0.2",
+    "@astrojs/rss": "^0.2.2",
+    "@fontsource/fira-code": "^4.5.12",
+    "@fontsource/source-serif-4": "^4.5.16",
+    "astro": "^1.8.0",
+    "astro-analytics": "^2.5.1",
+    "katex": "^0.16.4",
     "rehype-katex": "^6.0.2",
     "remark-footnotes": "^4.0.1",
     "remark-gemoji": "^7.0.1",
@@ -22,6 +23,9 @@
     "remark-math": "^5.1.1",
     "remark-slug": "^7.0.1",
     "remark-smartypants": "^2.0.0",
-    "sass": "^1.53.0"
+    "sass": "^1.57.1"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^0.14.0"
   }
 }
