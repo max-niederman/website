@@ -109,6 +109,11 @@ $gutter: 0 !default;
       white-space: unset;
     }
   }
+
+  .mathematica {
+    width: 100%;
+    border-radius: 0.25em;
+  }
 }
 
 @mixin structural {
