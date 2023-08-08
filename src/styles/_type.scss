@@ -35,7 +35,9 @@ $gutter: 0 !default;
   math[display="block"],
   code,
   pre.astro-code,
-  img {
+  img,
+  table,
+  .mathematica {
     margin-bottom: 1em;
   }
 
