@@ -1,3 +1,7 @@
+# Hakyll
+_cache
+_site
+
 # Haskell
 dist
 dist-*
