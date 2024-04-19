@@ -13,13 +13,21 @@
           inherit system;
           config.allowUnfree = true;
         };
-      in
-      {
+      in rec {
         packages = rec {
           builder = pkgs.haskellPackages.developPackage {
             root = ./.;
           };
           default = builder;
+        };
+
+        devShell = pkgs.haskellPackages.shellFor {
+          packages = hpkgs: [ packages.builder ];
+          withHoogle = true;
+          buildInputs = with pkgs; [
+            pkg-config
+            zlib
+          ];
         };
       }
     );
