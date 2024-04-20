@@ -3,8 +3,84 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Max Niederman</title>
+
+        <link rel="stylesheet" href="styles/global.css">
+        <style>
+            .hero {
+                color: white;
+            }
+
+            #hero-canvas {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+            }
+        </style>
     </head>
     <body>
-        <h1>Max Niederman</h1>
+        <div class="hero">
+            <canvas id="hero-canvas"></canvas>
+
+            <h1>Max Niederman</h1>
+        </div>
+
+        <script type="module">
+            import { mountAttractor } from "/scripts/clifford-attractor.js";
+
+            /**
+             * Linearly interpolates between points.
+             * @param {record<string, number>[]} points The points to interpolate between.
+             * @returns {(number) => record<string, number>} The interpolation function.
+             */
+            function linearSpline(points) {
+                const n = points.length - 1;
+                const keys = Object.keys(points[0]);
+                return (t) => {
+                    const i = Math.floor(t * n);
+                    const u = t * n - i;
+                    return Object.fromEntries(keys.map((key) =>
+                        [key, points[i][key] * (1 - u) + points[i + 1][key] * u])
+                    );
+                };
+            }
+
+            const canvas = document.getElementById("hero-canvas");
+
+            const attractorParameterSpline = linearSpline([
+                {
+                    a: -0.966918,
+                    b: 2.879879,
+                    c: 0.765145,
+                    d: 0.444728,
+                    scale: 0.5,
+                    nIterations: 25,
+                    nPointsPerPixel: 2
+                },
+                {
+                    a: -0.966918,
+                    b: 1.879879,
+                    c: 0.765145,
+                    d: 0.744728,
+                    scale: 0.4,
+                    nIterations: 25,
+                    nPointsPerPixel: 2
+                },
+                {
+                    a: -0.966918,
+                    b: 2.879879,
+                    c: 0.765145,
+                    d: 0.444728,
+                    scale: 0.5,
+                    nIterations: 25,
+                    nPointsPerPixel: 2
+                },
+            ]);
+
+            mountAttractor(canvas, (now) => attractorParameterSpline(now / 1000 / 20 % 1.0));
+        </script>
     </body>
 </html>
