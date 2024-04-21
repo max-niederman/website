@@ -1,16 +1,56 @@
 ---
+import "~/styles/global.scss";
 
+import nInitial from "~/images/n-initial.svg";
+import signature from "~/images/signature.svg";
 ---
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/n-initial.svg" />
+		<link rel="icon" type="image/svg+xml" href={nInitial.src} />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Max Niederman</title>
 	</head>
 	<body>
-		<h1>Max Niederman</h1>
+		<div class="hero">
+			<div class="hero-content">
+				<h1>
+					<img src={signature.src} alt="Max Niederman" />
+				</h1>
+				<p>Student. Mathematician. Programmer. Engineer.</p>
+			</div>
+		</div>
 	</body>
 </html>
+
+<style lang="scss">
+	.hero {
+		width: 100svw;
+		height: 100svh;
+
+		padding: 2rem;
+
+		@media screen and (min-width: 768px) {
+			padding: 4rem;
+		}
+	}
+
+	.hero-content {
+		max-width: 500px;
+
+		font-size: 1.25rem;
+	}
+
+	h1 {
+		margin: 0;
+
+		font-size: 3.75rem;
+
+		img {
+			width: 100%;
+		}
+	}
+
+</style>
