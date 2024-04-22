@@ -1,0 +1,55 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+import "~/styles/type.scss";
+
+export interface Props {
+    title: string;
+}
+const { title } = Astro.props;
+---
+
+<BaseLayout {title}>
+    <div class="title-block type">
+        <h1>{title}</h1>
+    </div>
+
+    <main class="type">
+        <slot />
+    </main>
+</BaseLayout>
+
+<style is:global lang="scss">
+    $fullwidth-margin: 6rem;
+    $fullwidth-breakpoint: 1200px;
+
+    body {
+        margin: 0 auto;
+        max-width: 80ch;
+        padding: 0 1rem;
+    }
+
+    main {
+        img {
+            max-width: 100%;
+            height: auto;
+
+            &.fullwidth {
+                max-width: unset;
+            }
+        }
+
+        .fullwidth {
+            width: 100%;
+            max-width: 100%;
+
+            @media screen and (min-width: $fullwidth-breakpoint) {
+                width: calc(100vw - #{2 * $fullwidth-margin});
+                max-width: calc(100vw - #{2 * $fullwidth-margin});
+
+                position: relative;
+                left: calc(-1 * (100vw - 100%) / 2 + $fullwidth-margin);
+            }
+        }
+    }
+</style>
