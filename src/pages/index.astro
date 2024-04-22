@@ -1,19 +1,12 @@
 ---
 import "~/styles/global.scss";
 
-import nInitial from "~/images/n-initial.svg";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+
 import signature from "~/images/signature.svg";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href={nInitial.src} />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Max Niederman</title>
-	</head>
-	<body>
+<BaseLayout title="Max Niederman">
 		<div class="hero">
 			<div class="hero-content">
 				<h1>
@@ -22,8 +15,7 @@ import signature from "~/images/signature.svg";
 				<p>Student. Mathematician. Programmer. Engineer.</p>
 			</div>
 		</div>
-	</body>
-</html>
+</BaseLayout>
 
 <style lang="scss">
 	.hero {
