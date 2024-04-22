@@ -2,7 +2,7 @@
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 
-import BaseLayout from "~/layouts/BaseLayout.astro";
+import PostLayout from "~/layouts/PostLayout.astro";
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection("posts");
@@ -14,9 +14,11 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { post } = Astro.props;
+
+const { title } = post.data;
 const { Content } = await post.render();
 ---
 
-<BaseLayout>
+<PostLayout {title}>
   <Content />
 </BaseLayout>

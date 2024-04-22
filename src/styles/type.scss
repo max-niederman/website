@@ -1,0 +1,42 @@
+.type {
+  font-family: "Source Serif 4", serif;
+  font-size: 1rem;
+
+  line-height: 1.3;
+
+  text-wrap: pretty;
+
+  em {
+    font-style: italic;
+  }
+
+  strong {
+    font-weight: 800;
+  }
+
+  strong em,
+  em strong {
+    font-style: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+  }
+
+  i {
+    font-style: italic;
+  }
+
+  blockquote {
+    font-style: italic;
+
+    cite, figcaption {
+      display: block;
+      margin-top: 0.5rem;
+
+      text-align: right;
+
+      &::before {
+        content: "— ";
+      }
+    }
+  }
+}
