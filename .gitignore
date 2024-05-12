@@ -1,27 +1,29 @@
-# direnv
-.direnv/
-
-# build output
-dist
-
-# dependencies
-node_modules/
-
-# logs
-npm-debug.log*
-pnpm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# environment variables
-.env
-.env.production
-
-# macOS-specific files
+**\.png-768px\.png
+**\.jpg-768px\.jpg
 .DS_Store
-
-# editors
-.vimrc
-.nvimrc
-.vim/
-.obsidian/
+404
+404.shtml
+**.o
+**.hi
+**.elc
+build/changeTag
+build/checkMetadata
+build/generateBacklinks
+build/generateDirectory
+build/generateLinkBibliography
+build/generateSimilar
+build/generateSimilarLinks
+build/guessTag
+build/hakyll
+build/link-extractor
+build/link-suggester
+build/preprocess-markdown
+**/*.html
+build/**/*.html
+css/**/*.html
+font/**/*.html
+js/**/*.html
+nginx/**/*.html
+redirect/**/*.html
+/.htaccess
+/asset.log

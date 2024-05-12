@@ -1,0 +1,23 @@
+<blockquote class="annotation<{annotationClassSuffix}>">
+	<[IF thumbnailFigure]>
+	<{thumbnailFigure}>
+	<[IFEND]>
+	<p class="data-field title">
+		<a 
+		   class="<{titleLinkClass}>"
+		   title="Open <{titleLinkHref}> in <{whichTab}> <{tabOrWindow}>"
+		   href="<{titleLinkHref}>"
+		   target="<{linkTarget}>"
+		   <{titleLinkDataAttributes}>
+			   ><{title}></a>
+	</p>
+	<[IF authorDateAux]>
+	<p class="data-field author-date-aux"><{authorDateAux}></p>
+	<[IFEND]>
+	<[IF abstract]>
+	<div class="data-field annotation-abstract"><{abstract}></div>
+	<[IFEND]>
+	<[IF fileIncludes]>
+	<div class="data-field file-includes"><{fileIncludes}></div>
+	<[IFEND]>
+</blockquote>

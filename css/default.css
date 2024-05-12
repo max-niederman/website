@@ -1,0 +1,6819 @@
+@charset "UTF-8";
+
+
+/*************/
+/* VARIABLES */
+/*************/
+
+:root {
+    /*  Does not get inverted, so should not be in colors.css.
+     */
+    --GW-iframe-background-color: #fff;
+
+    --GW-sidenotes-max-width: 550px;
+
+    --GW-popups-popup-max-width: 640px;
+    --GW-popups-popup-max-height: 480px;
+    --GW-popups-popup-with-footer-min-width: 480px;
+    --GW-popups-popup-with-full-title-bar-min-width: 360px;
+    --GW-popups-popup-with-full-title-bar-min-height: 120px;
+    --GW-popups-annotation-popup-min-width: 480px;
+    --GW-popups-annotation-popup-min-height: 120px;
+    --GW-popups-wikipedia-entry-popup-min-width: 480px;
+    --GW-popups-wikipedia-entry-popup-min-height: 120px;
+    --GW-popups-tweet-popup-min-height: 120px;
+    --GW-popups-tweet-avatar-size: 75px;
+    --GW-popups-aux-links-popup-min-width: 480px;
+    --GW-popups-aux-links-popup-min-height: 240px;
+    --GW-popups-local-page-popup-min-width: 480px;
+    --GW-popups-local-page-popup-min-height: 240px;
+    --GW-popups-popup-border-width: 3px;
+    --GW-popups-popup-title-bar-height: calc(1.5rem + 1px);
+    --GW-popups-popup-mini-title-bar-height: calc(1rem + 1px);
+    --GW-popups-video-popup-min-width: 360px;
+    --GW-popups-video-popup-min-height: 204px;
+    --GW-popups-video-youtube-iframe-width: 495px;
+    --GW-popups-video-youtube-iframe-height: 310px;
+    --GW-popups-video-vimeo-iframe-width: 495px;
+    --GW-popups-video-vimeo-iframe-height: 278px;
+    --GW-popups-audio-popup-min-width: 360px;
+    --GW-popups-audio-popup-min-height: 87px;
+    --GW-popups-image-popup-min-size: 70px;
+
+    --GW-popins-popin-max-height: 75vh;
+    --GW-popins-popin-min-height: 120px;
+    --GW-popins-popin-border-width: 3px;
+    --GW-popins-popin-title-bar-height: calc(1rem * 16/9);
+    --GW-popins-popin-footer-bar-height: calc(1rem * 16/9);
+
+    --GW-page-toolbar-collapse-duration: 0.25s;
+    --GW-page-toolbar-slow-collapse-duration: 1s;
+    --GW-page-toolbar-fade-after-collapse-duration: 0.25s;
+    --GW-page-toolbar-widget-flash-rise-duration: 1s;
+    --GW-page-toolbar-widget-flash-fall-duration: 1s;
+}
+@supports (-moz-appearance: none) {
+    :root {
+        --GW-popups-audio-popup-min-height: 75px;
+    }
+}
+
+
+/********************/
+/* GENERIC ELEMENTS */
+/********************/
+
+button {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    line-height: 1;
+    font-family: var(--GW-sans-serif-font-stack);
+    font-size: inherit;
+    font-weight: normal;
+    font-style: normal;
+    text-align: center;
+    color: inherit;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+
+/************/
+/* SECTIONS */
+/************/
+
+/*=----------------------------=*/
+/*= Section heading self-links =*/
+/*=----------------------------=*/
+
+.heading a::after {
+    content: "\00B6"; /* Pilcrow sign: ¶ */
+    font-size: 0.75em;
+    position: absolute;
+    bottom: 0.15em;
+    right: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0s ease 0.1s;
+}
+.heading a:hover::after,
+section.highlighted > .heading a::after,
+section:target > .heading a::after {
+    visibility: visible;
+}
+.heading a:hover::after,
+section.highlighted > .heading a::after {
+    opacity: 0.8;
+}
+section:target > .heading a::after {
+    opacity: 0.5;
+}
+
+/*  Pilcrow in H1.
+ */
+section.level1 > .heading a::after {
+    right: unset;
+    left: 0;
+}
+
+/*  Pilcrow in H3, H4, H5, H6.
+ */
+section.level3 > .heading a,
+section.level4 > .heading a,
+section.level5 > .heading a,
+section.level6 > .heading a {
+    position: relative;
+}
+section.level3 > .heading a::after,
+section.level4 > .heading a::after,
+section.level5 > .heading a::after,
+section.level6 > .heading a::after {
+    right: -1.5em;
+}
+section.level3 > .heading a::after,
+section.level4 > .heading a::after {
+    bottom: 0.4em;
+}
+section.level5 > .heading a::after,
+section.level6 > .heading a::after {
+    bottom: 0.3em;
+}
+
+/**********************************************************/
+/*  Highlighted sections. (Due to extract popups, usually.)
+ */
+
+section.highlighted {
+    position: relative;
+}
+section.highlighted::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -0.5em;
+    left: -1.25em;
+    width: calc(100% + 2em);
+    height: calc(100% + 1.25em);
+    outline: 3px double var(--GW-section-highlighted-border-color);
+    z-index: -1;
+    transition:
+        outline 0.15s ease 0.05s;
+}
+section.highlight-fading::before {
+    outline: 3px double transparent;
+}
+
+
+/*******************/
+/* COLLAPSE BLOCKS */
+/*******************/
+/*  Use: annotate collapsible section headers with '{.collapse}' (in the Markdown);
+    for sections where I want a summary/abstract of that (eg. in /note/note.page),
+    one annotate summaries to keep uncollapsed with '<div class="abstract-collapse">summary</div>'.
+    (Pandoc Markdown does support a native div syntax, but it's long and ugly.)
+ */
+
+.collapse-block {
+    --collapse-toggle-top-height: calc(3.0 * var(--base-font-size));
+    --collapse-toggle-bottom-height: calc(2.0 * var(--base-font-size));
+    --collapse-toggle-left-width: calc(0.45 * var(--base-font-size));
+    --collapse-left-offset: calc(1.0 * var(--base-font-size));
+
+    --collapse-toggle-top-icon-size: var(--collapse-toggle-top-height);
+    --collapse-toggle-bottom-icon-size: var(--collapse-toggle-bottom-height);
+
+    position: relative;
+    padding-top: var(--collapse-toggle-top-height);
+    padding-bottom: var(--collapse-toggle-bottom-height);
+}
+
+/*  Offset block left when expanded, so the contents are the same width as the
+    enclosing content column.
+ */
+.collapse-block.expanded {
+    margin-left: calc(-1 * var(--collapse-left-offset));
+    padding-left: var(--collapse-left-offset);
+}
+
+/*  Collapse blocks with no abstract show some of their contents when collapsed.
+ */
+.collapse-block.no-abstract.expanded-not {
+    min-height: calc(  var(--collapse-toggle-top-height)
+                     + var(--collapse-toggle-bottom-height));
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/************************************/
+/*  Collapse block component z-order.
+ */
+
+.collapse-block.expanded-not > .abstract-collapse {
+    z-index: 1;
+}
+
+.collapse-block > .disclosure-button {
+    z-index: 10;
+}
+.collapse-block > .disclosure-button:hover {
+    z-index: 11;
+}
+
+.collapse-block.expanded::before {
+    z-index: 12;
+}
+
+section.collapse > .heading {
+    z-index: 13;
+}
+.collapse-block.expanded > .abstract-collapse {
+    z-index: 13;
+}
+.collapse-block.expanded > .collapse-content-wrapper {
+    z-index: 13;
+}
+
+
+/***************************/
+/*  Collapse block contents.
+ */
+
+/*  Block (any state).
+ */
+.collapse-block > .collapse-content-wrapper {
+    position: relative;
+    box-sizing: border-box;
+}
+
+/*  Block (collapsed).
+ */
+
+.collapse-block.expanded-not > .collapse-content-wrapper {
+    overflow: hidden;
+    contain: content;
+}
+.collapse-block.has-abstract.expanded-not > .collapse-content-wrapper {
+    max-height: 0;
+}
+.collapse-block.no-abstract.expanded-not > .collapse-content-wrapper {
+    max-height: calc(  var(--collapse-toggle-top-height)
+                     + var(--collapse-toggle-bottom-height));
+}
+
+/*  Inline (collapsed).
+ */
+.collapse-inline.expanded-not > .collapse-content-outer-wrapper {
+	display: inline-block;
+}
+.collapse-inline.expanded-not > .collapse-content-outer-wrapper > .collapse-content-wrapper {
+    display: inline-block;
+    max-width: 0;
+    max-height: 0;
+    overflow: hidden;
+    contain: content;
+}
+
+/*****************************/
+/*  Collapse block background.
+ */
+
+.collapse-block::before {
+    content: "";
+    position: absolute;
+    left: var(--collapse-toggle-left-width);
+    top: var(--collapse-toggle-top-height);
+    bottom: var(--collapse-toggle-bottom-height);
+    right: 0;
+    background-color: var(--background-color);
+}
+
+/*  Fix for NoScript users.
+ */
+.collapse-block:not(.expanded):not(.expanded-not)::before {
+    display: none;
+}
+
+/*********************/
+/*  Disclosure button.
+ */
+
+.collapse > .disclosure-button {
+    --collapse-button-background-color: var(--GW-collapse-disclosure-button-color);
+    --collapse-button-text-color: var(--GW-collapse-disclosure-button-text-color);
+
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: inherit;
+    color: var(--collapse-button-text-color);
+    transition:
+        color 0.1s ease;
+    cursor: pointer;
+}
+.collapse > .disclosure-button:hover {
+    --collapse-button-background-color: var(--GW-collapse-disclosure-button-hover-color);
+    --collapse-button-text-color: var(--GW-collapse-disclosure-button-text-hover-color);
+}
+.collapse > .disclosure-button:focus {
+    outline: none;
+}
+
+.collapse-block > .disclosure-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 0.875em;
+    font-family: var(--GW-sans-serif-font-stack);
+    box-shadow:
+        var(--collapse-toggle-left-width) 0 0 0 var(--collapse-button-background-color) inset;
+}
+
+/*  Top and bottom parts of disclosure button.
+ */
+.collapse-block > .disclosure-button .part {
+    position: absolute;
+    right: 0;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: stretch;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.collapse-block > .disclosure-button .part::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: var(--collapse-button-background-color);
+    transition:
+        background-color 0.1s ease;
+}
+
+.collapse-block > .disclosure-button .part > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--collapse-button-background-color);
+    transition:
+        background-color 0.1s ease,
+        opacity 0.1s ease;
+}
+
+.collapse-block > .disclosure-button .part .icon {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    padding: calc(var(--icon-size) / 4);
+    box-sizing: border-box;
+}
+.collapse-block > .disclosure-button .part .icon svg {
+    height: 100%;
+}
+
+.collapse-block > .disclosure-button .part .label {
+    opacity: 0;
+}
+.collapse-block > .disclosure-button.labels-visible .part .label {
+    opacity: 1;
+}
+
+/*  Top part of disclosure button.
+ */
+.collapse-block > .disclosure-button .part.top {
+    --icon-size: var(--collapse-toggle-top-icon-size);
+
+    top: 0;
+    height: var(--collapse-toggle-top-height);
+    justify-content: flex-end;
+}
+
+.collapse-block.expanded-not > .disclosure-button:hover .part.top .icon svg {
+    transform: rotate(-0.25turn);
+    transition:
+        transform 1.0s ease;
+}
+.collapse-block.expanded-not.hover-not > .disclosure-button:hover .part.top .icon svg {
+    transform: none;
+    transition: none;
+}
+.collapse-block.expanded > .disclosure-button .part.top .icon svg {
+    transform: rotate(-0.25turn);
+}
+.collapse-block.expanded-not.just-clicked > .disclosure-button:hover .part.top .icon svg {
+    transform: none;
+    transition: none;
+}
+
+.collapse-block > .disclosure-button .part.top .label {
+    padding: 0 0 0 1.25em;
+}
+
+/*  Bottom part of disclosure button.
+ */
+.collapse-block > .disclosure-button .part.bottom {
+    --icon-size: var(--collapse-toggle-bottom-icon-size);
+
+    bottom: 0;
+    height: var(--collapse-toggle-bottom-height);
+    justify-content: center;
+}
+
+.collapse-block > .disclosure-button .part.bottom .label {
+    padding: 0 1em;
+}
+
+.collapse-block > .disclosure-button .part.bottom .icon {
+    position: absolute;
+}
+.collapse-block > .disclosure-button.labels-visible .part.bottom .icon {
+    opacity: 0;
+}
+.collapse-block > .disclosure-button .part.bottom .icon svg {
+    transform: rotate(-0.25turn);
+}
+.collapse-block.expanded > .disclosure-button .part.bottom .icon svg {
+    transform: rotate(0.25turn);
+}
+
+/*  Disclosure button edge cases.
+ */
+.collapse-block.just-auto-expanded > .disclosure-button.labels-visible .part .label {
+    opacity: 0;
+    transition: none;
+}
+.collapse-block.no-abstract.expanded-not > .disclosure-button .part.bottom > span {
+    display: none;
+}
+
+/*  Inline disclosure button.
+ */
+.collapse-inline > .collapse-content-outer-wrapper > .disclosure-button,
+.collapse-inline > .collapse-content-outer-wrapper > .disclosure-button .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.collapse-inline > .collapse-content-outer-wrapper > .disclosure-button {
+    --collapse-button-text-color: var(--GW-collapse-inline-disclosure-button-text-color);
+
+    height: 1em;
+    vertical-align: text-bottom;
+    position: relative;
+    bottom: 0.15em;
+}
+.collapse-inline > .collapse-content-outer-wrapper > .disclosure-button:hover,
+.collapse-inline > .collapse-content-outer-wrapper > .disclosure-button.hover {
+    --collapse-button-text-color: var(--GW-collapse-inline-disclosure-button-text-hover-color);
+}
+
+.collapse-inline > .collapse-content-outer-wrapper > .disclosure-button .icon {
+    height: 100%;
+    color: var(--collapse-button-text-color);
+    transition:
+        color 0.1s ease;
+}
+.collapse-inline.expanded > .collapse-content-outer-wrapper > .disclosure-button.start {
+	display: none;
+}
+.collapse-inline.expanded > .collapse-content-outer-wrapper > .disclosure-button.start .icon,
+.collapse-inline.has-abstract.expanded-not > .collapse-content-outer-wrapper > .disclosure-button.start .icon {
+    margin-right: -0.2em;
+}
+
+.collapse-inline > .collapse-content-outer-wrapper > .disclosure-button .icon svg {
+    display: block;
+    width: 1em;
+    height: 100%;
+}
+
+.collapse-inline > .collapse-content-outer-wrapper > .disclosure-button.end .icon svg:nth-last-of-type(2) {
+    height: 90%;
+    margin: 0 -0.5em 0 0;
+}
+.collapse-inline.expanded-not > .collapse-content-outer-wrapper > .disclosure-button.end .icon svg:nth-last-of-type(2) {
+	margin: 0 -0.5em 0 -0.3em;
+}
+
+.collapse-inline.expanded > .collapse-content-outer-wrapper > .disclosure-button.end .icon svg:nth-last-of-type(2) {
+    transform: rotateZ(0.5turn);
+}
+.collapse-inline.expanded-not:hover > .collapse-content-outer-wrapper > .disclosure-button.end .icon svg:nth-last-of-type(2) {
+    transform: rotateZ(0.5turn);
+    transition:
+        transform 1s ease;
+}
+.collapse-inline.expanded-not.just-clicked > .collapse-content-outer-wrapper > .disclosure-button.end:hover .icon svg:nth-last-of-type(2) {
+    transform: none;
+    transition: none;
+}
+
+/*****************************/
+/*	Shown only when collapsed.
+ */
+
+.collapse.expanded > .abstract-collapse-only {
+	display: none;
+}
+
+/********************/
+/*  Collapse summary.
+ */
+
+.collapse-block > .abstract-collapse {
+    position: relative;
+}
+
+/*  Shift blockquoted abstract so that edge of blockquote is flush with left
+    stripe of collapse block (disclosure button click region).
+ */
+.collapse-block > .abstract-collapse.abstract {
+    margin-left: calc(-1 * (var(--collapse-left-offset) - var(--collapse-toggle-left-width)));
+}
+
+/*  Hide abstract blockquote border when collapsed.
+ */
+.collapse-block.expanded-not > .abstract-collapse.abstract > blockquote {
+    border-color: var(--background-color);
+}
+.collapse-block.expanded-not > .disclosure-button:hover + .abstract-collapse.abstract > blockquote {
+    --background-color: var(--GW-abstract-collapse-blockquote-hover-color);
+}
+
+/*  Non-blockquoted collapse summary.
+ */
+.collapse-block.expanded-not > .abstract-collapse:not(.abstract) {
+    padding: 0.5em 0;
+}
+.collapse-block.expanded > .abstract-collapse:not(.abstract) {
+    padding: 0.5em 0 0 0;
+}
+
+/************************************************/
+/*  Collapsible sections (the <section> element).
+ */
+
+section.collapse {
+    --collapse-toggle-top-height: calc(2.125 * var(--base-font-size));
+
+    padding-top: 0;
+
+    /*  Offset collapsible sections left (so the content column doesn’t shift
+        width when expanding). (This also makes nested collapse sections’ left
+        edges line up.)
+     */
+    padding-left: var(--collapse-left-offset);
+    margin-left: calc(-1 * var(--collapse-left-offset));
+}
+
+section.collapse.has-abstract.expanded > .collapse-content-wrapper {
+    padding-bottom: 0.5em;
+}
+
+/*  When a section has no abstract, show preview of contents.
+ */
+section.collapse.no-abstract.expanded-not {
+    --collapse-toggle-bottom-height: calc(5.25 * var(--base-font-size));
+}
+section.collapse.no-abstract.expanded-not > .collapse-content-wrapper {
+    max-height: var(--collapse-toggle-bottom-height);
+    padding: 0.5em 0.5em 0.5em 0;
+}
+section.collapse.no-abstract.expanded > .collapse-content-wrapper {
+    padding: 0.5em 0;
+}
+
+/*  No disclosure button label on top part (it could interfere with heading).
+ */
+section.collapse.expanded > .disclosure-button .part.top .label {
+    display: none;
+}
+
+/*  For abstract-less sections, content visible through disclosure button.
+ */
+section.collapse.no-abstract.expanded-not > .disclosure-button .part.bottom::before {
+    opacity: 0.85;
+}
+
+/*  Heading.
+ */
+
+section.collapse > .heading {
+    position: relative;
+    min-height: var(--collapse-toggle-top-height);
+    margin-left: calc(-1 * var(--collapse-toggle-left-width));
+    margin-bottom: 0;
+    padding: 0.25em 2.5em 0 0;
+    text-align: left;
+    border: none;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+/*  H1.
+ */
+section.collapse.level1 > .heading {
+    font-size: 1.75em;
+}
+
+/*  Heading self-link.
+ */
+
+section.collapse > .heading a {
+    position: relative;
+    pointer-events: auto;
+}
+section.collapse > .heading a,
+section.collapse > .heading a * {
+    text-shadow: none;
+}
+
+section.collapse > .heading a::after {
+    right: -1.25em;
+    bottom: 0.4em;
+}
+
+/*  H1.
+ */
+section.collapse.level1 > .heading a::after {
+    left: unset;
+}
+
+/**********************************/
+/*  Collapsible non-section blocks.
+ */
+
+div.collapse.no-abstract.expanded-not > .disclosure-button {
+    box-shadow: none;
+}
+div.collapse.no-abstract.expanded-not > .disclosure-button .part::before {
+    opacity: 0.85;
+}
+
+/***************************/
+/*  Collapsible code blocks.
+ */
+
+/*  NOTE: ‘.sourceCode’ is a Pandoc-hardwired CSS class for code blocks. We do
+    not rewrite it to ‘.source-code’ for consistency with all our other custom
+    classes, because that risks confusion & interoperability problems, which is
+    not worth it for a bit of name consistency.
+ */
+
+.sourceCode.collapse.expanded > .collapse-content-wrapper {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+.sourceCode.collapse.expanded-not > .collapse-content-wrapper pre {
+    max-height: calc(  var(--collapse-toggle-top-height)
+                     + var(--collapse-toggle-bottom-height));
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.sourceCode.collapse.expanded-not > .collapse-content-wrapper.width-full {
+    max-width: 100%;
+    margin: 0 !important;
+}
+
+.sourceCode.collapse.expanded-not > .disclosure-button .part::before {
+    opacity: 0.70;
+}
+
+.sourceCode.collapse > .disclosure-button .part.top .label,
+.sourceCode.collapse > .disclosure-button .part.top .icon {
+    margin-top: 1px;
+}
+.sourceCode.collapse > .disclosure-button .part.top .icon {
+    margin-right: 1px;
+}
+.sourceCode.collapse > .disclosure-button .part.bottom .label {
+    margin-bottom: 1px;
+}
+
+/**********************/
+/*  Collapsible tables.
+ */
+
+.table-wrapper.collapse.expanded-not {
+    overflow: hidden;
+    margin-left: 0;
+    padding: 0;
+}
+
+.table-wrapper.collapse > .disclosure-button .part.top .label,
+.table-wrapper.collapse > .disclosure-button .part.top .icon {
+    margin-top: 2px;
+}
+
+.table-wrapper.collapse.expanded > .collapse-content-wrapper {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+/**********************************************************************/
+/*  “Bare content” collapses (not a section, not code, not table, etc.)
+ */
+
+.collapse.bare-content.has-abstract {
+    --collapse-toggle-top-height: calc(2.25 * var(--base-font-size));
+
+    padding-left: var(--collapse-left-offset);
+}
+
+.collapse.bare-content.no-abstract {
+    --collapse-toggle-bottom-height: calc(2.5 * var(--base-font-size));
+}
+
+.collapse.bare-content.has-abstract.expanded > .collapse-content-wrapper {
+	padding: 0 0 0.5em 0;
+}
+
+.collapse.bare-content.no-abstract.expanded-not > .collapse-content-wrapper {
+    padding: 0.25em 0.5em;
+}
+.collapse.bare-content.no-abstract.expanded > .collapse-content-wrapper {
+    padding: 0.5em 0;
+}
+
+/**********************/
+/*	Collapses in lists.
+ */
+
+/*	Fix problem of partial overlap of list marker, when collapse block is the
+	first block within a list item.
+ */
+.collapse-block.in-list:first-child {
+	--collapse-left-offset:calc(var(--list-left-padding) + 0.25em);
+}
+
+/****************************/
+/*  Collapses in blockquotes.
+ */
+
+blockquote .collapse-block:not(.in-list),
+blockquote .collapse-block:not(.in-list).expanded {
+    padding-left: var(--blockquote-horizontal-padding);
+    padding-right: var(--blockquote-horizontal-padding);
+    margin-left: calc(-1 * var(--blockquote-horizontal-padding) / var(--blockquote-font-size-scaling-factor));
+    margin-right: calc(-1 * var(--blockquote-horizontal-padding) / var(--blockquote-font-size-scaling-factor));
+}
+blockquote > .collapse-block:last-child {
+    margin-bottom: calc(-1 * var(--blockquote-vertical-padding) / var(--blockquote-font-size-scaling-factor));
+}
+
+blockquote .collapse-block > .disclosure-button {
+    --collapse-button-text-color: var(--GW-collapse-in-blockquote-disclosure-button-text-color);
+    --collapse-button-background-color: var(--GW-collapse-in-blockquote-disclosure-button-color);
+}
+blockquote .collapse-block > .disclosure-button:hover {
+    --collapse-button-text-color: var(--GW-collapse-in-blockquote-disclosure-button-text-hover-color);
+    --collapse-button-background-color: var(--GW-collapse-in-blockquote-disclosure-button-hover-color);
+}
+
+blockquote .collapse-block.no-abstract.expanded-not > .disclosure-button .part::before {
+    opacity: 0.70;
+}
+
+/**************************/
+/*  Collapses in footnotes.
+ */
+
+.footnote .collapse-block {
+    --collapse-left-offset: calc(0.75 * var(--base-font-size));
+}
+
+/****************************************/
+/*	Aux-links and file include collapses.
+ */
+.collapse.aux-links-append,
+.collapse.file-include-collapse {
+    --collapse-toggle-top-height: calc(2.25 * var(--base-font-size));
+    --collapse-toggle-bottom-height: calc(2.25 * var(--base-font-size));
+}
+
+/**************************/
+/*	File include collapses.
+ */
+
+.collapse.file-include-collapse {
+    --collapse-toggle-top-height: calc(2.25 * var(--base-font-size));
+    --collapse-toggle-bottom-height: calc(2.25 * var(--base-font-size));
+
+    padding-left: var(--collapse-left-offset);
+}
+
+.collapse.file-include-collapse > .collapse-content-wrapper {
+    padding: 0.5em 0.5em 0.5em 0;
+}
+
+/***********************************************************/
+/*  “Aux links” and “file include” collapses in annotations.
+ */
+
+.annotation .collapse.aux-links-append,
+.annotation .collapse.file-include-collapse {
+    border-top: 1px solid var(--GW-aux-links-collapse-border-color);
+}
+
+.annotation .collapse.aux-links-append > .collapse-content-wrapper,
+.annotation .collapse.file-include-collapse > .collapse-content-wrapper {
+    padding: 0.5em 0 0.5em 2px;
+}
+
+.annotation .collapse-block.last-collapse:not(:last-child) {
+    border-bottom: 1px solid var(--GW-aux-links-collapse-border-color);
+}
+
+/*********************************************************************/
+/*	File includes in link bibliographies, directory indexes, and other
+    transcluded (rather than pop-framed) annotations.
+ */
+
+.annotation > blockquote > .file-includes:last-child > .collapse-block:last-child {
+    margin-bottom: calc(-1 * var(--blockquote-vertical-padding) / var(--blockquote-font-size-scaling-factor));
+}
+
+.annotation > .data-field.title + .data-field.file-includes .collapse.file-include-collapse {
+	border-top: none;
+}
+
+/****************************************************/
+/*  Collapses in directory index link bibliographies.
+ */
+
+.collapse.tag-index-link-bibliography-block.expanded-not {
+    padding-left: 0.75em;
+    margin-left: -1px;
+}
+
+.collapse.tag-index-link-bibliography-block > .collapse-content-wrapper {
+    padding: 0.5em 0;
+}
+
+/*************************/
+/*  Per-section backlinks.
+ */
+
+.collapse.section-backlinks-container {
+    --collapse-toggle-top-height: calc(2.75 * var(--base-font-size));
+
+    margin-left: calc(-1 * var(--collapse-left-offset));
+    padding-left: var(--collapse-left-offset);
+}
+
+.collapse.section-backlinks-container > .collapse-content-wrapper {
+    padding: 0.5em 0 0.75em 0;
+}
+
+.collapse.section-backlinks-container.expanded-not > .disclosure-button .part::before {
+    opacity: 0.70;
+}
+
+/****************************************************/
+/*  Miscellaneous/general content in collapse blocks.
+ */
+
+/*  Headings, of collapse-sections or regular sections, within collapses.
+ */
+.collapse section > .heading {
+    margin-left: 0;
+}
+
+
+/*********************/
+/* SECTION SEPARATOR */
+/*********************/
+
+hr {
+    border: 0;
+    display: flex;
+    margin: 0;
+}
+
+/*  These classes are created at compile-time by the ‘rulersCycle’ Pandoc
+    rewrite pass in Typography.hs; they assign each use of <hr> in the body a
+    class 0-2 (n modulo 3). This lets us create an astronomical theme cycle:
+    the first, fourth, seventh etc rulers are the triple-white star; the
+    second, fifth, eighth etc are a dotted moon; the third, sixth, ninth etc
+    are a sun.
+ */
+hr::after,
+.horizontal-rule-nth-0 hr::after {
+    /*  https://commons.wikimedia.org/wiki/File:Sun_of_Vergina_black.svg
+        */
+    --icon-size: 40px;
+
+    content: "";
+    margin: auto;
+    box-sizing: border-box;
+    width: 40px;
+    height: var(--icon-size);
+    background-image: url('/static/img/ornament/sun-verginasun-black.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-origin: content-box;
+    background-size: var(--icon-size);
+    opacity: 0.80;
+}
+.horizontal-rule-nth-1 hr::after {
+    /*  https://commons.wikimedia.org/wiki/File:Japanese_crest_Tsuki_ni_Hoshi.svg
+        NOTE: alternative moon icon is /static/img/icon/japanesecrest-oookashippouofoookatadasuke-sun.svg
+        modified from https://commons.wikimedia.org/wiki/File:Japanese_crest_Oooka_Shippou_of_Oooka_Tadasuke.svg
+        - while nice, it lacks the intense moire effect of the Vergina Sun
+     */
+    --icon-size: 28px;
+
+    background-image: url('/static/img/ornament/japanesecrest-tsukinihoshi-dottedmoon.svg');
+    opacity: 0.85;
+}
+.horizontal-rule-nth-2 hr::after {
+    --icon-size: 38px;
+
+    background-image: url('/static/img/ornament/asterism-triplewhitestar.svg');
+    opacity: 0.90;
+}
+
+
+/*********/
+/* LISTS */
+/*********/
+
+/**************/
+/*  Edge cases.
+ */
+
+/*  Necessary for list items to wrap around floating elements in list items.
+
+    NOTE: The consequence of this is that any list that contains a floating
+    element (e.g. a figure floated left or right) will not display correctly
+    if positioned next to the page table of contents. Caveat emptor!
+ */
+ul.has-floats > li,
+ol.has-floats > li {
+    display: list-item;
+}
+
+/*  List headings are normally paragraphs, but should never be indented.
+ */
+.markdownBody p.list-heading {
+    text-indent: 0;
+}
+
+
+/*****************/
+/* MULTI-COLUMNS */
+/*****************/
+/*  Inspired by Markdeep:
+    https://casual-effects.com/markdeep/features.md.html#multiplecolumns
+    (limited multi-column support as a div class annotation)
+
+    This is particularly useful for extremely long (‘skinny’) lists where items
+    tend to be short, such as in /dnm-archive#overall-coverage or /replication
+
+    Uses CSS3 columns:
+    https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Columns/Using_multi-column_layouts
+    https://www.caniuse.com/#feat=multicolumn
+
+    Currently limited to lists due to issues with hidden:overflow in FF
+    and sidenotes.js in Chrome.
+ */
+
+.markdownBody .columns > .list {
+    --text-alignment: left;
+
+    column-width: 18em;
+    column-gap: 3em;
+}
+
+.markdownBody .columns .list li {
+    break-inside: avoid;
+}
+
+/**********************/
+/*  Figures in columns.
+ */
+
+.markdownBody .columns.figures > ul {
+    --list-left-padding: 0;
+
+    column-gap: 1.5em;
+}
+.markdownBody .columns.figures > ul > li::before {
+    display: none;
+}
+
+.markdownBody .columns.figures figure {
+    max-width: unset;
+    margin: 0 0 1em 0;
+}
+.markdownBody .columns.figures figure img,
+.markdownBody .columns.figures figure svg,
+.markdownBody .columns.figures figure video,
+.markdownBody .columns.figures figure audio {
+    max-width: 100%;
+}
+
+/*  Special styles for special browsers.
+    */
+@supports (-moz-appearance: none) {
+    .markdownBody .columns.figures figcaption {
+        line-height: initial;
+    }
+}
+
+
+/*************/
+/* TRIPTYCHS */
+/*************/
+
+@media all and (min-width: 650px) {
+	.triptych {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-column-gap: var(--float-side-margin);
+	}
+}
+
+
+/***********/
+/* FIGURES */
+/***********/
+/*  Additional figure styles.
+ */
+
+/*  Figures in sidenotes should take up the full width of the sidenote.
+    */
+#markdownBody .sidenote figure {
+    max-width: calc(100% - 2px);
+}
+
+/*  Image alt-text.
+    */
+img::before {
+    content: attr(alt);
+    font-family: var(--GW-sans-serif-font-stack);
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    padding: 0.5em 0.75em;
+    background-color: var(--background-color);
+    text-align: center;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+
+/**********/
+/* EMBEDS */
+/**********/
+
+video {
+	cursor: pointer;
+}
+
+iframe {
+	display: block;
+	width: calc(100% - 2px);
+	max-height: calc(100vh - 8rem);
+	border: 1px solid var(--GW-embed-border-color);
+	background-color: var(--GW-iframe-background-color);
+}
+
+iframe {
+	aspect-ratio: 1 / 1;
+}
+@media all and (max-width: 649px) {
+	iframe {
+		aspect-ratio: 3 / 5;
+	}
+}
+
+iframe.youtube {
+	aspect-ratio: 495 / 310;
+}
+iframe.vimeo {
+	aspect-ratio: 495 / 278;
+}
+iframe.pdf {
+	aspect-ratio: 8.5 / 11;
+}
+
+
+/**************/
+/* INTERVIEWS */
+/**************/
+
+/***************************************************/
+/*  New style interviews
+    (e.g. https://gwern.net/lorem-block#interviews )
+ */
+
+/*  Interview.
+ */
+ul.interview {
+    --list-left-padding: 1.5em;
+    --speaker-spacing: 0.75ch;
+}
+
+/*  Exchanges.
+ */
+ul.interview li.exchange ul {
+    --list-left-padding: 1.625em;
+}
+ul.interview li.exchange::before {
+    left: 0;
+}
+
+/*  Utterances.
+ */
+ul.interview li.utterance {
+    text-indent: calc(-1 * var(--list-left-padding));
+}
+ul.interview li.utterance::before {
+    display: none;
+}
+
+/*  Speakers.
+ */
+ul.interview .speaker {
+    font-variant-caps: small-caps;
+    letter-spacing: -0.25px;
+    display: inline-block;
+    min-width: calc(var(--list-left-padding) - var(--speaker-spacing));
+    margin-right: var(--speaker-spacing);
+}
+
+/*************/
+/* ABSTRACTS */
+/*************/
+/*  Abstract for page or section.
+ */
+
+.abstract blockquote {
+    border-color: var(--GW-abstract-border-color);
+}
+
+/*  Auto-smallcaps introductory paragraphs of documents or sub-documents.
+    (This is also where dropcaps appear.)
+ */
+p.intro-graf::first-line {
+    font-variant-caps: small-caps;
+}
+
+
+/*************/
+/* EPIGRAPHS */
+/*************/
+/*  Loosely inspired by https://edwardtufte.github.io/tufte-css/#epigraphs
+ */
+
+.epigraph {
+    display: flow-root;
+    margin: auto;
+    padding: 0.75em 2.5em;
+}
+
+.epigraph blockquote {
+    --background-color: inherit;
+
+    padding: 0;
+    border: none;
+    position: relative;
+    z-index: 1;
+    width: fit-content;
+    margin: auto;
+}
+.epigraph blockquote p  {
+    font-size: inherit;
+    font-style: italic;
+    background-color: inherit;
+}
+
+/*  Reverse back to normal when italics are used inside an epigraph, or final block.
+ */
+.epigraph blockquote p:first-child em {
+    font-style: normal;
+    margin: 0 0 0 0.125em;
+}
+.epigraph blockquote p:last-child:not(:only-child) {
+    margin: 0.5em 0 0 0;
+    text-align: right;
+    font-size: 0.875em;
+    font-style: normal;
+}
+
+.epigraph blockquote blockquote p,
+.epigraph blockquote blockquote p:last-child {
+    text-align: var(--text-alignment);
+}
+
+.epigraph > blockquote::before,
+.epigraph > blockquote::after {
+    display: block;
+    position: absolute;
+    font-size: 2.5em;
+    color: var(--GW-epigraph-quotation-mark-color);
+}
+.epigraph > blockquote::before {
+    content: "\201C";
+    left: -1em;
+    top: -0.56em;
+}
+.epigraph > blockquote::after {
+    content: "\201D";
+    right: -1em;
+    bottom: -1.12em;
+}
+
+@media all and (max-width: 649px) {
+    .epigraph {
+        padding: 1.5em 0.75em;
+        font-size: 0.95em;
+    }
+    .epigraph > blockquote::before {
+        left: -0.3em;
+        top: -0.9em;
+    }
+    .epigraph > blockquote::after {
+        right: -0.3em;
+        bottom: -1.4em;
+    }
+}
+
+
+/***************/
+/* ADMONITIONS */
+/***************/
+/*  Highlighted boxes: ‘admonitions’ are small break-out boxes with notes, tips,
+    warnings, etc. for the reader.
+
+    These are particularly useful in didactic technical writing, where there are
+    many ways to slip up while using or coding something.
+
+    Available (in increasing order of minatoriness):
+    ‘tip’, ‘note’, ‘warning’, ‘error’.
+
+    Based on Markdeep's implementation:
+    https://casual-effects.com/markdeep/features.md.html#basicformatting/admonitions
+    (which appears loosely inspired by Wikipedia's notification templates like
+    `{{NPOV}}`) and modified to grayscale (increasing intensity == increasing
+    warning) for Gwern.net.
+
+    Usage examples:
+
+    - <div class="admonition tip"><div class="admonition-title">Tip title (optional)</div> text</div>
+    - <div class="admonition note"><div class="admonition-title">Note title (*)</div> text</div>
+    - <div class="admonition warning"><div class="admonition-title">Warning title (*)</div> text</div>
+    - <div class="admonition error"><div class="admonition-title">Error title (*)</div> text</div>
+ */
+.admonition {
+    display: flow-root;
+    font-family: var(--GW-sans-serif-font-stack);
+    font-size: 0.875em;
+    position: relative;
+    padding: 0.75em 1.25em 0.875em 1.125em;
+    border-left: 2.875em solid var(--admonition-left-border-color);
+    background-color: var(--background-color);
+}
+
+.admonition.note {
+    --background-color: var(--GW-admonition-note-background-color);
+    --admonition-left-border-color: var(--GW-admonition-note-left-border-color);
+}
+.admonition.tip {
+    --background-color: var(--GW-admonition-tip-background-color);
+    --admonition-left-border-color: var(--GW-admonition-tip-left-border-color);
+}
+.admonition.warning {
+    --background-color: var(--GW-admonition-warning-background-color);
+    --admonition-left-border-color: var(--GW-admonition-warning-left-border-color);
+
+    color: var(--GW-admonition-warning-text-color);
+}
+.admonition.error {
+    --background-color: var(--GW-admonition-error-background-color);
+    --admonition-left-border-color: var(--GW-admonition-error-left-border-color);
+
+    color: var(--GW-admonition-error-text-color);
+}
+
+.admonition-title {
+    font-weight: bold;
+}
+
+.admonition::before {
+    content: "";
+    width: 2.875em;
+    height: 100%;
+    position: absolute;
+    top: 0.125em;
+    right: 100%;
+    padding: 0.60em;
+    box-sizing: border-box;
+    background-origin: content-box;
+    background-clip: content-box;
+    background-repeat: no-repeat;
+}
+
+.admonition.tip::before {
+    background-image: url('/static/img/icon/icons.svg#info-circle-regular');
+}
+.admonition.note::before {
+    background-image: url('/static/img/icon/icons.svg#hand-point-right-regular');
+    filter: invert(1);
+}
+.admonition.warning::before {
+    background-image: url('/static/img/icon/icons.svg#triangle-exclamation-regular');
+    filter: invert(1);
+}
+.admonition.error::before {
+    background-image: url('/static/img/icon/icons.svg#skull-crossbones-solid');
+    padding: 0.75em;
+    top: 0;
+    filter: invert(1);
+}
+
+.admonition code {
+    --GW-code-element-background-color: transparent;
+
+    border: none;
+    padding-left: 0;
+    font-size: unset;
+}
+
+.admonition .footnote-ref {
+    text-shadow: none;
+}
+
+
+/**********/
+/* TABLES */
+/**********/
+
+table {
+    margin: 0 auto;
+    padding: 0;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.75em;
+    border-width: 0;
+}
+
+.table-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    border-width: 2px 0;
+    border-color: var(--GW-table-border-color);
+    border-style: solid;
+}
+
+.table-scroll-wrapper {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: calc(100vh - 8rem);
+	overscroll-behavior: none;
+}
+
+/*=-------------------=*/
+/*= Full-width tables =*/
+/*=-------------------=*/
+
+.width-full table {
+    width: fit-content;
+    background-color: var(--background-color);
+}
+
+/*=--------------=*/
+/*= Small tables =*/
+/*=--------------=*/
+
+.table-wrapper.table-small {
+    width: fit-content;
+}
+
+/*  Floating small tables.
+    NOTE: we do not float small tables by default, although this is an appealing idea because so many small tables could be floated usefully, especially in popups.
+    But when tried on heavy users like /clone#mackenzie-et-al-1986 or /ab-testing, floated small tables interact badly with code blocks/paragraphs/figures. One would need more intelligence than just making them all float left (or right), so they are left unfloated and must be manually floated (usually in a left/right zig-zag).
+ */
+@media all and (min-width: 650px) {
+    .table-small.float-left {
+        clear: right;
+    }
+    .table-small.float-right {
+        clear: left;
+    }
+}
+
+/*=-------------=*/
+/*= Table parts =*/
+/*=-------------=*/
+
+table caption {
+    --text-hyphenation: none;
+    --text-alignment: center;
+
+    padding: 0.25em 0.75em;
+    font-style: italic;
+    font-size: 1.25em;
+    border-bottom: 2px solid var(--GW-table-caption-border-color);
+    background-color: inherit;
+}
+
+/*
+Sticky table headers: the column labels of larger tables are 'sticky', and will remain visible when the reader scrolls through a large table, so they can see at a glance what each column contains.
+
+Implementation: This is supported natively in CSS by `position:sticky`.
+However, the naive use of sticky table headers is fragile and runs into many problems (eg disappearing borders <https://stackoverflow.com/questions/50361698/border-style-do-not-work-with-sticky-position-element>, overflows, or _z_-index bugs where the sticky header is *below* table elements).
+It works mostly in: tables in the base page, not in a collapse, not wider than the page, not in a blockquote, not in popups/popovers, etc.
+Because of the limited scope & many bugs, the naive approach was not worth implementing: small simple tables don't need it, while the large complex tables that do are relatively rare & would probably trigger bugs.
+
+So we implement them in a more complex way to work around bugs.
+To limit sticky issues, we only do sticky headers on 'large' tables where 'large' > 1 viewport height (ie. a table which would require scrolling). So the table becomes v-scrollable within an inner scroll container (set to be substantially smaller than the window size so there is plenty of room to click on and 'untrap' the mouse), like code-blocks on mobile.
+Within that scroll container, the headers are sticky.
+Since they are confined to the inner container and don't need to interact with any other page elements, most of the problems of sticky elements are avoided.
+Then other issues are dealt with by a bunch of small CSS tweaks.
+*/
+table thead {
+	position: sticky;
+	top: -1px;
+	z-index: 1;
+	background-color: var(--background-color);
+	box-shadow: 0 -1px 0 0 var(--GW-table-row-horizontal-border-color) inset;
+}
+
+table tbody {
+	--text-alignment: left;
+}
+
+table th,
+table td {
+    padding: 7px 10px;
+    line-height: 1.35;
+}
+table th {
+    --text-hyphenation: none;
+
+    font-weight: bold;
+    border-bottom: 1px solid var(--GW-table-row-horizontal-border-color);
+    text-align: left;
+}
+table td {
+    vertical-align: top;
+}
+table th + th,
+table td + td {
+    border-left: 1px solid var(--background-color);
+}
+
+table td > code {
+    word-break: normal;
+}
+
+/*  Scroll bar styles (for WebKit/Chromium).
+    */
+.table-scroll-wrapper::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+}
+@media all and (max-width: 649px) {
+    .table-scroll-wrapper::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+.table-scroll-wrapper::-webkit-scrollbar-thumb {
+    background-image: var(--GW-checkerboard-scrollbar-background-image);
+    background-size: 2px;
+}
+.table-scroll-wrapper::-webkit-scrollbar-thumb:horizontal {
+    box-shadow:
+        0 2px 0 0   var(--background-color) inset,
+        0 0   0 1px var(--GW-table-scrollbar-border-color) inset,
+        0 2px 0 1px var(--GW-table-scrollbar-border-color) inset;
+}
+.table-scroll-wrapper::-webkit-scrollbar-thumb:vertical {
+    box-shadow:
+		 0   -1px 0 0 var(--GW-table-scrollbar-border-color),
+		 0    1px 0 0 var(--GW-table-scrollbar-border-color),
+         1px  0   0 0 var(--GW-table-scrollbar-border-color) inset,
+        -1px  0   0 0 var(--GW-table-scrollbar-border-color) inset;
+}
+.table-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+    background-image: var(--GW-checkerboard-scrollbar-hover-background-image);
+}
+
+.table-scroll-wrapper::-webkit-scrollbar-track:vertical {
+	border-left: 1px dotted var(--GW-table-scrollbar-border-color)
+}
+
+/*  Scroll bar styles (for Firefox).
+    */
+.table-scroll-wrapper {
+    scrollbar-color: var(--GW-table-scrollbar-thumb-color) var(--background-color);
+}
+.table-scroll-wrapper:hover {
+    scrollbar-color: var(--GW-table-scrollbar-thumb-hover-color) var(--background-color);
+}
+
+/*  Add little icons to tables handled by tablesorter.js
+    to advertise that they are sortable.
+    https://mottie.github.io/tablesorter/docs/#Configuration
+    */
+th.tablesorter-header {
+    background-image: url('/static/img/tablesorter/tablesorter-bg.gif');
+    cursor: pointer;
+    font-weight: bold;
+    background-repeat: no-repeat;
+    background-position: center left;
+    padding-left: 20px;
+}
+th.tablesorter-header:hover {
+    background-color: var(--GW-table-column-heading-hover-background-color);
+}
+th.tablesorter-header:focus {
+    outline: none;
+}
+th.tablesorter-headerAsc {
+    background-image: url('/static/img/tablesorter/tablesorter-asc.gif');
+}
+th.tablesorter-headerDesc {
+    background-image: url('/static/img/tablesorter/tablesorter-desc.gif');
+}
+th.tablesorter-headerAsc,
+th.tablesorter-headerDesc,
+th.tablesorter-headerAsc:hover,
+th.tablesorter-headerDesc:hover {
+    background-color: var(--GW-table-sorted-column-heading-background-color);
+    color: var(--GW-table-sorted-column-heading-text-color);
+    text-shadow:
+       0.5px 0.5px 0 var(--GW-table-sorted-column-heading-text-shadow-color),
+       0 0 1px var(--GW-table-sorted-column-heading-text-shadow-color);
+}
+
+/*  Zebra-stripe tables (CSS3); from Twitter’s bootstrap package.
+    NOTE: we tried 3-cycle zebra striping tables, but didn’t pass muster.
+    */
+table tr:nth-child(odd) td {
+    --background-color: var(--GW-table-zebra-stripe-alternate-row-background-color);
+
+    background-color: var(--background-color);
+}
+
+/*  Small tables don’t get zebra-striped.
+ */
+.table-small table tr:nth-child(odd) td {
+    --background-color: inherit;
+}
+
+/*  Tables in blockquotes.
+ */
+blockquote table {
+    font-size: 0.7em;
+}
+blockquote table tr:nth-child(odd) td {
+    --background-color: var(--GW-body-background-color);
+}
+
+/*  Adjustment for nested tables in Wikipedia infoboxes.
+ */
+blockquote table table {
+    font-size: 1em;
+}
+
+/*	Fix for z-index bug due to link styles.
+ */
+table .has-content.has-indicator-hook {
+	z-index: 0;
+	-webkit-box-decoration-break: clone;
+	box-decoration-break: clone;
+}
+
+/*  Hover row outline.
+ */
+table tbody tr:hover {
+    outline: 1px dotted var(--GW-table-row-hover-outline-color);
+}
+
+/*  Corrected version of suppliers tables CSS on /modafinil; original by cwillu
+    */
+#suppliers-prices th {
+    padding: 3px 15px;
+}
+#suppliers-prices td {
+    padding: 0 15px;
+}
+#suppliers-prices th:nth-last-child(n+3),
+#suppliers-prices td:nth-last-child(n+3) {
+    text-align: right !important;
+}
+#suppliers-prices td:nth-child(1):after {
+    content: " mg/$";
+}
+#suppliers-prices td:nth-child(2):after {
+    content: " mg";
+}
+#suppliers-prices td:nth-child(3):before {
+    content: "x";
+    opacity: 0.4;
+}
+#suppliers-prices td:nth-child(4):before,
+#suppliers-prices td:nth-child(5):before {
+    content: "$";
+}
+
+
+/***************/
+/* CODE BLOCKS */
+/***************/
+
+code {
+    --background-color: var(--GW-code-element-background-color);
+
+    border: 1px solid var(--GW-code-element-border-color);
+    background-color: var(--background-color);
+
+/*  This is currently broken in Safari. Since it’s not important enough to
+    figure out a way to scope it to only non-Safari browsers, I’m disabling it
+    for now. This should be revisited in a year.
+        —SA 2023-09-24
+ */
+/*
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+ */
+
+    padding: 0 4px;
+
+    /*  Primary font: https://en.wikipedia.org/wiki/IBM_Plex
+        This was chosen for its dotted/slashed zero (a sine qua non of
+        coding fonts where O/0 ambiguity is fatal), and for rendering well
+        on Macs.
+     */
+    font-family: var(--GW-monospaced-font-stack);
+    /*  OpenType stylistic sets to enable single-story ‘g’ and slashed zero
+        in IBM Plex Mono.
+     */
+    font-feature-settings: 'ss02', 'ss03';
+
+    font-size: 0.9em;
+    word-break: break-word;
+}
+
+/*  Bare-URL links will be <a><code>http://foo.bar</code></a>
+ */
+a code {
+    font-size: 0.9em;
+}
+
+pre {
+    --background-color: var(--GW-pre-element-background-color);
+
+    overflow: auto;
+    margin: 0;
+    border: 1px solid var(--GW-pre-element-border-color);
+    background-color: var(--background-color);
+    cursor: text;
+    max-height: calc(100vh - 8rem);
+}
+pre code {
+    display: block;
+    margin: 0;
+    padding: 0.4rem 0.7rem;
+    border: none;
+    background-color: transparent;
+}
+
+/*	Truncated code blocks.
+ */
+div.sourceCode.truncated .truncation-notice {
+    font-family: var(--GW-sans-serif-font-stack);
+    text-align: center;
+    height: 2em;
+    line-height: 2;
+    border-style: solid;
+    border-color: var(--GW-pre-element-border-color);
+    border-width: 0 1px 1px 1px;
+}
+
+/*  Horizontal scroll bar styles (for WebKit/Blink).
+ */
+pre::-webkit-scrollbar {
+    height: 16px;
+    background-color: var(--GW-pre-element-scrollbar-track-color);
+}
+pre::-webkit-scrollbar-thumb {
+    background-color: var(--GW-pre-element-scrollbar-thumb-color);
+    box-shadow:
+        0 0 0 3px var(--GW-pre-element-scrollbar-track-color) inset;
+}
+pre::-webkit-scrollbar-thumb:hover {
+    background-color: var(--GW-pre-element-scrollbar-thumb-hover-color);
+}
+@media all and (max-width: 649px) {
+    pre::-webkit-scrollbar {
+        height: 10px;
+    }
+}
+
+/*  Horizontal scroll bar styles (for Firefox).
+ */
+pre {
+    scrollbar-color: var(--GW-pre-element-scrollbar-thumb-color) var(--GW-pre-element-scrollbar-track-color);
+}
+pre:hover {
+    scrollbar-color: var(--GW-pre-element-scrollbar-thumb-hover-color) var(--GW-pre-element-scrollbar-track-color);
+}
+
+/*=------------------------------------------------------------------------------------------=*/
+/*= Source code highlighting for Pandoc/skylighting-generated syntax classes (not Pygments)  =*/
+/*=------------------------------------------------------------------------------------------=*/
+
+/*  Monochrome-ish code highlighting theme, loosely based on Pygments’s algol_nu
+
+    CSS: https://github.com/lukelbd/proplot/blob/master/docs/_static/pygments/algol_nu.css
+    demo: https://xyproto.github.io/splash/docs/longer/algol_nu.html
+    Python: https://github.com/pycom/EricShort/blob/master/ThirdParty/Pygments/pygments/styles/algol.py
+
+    This skips the underlining and overuse of graying, and uses a bit of blue
+    as an alternative, and retains red for warnings/errors.
+ */
+code span    { color: var(--GW-syntax-highlight-color-normal); } /* Normal */
+code span.at { color: var(--GW-syntax-highlight-color-attribute); } /* Attribute */
+code span.dt { color: var(--GW-syntax-highlight-color-data-type); font-weight: bold; font-style: italic  } /* DataType */
+code span.va { color: var(--GW-syntax-highlight-color-variable); font-weight: bold; font-style: italic } /* Variable */
+code span.ot { color: var(--GW-syntax-highlight-color-other); font-weight: bold; font-style: italic } /* Other */
+code span.pp { color: var(--GW-syntax-highlight-color-preprocessor); font-weight: bold; font-style: italic } /* Preprocessor */
+code span.ex { color: var(--GW-syntax-highlight-color-extension); font-style: italic } /* Extension */
+code span.co { color: var(--GW-syntax-highlight-color-comment); } /* Comment */
+code span.cf { color: var(--GW-syntax-highlight-color-control-flow); font-weight: bold; } /* ControlFlow */
+code span.kw { color: var(--GW-syntax-highlight-color-keyword); font-weight: bold; } /* Keyword */
+code span.op { color: var(--GW-syntax-highlight-color-operator); } /* Operator */
+code span.sc { color: var(--GW-syntax-highlight-color-special-char); } /* SpecialChar */
+code span.bu { color: var(--GW-syntax-highlight-color-built-in); font-weight: bold; } /* BuiltIn */
+code span.fu { color: var(--GW-syntax-highlight-color-function); } /* Function */
+code span.cn { color: var(--GW-syntax-highlight-color-constant); font-weight: bold; } /* Constant */
+code span.dv { color: var(--GW-syntax-highlight-color-dec-val); font-weight: bold; } /* DecVal */
+code span.bn { color: var(--GW-syntax-highlight-color-base-n); font-weight: bold; font-feature-settings: 'ss01'; } /* BaseN: "dsBaseN, values with a base other than 10." */
+code span.fl { color: var(--GW-syntax-highlight-color-float);  font-weight: bold; font-feature-settings: 'ss01'; } /* Float */
+code span.in { color: var(--GW-syntax-highlight-color-information); font-weight: bold; } /* Information */
+code span.ch { color: var(--GW-syntax-highlight-color-char); font-style: italic; } /* Char */
+code span.st { color: var(--GW-syntax-highlight-color-string); font-style: italic; } /* String */
+code span.ss { color: var(--GW-syntax-highlight-color-special-string); font-weight: bold; font-style: italic } /* SpecialString: "dsSpecialString, SQL, regexes, HERE docs, LaTeX math mode, ..."x1 */
+code span.vs { color: var(--GW-syntax-highlight-color-verbatim-string); font-style: italic; } /* VerbatimString: "dsVerbatimString, verbatim or raw strings like 'raw \backlash' in Perl, CoffeeScript, and shells, as well as r'\raw' in Python." */
+code span.al { color: var(--GW-syntax-highlight-color-alert); text-decoration: underline; font-weight: bold; } /* Alert */
+code span.er { color: var(--GW-syntax-highlight-color-error); } /* Error */
+code span.im { color: var(--GW-syntax-highlight-color-import); font-weight: bold; font-style: italic } /* Import */
+
+/********************************************************/
+/*	EXPERIMENTAL: Highlight-on-hover for all code blocks.
+ */
+pre code {
+    padding: 0.4rem 0;
+}
+pre .line {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    padding: 0 0.7rem;
+    box-sizing: border-box;
+}
+pre .line:hover {
+    background-color: var(--GW-code-popframe-line-highlight-background-color);
+    box-shadow:
+        0  1px 0 0 var(--GW-code-popframe-line-highlight-border-color),
+        0 -1px 0 0 var(--GW-code-popframe-line-highlight-border-color);
+}
+
+
+/********/
+/* MATH */
+/********/
+
+.math.block {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border: 1px solid var(--GW-math-block-scrollbar-border-color);
+}
+
+.math.block .mjpage {
+    display: block;
+    overflow: auto;
+}
+
+.math.block .MJXc-display {
+    --background-color: var(--GW-math-block-background-color);
+
+    display: inline-block;
+    margin: 0;
+    padding: 0.875em 0.75em 0.75em 0.75em;
+    min-width: calc(100% - 1.5em);
+    background-color: var(--background-color);
+    transition:
+        background-color 0.15s ease-out;
+}
+.math.block .MJXc-display.flash {
+    --background-color: var(--GW-math-block-background-color-flash);
+
+    transition:
+        background-color 0.1s ease-out;
+}
+
+/*  Horizontal scroll bar styles (for WebKit/Chromium).
+    */
+.math.block .mjpage::-webkit-scrollbar {
+    height: 14px;
+    border-top: 1px solid var(--GW-math-block-scrollbar-border-color);
+    background-color: var(--background-color);
+}
+.math.block .mjpage::-webkit-scrollbar-thumb {
+    box-shadow:
+        0 0 0 2px var(--background-color) inset,
+        0 0 0 8px var(--GW-math-block-scrollbar-thumb-color) inset;
+    border-color: var(--GW-math-block-scrollbar-border-color);
+    border-style: solid;
+    border-width: 1px 0 0 0;
+}
+.math.block .mjpage:hover::-webkit-scrollbar-thumb:hover {
+    box-shadow:
+        0 0 0 2px var(--background-color) inset,
+        0 0 0 8px var(--GW-math-block-scrollbar-thumb-hover-color) inset;
+}
+@media all and (max-width: 649px) {
+    .math.block .mjpage::-webkit-scrollbar {
+        height: 10px;
+    }
+}
+
+/*  Horizontal scroll bar styles (for Firefox).
+    */
+.math.block {
+    scrollbar-color: var(--GW-math-block-scrollbar-thumb-color) var(--background-color);
+}
+.math.block:hover {
+    scrollbar-color: var(--GW-math-block-scrollbar-thumb-hover-color) var(--background-color);
+}
+
+/*  Block buttons.
+ */
+.math.block .block-button-bar {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    border-color: var(--GW-math-block-scrollbar-border-color);
+    border-style: solid;
+    border-width: 1px;
+}
+@media all and (min-width: 650px) {
+    .math.block .block-button-bar {
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.15s ease,
+            visibility 0.15s ease;
+    }
+    .math.block:hover .block-button-bar {
+        opacity: 1.0;
+        visibility: visible;
+        transition:
+            opacity 0s ease 0.05s,
+            visibility 0s ease 0.05s;
+    }
+}
+.math.block .block-button-bar button {
+    appearance: none;
+    display: block;
+    font-size: inherit;
+    border: none;
+    padding: 0.25em;
+    width: 1.25em;
+    background-color: var(--GW-body-background-color);
+    cursor: pointer;
+}
+.math.block .block-button-bar button svg {
+    opacity: 0.65;
+}
+@media all and (hover: hover) {
+    .math.block .block-button-bar button svg {
+        opacity: 0.45;
+    }
+    .math.block .block-button-bar button:hover svg {
+        opacity: 0.65;
+    }
+}
+.math.block .block-button-bar button:active svg {
+    transform: translateY(1px);
+}
+
+.math.inline,
+.math.inline .mjpage,
+.math.inline .mjx-chtml,
+.math.inline .mjx-math,
+.math.inline .mjx-mrow {
+    display: inline;
+    white-space: normal;
+}
+
+
+/*************/
+/* CITATIONS */
+/*************/
+
+/* Citation formatting: ellipsis'd "et al", subscripted date; see /subscripts & /lorem#citation-variants */
+/* This is variant #6, 'HORIZONTAL ELLIPSIS/​subscripted year'. */
+/* This relies on the 'citefyInline' pass in Typography.hs: the author ('Foo', or 'Foo & Bar') is put in span.cite-author, the 'et al' joiner (if any) in span.cite-joiner, and the year date in span.cite-date. For 'Foo 2020' or 'Foo & Bar 2020', there is no joiner, only for 'et al'; this lets us replace the et al with an ellipsis while subscripting the year in all cases. */
+/*  Author
+ */
+.cite-author-plural::after {
+    content: "...";
+    margin-left: 0.05em;
+    margin-right: -0.05em;
+    font-size: 75%;
+}
+a .cite-author-plural::after {
+    margin-right: 0;
+}
+
+/*  “et al”
+ */
+.cite-joiner {
+    display: none;
+}
+
+/*  Date
+ */
+.cite-date {
+    vertical-align: -0.35ex;
+    position: relative;
+    font-size: 0.8em;
+    line-height: 0.7;
+    font-variant-numeric: tabular-nums;
+    margin-left: 0.1em;
+    white-space: nowrap;
+}
+
+
+/***********/
+/* NUMBERS */
+/***********/
+/*  ‘Tabular figures’ to make numbers line up in tables or other
+    monospace/code like contexts:
+
+    https://practicaltypography.com/alternate-figures.html#tabular-and-proportional-figures
+    https://helpx.adobe.com/fonts/using/open-type-syntax.html#tnum
+ */
+/*  Skip old-style figures in elements with underlining, to reduce the need to
+    cross the underline with skip-ink
+ */
+table, code, pre, a, h1, h2, h3, h4, h5, h6 {
+    font-variant-numeric: tabular-nums;
+}
+
+
+/********************/
+/* SUB/SUPERSCRIPTS */
+/********************/
+
+sub,
+sup {
+    font-size: 0.7em;
+    position: relative;
+    line-height: 0.3em;
+    font-variant-numeric: lining-nums;
+}
+
+sup.ordinal {
+    text-transform: lowercase;
+    top: 0.1em;
+    text-shadow: none;
+}
+.heading sup.ordinal {
+    font-variant-caps: small-caps;
+}
+.markdownBody a sup.ordinal {
+    padding: 0;
+}
+
+sub {
+    bottom: 0.1em;
+}
+
+/*  SUBSCRIPT+SUPERSCRIPT (necessary for inflation adjuster, and other math)
+ */
+.subsup {
+    margin-left: 0.15em;
+    margin-right: 0.1em;
+    display: inline-flex;
+    flex-flow: column;
+    align-items: flex-start;
+    vertical-align: text-bottom;
+    position: relative;
+    bottom: -0.1em;
+}
+.subsup sup,
+.subsup sub {
+    position: relative;
+    line-height: 1;
+}
+
+/*  Inflation adjustments.
+
+    Make sure that adjusted prices move as a block: no breaking in the middle
+    between the price & sup/sub; this works better than trying to use no-break
+    Unicode entities.
+ */
+span.inflation-adjusted {
+    white-space: nowrap;
+}
+span.inflation-adjusted .subsup {
+    align-items: flex-end;
+}
+span.inflation-adjusted .subsup sup,
+span.inflation-adjusted .subsup sub {
+    font-size: 0.6em;
+}
+span.inflation-adjusted .subsup {
+    bottom: 0;
+}
+
+
+/********/
+/* MISC */
+/********/
+
+/*  Enable standard Pandoc attribute-based syntax for small-caps like
+    ‘[foo]{.smallcaps}’; see https://pandoc.org/MANUAL.html#small-caps
+ */
+span.smallcaps {
+    font-variant-caps: small-caps;
+}
+
+/*  Fixes a bug, not with thickness of the strikethrough line, but its position.
+    (No, I have no idea why it works like that.)
+ */
+del {
+    text-decoration-thickness: from-font;
+}
+
+/*  LaTeX/TeX: Format the logotypes correctly (a higher up, e lower)
+    (borrowed from https://latex.now.sh/ )
+    */
+.logotype-latex .logotype-latex-a {
+    text-transform: uppercase;
+    font-size: 0.80em;
+    vertical-align: 0.25em;
+    margin-left: -0.30em;
+    margin-right: -0.03em;
+    line-height: 1ex;
+}
+.logotype-latex .logotype-latex-e {
+    text-transform: uppercase;
+    vertical-align: -0.5ex;
+    margin-left: -0.13em;
+    margin-right: -0.10em;
+    line-height: 1ex;
+}
+.logotype-tex sub {
+    text-transform: uppercase;
+    vertical-align: -0.50ex;
+    margin-left: -0.08em;
+    margin-right: -0.08em;
+    font-size: 1em;
+}
+
+/*  Scratchpad for copy operations.
+ */
+#scratchpad {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+
+/*************/
+/* AUX-LINKS */
+/*************/
+
+#link-bibliography-section > .list > li > p {
+	--text-alignment: left;
+}
+
+
+/*************/
+/* DROPCAPS */
+/*************/
+/*  "dropcaps"/"initials" (https://en.wikipedia.org/wiki/Initial
+    https://wiki.obormot.net/Reference/DropCapsDemo) are large fancy
+    block letters used to start a page/section.
+
+    The 5 dropcaps right now are Cheshire ('dropcaps-cheshire') (https://www.dafont.com/cheshire-initials.font), Goudy Initialen (https://www.1001fonts.com/goudy-initialen-font.html)
+    ('dropcaps-goudy'), yinit (https://www.tug.org/TUGboat/tb12-1/tb31hara.pdf#page=8) ('dropcaps-yinit'), Kanzlei Initialen ('dropcaps-kanzlei') (https://wiki.obormot.net/Main/BonusFontsDemo?demo_font_one=Kanzlei+Initialen), and
+    De-Zs/Deutsche Zierschrift (https://www.typografie.info/3/Schriften/fonts.html/deutsche-zierschrift-r250/) ('dropcaps-de-zs').
+
+    Dropcaps are used to subtly 'theme' pages: Cheshire is for literary pages, Goudy is for
+    historical/humanities pages, Kanzlei is for light technical/scientific pages, while yinit is for hardcore technical/scientific
+    pages (if it has a lot of equations, it's yinit), and De-Zs is for everything else (such as newsletters).
+
+    We use them on desktop & skip them on mobile because
+    they use up 8-12KB each (even after @font-face subset optimization to load
+    only 1 letter at a time), and take up a lot of screen space.
+    (Mobile users can't have nice things.)
+
+    To implement them, each Markdown
+    page has a custom metadata field like "css: dropcaps-goudy" which is
+    substituted into the compiled HTML like
+    '<body class="pagename dropcaps-goudy">', allowing defining of multiple
+    dropcaps and customized per page. The body class then is read by JS
+    (currently: `rewrite.js` l841, the `dropcapBlocksSelector` variable) which
+    actually sets it on relevant paragraphs. It would be difficult to define 'first paragraph'
+    at the start of the page correctly without many special-case pure-CSS selectors.
+    (Dropcaps in arbitrary manually-specified places, like appendices or split-out articles,
+    are supported by a separate 'dropcap' singular class which can wrap either the abstract
+    or a specific <p>.)
+ */
+@media all and (min-width: 650px) {
+    p[class*='dropcap-'].overlap-not {
+        min-height: 6em;
+    }
+    p[class*='dropcap-'].graphical-dropcap.overlap-not {
+        min-height: 8em;
+    }
+
+    p[class*='dropcap-'] a.link-dropcap,
+    p[class*='dropcap-'] a.link-dropcap * {
+    	text-shadow: none;
+    }
+    p[class*='dropcap-'] span.dropcap {
+        font-style: normal;
+        font-weight: normal;
+        float: left;
+    }
+
+	.initial-preceding-punctuation {
+		float: left;
+		margin-left: -1ch;
+		font-size: 1.5em;
+	}
+
+    /*  All of these numbers are magic.
+     */
+    p.dropcap-goudy span.dropcap {
+        font-family: Goudy Initialen;
+        font-size: 7em;
+        line-height: 1;
+        margin: 0.025em 0.02em -0.25em 0;
+        color: var(--GW-dropcaps-goudy-color);
+    }
+    p.dropcap-yinit span.dropcap {
+        font-family: Yinit;
+        font-size: 5.625em;
+        line-height: 1.35;
+        margin: 0.07em 0.08em -0.5em 0;
+        text-shadow: 0 0 0 var(--GW-dropcaps-yinit-text-shadow-color);
+        color: var(--GW-dropcaps-yinit-color);
+    }
+    p.dropcap-de-zs span.dropcap {
+        font-family: Deutsche Zierschrift;
+        font-size: 6.625em;
+        line-height: 1.1;
+        margin: 0.01em 0.05em -0.25em 0;
+        color: var(--GW-dropcaps-de-zs-color);
+    }
+    p.dropcap-cheshire span.dropcap {
+        font-family: Cheshire Initials;
+        font-size: 6.75em;
+        line-height: 1;
+        margin: 0.045em 0.06em -0.25em 0;
+        color: var(--GW-dropcaps-cheshire-color);
+    }
+    p.dropcap-kanzlei span.dropcap {
+        font-family: Kanzlei Initialen;
+        font-size: 7em;
+        line-height: 1;
+        margin: 0.025em 0.025em -0.25em -0.02em;
+        color: var(--GW-dropcaps-kanzlei-color);
+    }
+
+    /*  Compensating for responsive line-height reduction.
+     */
+    @media all and (max-width: 1199px) {
+        p.dropcap-goudy span.dropcap {
+            font-size: 6.875em;
+        }
+        p.dropcap-yinit span.dropcap {
+            font-size: 5.375em;
+        }
+        p.dropcap-de-zs span.dropcap {
+            font-size: 6.5em;
+        }
+        p.dropcap-cheshire span.dropcap {
+            font-size: 6.625em;
+        }
+        p.dropcap-kanzlei span.dropcap {
+            font-size: 6.875em;
+        }
+    }
+    @media all and (max-width: 999px) {
+        p.dropcap-goudy span.dropcap {
+            font-size: 6.625em;
+        }
+        p.dropcap-yinit span.dropcap {
+            font-size: 5.25em;
+        }
+        p.dropcap-de-zs span.dropcap {
+            font-size: 6.25em;
+        }
+        p.dropcap-cheshire span.dropcap {
+            font-size: 6.3125em;
+        }
+        p.dropcap-kanzlei span.dropcap {
+            font-size: 6.6875em;
+        }
+    }
+
+	/**********************/
+	/*	Graphical dropcaps.
+	 */
+
+	p.graphical-dropcap img.dropcap {
+		float: left;
+		display: block;
+		height: 9.4em;
+		margin: -0.5em -0.10em -0.95em -0.75em;
+		filter: none;
+	}
+	@media all and (max-width: 1199px) {
+		p.graphical-dropcap img.dropcap {
+			margin-top: -0.25em;
+		}
+	}
+
+	p.graphical-dropcap img.dropcap.svg {
+		height: 8em;
+		margin: 0 0.25em 0 0;
+	}
+	p.graphical-dropcap img.dropcap.svg.invert {
+		filter: invert(1);
+	}
+
+	p.graphical-dropcap.disable-dropcap img.dropcap {
+		display: none;
+	}
+
+	p.graphical-dropcap:not(.disable-dropcap) .hidden-initial-letter {
+		display: inline-block;
+		width: 0;
+		height: 0;
+		overflow: hidden;
+	}
+}
+
+
+/*************/
+/* FOOTNOTES */
+/*************/
+
+/*=-----------=*/
+/*= Citations =*/
+/*=-----------=*/
+
+a.footnote-ref {
+    vertical-align: super;
+    line-height: 0.3;
+    position: relative;
+    top: 0.05em;
+    padding: 0 0.05em;
+    font-variant-numeric: lining-nums;
+    font-weight: 600;
+    z-index: 1;
+    transition:
+        box-shadow 0.15s ease 0.05s;
+}
+
+a.footnote-ref sup {
+    font-size: 0.75em;
+    vertical-align: baseline;
+}
+
+/*  Expanded hover/tap area.
+ */
+a.footnote-ref::after {
+    content: "";
+    position: absolute;
+    left: -40%;
+    top: 5%;
+    width: 180%;
+    height: 120%;
+}
+a.footnote-ref.highlighted,
+a.footnote-ref:hover,
+a.footnote-ref.targeted {
+    /*  o-v-o:  outline vertical offset
+        o-p:    outline padding
+        o-h-s:  outline horizontal spread
+     */
+    --o-v-o: 4px;
+    --o-p:   4px;
+    --o-h-s: 2px;
+
+    box-shadow:
+                  var(--o-h-s)  var(--o-v-o) 0      var(--o-p)        var(--background-color),
+        calc(-1 * var(--o-h-s)) var(--o-v-o) 0      var(--o-p)        var(--background-color),
+                  var(--o-h-s)  var(--o-v-o) 0 calc(var(--o-p) + 1px) var(--GW-highlighted-link-outline-color),
+        calc(-1 * var(--o-h-s)) var(--o-v-o) 0 calc(var(--o-p) + 1px) var(--GW-highlighted-link-outline-color),
+                  var(--o-h-s)  var(--o-v-o) 0 calc(var(--o-p) + 2px) var(--background-color),
+        calc(-1 * var(--o-h-s)) var(--o-v-o) 0 calc(var(--o-p) + 2px) var(--background-color),
+                  var(--o-h-s)  var(--o-v-o) 0 calc(var(--o-p) + 3px) var(--GW-highlighted-link-outline-color),
+        calc(-1 * var(--o-h-s)) var(--o-v-o) 0 calc(var(--o-p) + 3px) var(--GW-highlighted-link-outline-color)
+}
+
+/*  Deal with multiple footnote superscripts one after another; per Charuru
+ */
+sup + sup,
+a.footnote-ref {
+    margin-left: 0.125em;
+}
+
+/*  ‘Foreign’ footnotes.
+ */
+sup a,
+sub a {
+    margin-left:  0.10em;
+    margin-right: 0.13em;
+}
+sup a + a,
+sub a + a {
+    margin-left:  0.20em;
+    margin-right: 0.13em;
+}
+
+/*=-------------------=*/
+/*= Footnotes section =*/
+/*=-------------------=*/
+
+section.footnotes {
+    position: relative;
+}
+
+/*********************************************************/
+/*  Horizontal rule at the start of the footnotes section.
+ */
+
+section.footnotes > hr:first-child {
+    position: relative;
+    display: flex;
+    margin: -0.5em 0;
+}
+section.footnotes > hr:first-child::after {
+    content: "";
+    border: 1px solid var(--GW-footnotes-section-top-rule-color);
+    width: 2em;
+    height: 2em;
+    background-color: var(--background-color);
+    background-image: none;
+    z-index: 1;
+    box-shadow:
+        0 0 0 calc(0.5em - 1px) var(--background-color) inset,
+        0 0 0 0.5em var(--GW-footnotes-section-top-rule-color) inset;
+    filter: none;
+    opacity: 1.0;
+}
+section.footnotes > hr:first-child::before {
+    content: "";
+    position: absolute;
+    height: 1px;
+    background-color: var(--GW-footnotes-section-top-rule-color);
+    width: 100%;
+    top: 50%;
+}
+
+section.footnotes:target > hr:first-child::after,
+section.footnotes > hr:first-child.highlighted::after {
+    border-color: var(--GW-footnote-highlighted-border-color);
+    box-shadow:
+        0 0 0 1px var(--background-color) inset,
+        0 0 0 2px var(--GW-footnote-highlighted-border-color) inset,
+        0 0 0 calc(0.5em - 1px) var(--background-color) inset,
+        0 0 0 0.5em var(--GW-footnote-highlighted-border-color) inset,
+        0 0 0 calc(0.5em + 1px) var(--background-color) inset,
+        0 0 0 calc(0.5em + 2px) var(--GW-footnote-highlighted-border-color) inset;
+}
+section.footnotes:target > hr:first-child::before,
+section.footnotes > hr:first-child.highlighted::before {
+    background-color: var(--background-color);
+    box-shadow:
+        0 1px 0 0 var(--GW-footnote-highlighted-border-color) inset,
+        0 -1px 0 0 var(--GW-footnote-highlighted-border-color) inset;
+    height: 3px;
+}
+
+/*  Footnotes section self-link.
+ */
+section.footnotes .section-self-link {
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    top: -1px;
+    border: 1px solid transparent;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 1;
+    opacity: 0;
+}
+
+/*=----------------=*/
+/*= Footnotes list =*/
+/*=----------------=*/
+
+section.footnotes > ol {
+    padding-left: 2.625em;
+}
+section.footnotes > ol > li {
+    counter-increment: footnotes;
+    min-height: calc(1.75em + 1px);
+    padding: 6px 0 0.25em 0;
+}
+
+/*  Footnote number.
+ */
+section.footnotes > ol > li::before {
+    content: counter(footnotes);
+    position: absolute;
+    left: unset;
+    right: calc(100% + 0.75em);
+    top: calc(-0.125em + 5px);
+    width: 1.75em;
+    height: 1.75em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dotted var(--GW-footnote-border-color);
+    border-right-color: transparent;
+    line-height: 1;
+    font-variant-numeric: lining-nums;
+    z-index: 1;
+}
+
+/*  Dotted vertical line.
+ */
+section.footnotes > ol > li::after {
+    content: "";
+    position: absolute;
+    border-right: 1px dotted var(--GW-footnote-border-color);
+    height: calc(100% + 0.125em - 4px);
+    top: calc(-0.125em + 5px);
+    left: calc(-0.75em - 1px);
+}
+
+/*  Footnote highlighting.
+ */
+section.footnotes > ol > li.targeted::before,
+section.footnotes > ol > li.targeted::after,
+section.footnotes > ol > li.highlighted::before,
+section.footnotes > ol > li.highlighted::after {
+    border-style: solid;
+    border-color: var(--GW-footnote-highlighted-border-color);
+    box-shadow:
+        0 0 0 1px var(--background-color) inset,
+        0 0 0 2px var(--GW-footnote-highlighted-border-color) inset;
+}
+section.footnotes > ol > li.targeted::after,
+section.footnotes > ol > li.highlighted::after {
+    border-width: 0 3px 0 0;
+    border-style: double;
+    left: calc(-0.75em - 3px);
+}
+
+/*  Footnote self-links.
+ */
+section.footnotes .footnote-self-link {
+	display: initial;
+    position: absolute;
+    top: 2px;
+    right: calc(100% + 0.75em);
+    width: 1.75em;
+    height: 1.75em;
+    border: 1px solid transparent;
+    z-index: 1;
+    opacity: 0;
+}
+/*	Hide outside of a footnotes section.
+ */
+.footnote-self-link {
+	display: none;
+}
+
+/*=------------------------=*/
+/*= Back-to-citation links =*/
+/*=------------------------=*/
+
+.footnotes a.footnote-back {
+	display: initial;
+    margin: 0 0 0 0.5em;
+    position: relative;
+    display: inline-block;
+    font-size: 1em;
+    line-height: 0.5;
+    border: 1px dotted var(--GW-footnote-backlink-border-color);
+    top: 0.15em;
+    padding: 0.1em 0.25em 0.15em 0.25em;
+    width: 1em;
+    z-index: 1;
+}
+/*	Hide outside of a footnotes section.
+ */
+a.footnote-back {
+	display: none;
+}
+
+.markdownBody .footnotes a.footnote-back {
+    background-image: none;
+}
+.markdownBody .footnotes a.footnote-back:hover {
+    border-color: var(--GW-footnote-backlink-border-hover-color);
+    border-style: solid;
+    box-shadow:
+        0 0 0 1px var(--background-color) inset,
+        0 0 0 2px var(--GW-footnote-backlink-border-hover-color) inset;
+}
+
+.markdownBody .footnotes .footnote-back-block {
+    text-align: right;
+}
+
+
+/*************/
+/* SIDENOTES */
+/*************/
+
+.sidenote-layout-cell {
+    position: absolute;
+    width: 100%;
+    pointer-events: none;
+}
+.sidenote-layout-cell > * {
+    pointer-events: auto;
+}
+
+#sidenote-column-left,
+#sidenote-column-right,
+#hidden-sidenote-storage {
+    width: calc(50vw - (var(--GW-body-max-width) / 2 + 96px));
+    max-width: var(--GW-sidenotes-max-width);
+}
+
+#sidenote-column-left,
+#sidenote-column-right {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+#sidenote-column-left {
+    right: calc(100% + 64px);
+}
+#sidenote-column-right {
+    left: calc(100% + 64px);
+}
+#sidenote-column-left:empty,
+#sidenote-column-right:empty {
+    display: none;
+}
+
+/*=-----------------=*/
+/*= Sidenote blocks =*/
+/*=-----------------=*/
+
+#markdownBody .sidenote {
+    --sidenote-padding: 10px;
+    --sidenote-border-width: 3px;
+    --text-indent: 1.75em;
+
+    position: absolute;
+    left: 0;
+    width: 100%;
+    opacity: 0.85;
+    padding: 2em 0 0 0;
+    font-size: 0.85em;
+    line-height: calc(1.3 / 0.85);
+    transition:
+        opacity 0.25s ease-in,
+        transform 0.25s ease-in;
+}
+#markdownBody .sidenote.displaced {
+    transition:
+        opacity 0.25s ease-out,
+        transform 0.25s ease-out;
+}
+#markdownBody .sidenote.hidden {
+    display: none;
+}
+#markdownBody .sidenote:hover,
+#markdownBody .sidenote.targeted,
+#markdownBody .sidenote.displaced,
+#markdownBody .sidenote.highlighted {
+    background-color: var(--background-color);
+    opacity: 1.0;
+    box-shadow: 0 0 0 16px var(--background-color);
+}
+#markdownBody .sidenote.targeted {
+    z-index: 1;
+}
+#markdownBody .sidenote.displaced {
+    z-index: 2;
+}
+#markdownBody .sidenote.highlighted,
+#markdownBody .sidenote:hover {
+    z-index: 3;
+}
+
+/*  This provides a solid hover margin.
+    */
+#markdownBody .sidenote::after {
+    content: "";
+    position: absolute;
+    width: calc(100% + 2 * var(--sidenote-padding));
+    height: calc(100% + 2 * var(--sidenote-padding));
+    top: calc(-1 * (var(--sidenote-padding) + var(--sidenote-border-width)));
+    left: calc(-1 * (var(--sidenote-padding) + var(--sidenote-border-width)));
+}
+#markdownBody .sidenote:hover::after,
+#markdownBody .sidenote.targeted::after,
+#markdownBody .sidenote.displaced::after,
+#markdownBody .sidenote.highlighted::after {
+    border: 3px double var(--GW-sidenote-highlight-box-shadow-color);
+}
+
+#markdownBody .sidenote.cut-off::before {
+    content: "…";
+    position: absolute;
+    border: 1px dotted var(--GW-sidenote-border-color);
+    top: calc(100% - 1px);
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: fit-content;
+    z-index: 2;
+    background-color: var(--background-color);
+    padding: 0.125em 0.5em 0.5em 0.5em;
+    font-size: 1.25em;
+    font-weight: 600;
+    line-height: 0.5;
+    pointer-events: none;
+}
+#markdownBody .sidenote.cut-off:hover::before {
+    visibility: hidden;
+}
+#markdownBody .sidenote.cut-off.hide-more-indicator::before {
+    visibility: hidden;
+}
+
+/*=-------------------=*/
+/*= Sidenote wrappers =*/
+/*=-------------------=*/
+
+/*  Outer wrapper (scrolls).
+    */
+.sidenote-outer-wrapper {
+    max-height: 600px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    border-style: dotted;
+    border-color: var(--GW-sidenote-border-color);
+    border-width: 1px 0;
+}
+#markdownBody .sidenote:hover .sidenote-outer-wrapper,
+#markdownBody .sidenote.displaced .sidenote-outer-wrapper,
+#markdownBody .sidenote.highlighted .sidenote-outer-wrapper {
+    /*  1px for inner border; 1px for minimum distance from edge. */
+    max-height: calc(100vh - (2em + 2 * (var(--sidenote-padding) + var(--sidenote-border-width) + 1px + 1px)));
+}
+#markdownBody .sidenote.cut-off .sidenote-outer-wrapper {
+    overflow-y: scroll;
+    overscroll-behavior: none;
+    width: 100%;
+    padding: 0 0.5em 0 0;
+}
+
+/*  Scroll bar styles (for WebKit/Chromium).
+    */
+#markdownBody .sidenote.cut-off .sidenote-outer-wrapper::-webkit-scrollbar {
+    width: 12px;
+}
+#markdownBody .sidenote.cut-off .sidenote-outer-wrapper::-webkit-scrollbar-thumb {
+    background-image: var(--GW-checkerboard-scrollbar-background-image);
+    background-size: 2px;
+    box-shadow:
+        0 0 0 2px var(--background-color) inset;
+}
+#markdownBody .sidenote.cut-off .sidenote-outer-wrapper::-webkit-scrollbar-thumb:hover {
+    background-image: var(--GW-checkerboard-scrollbar-hover-background-image);
+}
+
+/*  Scroll bar styles (for Firefox).
+    */
+#markdownBody .sidenote.cut-off .sidenote-outer-wrapper {
+    scrollbar-color: var(--GW-sidenote-scrollbar-thumb-color) var(--background-color);
+}
+#markdownBody .sidenote.cut-off .sidenote-outer-wrapper:hover {
+    scrollbar-color: var(--GW-sidenote-scrollbar-thumb-hover-color) var(--background-color);
+}
+
+/*  Inner wrapper (does not scroll; stretches to height of content).
+    */
+.sidenote-inner-wrapper {
+    position: relative;
+    margin: 0.5em 0;
+}
+
+/*  Ensure content is interactive.
+    */
+.sidenote-inner-wrapper > * {
+    position: relative;
+    z-index: 1;
+}
+
+/*=--------------------------------------=*/
+/*= Sidenote contents layout corrections =*/
+/*=--------------------------------------=*/
+
+#markdownBody .sidenote {
+    --base-block-spacing: 0.2em;
+}
+
+#markdownBody .sidenote .list {
+    --list-left-padding: 1.75em;
+}
+
+#markdownBody .sidenote li p {
+    text-align: left;
+}
+
+#markdownBody .sidenote .footnote-back {
+    vertical-align: text-top;
+}
+
+#markdownBody .sidenote blockquote > * {
+    line-height: calc(1.25 / (var(--blockquote-font-size-scaling-factor) * 0.85))
+}
+
+/*=-------------------------------=*/
+/*= Sidenote self-links (numbers) =*/
+/*=-------------------------------=*/
+
+#markdownBody .sidenote > .sidenote-self-link {
+    font-weight: 600;
+    position: absolute;
+    top: -1px;
+    background-image: none;
+    border-style: dotted;
+    border-color: var(--GW-sidenote-self-link-border-color);
+    border-width: 1px 1px 0px 1px;
+    width: 2em;
+    height: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+#markdownBody #sidenote-column-left .sidenote > .sidenote-self-link {
+    right: 0;
+}
+#markdownBody #sidenote-column-right .sidenote > .sidenote-self-link {
+    left: 0;
+}
+
+#markdownBody .sidenote.targeted > .sidenote-self-link,
+#markdownBody .sidenote > .sidenote-self-link:hover {
+    border-width: 3px;
+    border-style: double;
+    top: -3px;
+}
+#markdownBody #sidenote-column-left .sidenote.targeted > .sidenote-self-link,
+#markdownBody #sidenote-column-left .sidenote > .sidenote-self-link:hover {
+    right: -2px;
+}
+#markdownBody #sidenote-column-right .sidenote.targeted > .sidenote-self-link,
+#markdownBody #sidenote-column-right .sidenote > .sidenote-self-link:hover {
+    left: -2px;
+}
+
+#markdownBody .sidenote.targeted > .sidenote-self-link::before,
+#markdownBody .sidenote > .sidenote-self-link:hover::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    width: calc(50vw - (var(--GW-body-max-width) / 2 + 96px) + 10px);
+    max-width: var(--GW-sidenotes-max-width);
+    border-bottom: 3px double var(--GW-sidenote-self-link-border-color);
+}
+#markdownBody #sidenote-column-left .sidenote.targeted > .sidenote-self-link::before,
+#markdownBody #sidenote-column-left .sidenote > .sidenote-self-link:hover::before {
+    right: -1px;
+}
+#markdownBody #sidenote-column-right .sidenote.targeted > .sidenote-self-link::before,
+#markdownBody #sidenote-column-right .sidenote > .sidenote-self-link:hover::before {
+    left: -1px;
+}
+
+
+/**********/
+/* FOOTER */
+/**********/
+
+#footer {
+    margin-top: 2.5rem;
+}
+
+#footer > p:first-child {
+    text-align: center;
+}
+
+
+/**********************************/
+/* TRANSCLUDED TABLES OF CONTENTS */
+/**********************************/
+
+/*  TOCs in annotations and content transforms.
+ */
+blockquote .TOC,
+.content-transform .TOC,
+.annotation .TOC {
+    padding: 0.5em 0.5em 0.75em 0.75em;
+
+    /*  The following four properties are to prevent both overlap and
+        margin-collapse of the TOC when there’s a floated thumbnail figure
+        that juts down below the abstract text.
+     */
+    clear: both;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+
+/**********************/
+/* CONTENT TRANSFORMS */
+/**********************/
+
+/*=-------------------=*/
+/*= WIKIPEDIA ENTRIES =*/
+/*=-------------------=*/
+
+.wikipedia-entry p.data-field {
+    --text-alignment: left;
+    --text-indent: 0em;
+}
+
+.wikipedia-entry .data-field.title .title-link {
+	font-weight: bold;
+}
+
+.wikipedia-entry figure {
+    clear: both;
+}
+
+.wikipedia-entry figure.float .image-wrapper {
+    max-width: 100%;
+}
+
+.wikipedia-entry .image-row-wrapper {
+    display: flex;
+}
+
+.wikipedia-entry .table-wrapper {
+    clear: both;
+}
+.wikipedia-entry .infobox {
+    font-size: 0.9em;
+}
+.wikipedia-entry .infobox table {
+    font-size: 0.935em;
+}
+.wikipedia-entry .infobox tbody tr:hover {
+    outline: none;
+}
+.wikipedia-entry .infobox th[colspan="2"],
+.wikipedia-entry .infobox td[colspan="2"],
+.wikipedia-entry .infobox th.sidebar-title,
+.wikipedia-entry .infobox th.sidebar-heading {
+    text-align: center;
+}
+.wikipedia-entry .infobox th {
+    border-top: 1px solid var(--GW-table-row-horizontal-border-color);
+}
+.wikipedia-entry .infobox tr:first-of-type th {
+    font-size: 1.25em;
+}
+.wikipedia-entry .infobox td:first-child {
+    font-weight: bold;
+}
+.wikipedia-entry .infobox td ul {
+    margin: 0.25em 0;
+    padding: 0 0 0 1.5em;
+}
+.wikipedia-entry .quotebox-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.25em;
+    margin: -0.125em 0 0.25em 0;
+}
+.wikipedia-entry .quotebox-cite {
+    margin-top: 0.5em;
+}
+.wikipedia-entry #Timeline-row {
+    display: flex;
+    width: fit-content;
+    margin: 0.25em auto;
+}
+.wikipedia-entry th br ~ * {
+    font-weight: normal;
+    font-size: calc((1 / 1.25) * 1em);
+}
+.wikipedia-entry .hatnote {
+    margin: 0 0 0.75em 0;
+    font-style: italic;
+}
+.wikipedia-entry .chemf {
+    word-break: break-all;
+}
+.wikipedia-entry .side-box {
+    border: 1px dotted currentColor;
+    float: right;
+    clear: right;
+    padding: 0.5em 0.75em;
+    max-width: calc(50% - 2em);
+    margin: 0 0 1em 1em;
+    overflow: auto;
+    position: relative;
+    z-index: 1;
+}
+.wikipedia-entry .side-box.sister-box ul {
+    padding: 0;
+    margin: 1em 0 0 0;
+}
+.wikipedia-entry .side-box.sister-box ul li::before {
+    content: none;
+}
+.wikipedia-entry .side-box.sister-box ul .sister-logo {
+    margin: 0 0.5em 0 0;
+    display: inline-block;
+    vertical-align: text-top;
+    width: 1.5em;
+    text-align: center;
+}
+
+/*  Special case for inline math in Wikipedia pop-frames.
+ */
+.wikipedia-entry .wikipedia-math-inline-wrapper {
+    vertical-align: baseline;
+    position: relative;
+    bottom: -0.15em;
+}
+/*  Ditto, but block math.
+ */
+.wikipedia-entry .wikipedia-math-block-wrapper {
+    margin: 1em 0;
+}
+.wikipedia-entry .wikipedia-math-block-wrapper img {
+    display: block;
+    margin: auto;
+}
+
+/*	WP wraps references entirely in <cite> elements; <cite> is styled by
+	browsers (Chrome/FF) by default in italics. No one wants their entire
+	reference in italics, so WP resets the font to the default style (whatever
+	that is), and styles italics bits (like book titles) manually. We need to
+	replicate that, or else references sections in our WP popups will be
+	entirely italics!
+ */
+.wikipedia-entry cite,
+.wikipedia-entry dfn {
+    font-style: inherit;
+}
+
+.wikipedia-entry .wp-footnote-back {
+	padding: 0 0.25em;
+	margin: 0 0.5em 0 0;
+}
+
+/*=--------=*/
+/*= TWEETS =*/
+/*=--------=*/
+
+.tweet {
+    --avatar-margin: 1em;
+    --avatar-border-width: 1px;
+}
+
+.tweet p.data-field {
+    --text-alignment: left;
+    --text-indent: 0em;
+}
+
+.tweet .data-field.tweet-links a {
+	font-weight: bold;
+}
+
+.tweet img.avatar {
+    display: block;
+    width: var(--GW-popups-tweet-avatar-size);
+    height: var(--GW-popups-tweet-avatar-size);
+    float: left;
+    margin: 0.25em var(--avatar-margin) var(--avatar-margin) 0;
+    border-radius: 50%;
+    border: var(--avatar-border-width) solid var(--GW-figure-outline-color);
+}
+
+.tweet .data-field.tweet-content p {
+    text-indent: 0;
+    padding-left: calc(var(--GW-popups-tweet-avatar-size) + var(--avatar-margin) + 2 * var(--avatar-border-width));
+}
+
+.tweet figure {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 0.1em;
+    max-width: unset;
+}
+
+
+/***************/
+/* ANNOTATIONS */
+/***************/
+
+/***************/
+/*  Data fields.
+ */
+
+.annotation p.data-field,
+.annotation-partial p.data-field {
+    --text-alignment: left;
+    --text-indent: 0em;
+}
+
+.annotation p.data-field.author-date-aux,
+.annotation-partial p.data-field.author-date-aux {
+    --text-hyphenation: none;
+}
+
+/*  Title link.
+ */
+.annotation .data-field.title .title-link,
+.annotation-partial .data-field.title .title-link {
+    font-weight: bold;
+}
+
+/*  Italicize link tags in popups/indexes similar to the page metadata block’s
+    tags, for consistency.
+ */
+.annotation .link-tags,
+.annotation-partial .link-tags {
+    font-style: italic;
+
+    /*  Tags are enclosed in ()s, but as links with the text-shadow trick, the
+        italic slant leads to the usual ‘chomp’ without additional margin.
+     */
+    margin-left: 0.1em;
+}
+
+/*************************************/
+/*  Content (in annotation abstracts).
+ */
+
+/*  Page description in annotation abstract.
+ */
+.annotation .data-field.annotation-abstract .page-description-annotation {
+    font-style: italic;
+}
+.annotation .data-field.annotation-abstract .page-description-annotation:not(.first-block)::before {
+    content: "";
+    display: block;
+    overflow: auto;
+    margin: 0.75em 0 0.5em 0;
+    border-top: 1px dotted currentColor;
+}
+
+/*  Images.
+ */
+.annotation figure {
+    clear: both;
+}
+
+.annotation figure.float .image-wrapper {
+    max-width: 100%;
+}
+
+/*  “Aux links” (see also, similars, backlinks, link bibliography).
+ */
+.annotation .aux-links-list > li > p {
+    --text-alignment: left;
+}
+
+/*  “Aux links” in link bibliographies, directory indexes, and other transcluded
+    (rather than pop-framed) annotations.
+ */
+
+ol.link-bibliography-list-compact {
+    --list-left-padding: 2.25em;
+}
+ol.link-bibliography-list-compact > li::before {
+    font-family: var(--GW-monospaced-font-stack);
+}
+@media all and (max-width: 649px) {
+    ol.link-bibliography-list-compact {
+        --list-left-padding: 1.75em;
+    }
+}
+
+
+/****************/
+/* X OF THE DAY */
+/****************/
+
+#x-of-the-day {
+    position: relative;
+    margin-top: 2.75rem;
+    padding: 2.5rem 1.5rem 3.75rem 1.5rem;
+    border: 1px solid var(--GW-x-of-the-day-border-color);
+}
+@media all and (max-width: 649px) {
+    #x-of-the-day {
+        margin-top: 3rem;
+        padding: 3.5rem 1rem 3.75rem 1rem;
+    }
+}
+
+#x-of-the-day::before,
+#x-of-the-day::after {
+    content: "";
+    position: absolute;
+    left: 0.5rem;
+    width: calc(100% - 1rem);
+    height: 2rem;
+    background-image:
+        url('/static/img/ornament/three-wavy-lines-ornament-left.svg'),
+        url('/static/img/ornament/three-wavy-lines-ornament-right.svg');
+    background-repeat: no-repeat;
+    background-size: 4rem 100%;
+    background-position:
+        center left,
+        center right;
+    opacity: 0.15;
+}
+#x-of-the-day::before {
+    top: 0.5rem;
+}
+#x-of-the-day::after {
+    bottom: 0.5rem;
+    transform: scaleY(-1);
+}
+
+/*******************/
+/*  Quote of the day.
+ */
+
+/*  No special styles, for now.
+ */
+
+/*******************/
+/*  Site of the day.
+ */
+
+#x-of-the-day .site-of-the-day {
+    --box-size: 4em;
+    --box-padding-top: 1em;
+    --box-padding-bottom: 3em;
+
+    --box-total-size: calc(var(--box-size) + var(--box-padding-top) + var(--box-padding-bottom));
+
+    --box-horizontal-offset: calc(var(--box-padding-top) * 2.0);
+
+    margin: 3.5em 0 3.25em 0;
+    padding-right: calc(var(--box-horizontal-offset) * 0.25);
+}
+@media all and (max-width: 649px) {
+    #x-of-the-day .site-of-the-day {
+        margin: 2.75em -1em;
+    }
+}
+
+#x-of-the-day .site-of-the-day blockquote {
+    --background-color: var(--GW-body-background-color);
+
+    position: relative;
+    height: var(--box-size);
+    width: fit-content;
+    margin: auto;
+    padding:
+        var(--box-padding-top)
+        calc(var(--box-size) + 2.0 * var(--box-padding-top))
+        var(--box-padding-bottom)
+        calc(var(--box-size) + 2.0 * var(--box-padding-top) + var(--box-horizontal-offset));
+    background-image: url('/static/img/ornament/swissspiralroll.svg#svgView(preserveAspectRatio(none))');
+    background-size: 1000% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    display: flex;
+    align-items: center;
+}
+@media all and (max-width: 649px) {
+    #x-of-the-day .site-of-the-day blockquote {
+        font-size: calc((17/18) * var(--GW-body-text-font-size));
+        padding:
+            var(--box-padding-top)
+            calc(var(--box-size) - var(--box-padding-top))
+            var(--box-padding-bottom)
+            calc(var(--box-size) + var(--box-padding-top) + var(--box-horizontal-offset));
+    }
+}
+
+#x-of-the-day .site-of-the-day blockquote::before,
+#x-of-the-day .site-of-the-day blockquote::after {
+    content: "";
+    position: absolute;
+    width: var(--box-total-size);
+    height: var(--box-total-size);
+    background-image: url('/static/img/ornament/swissspiralroll.svg');
+    background-repeat: no-repeat;
+    background-color: inherit;
+    background-size: cover;
+    top: 0;
+}
+#x-of-the-day .site-of-the-day blockquote::before {
+    left: 0;
+}
+#x-of-the-day .site-of-the-day blockquote::after {
+    right: 0;
+    background-position: right;
+}
+
+#x-of-the-day .site-of-the-day blockquote p {
+    position: relative;
+    margin: 0;
+    line-height: 1;
+    z-index: 1;
+}
+
+/*************************/
+/*  Annotation of the day.
+ */
+
+#x-of-the-day .annotation-of-the-day {
+    width: fit-content;
+    margin: auto;
+}
+
+
+/*********************/
+/* BOTTOM DECORATION */
+/*********************/
+
+#footer-decoration-container {
+    margin: 1.5rem 0 1rem 0;
+    line-height: 0;
+}
+
+#footer-decoration-container .footer-logo {
+    position: relative;
+    opacity: 0.3;
+    pointer-events: none;
+}
+#footer-decoration-container .footer-logo:hover {
+    opacity: 1.0;
+}
+#footer-decoration-container .footer-logo::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 15px;
+    height: 1px;
+    border-bottom: 1px dotted var(--GW-bottom-ornament-line-color);
+    width: 100%;
+}
+#footer-decoration-container .footer-logo::after {
+    content: "";
+    background-color: var(--GW-body-background-color);
+    background-image: url('/static/img/logo/logo-smooth.svg');
+    display: block;
+    position: relative;
+    width: 22px;
+    height: 30px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: auto;
+    padding: 0 10px 0 10px;
+    z-index: 1;
+    pointer-events: auto;
+}
+
+
+/*********************/
+/* SEQUENTIAL NAV UI */
+/*********************/
+/*  Navigation bar for previous/next page links (horizontal divider based on:
+    https://commons.wikimedia.org/wiki/File:Filet_arabesque.svg )
+    On mobile, we hide the forward/back links.
+ */
+
+#navigation {
+    display: flex;
+    align-items: center;
+    opacity: 0.8;
+}
+#navigation a {
+    line-height: 1;
+    display: flex;
+	color: var(--GW-nav-header-link-color);
+}
+#navigation a:hover {
+    color: var(--GW-body-link-color);
+}
+#navigation a svg {
+    margin: 0;
+    width: 100%;
+    height: 1.65em;
+}
+
+@media all and (min-width: 650px) {
+    #navigation {
+        margin: 2.5em 0 0 0;
+        justify-content: space-between;
+    }
+    #navigation #navigation-next,
+    #navigation #navigation-previous {
+        flex-grow: 1;
+    }
+    #navigation #navigation-next {
+        transform: scale(-1, 1);
+    }
+    #navigation #navigation-center {
+        width: 15%;
+    }
+}
+@media all and (max-width: 649px) {
+    #navigation {
+        margin: 3em 0 0 0;
+        justify-content: center;
+    }
+    #navigation #navigation-next,
+    #navigation #navigation-previous {
+        display: none;
+    }
+    #navigation #navigation-center {
+        width: 25%;
+    }
+}
+
+
+/********************/
+/* BACK-TO-TOP LINK */
+/********************/
+
+#back-to-top {
+    position: absolute;
+    bottom: 0.75rem;
+    opacity: 1.0;
+    visibility: visible;
+    transition:
+        opacity 2s ease;
+}
+#back-to-top.hidden {
+    opacity: 0;
+}
+#back-to-top a {
+    --background-color: var(--GW-body-background-color);
+
+    display: block;
+    width: 2.25em;
+    height: 2.25em;
+    padding: 0.25em 0.25em;
+    box-sizing: border-box;
+    color: var(--GW-back-to-top-link-color);
+    filter:
+        drop-shadow(0 0 1px var(--background-color))
+        drop-shadow(0 0 1px var(--background-color))
+        drop-shadow(0 0 1px var(--background-color));
+}
+#back-to-top a:hover {
+    color: var(--GW-back-to-top-link-hover-color);
+}
+#back-to-top svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+@media all and (min-width: 1080px) {
+    #back-to-top {
+        right: calc(((100% - (var(--GW-body-max-width) + 2 * var(--GW-body-side-padding))) / 2) - 35px);
+    }
+    #back-to-top a {
+        border: 3px double transparent;
+    }
+    #back-to-top a:hover {
+        border-color: currentColor;
+    }
+}
+@media all and (max-width: 1079px) {
+    #back-to-top {
+        right: 1rem;
+        bottom: 1rem;
+    }
+    #back-to-top a {
+        border: 1px solid currentColor;
+    }
+    #back-to-top {
+        background-color: var(--background-color);
+        background-image: linear-gradient(var(--GW-back-to-top-link-color),
+                                          var(--GW-back-to-top-link-color));
+        background-position: 0 0;
+        background-repeat: no-repeat;
+        background-size: 0 0;
+    }
+}
+
+
+/*******************************/
+/* PAGE-SPECIFIC MODIFICATIONS */
+/*******************************/
+
+/*=-------------=*/
+/*= /static/404 =*/
+/*=-------------=*/
+
+body.page-static-404 figure .figure-inner-wrapper {
+	padding: 0 1em;
+}
+
+body.page-static-404 figure figcaption {
+	margin-top: 0.5em;
+}
+
+/*=----------------=*/
+/*= /review/book =*/
+/*=----------------=*/
+
+#markdownBody .book-review-meta {
+    margin: -0.5em 0 1.5em 0;
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    max-width: 100%;
+}
+.book-review-meta span {
+    white-space: nowrap;
+}
+.book-review-meta span + span {
+    margin-left: 1em;
+}
+.book-review-meta span:first-of-type {
+    flex: 0 1 auto;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.book-review-meta span:first-of-type:hover {
+    overflow: visible;
+    white-space: normal;
+    height: 1em;
+    padding-left: 1.5em;
+    text-indent: -1.5em;
+}
+
+/*=---------------=*/
+/*= /review/mead =*/
+/*=---------------=*/
+
+/*  This is for the pictures of mead bottles next to the reviews.
+    */
+body.page-review-mead p > img {
+    float: right;
+    max-height: 8em;
+    width: auto;
+    position: relative;
+    z-index: 1;
+    margin: 1em 1em 1em 2em;
+}
+
+/*=-------=*/
+/*= /hafu =*/
+/*=-------=*/
+
+body.page-hafu .table-wrapper#hafu-list-table td:last-of-type {
+    width: 50%;
+}
+
+/*=--------------=*/
+/*= /dnm-arrest =*/
+/*=--------------=*/
+
+body.page-dnm-arrest .table-wrapper#data-table td:nth-of-type(6),
+body.page-dnm-arrest .table-wrapper#data-table td:nth-of-type(12),
+body.page-dnm-arrest .table-wrapper#data-table td:nth-of-type(13) {
+    white-space: nowrap;
+}
+body.page-dnm-arrest .table-wrapper#data-table td:last-of-type {
+    width: 20%;
+}
+
+
+/**************/
+/* POP-FRAMES */
+/**************/
+
+/*******************/
+/*  Pop-frame title.
+ */
+
+.popframe .popframe-title .popframe-title-link::after,
+.popframe .popframe-title .popframe-title-link-archived::after {
+    display: none;
+}
+
+.popframe .popframe-title .separator {
+    margin: 0 0.5em;
+}
+
+.popframe .popframe-title code {
+    margin: 0 0.05em;
+    padding: 0;
+    border: none;
+    background-color: inherit;
+    font-size: 0.95em;
+}
+
+.popframe .popframe-title code + span {
+    margin-left: 0.25em;
+}
+
+/*  “Loading failed” message.
+    */
+.popframe {
+    --popframe-loading-failed-message: "Loading failed.";
+}
+
+/*=-------------------=*/
+/*= POP-FRAME CONTENT =*/
+/*=-------------------=*/
+/*  Adjustments for styles in pop-frames.
+    */
+
+.popframe-body {
+    --text-indent: 1.75em;
+}
+
+.popframe-body section.level1 > .heading {
+    font-size: 1.75em;
+}
+
+.popframe-body .list {
+    --text-alignment: left;
+}
+
+.popframe-body .heading {
+    margin-left: 0;
+}
+
+.popframe-body figure:not(.float) {
+	max-width: calc(100% - 2px);
+}
+
+.popframe-body > figure:only-child {
+    margin: 0;
+    max-width: unset;
+}
+
+.popframe-body pre {
+    max-height: unset;
+}
+
+.popframe-body .table-scroll-wrapper {
+	max-height: unset;
+}
+
+.popframe-body .marginnote {
+    display: initial;
+}
+
+/*  Footnotes sections in pop-frames.
+ */
+
+.popframe-body #footnotes > hr:first-child,
+.popframe-body #footnotes > hr:first-child + a.section-self-link {
+    display: none;
+}
+
+.popframe-body .footnotes .footnote-back {
+    vertical-align: text-top;
+}
+
+.popframe-body:not(.object) iframe {
+	max-height: calc(var(--popframe-scroll-view-height) - 2em);
+}
+
+/*=-----------------=*/
+/*= POP-FRAME TYPES =*/
+/*=-----------------=*/
+
+/*┌──────────────────────┐*/
+/*│ Aux-link pop-frames. │*/
+/*└──────────────────────┘*/
+
+/*┌────────────────────────┐*/
+/*│ Annotation pop-frames. │*/
+/*└────────────────────────┘*/
+
+/*  Collapses in annotations.
+ */
+.popframe-body > .annotation > .annotation-abstract > .collapse-block,
+.popframe-body > .annotation > .file-includes > .collapse-block,
+.popframe-body > .annotation > .annotation-abstract > .file-includes > .collapse-block {
+    margin-left: calc(-1 * var(--collapse-left-offset));
+    padding-left: var(--collapse-left-offset);
+}
+
+/*  Aux-links and file include collapses in annotations.
+ */
+.popframe-body > .annotation > .annotation-abstract > .collapse-block.aux-links-append,
+.popframe-body > .annotation > .file-includes > .collapse-block.file-include-collapse,
+.popframe-body > .annotation > .annotation-abstract > .file-includes > .collapse-block.file-include-collapse {
+    padding-right: 0.5em;
+    border-right: 1px solid var(--GW-aux-links-collapse-border-color);
+}
+.popframe-body > .annotation > .annotation-abstract:last-child > .collapse-block.aux-links-append:last-child,
+.popframe-body > .annotation > .file-includes:last-child > .collapse-block.file-include-collapse:last-child,
+.popframe-body > .annotation > .annotation-abstract:last-child > .file-includes:last-child > .collapse-block.file-include-collapse:last-child {
+    border-bottom: 1px solid var(--GW-aux-links-collapse-border-color);
+}
+
+/*┌──────────────────────┐*/
+/*│ Footnote pop-frames. │*/
+/*└──────────────────────┘*/
+
+/*┌──────────────────────────────┐*/
+/*│ Citation context pop-frames. │*/
+/*└──────────────────────────────┘*/
+
+/*┌──────────────────┐*/
+/*│ Code pop-frames. │*/
+/*└──────────────────┘*/
+
+.popframe.local-code-file .popframe-content-view {
+    padding: 0;
+}
+
+.popframe-body.local-code-file div.sourceCode {
+    height: 100%;
+}
+
+/*  Truncated syntax-highlighted code pop-frames, and the note at their end.
+ */
+.popframe-body.local-code-file div.sourceCode.truncated {
+    height: calc(100% - 2em);
+}
+.popframe-body.local-code-file div.sourceCode.truncated .truncation-notice {
+    border-width: 1px 0 0 0;
+}
+
+.popframe-body.local-code-file pre {
+    height: 100%;
+    border: none;
+    max-height: unset;
+    white-space: pre-wrap;
+}
+
+/*  Syntax highlighting.
+ */
+.popframe-body.local-code-file pre code {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+.popframe-body.local-code-file pre .line {
+    counter-increment: code-line;
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    padding: 0 0 0.25em 4em;
+    box-sizing: border-box;
+}
+.popframe-body.local-code-file pre .line:hover {
+    background-color: var(--GW-code-popframe-line-highlight-background-color);
+    box-shadow:
+        0  1px 0 0 var(--GW-code-popframe-line-highlight-border-color),
+        0 -1px 0 0 var(--GW-code-popframe-line-highlight-border-color);
+}
+.popframe-body.local-code-file pre .line::before {
+    content: counter(code-line);
+    position: absolute;
+    width: 3.5em;
+    height: 100%;
+    left: 0;
+    top: 0;
+    text-align: right;
+    color: var(--GW-code-popframe-line-number-color);
+    font-size: 0.8em;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 0.25em 0.5em 0 0;
+    border-right: 1px solid var(--GW-code-popframe-line-number-divider-color);
+}
+
+/*  “Loading failed” message.
+    */
+.popframe.local-code-file {
+    --popframe-loading-failed-message: "File not found.";
+}
+
+/*┌────────────────────┐*/
+/*│ Object pop-frames. │*/
+/*└────────────────────┘*/
+/*  “Object pop-frames”: videos, images, PDFs, archived web pages, etc.
+    */
+
+.popframe.object .popframe-content-view {
+    --background-color: var(--GW-popups-object-popup-background-color);
+
+    padding: 0;
+}
+
+.popframe-body.object img,
+.popframe-body.object video,
+.popframe-body.object audio,
+.popframe-body.object iframe {
+    display: block;
+    margin: auto;
+}
+
+.popframe-body.object iframe {
+    border: unset;
+    max-height: unset;
+}
+
+.popframe-body.object iframe {
+    background-color: var(--GW-popframes-iframe-background-color);
+}
+
+/*  Don’t show when loading failed.
+ */
+.popframe-body.object.loading-failed iframe {
+    visibility: hidden;
+}
+
+/*┌───────────────────┐*/
+/*│ Image pop-frames. │*/
+/*└───────────────────┘*/
+
+/*  “Loading failed” message.
+    */
+.popframe.image {
+    --popframe-loading-failed-message: "Image not found.";
+}
+
+/*  Don’t show when loading failed.
+ */
+.popframe-body.image.loading-failed figure {
+    visibility: hidden;
+}
+
+/*┌───────────────────┐*/
+/*│ Video pop-frames. │*/
+/*└───────────────────┘*/
+
+.popframe-body.video video {
+    width: 100%;
+}
+
+/*  Don’t show while loading, or when loading failed.
+ */
+.popframe-body.video.loading figure,
+.popframe-body.video.loading-failed figure {
+    visibility: hidden;
+}
+
+/*  “Loading failed” message.
+    */
+.popframe.video {
+    --popframe-loading-failed-message: "Video not found.";
+}
+
+/*┌───────────────────┐*/
+/*│ Audio pop-frames. │*/
+/*└───────────────────┘*/
+
+.popframe-body.audio audio {
+    width: 100%;
+    top: 0;
+}
+
+/*  Don’t show while loading, or when loading failed.
+ */
+.popframe-body.audio.loading figure,
+.popframe-body.audio.loading-failed figure {
+    visibility: hidden;
+}
+
+/*  “Loading failed” message.
+    */
+.popframe.audio {
+    --popframe-loading-failed-message: "Audio not found.";
+}
+
+/*┌────────────────────────────┐*/
+/*│ Local document pop-frames. │*/
+/*└────────────────────────────┘*/
+
+/*  “Loading failed” message.
+    */
+.popframe.local-document {
+    --popframe-loading-failed-message: "File not found.";
+}
+
+/*┌─────────────────────────────┐*/
+/*│ Wikipedia entry pop-frames. │*/
+/*└─────────────────────────────┘*/
+
+.popframe-body.wikipedia-entry .data-field.title .title-link {
+    font-size: 1.125em;
+}
+
+/*┌───────────────────┐*/
+/*│ Tweet pop-frames. │*/
+/*└───────────────────┘*/
+
+.popframe.tweet .popframe-title img.avatar {
+	height: 1.125em;
+	width: auto;
+	margin: 0 0.5em 0 0;
+}
+
+/*┌──────────────────────────────┐*/
+/*│ Local transclude pop-frames. │*/
+/*└──────────────────────────────┘*/
+
+.popframe.local-page .popframe-content-view {
+    overflow-x: hidden;
+}
+
+.popframe-body #page-metadata::after {
+    content: "";
+    display: block;
+    border-bottom: 1px dotted currentColor;
+    width: calc(100% + 2em);
+    margin: 1em -1em 1.125em -1em;
+}
+
+.popframe-body .collapse.section-backlinks-container {
+    padding-right: 0.5em;
+    border-color: var(--GW-aux-links-collapse-border-color);
+    border-style: solid;
+    border-width: 1px 1px 1px 0;
+}
+
+/*  Section pop-frame metadata (e.g., backlinks link).
+ */
+.popframe-body section .section-metadata {
+    text-align: right;
+}
+.popframe-body section.level1 .section-metadata {
+    text-align: left;
+}
+
+/*┌─────────────────┐*/
+/*│ Tag pop-frames. │*/
+/*└─────────────────┘*/
+
+/*  On tag/directory index pop-frames, we want to hide the initial ‘# Links’
+    <h1> because it takes up way too much space and adds nothing.
+ */
+.popframe-body section.display-pop-not > .heading {
+    display: none;
+}
+
+/*  Hide “See Also”... also.
+ */
+.popframe-body[class*='-index'] section#see-also > .heading {
+    display: none;
+}
+
+
+/**********/
+/* POPUPS */
+/**********/
+
+/*=----------------------=*/
+/*= GENERAL POPUP STYLES =*/
+/*=----------------------=*/
+
+/*  Overlay that holds all popups as immediate children.
+    */
+.popup-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    pointer-events: none;
+}
+.popup-container > * {
+    pointer-events: auto;
+}
+
+.popup.hidden,
+.popup-body.hidden {
+    visibility: hidden;
+}
+
+/*  The three nested boxes that make up a popup:
+    1. Outer frame (positioned within the popup container)
+    2. Scroll view
+    3. Content view
+
+    The content view contains the actual contents of a popup.
+    */
+.popup,
+.popup .popframe-scroll-view,
+.popup .popframe-content-view,
+.popup .popframe-title-bar,
+.popup .popframe-footer-bar {
+    box-sizing: border-box;
+}
+
+/*┌────────────────────┐*/
+/*│ Popup outer frame. │*/
+/*└────────────────────┘*/
+
+.popup {
+    --background-color: var(--GW-popups-popup-background-color);
+
+    /*  Layout. */
+    --popups-popup-content-padding: 0.7em 0.9em 0.8em 0.9em;
+
+    position: absolute;
+    overflow: visible;
+    max-width: var(--GW-popups-popup-max-width);
+    max-height: 100vh;
+    min-height: calc(3 * var(--popup-title-bar-height) + 2 * var(--GW-popups-popup-border-width));
+    z-index: 1;
+
+    /*  Styling. */
+    --popups-popup-box-shadow: 1px 2px 8px 0 var(--GW-popups-box-shadow-color);
+
+    border: var(--GW-popups-popup-border-width) double var(--GW-popups-popup-border-color);
+    box-shadow: var(--popups-popup-box-shadow);
+    background-color: var(--background-color);
+}
+
+/*┌──────────────────┐*/
+/*│ Popup title bar. │*/
+/*└──────────────────┘*/
+
+.popup {
+    --popup-title-bar-height: 0px;
+}
+.popup.has-title-bar {
+    --popup-title-bar-height: var(--GW-popups-popup-title-bar-height);
+    --popup-title-bar-button-size: calc(var(--popup-title-bar-height) - 1px);
+}
+.popup.has-title-bar.mini-title-bar {
+    --popup-title-bar-height: var(--GW-popups-popup-mini-title-bar-height);
+}
+.popup.has-title-bar:not(.mini-title-bar) {
+    min-width: var(--GW-popups-popup-with-full-title-bar-min-width);
+    min-height: var(--GW-popups-popup-with-full-title-bar-min-height);
+}
+
+.popup .popframe-title-bar {
+    --background-color: var(--GW-popups-popup-title-bar-background-color);
+
+    position: absolute;
+    height: var(--popup-title-bar-height);
+    border-bottom: 1px solid var(--GW-popups-popup-border-color);
+    background-color: var(--background-color);
+    background-image: var(--GW-popups-popup-title-bar-pattern);
+    background-size: 8px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    width: 100%;
+    cursor: grab;
+    z-index: 111;
+}
+
+.popup.has-title-bar.mini-title-bar .popframe-title-bar {
+    overflow: hidden;
+}
+.popup.grabbed .popframe-title-bar,
+.popup.dragging .popframe-title-bar,
+.popup.dragging .popframe-title-bar a {
+    cursor: grabbing;
+}
+
+/*  Popup title.
+    */
+.popup .popframe-title {
+    display: flex;
+    justify-content: center;
+    font-family: var(--GW-sans-serif-font-stack);
+    font-size: 0.8rem;
+    font-weight: bold;
+    flex: 1 1 100%;
+    /*  Extra 3rem padding on right to maintain centeredness despite
+        2 extra buttons on left.
+     */
+    padding: 0 4rem 0 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-decoration: none;
+    text-align: center;
+    filter:
+        drop-shadow(0 0 1px var(--background-color))
+        drop-shadow(0 0 2px var(--background-color));
+}
+.popup.mini-title-bar .popframe-title {
+    visibility: hidden;
+    padding: 0;
+    flex: 0 1 100%;
+    line-height: 0;
+}
+.popup .popframe-title-link,
+.popup .popframe-title span {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.popup .popframe-title,
+.popup .popframe-title span,
+.popup .popframe-title a {
+    color: var(--GW-popups-popup-title-color);
+}
+.popup .popframe-title a:hover {
+    color: var(--GW-popups-popup-title-link-hover-color);
+}
+.popup .popframe-title::after {
+    display: none;
+}
+
+/*  Buttons in the popup title bar.
+    */
+.popup .popframe-title-bar-button {
+    line-height: 0;
+    margin: 0 1px;
+    padding: 4px;
+    height: 100%;
+    flex: 0 0 1.5rem;
+    width: var(--popup-title-bar-button-size);
+    cursor: pointer;
+    color: var(--GW-popups-popup-title-bar-button-color);
+}
+.popup .popframe-title-bar-button + .popframe-title-bar-button {
+    margin: 0 1px 0 0;
+}
+.popup.mini-title-bar .popframe-title-bar-button {
+    padding: 2px;
+    flex: 0 0 1rem;
+}
+.popup .popframe-title-bar-button:hover {
+    color: var(--GW-popups-popup-title-bar-button-color-hover);
+}
+.popup .popframe-title-bar-button:active {
+    transform: scale(0.9);
+}
+.popup .popframe-title-bar-button svg {
+    max-width: 100%;
+    max-height: 100%;
+    filter:
+        drop-shadow(0 0 1px var(--background-color))
+        drop-shadow(0 0 2px var(--background-color));
+}
+
+.popup .popframe-title-bar-button.zoom-button {
+    padding: 5px;
+}
+
+.popup button.extracts-disable-button {
+	padding: 3px;
+}
+
+.popup.mini-title-bar button.zoom-button,
+.popup.mini-title-bar button.extracts-disable-button {
+    display: none;
+}
+
+/*  Sub-menus of buttons in the popup title bar.
+    */
+
+.popup .popframe-title-bar .submenu {
+    position: absolute;
+    top: var(--popup-title-bar-height);
+    left: -1px;
+    background-color: var(--background-color);
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 1px;
+    padding: 0 1px 1px 1px;
+    background-color: var(--GW-popups-popup-border-color);
+    visibility: hidden;
+    box-shadow:
+        1px 1px 0 0 var(--GW-popups-popup-title-bar-submenu-box-shadow-color);
+    opacity: 0.0;
+    transition:
+        visibility 0.1s ease 0.2s,
+        opacity 0.1s ease 0.2s;
+}
+.popup .popframe-title-bar .submenu:hover,
+.popup .popframe-title-bar .has-submenu:hover + .submenu {
+    visibility: visible;
+    opacity: 1.0;
+}
+.popup .popframe-title-bar .submenu button {
+    background-color: var(--background-color);
+    border: none;
+    margin: 0;
+    height: var(--popup-title-bar-button-size);
+}
+.popup .popframe-title-bar .submenu button svg {
+    height: calc(var(--popup-title-bar-button-size) - 8px);
+    width: calc(var(--popup-title-bar-button-size) - 8px);
+}
+
+/*┌─────────────────────────────┐*/
+/*│ Popup with appended footer. │*/
+/*└─────────────────────────────┘*/
+
+.popup.has-footer {
+    border-bottom-width: 0;
+    min-width: var(--GW-popups-popup-with-footer-min-width);
+}
+
+/*┌──────────────────────────────┐*/
+/*│ Appended partial annotation. │*/
+/*└──────────────────────────────┘*/
+
+.popup .partial-annotation-append-container {
+    background-color: var(--background-color);
+    padding: var(--popups-popup-content-padding);
+    position: absolute;
+    top: 100%;
+    left: calc(-1 * var(--GW-popups-popup-border-width));
+    right: calc(-1 * var(--GW-popups-popup-border-width));
+    border-color: inherit;
+    border-style: inherit;
+    border-width:
+        0
+        var(--GW-popups-popup-border-width)
+        var(--GW-popups-popup-border-width)
+        var(--GW-popups-popup-border-width);
+    box-shadow:
+        0 -3px 0 -2px var(--GW-popups-popup-border-color),
+        0 -4px 0 -2px var(--background-color),
+        0 -5px 0 -2px var(--GW-popups-popup-border-color),
+        var(--popups-popup-box-shadow);
+}
+
+/*┌────────────────────┐*/
+/*│ Popup scroll view. │*/
+/*└────────────────────┘*/
+
+.popup .popframe-scroll-view {
+    overflow-y: auto;
+    overscroll-behavior: none;
+    max-height: calc(var(--GW-popups-popup-max-height) - 2 * var(--GW-popups-popup-border-width) - var(--popup-title-bar-height));
+    height: 100%;
+    margin-top: var(--popup-title-bar-height);
+    position: relative;
+}
+
+/*  Scroll bar styles (for WebKit/Blink).
+    */
+.popup .popframe-scroll-view::-webkit-scrollbar {
+    width: 14px;
+}
+.popup .popframe-scroll-view::-webkit-scrollbar-thumb {
+    background-color: var(--GW-popups-popup-scrollbar-thumb-color);
+    background-image: var(--GW-checkerboard-scrollbar-background-image);
+    background-size: 2px;
+    box-shadow:
+        0 0 0 3px var(--background-color) inset;
+}
+.popup .popframe-scroll-view::-webkit-scrollbar-thumb:hover {
+    background-color: var(--GW-popups-popup-scrollbar-thumb-hover-color);
+    background-image: var(--GW-checkerboard-scrollbar-hover-background-image);
+}
+
+
+/*  Scroll bar styles (for Firefox).
+    */
+.popup .popframe-scroll-view {
+    scrollbar-color: var(--GW-popups-popup-scrollbar-thumb-color) var(--background-color);
+}
+.popup .popframe-scroll-view:hover {
+    scrollbar-color: var(--GW-popups-popup-scrollbar-thumb-hover-color) var(--background-color);
+}
+
+/*┌─────────────────────┐*/
+/*│ Popup content view. │*/
+/*└─────────────────────┘*/
+
+.popup .popframe-content-view {
+    --base-font-size: 0.9rem;
+
+    background-color: var(--background-color);
+    padding: var(--popups-popup-content-padding);
+    display: flow-root;
+    contain: content;
+}
+
+/*┌─────────────┐*/
+/*│ Popup body. │*/
+/*└─────────────┘*/
+
+.popup-body {
+    --line-height: 1.5;
+
+    font-size: 0.9em;
+}
+
+/*┌─────────────────┐*/
+/*│ Focused popups. │*/
+/*└─────────────────┘*/
+
+.popup:not(.focused) .popframe-title-bar * {
+    pointer-events: none;
+}
+
+.popup.focused {
+    --GW-popups-popup-border-color: var(--GW-popups-popup-border-focused-color);
+    --GW-popups-box-shadow-color: var(--GW-popups-box-shadow-focused-color);
+
+    --GW-popups-popup-title-bar-button-color: var(--GW-popups-popup-title-bar-button-focused-color);
+    --GW-popups-popup-title-bar-button-color-hover: var(--GW-popups-popup-title-bar-button-focused-color-hover);
+    --GW-popups-popup-title-color: var(--GW-popups-popup-title-focused-color);
+    --GW-popups-popup-title-link-hover-color: var(--GW-popups-popup-title-link-hover-focused-color);
+
+    --GW-popups-popup-scrollbar-thumb-color: var(--GW-popups-popup-scrollbar-thumb-focused-color);
+    --GW-popups-popup-scrollbar-thumb-hover-color: var(--GW-popups-popup-scrollbar-thumb-hover-focused-color);
+}
+
+.popup.focused .popframe-title-bar {
+    background-image: var(--GW-popups-popup-title-bar-pattern-focused);
+}
+
+/*┌──────────────────────────┐*/
+/*│ Zoomed / resized popups. │*/
+/*└──────────────────────────┘*/
+
+.popup.zoomed .popframe-scroll-view,
+.popup.resized .popframe-scroll-view {
+	max-height: calc(100% - var(--popup-title-bar-height));
+}
+
+.popup.zoomed .popframe-content-view,
+.popup.resized .popframe-content-view {
+    max-width: 971px;
+    margin: auto;
+}
+
+.popup.zoomed.full .popframe-content-view {
+    --line-height: 1.6;
+
+    font-size: 1em;
+}
+
+.popup.object.zoomed .popframe-content-view,
+.popup.object.resized .popframe-content-view,
+.popup.local-code-file.zoomed .popframe-content-view,
+.popup.local-code-file.resized .popframe-content-view {
+    max-width: unset;
+    height: 100%;
+}
+
+.popup-body.object.zoomed iframe,
+.popup-body.object.resized iframe {
+    width: 100%;
+    height: 100%;
+}
+
+/*┌───────────────────┐*/
+/*│ Collapsed popups. │*/
+/*└───────────────────┘*/
+
+.popup.collapsed {
+    border-bottom-width: var(--popups-popup-border-width);
+}
+.popup.collapsed[class] {
+    height: unset !important;
+    min-height: unset !important;
+}
+.popup.collapsed .popframe-title-bar {
+    border-bottom: none;
+    height: calc(var(--popup-title-bar-height) - 1px);
+}
+.popup.collapsed .popframe-scroll-view {
+    height: 0 !important;
+    margin-top: calc(var(--popup-title-bar-height) - 1px);
+}
+.popup.collapsed .popframe-scroll-view ~ * {
+    display: none !important;
+}
+
+/*┌───────────────────────────┐*/
+/*│ Transitional UI elements. │*/
+/*└───────────────────────────┘*/
+
+/*  Animated spawn/despawn.
+ */
+.popup {
+    opacity: 1.0;
+    transition: none;
+}
+.popup.fading {
+    opacity: 0.0;
+    transition:
+        opacity 0.25s ease-in 0.1s;
+}
+
+/*  Loading spinner.
+ */
+.popup .popframe-loading-spinner-view {
+	display: none;
+}
+.popup.loading .popframe-loading-spinner-view {
+	display: initial;
+}
+
+.popup .popframe-loading-spinner-view::before {
+    content: "";
+    background-image: url('/static/img/icon/icons.svg#circle-notch-light');
+    animation: fa-spin 2s infinite linear;
+    position: absolute;
+    width: calc(100% - 1em);
+    height: auto;
+    max-width: 3em;
+    max-height: 3em;
+    top: var(--popup-title-bar-height);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    opacity: 0.2;
+    z-index: 1;
+}
+@keyframes fa-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/*  “Loading failed” messages.
+    */
+.popup .popframe-loading-failed-message-view {
+	display: none;
+}
+.popup.loading-failed .popframe-loading-failed-message-view {
+	display: initial;
+}
+
+.popup .popframe-loading-failed-message-view::before {
+    content: var(--popframe-loading-failed-message);
+    position: absolute;
+    left: 0;
+    top: var(--popup-title-bar-height);
+    width: 100%;
+    height: calc(100% - var(--popup-title-bar-height) - 0.1em - 1px);
+    padding-bottom: 0.1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.75em;
+    font-family: var(--GW-sans-serif-font-stack);
+    font-weight: bold;
+    text-transform: uppercase;
+    opacity: 0.35;
+}
+
+/*=-------------=*/
+/*= POPUP TYPES =*/
+/*=-------------=*/
+
+/*┌────────────────────┐*/
+/*│ Annotation popups. │*/
+/*└────────────────────┘*/
+
+.popup.annotation:not(.annotation-partial) {
+    min-width: var(--GW-popups-annotation-popup-min-width);
+    min-height: var(--GW-popups-annotation-popup-min-height);
+}
+
+/*┌─────────────────────────┐*/
+/*│ Wikipedia entry popups. │*/
+/*└─────────────────────────┘*/
+
+.popup.content-transform.wikipedia-entry {
+    min-width: var(--GW-popups-wikipedia-entry-popup-min-width);
+    min-height: var(--GW-popups-wikipedia-entry-popup-min-height);
+}
+
+/*┌───────────────┐*/
+/*│ Tweet popups. │*/
+/*└───────────────┘*/
+
+.popup.content-transform.tweet {
+    min-height: var(--GW-popups-tweet-popup-min-height);
+}
+
+/*┌──────────────────────┐*/
+/*│ Dropcap info popups. │*/
+/*└──────────────────────┘*/
+
+.popup-body.dropcap-info p {
+	text-align: left;
+}
+
+/*┌──────────────────┐*/
+/*│ Footnote popups. │*/
+/*└──────────────────┘*/
+
+/*┌──────────────────────────┐*/
+/*│ Citation context popups. │*/
+/*└──────────────────────────┘*/
+
+/*┌──────────────────┐*/
+/*│ Aux-link popups. │*/
+/*└──────────────────┘*/
+
+.popup.aux-links {
+    min-width: var(--GW-popups-aux-links-popup-min-width);
+    min-height: var(--GW-popups-aux-links-popup-min-height);
+}
+
+/*┌──────────────┐*/
+/*│ Code popups. │*/
+/*└──────────────┘*/
+
+.popup.local-code-file {
+    width: var(--GW-popups-popup-max-width);
+    height: var(--GW-popups-popup-max-height);
+}
+
+.popframe.local-code-file .popframe-content-view {
+    height: 100%;
+}
+
+/*┌────────────────┐*/
+/*│ Object popups. │*/
+/*└────────────────┘*/
+
+.popup.object {
+    width: var(--GW-popups-popup-max-width);
+    height: var(--GW-popups-popup-max-height);
+}
+
+.popup-body.object iframe {
+    width: calc(var(--GW-popups-popup-max-width) - 2 * var(--GW-popups-popup-border-width));
+    height: calc(var(--GW-popups-popup-max-height) - 2 * var(--GW-popups-popup-border-width) - var(--popup-title-bar-height));
+}
+
+/*  Overlay (for dragging / click capturing).
+ */
+.popup.object .popframe-content-view::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.popup.object.focused .popframe-content-view::before {
+    visibility: hidden;
+}
+.popup.object.dragging .popframe-content-view::before {
+    visibility: visible;
+}
+
+/*┌───────────────┐*/
+/*│ Image popups. │*/
+/*└───────────────┘*/
+
+.popup.image {
+    width: unset;
+    height: unset;
+    min-height: calc(var(--GW-popups-image-popup-min-size) + var(--GW-popups-popup-mini-title-bar-height));
+}
+.popup.image:not(.has-footer) {
+    min-width: var(--GW-popups-image-popup-min-size);
+}
+
+.popup-body.image figure {
+    background-color: var(--background-color);
+}
+
+.popup-body.image img {
+    margin: auto;
+    max-width: calc(var(--GW-popups-popup-max-width) - 2 * var(--GW-popups-popup-border-width));
+    max-height: calc(var(--GW-popups-popup-max-height) - 2 * var(--GW-popups-popup-border-width) - var(--popup-title-bar-height));
+    object-fit: contain;
+    outline: none;
+}
+.popup-body.image img.invert,
+.popup-body.image img.invert-auto {
+    background-color: var(--background-color);
+}
+
+/*  “Loading failed” message.
+    */
+.popup.image:not(.dimensions-specified).loading-failed::after {
+    content: "";
+    background-image: url('/static/img/icon/icons.svg#xmark-regular');
+    background-position: center;
+    box-sizing: border-box;
+    margin: 8px;
+    width: calc(var(--GW-popups-image-popup-min-size) - 2 * var(--GW-popups-popup-border-width) - 16px);
+    height: calc(var(--GW-popups-image-popup-min-size) - 2 * var(--GW-popups-popup-border-width) - 16px);
+    opacity: 0.2;
+}
+
+/*┌───────────────┐*/
+/*│ Video popups. │*/
+/*└───────────────┘*/
+
+/*  Popups for videos.
+    */
+.popup.video {
+    width: unset;
+    height: unset;
+    min-width: var(--GW-popups-video-popup-min-width);
+    min-height: var(--GW-popups-video-popup-min-height);
+}
+
+.popup-body.video video {
+    max-width: calc(var(--GW-popups-popup-max-width) - 2 * var(--GW-popups-popup-border-width));
+    max-height: calc(var(--GW-popups-popup-max-height) - 2 * var(--GW-popups-popup-border-width) - var(--popup-title-bar-height));
+    object-fit: contain;
+    outline: none;
+}
+
+.popup-body.video.youtube iframe {
+    width: var(--GW-popups-video-youtube-iframe-width);
+    height: var(--GW-popups-video-youtube-iframe-height);
+}
+.popup-body.video.vimeo iframe {
+    width: var(--GW-popups-video-vimeo-iframe-width);
+    height: var(--GW-popups-video-vimeo-iframe-height);
+}
+
+/*┌───────────────┐*/
+/*│ Audio popups. │*/
+/*└───────────────┘*/
+
+/*  Popups for audio files.
+    */
+.popup.audio {
+    width: unset;
+    height: unset;
+    min-height: var(--GW-popups-audio-popup-min-height);
+}
+.popup.audio:not(.has-footer) {
+    min-width: var(--GW-popups-audio-popup-min-width);
+}
+
+.popup.audio .popframe-content-view {
+    padding: 3px;
+}
+.popup.audio.has-footer .popframe-content-view {
+    padding-bottom: 6px;
+}
+
+/*┌────────────────────────┐*/
+/*│ Local document popups. │*/
+/*└────────────────────────┘*/
+
+/*┌──────────────────────────┐*/
+/*│ Local transclude popups. │*/
+/*└──────────────────────────┘*/
+
+.popup.local-page {
+    min-width: var(--GW-popups-local-page-popup-min-width);
+    min-height: var(--GW-popups-local-page-popup-min-height);
+}
+
+/*  Table of contents popups.
+    */
+.popup.local-page.toc-section .popframe-scroll-view {
+    max-height: calc(100vh - 2 * var(--GW-popups-popup-border-width) - var(--popup-title-bar-height));
+}
+
+/*  External page embeds popups.
+    */
+.popup.full-page {
+    width: var(--GW-popups-popup-max-width);
+    height: var(--GW-popups-popup-max-height);
+}
+
+/*=---------------=*/
+/*= POPUP CONTENT =*/
+/*=---------------=*/
+
+/*  None... for now.
+ */
+
+
+/**********/
+/* POPINS */
+/**********/
+
+/*  The three nested boxes that make up a popin:
+    1. Outer frame (positioned within the block flow, after the spawning target)
+    2. Scroll view
+    3. Content view
+
+    The content view contains the actual contents of a popin.
+    */
+.popin,
+.popin .popframe-scroll-view,
+.popin .popframe-content-view,
+.popin .popframe-title-bar {
+    box-sizing: border-box;
+}
+
+/*┌────────────────────┐*/
+/*│ Popin outer frame. │*/
+/*└────────────────────┘*/
+
+.popin {
+    --background-color: var(--GW-popins-popin-background-color);
+
+    /*  Layout. */
+    --popins-popin-content-padding: 0.7em 0.9em 0.8em 0.9em;
+
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    margin-top: 2.2em;
+    max-height: var(--GW-popins-popin-max-height);
+    min-height: var(--GW-popins-popin-min-height);
+    overflow: visible;
+    z-index: 100;
+
+    /*  Styling. */
+    background-color: var(--background-color);
+    border: var(--GW-popins-popin-border-width) double var(--GW-popins-popin-border-color);
+
+    /*  Having a filter on the popin causes `position:fixed` to not work on
+        the popin backdrop (see below). This is not, technically, a ‘bug’:
+        https://stackoverflow.com/questions/52937708/why-does-applying-a-css-filter-on-the-parent-break-the-child-positioning
+        https://github.com/w3c/fxtf-drafts/issues/402
+        Still, maybe CSSWG will come to their senses someday?
+            —SA 2023-09-29
+     */
+/*  filter: drop-shadow(0px 0px 12px var(--GW-popins-box-shadow-color)); */
+}
+
+.markdownBody .popin-ancestor {
+    position: relative !important;
+    z-index: 100 !important;
+}
+
+.popin + .popin {
+    display: none;
+}
+
+/*  Backdrop.
+ */
+.popin-open + .popin::before {
+    content: "";
+    background-color: var(--background-color);
+    position: absolute;
+    top: calc(-1 * var(--GW-popins-popin-border-width));
+    left: calc(-1 * var(--GW-popins-popin-border-width));
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    border: var(--GW-popins-popin-border-width) double var(--GW-popins-popin-border-color);
+}
+.popin-open + .popin::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--GW-popins-popin-backdrop-color);
+    z-index: -2;
+}
+
+/*┌──────────────────┐*/
+/*│ Popin title bar. │*/
+/*└──────────────────┘*/
+
+.popin .popframe-title-bar {
+    --background-color: var(--GW-popins-popin-title-bar-background-color);
+
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 1px);
+    height: var(--GW-popins-popin-title-bar-height);
+    max-width: calc(100% - 2em);
+    border-width: 0;
+    background-color: var(--background-color);
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    width: fit-content;
+    z-index: -1;
+    outline: 1px solid var(--GW-popins-popin-border-color);
+    box-shadow:
+          -2px  0   0 0 var(--background-color),
+           2px  0   0 0 var(--background-color),
+           2px -2px 0 0 var(--background-color),
+          -2px -2px 0 0 var(--background-color),
+          -3px -1px 0 0 var(--GW-popins-popin-border-color),
+          -3px -3px 0 0 var(--GW-popins-popin-border-color),
+           3px  0   0 0 var(--GW-popins-popin-border-color),
+           3px -3px 0 0 var(--GW-popins-popin-border-color);
+}
+
+.popin {
+    --popin-title-bar-height: 0px;
+}
+.popin.has-title-bar {
+    --popin-title-bar-height: var(--GW-popins-popin-title-bar-height);
+}
+
+/*  Popin title.
+    */
+.popin .popframe-title {
+    display: flex;
+    justify-content: center;
+    font-family: var(--GW-sans-serif-font-stack);
+    font-size: 0.875rem;
+    flex: 1 1 100%;
+    padding: 0 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-decoration: none;
+    text-align: center;
+}
+.popin .popframe-title::after {
+    display: none;
+}
+
+.popin .popframe-title-link,
+.popin .popframe-title span {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*  Buttons in the popin title bar.
+    */
+.popin .popframe-title-bar-button {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    margin: 0 1px;
+    padding: 6px;
+    height: 100%;
+    flex: 1 0 auto;
+    width: calc(var(--GW-popins-popin-title-bar-height) - 1px);
+    cursor: pointer;
+    color: var(--GW-popins-popin-title-bar-button-color);
+}
+.popin .popframe-title-bar-button:active {
+    transform: scale(0.9);
+}
+.popin .popframe-title-bar-button svg {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.popin .popframe-title-bar-button.extracts-disable-button {
+    padding: 3px;
+    margin: 0 0 0 2px;
+}
+.popin .popframe-title-bar-button.close-button {
+    padding: 2px;
+}
+
+/*  Popin stack counter.
+    */
+.popin-stack-counter {
+    position: absolute;
+    right: calc(100% + var(--GW-popins-popin-border-width));
+    bottom: calc(var(--GW-popins-popin-border-width) - 1px);
+    height: calc(var(--GW-popins-popin-title-bar-height) - var(--GW-popins-popin-border-width) - 1px);
+    padding: 1px calc(0.5rem + 1px) 1px calc(0.5rem + 2px);
+    background-color: var(--GW-popins-popin-stack-counter-background-color);
+    font-family: var(--GW-sans-serif-font-stack);
+    font-size: calc(1rem * 8/9);
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+    color: var(--GW-popins-popin-stack-counter-text-color);
+}
+
+/*┌───────────────────┐*/
+/*│ Popin footer bar. │*/
+/*└───────────────────┘*/
+
+.popin .popin-footer-bar {
+    --background-color: var(--GW-popins-popin-title-bar-background-color);
+
+    position: absolute;
+    left: calc(-1 * var(--GW-popins-popin-border-width));
+    right: calc(-1 * var(--GW-popins-popin-border-width));
+    top: calc(100%);
+    height: calc(var(--GW-popins-popin-border-width) + var(--GW-popins-popin-footer-bar-height));
+    max-width: calc(100% + (2 * var(--GW-popins-popin-border-width)));
+    border-style: double;
+    border-color: var(--GW-popins-popin-border-color);
+    border-width: 1px var(--GW-popins-popin-border-width) var(--GW-popins-popin-border-width) var(--GW-popins-popin-border-width);
+    background-color: var(--background-color);
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.popin .popin-footer-bar .popframe-title-link {
+    font-family: var(--GW-sans-serif-font-stack);
+    font-size: 0.875rem;
+}
+
+.popin .popin-footer-bar .popframe-title-link .bracket {
+	font-size: 1.125em;
+}
+
+/*┌─────────────────────────────┐*/
+/*│ Popup with appended footer. │*/
+/*└─────────────────────────────┘*/
+
+.popin.has-footer {
+    border-bottom-width: 0;
+}
+
+.popin.has-footer .popin-footer-bar {
+    display: none;
+}
+
+/*┌──────────────────────────────┐*/
+/*│ Appended partial annotation. │*/
+/*└──────────────────────────────┘*/
+
+.popin .partial-annotation-append-container {
+    background-color: var(--background-color);
+    padding: var(--popins-popin-content-padding);
+    position: absolute;
+    top: 100%;
+    left: calc(-1 * var(--GW-popins-popin-border-width));
+    right: calc(-1 * var(--GW-popins-popin-border-width));
+    border-color: inherit;
+    border-style: inherit;
+    border-width:
+        0
+        var(--GW-popins-popin-border-width)
+        var(--GW-popins-popin-border-width)
+        var(--GW-popins-popin-border-width);
+    box-shadow:
+        0 -3px 0 -2px var(--GW-popins-popin-border-color),
+        0 -4px 0 -2px var(--background-color),
+        0 -5px 0 -2px var(--GW-popins-popin-border-color);
+}
+
+.popin .partial-annotation-append-container .data-field {
+    display: inline;
+}
+
+.popin .partial-annotation-append-container .data-field.title {
+    margin-right: 0.25em;
+}
+
+/*┌────────────────────┐*/
+/*│ Popin scroll view. │*/
+/*└────────────────────┘*/
+
+.popin .popframe-scroll-view {
+    overflow-y: auto;
+    overscroll-behavior: none;
+    max-height: calc(var(--GW-popins-popin-max-height) - 2 * var(--GW-popins-popin-border-width) - var(--popin-title-bar-height));
+    height: 100%;
+    background-color: var(--background-color);
+}
+
+/*  Scroll bar styles (for WebKit/Blink).
+    */
+.popin .popframe-scroll-view::-webkit-scrollbar {
+    width: 12px;
+}
+.popin .popframe-scroll-view::-webkit-scrollbar-thumb {
+    background-color: var(--GW-popins-popin-scrollbar-thumb-color);
+    background-image: var(--GW-checkerboard-scrollbar-background-image);
+    background-size: 2px;
+    box-shadow:
+        0 0 0 3px var(--background-color) inset;
+}
+.popin .popframe-scroll-view::-webkit-scrollbar-thumb:hover {
+    background-color: var(--GW-popins-popin-scrollbar-thumb-hover-color);
+    background-image: var(--GW-checkerboard-scrollbar-hover-background-image);
+}
+
+/*  Scroll bar styles (for Firefox).
+    */
+.popin .popframe-scroll-view {
+    scrollbar-color: var(--GW-popins-popin-scrollbar-thumb-color) var(--background-color);
+}
+.popin .popframe-scroll-view:hover {
+    scrollbar-color: var(--GW-popins-popin-scrollbar-thumb-hover-color) var(--background-color);
+}
+
+/*┌─────────────────────┐*/
+/*│ Popin content view. │*/
+/*└─────────────────────┘*/
+
+.popin .popframe-content-view {
+    --background-color: var(--GW-popins-popin-title-bar-background-color);
+
+    background-color: var(--background-color);
+    padding: var(--popins-popin-content-padding);
+    display: flow-root;
+    contain: content;
+}
+
+/*┌─────────────┐*/
+/*│ Popin body. │*/
+/*└─────────────┘*/
+
+.popin-body {
+    font-size: 0.9em;
+}
+
+/*┌───────────────────────────┐*/
+/*│ Transitional UI elements. │*/
+/*└───────────────────────────┘*/
+
+/*  Loading spinner.
+ */
+.popin .popframe-loading-spinner-view {
+	display: none;
+}
+.popin.loading .popframe-loading-spinner-view {
+	display: initial;
+}
+
+.popin .popframe-loading-spinner-view::before {
+    content: "";
+    background-image: url('/static/img/icon/icons.svg#circle-notch-light');
+    animation: fa-spin 2s infinite linear;
+    position: absolute;
+    width: calc(100% - 1em);
+    height: auto;
+    max-width: 3em;
+    max-height: 3em;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    opacity: 0.2;
+    z-index: 1;
+}
+@keyframes fa-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/*  “Loading failed” messages.
+ */
+.popin .popframe-loading-failed-message-view {
+	display: none;
+}
+.popin.loading-failed .popframe-loading-failed-message-view {
+	display: initial;
+}
+
+.popin .popframe-loading-failed-message-view::before {
+    content: var(--popframe-loading-failed-message);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.5em;
+    font-family: var(--GW-sans-serif-font-stack);
+    font-weight: bold;
+    text-transform: uppercase;
+    opacity: 0.35;
+}
+
+/*┌───────────────────────────┐*/
+/*│ Links with an open popin. │*/
+/*└───────────────────────────┘*/
+
+.markdownBody a.spawns-popin:not(.footnote-ref) {
+    transition:
+        box-shadow 0.15s ease 0.05s;
+}
+.markdownBody a.spawns-popin.popin-open:not(.footnote-ref) {
+    position: relative;
+    z-index: 2;
+    box-shadow:
+         3px 1px 0 2px var(--background-color),
+        -3px 1px 0 2px var(--background-color),
+         3px 1px 0 3px var(--GW-highlighted-link-outline-color),
+        -3px 1px 0 3px var(--GW-highlighted-link-outline-color),
+         3px 1px 0 4px var(--background-color),
+        -3px 1px 0 4px var(--background-color),
+         3px 1px 0 5px var(--GW-highlighted-link-outline-color),
+        -3px 1px 0 5px var(--GW-highlighted-link-outline-color);
+}
+
+/*=-------------=*/
+/*= POPIN TYPES =*/
+/*=-------------=*/
+
+/*┌────────────────────┐*/
+/*│ Annotation popins. │*/
+/*└────────────────────┘*/
+
+/*┌──────────────────┐*/
+/*│ Footnote popins. │*/
+/*└──────────────────┘*/
+
+.popin.footnote {
+    min-height: unset;
+}
+
+/*┌──────────────────────────┐*/
+/*│ Citation context popins. │*/
+/*└──────────────────────────┘*/
+
+/*┌──────────────┐*/
+/*│ Code popins. │*/
+/*└──────────────┘*/
+
+.popin.local-code-file .popframe-title-bar {
+    --background-color: var(--GW-pre-element-background-color);
+}
+
+/*┌────────────────┐*/
+/*│ Object popins. │*/
+/*└────────────────┘*/
+
+.popin-body.object iframe {
+    width: 100%;
+    height: calc(var(--GW-popins-popin-max-height) - 2 * var(--GW-popins-popin-border-width) - var(--popin-title-bar-height));
+}
+
+/*┌───────────────┐*/
+/*│ Image popins. │*/
+/*└───────────────┘*/
+
+.popin-body.image img {
+    margin: auto;
+    max-height: calc(var(--GW-popins-popin-max-height) - 2 * var(--GW-popins-popin-border-width) - var(--popin-title-bar-height));
+    outline: none;
+}
+
+/*┌───────────────┐*/
+/*│ Video popins. │*/
+/*└───────────────┘*/
+
+.popin.video {
+    padding: 0;
+}
+
+.popin-body.video iframe {
+    display: block;
+    width: 100%;
+}
+
+/*┌───────────────┐*/
+/*│ Audio popins. │*/
+/*└───────────────┘*/
+
+.popin.audio {
+    padding: 2px;
+}
+
+/*┌────────────────────────┐*/
+/*│ Local document popins. │*/
+/*└────────────────────────┘*/
+
+/*┌──────────────────────────┐*/
+/*│ Local transclude popins. │*/
+/*└──────────────────────────┘*/
+
+.popin-body #page-metadata::after {
+    width: calc(100% + 1em);
+    margin: 1em -1em 1.125em 0;
+}
+
+/*=---------------=*/
+/*= POPIN CONTENT =*/
+/*=---------------=*/
+/*  Adjustments for styles in popins.
+    */
+
+/*┌──────────────┐*/
+/*│ Style reset. │*/
+/*└──────────────┘*/
+
+.popin {
+    white-space: normal;
+    font-weight: normal;
+    font-style: normal;
+    font-size: var(--GW-body-text-font-size);
+    text-align: unset;
+}
+
+
+/*************************/
+/* UI ELEMENTS CONTAINER */
+/*************************/
+
+#ui-elements-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    pointer-events: none;
+}
+#ui-elements-container > * {
+    pointer-events: auto;
+}
+@media all and (hover: hover) {
+    #ui-elements-container.hover {
+        z-index: 10001;
+    }
+}
+
+
+/****************/
+/* PAGE TOOLBAR */
+/****************/
+
+/*  Show no toolbar if no items in it.
+ */
+#page-toolbar .widgets:empty ~ * {
+    display: none;
+}
+
+/***************************/
+/*  Toolbar control buttons.
+ */
+#page-toolbar > button {
+    color: var(--GW-page-toolbar-control-button-color);
+}
+#page-toolbar > button.toggle-button:active {
+    color: var(--GW-page-toolbar-control-button-active-color);
+}
+#page-toolbar > button svg {
+    display: block;
+
+    /*  The following two properties are not valid CSS. They are here to fix
+        a Safari-specific bug, which causes the toolbar toggle button to not
+        display. These properties should be ignored by non-Safari browsers.
+            —SA 2023-09-24
+     */
+    width: intrinsic;
+    height: intrinsic;
+}
+
+/*  Collapse button (chevron); hidden on desktop.
+ */
+#page-toolbar.desktop > button.collapse-button {
+    display: none;
+}
+
+/*  Collapse button (chevron) in mobile layout.
+ */
+#page-toolbar.mobile > button.collapse-button {
+    order: 1;
+    padding: 0 12px;
+    outline: 1px dotted currentColor;
+    background-color: var(--background-color);
+}
+
+/*  Main toggle button (gear).
+ */
+#page-toolbar > button.main-toggle-button {
+    order: -1;
+    opacity: 0.4;
+}
+#page-toolbar > button.main-toggle-button:active {
+    transform: scale(0.95);
+}
+@media all and (hover: hover) {
+    #page-toolbar > button.main-toggle-button:hover {
+        opacity: 1.0;
+        transition:
+            opacity 0.15s ease;
+    }
+    #page-toolbar:not(.collapsed):not(.expanded-temp) > button.main-toggle-button {
+        opacity: 1.0;
+    }
+}
+
+/*  Main toggle button (gear) in vertical layout.
+ */
+#page-toolbar.vertical > button.main-toggle-button {
+    padding: 3px;
+}
+
+/******************/
+/*  Toolbar layout.
+ */
+#page-toolbar {
+    position: fixed;
+    display: flex;
+    align-items: stretch;
+    opacity: 1;
+}
+
+#page-toolbar .widgets {
+    display: flex;
+    align-items: stretch;
+    max-height: 100vh;
+    max-width: 100vw;
+    transition:
+        transform 0.25s ease-out;
+}
+
+#page-toolbar .widget {
+    display: flex;
+    align-items: stretch;
+    background-color: var(--background-color);
+}
+
+#page-toolbar .widget a {
+	font-family: var(--GW-sans-serif-font-stack);
+}
+
+#page-toolbar .widget button .label,
+#page-toolbar .widget a .label {
+    color: var(--GW-page-toolbar-button-text-color);
+}
+#page-toolbar .widget button:disabled .label {
+    color: var(--GW-page-toolbar-button-disabled-text-color);
+}
+
+#page-toolbar .widget button .icon {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    color: var(--GW-page-toolbar-button-icon-color);
+    transition:
+        color 0.1s ease;
+}
+#page-toolbar .widget button.selectable .icon {
+    color: var(--GW-page-toolbar-button-selectable-icon-color);
+}
+#page-toolbar .widget button.selected .icon {
+    color: var(--GW-page-toolbar-button-selected-icon-color);
+}
+@media all and (hover: hover) {
+    #page-toolbar .widget button:hover .icon {
+        color: var(--GW-page-toolbar-button-selected-icon-color);
+    }
+}
+#page-toolbar .widget button:not(:disabled):active .icon {
+    transform: scale(0.95);
+}
+
+/*  Icons-only toolbar mode.
+ */
+#page-toolbar.button-labels-not .widget button .label,
+#page-toolbar.button-labels-not .widget a .label {
+    display: none;
+}
+
+/*  Vertical toolbar layout.
+ */
+#page-toolbar.vertical {
+    --toolbar-button-size: 4vmin;
+
+    flex-flow: column;
+    width: var(--toolbar-button-size);
+    top: 5px;
+    right: 4px;
+}
+
+#page-toolbar.vertical .widgets {
+    flex-flow: column;
+    transform-origin: top;
+}
+
+#page-toolbar.vertical .widget {
+    --widget-box-shadow-double-outline:
+            0 0 0 1px var(--GW-page-toolbar-border-color),
+            0 0 0 2px var(--background-color),
+            0 0 0 3px var(--GW-page-toolbar-border-color);
+
+    flex-flow: column;
+    outline: 1px dotted var(--GW-page-toolbar-border-color);
+    margin-top: 8px;
+    transition:
+        box-shadow 0.1s ease;
+}
+@media all and (hover: hover) {
+    #page-toolbar.vertical .widget:hover {
+        box-shadow: var(--widget-box-shadow-double-outline);
+    }
+}
+#page-toolbar.vertical .widget.flashing {
+    box-shadow: var(--widget-box-shadow-double-outline);
+    transition:
+        box-shadow var(--GW-page-toolbar-widget-flash-rise-duration) ease-out;
+}
+#page-toolbar.vertical .widget.flashing-fade {
+    transition:
+        box-shadow var(--GW-page-toolbar-widget-flash-fall-duration) ease-in;
+}
+
+#page-toolbar.vertical .widget button,
+#page-toolbar.vertical .widget a {
+    position: relative;
+}
+#page-toolbar.vertical .widget button {
+    height: var(--toolbar-button-size);
+}
+#page-toolbar.vertical .widget button .icon {
+    padding: 4px;
+}
+#page-toolbar.vertical .widget button .label,
+#page-toolbar.vertical .widget a .label {
+    position: absolute;
+    right: calc(100% + 5px);
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    padding: 0 10px;
+    font-variant-caps: small-caps;
+    background-color: var(--background-color);
+    box-shadow:
+        0 0 0 2px var(--background-color),
+        0 0 0 3px var(--GW-page-toolbar-border-color);
+    opacity: 0;
+    transition:
+        opacity 0.1s ease;
+    pointer-events: none;
+}
+@media all and (hover: hover) {
+    #page-toolbar.vertical .widget:not(.flashing) button:hover .label,
+    #page-toolbar.vertical .widget.show-selected-button-label button.selected .label,
+    #page-toolbar.vertical .widget:not(.flashing) a:hover .label,
+    #page-toolbar.vertical .widget.show-selected-button-label a .label {
+        opacity: 1;
+    }
+    #page-toolbar.vertical .widget.highlight-selected-button-label button.selected .label {
+    	color: var(--GW-page-toolbar-button-highlighted-text-color);
+    }
+	#page-toolbar.vertical .widget.highlight-selected-button-label button.selected .label::after {
+		content: "!";
+	}
+}
+
+/*  Mobile toolbar layout (reverse vertical).
+ */
+#page-toolbar.mobile {
+    --toolbar-button-size: 46px;
+
+    flex-flow: column-reverse;
+    width: var(--toolbar-button-size);
+    bottom: 0.5em;
+    right: 0.5em;
+}
+
+#page-toolbar.mobile .widgets {
+    flex-flow: column;
+    margin: 0 0 0.75em 0;
+    transform-origin: bottom;
+}
+
+#page-toolbar.mobile .widget {
+    --widget-box-shadow-double-outline:
+            0 0 0 1px var(--GW-page-toolbar-border-color),
+            0 0 0 2px var(--background-color),
+            0 0 0 3px var(--GW-page-toolbar-border-color);
+
+    flex-flow: column;
+    outline: 1px dotted var(--GW-page-toolbar-border-color);
+    margin-top: 0.5em;
+    transition:
+        box-shadow 0.15s ease;
+}
+#page-toolbar.mobile .widget.flashing {
+    box-shadow: var(--widget-box-shadow-double-outline);
+    transition:
+        box-shadow var(--GW-page-toolbar-widget-flash-rise-duration) ease-out;
+}
+#page-toolbar.mobile .widget.flashing-fade {
+    transition:
+        box-shadow var(--GW-page-toolbar-widget-flash-fall-duration) ease-in;
+}
+
+#page-toolbar.mobile .widget button {
+    height: var(--toolbar-button-size);
+}
+#page-toolbar.mobile .widget button .icon {
+    padding: 7px;
+}
+
+/******************/
+/*  Fade on scroll.
+ */
+#page-toolbar.collapsed {
+    transition:
+        opacity 2s ease-out;
+}
+#page-toolbar.collapsed.faded {
+    opacity: 0;
+}
+#page-toolbar.collapsed:hover {
+    transition:
+        opacity 0.15s ease;
+}
+
+/**********************/
+/*  Toolbar collapsing.
+ */
+#page-toolbar.animating > button.main-toggle-button {
+    transition:
+        opacity var(--GW-page-toolbar-collapse-duration) ease-out,
+        transform var(--GW-page-toolbar-collapse-duration) ease-out;
+}
+
+/*  Toolbar collapsing (vertical mode).
+ */
+#page-toolbar.vertical.collapsed > button.main-toggle-button {
+    transform: rotateZ(0.5turn);
+}
+#page-toolbar.vertical.collapsed > button.main-toggle-button:active {
+    transform: rotateZ(0.5turn) scale(0.95);
+}
+
+#page-toolbar.vertical.collapsed .widgets {
+    transform: rotateX(-0.25turn);
+    max-height: 0;
+    transition:
+        transform var(--GW-page-toolbar-collapse-duration) ease-out,
+        max-height 0s ease-out var(--GW-page-toolbar-collapse-duration);
+}
+
+/*  Toolbar collapsing (mobile mode).
+ */
+#page-toolbar.mobile > button.main-toggle-button {
+    opacity: 1.0;
+}
+#page-toolbar.mobile.collapsed > button.main-toggle-button {
+    opacity: 0.65;
+    transform: rotateZ(-0.5turn);
+}
+#page-toolbar.mobile.collapsed > button.main-toggle-button:active {
+    transform: rotateZ(-0.5turn) scale(0.95);
+}
+#page-toolbar.mobile > button.collapse-button {
+    transition:
+        opacity var(--GW-page-toolbar-fade-after-collapse-duration) ease-out var(--GW-page-toolbar-collapse-duration);
+}
+#page-toolbar.mobile.collapsed > button.collapse-button {
+    opacity: 0;
+    transition:
+        opacity var(--GW-page-toolbar-collapse-duration) ease-out;
+}
+
+#page-toolbar.mobile.collapsed .widgets {
+    transform: rotateX(0.25turn);
+    max-height: 0;
+    transition:
+        transform var(--GW-page-toolbar-collapse-duration) ease-out,
+        max-height 0s ease-out var(--GW-page-toolbar-collapse-duration);
+}
+
+/*  Slow collapsing.
+ */
+#page-toolbar.collapsed.collapsed-slowly > button.main-toggle-button {
+    transition:
+        opacity var(--GW-page-toolbar-slow-collapse-duration) ease-out,
+        transform var(--GW-page-toolbar-slow-collapse-duration) linear;
+}
+
+#page-toolbar.collapsed.collapsed-slowly .widgets {
+    transition:
+        transform var(--GW-page-toolbar-slow-collapse-duration) ease-out;
+}
+
+/*  Slow collapsing (vertical layout).
+ */
+#page-toolbar.vertical.collapsed.collapsed-slowly .widgets {
+    transition:
+        transform var(--GW-page-toolbar-slow-collapse-duration) ease-out,
+        max-height 0s ease-out var(--GW-page-toolbar-slow-collapse-duration);
+}
+
+/*  Slow collapsing (mobile layout).
+ */
+#page-toolbar.mobile.collapsed.collapsed-slowly .widgets {
+    transition:
+        transform var(--GW-page-toolbar-slow-collapse-duration) ease-out,
+        max-height 0s ease-out var(--GW-page-toolbar-slow-collapse-duration);
+}
+
+
+/***************/
+/* IMAGE FOCUS */
+/***************/
+
+/*=--------=*/
+/*= Colors =*/
+/*=--------=*/
+
+:root {
+    --SA-image-focus-sans-serif-font-stack: var(--GW-sans-serif-font-stack);
+
+    --SA-image-focus-image-background-color: #fff;
+
+    --SA-image-focus-image-hover-drop-shadow-color: var(--GW-image-focus-image-hover-drop-shadow-color);
+    --SA-image-focus-image-hover-tooltip-background-color: rgba(0, 0, 0, 0.75);
+    --SA-image-focus-image-hover-tooltip-text-color: #fff;
+    --SA-image-focus-image-hover-tooltip-inverted-background-color: rgba(255, 255, 255, 0.6);
+
+    --SA-image-focus-overlay-background-color: #000;
+    --SA-image-focus-overlay-image-caption-background-color: rgba(0, 0, 0, 0.7);
+    --SA-image-focus-overlay-image-caption-text-color: #fff;
+    --SA-image-focus-overlay-image-caption-link-color: #ccc;
+    --SA-image-focus-overlay-image-caption-link-hover-color: #aaa;
+    --SA-image-focus-overlay-image-caption-separator-color: #888;
+    --SA-image-focus-overlay-help-box-background-color: rgba(0, 0, 0, 0.85);
+    --SA-image-focus-overlay-help-box-text-color: #fff;
+    --SA-image-focus-overlay-info-icon-drop-shadow-color: #000;
+    --SA-image-focus-overlay-image-number-text-color: #fff;
+    --SA-image-focus-overlay-image-number-text-shadow-color: #000;
+    --SA-image-focus-overlay-image-url-copy-icon-color: #bbb;
+    --SA-image-focus-overlay-slideshow-button-color: #ddd;
+    --SA-image-focus-overlay-slideshow-button-hover-background-color: rgba(0, 0, 0, 0.1);
+    --SA-image-focus-overlay-slideshow-button-hover-color: #777;
+    --SA-image-focus-overlay-slideshow-button-hover-drop-shadow-color: #fff;
+    --SA-image-focus-overlay-slideshow-button-active-color: #888;
+    --SA-image-focus-overlay-slideshow-button-disabled-color: #ddd;
+}
+
+/*=--------------=*/
+/*= Hover styles =*/
+/*=--------------=*/
+
+.markdownBody img.focusable:hover {
+/*     filter: drop-shadow(0 0 3px var(--SA-image-focus-image-hover-drop-shadow-color)); */
+    cursor: zoom-in;
+    box-shadow: 0 0 10px 0 var(--SA-image-focus-image-hover-drop-shadow-color);
+}
+.markdownBody img.focusable:active {
+    transform: scale(0.975);
+}
+
+/*=---------=*/
+/*= Overlay =*/
+/*=---------=*/
+
+#image-focus-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    display: none;
+    cursor: zoom-out;
+}
+#image-focus-overlay::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: var(--SA-image-focus-overlay-background-color);
+    opacity: 0.9;
+    z-index: -1;
+}
+#image-focus-overlay.engaged {
+    display: initial;
+}
+
+#image-focus-overlay img {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    width: auto;
+    height: auto;
+    background-color: var(--SA-image-focus-image-background-color);
+}
+
+#image-focus-overlay img.loading {
+    box-shadow: 0 0 0 1px var(--SA-image-focus-overlay-image-caption-separator-color) inset;
+    background-color: transparent;
+}
+#image-focus-overlay .loading-spinner {
+    visibility: hidden;
+    color: var(--SA-image-focus-overlay-image-caption-separator-color);
+    width: 40vw;
+    height: fit-content;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: -1;
+}
+#image-focus-overlay .loading-spinner svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-height: 20vh;
+    animation: fa-spin 2s infinite linear;
+}
+#image-focus-overlay img.loading + .loading-spinner {
+    visibility: visible;
+}
+
+/*=-------------------=*/
+/*= Single-image mode =*/
+/*=-------------------=*/
+
+#image-focus-overlay:not(.slideshow) .image-number,
+#image-focus-overlay:not(.slideshow) .slideshow-buttons,
+#image-focus-overlay:not(.slideshow) .slideshow-help-text {
+    display: none;
+}
+
+/*=---------=*/
+/*= Caption =*/
+/*=---------=*/
+
+#image-focus-overlay .caption {
+    position: absolute;
+    bottom: 0.25em;
+    left: 4.5em;
+    right: 4.5em;
+    margin: auto;
+    max-width: calc(100% - 9em);
+    width: fit-content;
+    text-align: center;
+    font-family: var(--SA-image-focus-sans-serif-font-stack);
+    cursor: auto;
+    z-index: 1;
+    transition:
+        bottom 0.15s ease;
+}
+@media all and (max-width: 1179px) {
+    #image-focus-overlay .caption {
+        max-width: calc(100% - 2em);
+        left: 1em;
+        right: 1em;
+    }
+}
+@media (min-width:  650px) and (orientation: portrait),
+       (min-height: 650px) and (orientation: landscape) {
+    #image-focus-overlay .caption {
+        font-size: 2vmin;
+    }
+}
+
+#image-focus-overlay .caption.hidden:not(.locked) {
+    bottom: -50%;
+    transition:
+        bottom 0.5s ease-in;
+}
+
+/*  Necessary so that mouse hover at bottom of screen to the left or right of
+    a narrow caption still counts as “hovering over the caption” for the purpose
+    of preventing the caption from hiding.
+ */
+#image-focus-overlay .caption:not(:empty)::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100vw;
+    height: calc(100% + 1.5em);
+    z-index: -1;
+    top: -0.75em;
+    left: calc(-50vw + 50%);
+}
+
+#image-focus-overlay .caption .caption-text-wrapper {
+    background-color: var(--SA-image-focus-overlay-image-caption-background-color);
+    padding: 0.125em 1.25em 1px 1.25em;
+    border-radius: 8px;
+}
+@media (max-width:  649px) and (orientation: portrait),
+       (max-height: 649px) and (orientation: landscape) {
+    #image-focus-overlay .caption .caption-text-wrapper {
+        font-size: 0.9em;
+        padding: 0.125em 0.75em 0.25em 0.75em;
+    }
+}
+#image-focus-overlay .caption .caption-text-wrapper:empty {
+    display: none;
+}
+
+/*  Caption contents.
+ */
+
+#image-focus-overlay .caption p {
+    margin: 0.875em 0;
+    color: var(--SA-image-focus-overlay-image-caption-text-color);
+}
+#image-focus-overlay .caption p + p {
+    padding-top: 0.75em;
+    border-top: 1px dotted var(--SA-image-focus-overlay-image-caption-separator-color);
+    font-size: 0.9em;
+}
+@media (max-width:  649px) and (orientation: portrait),
+       (max-height: 649px) and (orientation: landscape) {
+	#image-focus-overlay .caption p + p {
+	   display: none;
+	}
+}
+
+#image-focus-overlay .caption code {
+    background-color: inherit;
+    border: none;
+    font-size: 1em;
+}
+
+#image-focus-overlay .caption a {
+    color: var(--SA-image-focus-overlay-image-caption-link-color);
+    margin: 0;
+    padding: 0;
+}
+#image-focus-overlay .caption a:hover {
+    color: var(--SA-image-focus-overlay-image-caption-link-hover-color);
+}
+#image-focus-overlay .caption a .indicator-hook,
+#image-focus-overlay .caption a .link-icon-hook {
+    display: none;
+}
+
+/*  Image URL in caption.
+ */
+
+#image-focus-overlay .caption .image-url {
+    position: relative;
+    margin: 0;
+    padding: 0.625em 2em 0.875em 1.25em;
+    border-radius: 8px;
+    background-color: var(--SA-image-focus-overlay-image-caption-background-color);
+    cursor: copy;
+    user-select: none;
+    transition:
+        background-color 0.15s ease-out;
+}
+#image-focus-overlay .caption .caption-text-wrapper:not(:empty) + .image-url::before {
+	content: "";
+	position: absolute;
+	top: -1px;
+	left: 1.25em;
+	right: 1.25em;
+	border-top: 1px dotted var(--SA-image-focus-overlay-image-caption-separator-color);
+}
+@media (max-width:  649px) and (orientation: portrait),
+       (max-height: 649px) and (orientation: landscape) {
+    #image-focus-overlay .caption .image-url {
+        display: none;
+    }
+}
+
+#image-focus-overlay .caption .image-url.flash {
+    background-color: var(--SA-image-focus-overlay-image-caption-link-color);
+    transition:
+        background-color 0.1s ease-out;
+}
+
+#image-focus-overlay .caption .image-url .url {
+    font-size: 0.8em;
+    color: var(--SA-image-focus-overlay-image-caption-link-color);
+}
+@media (max-width:  649px) and (orientation: portrait) {
+    #image-focus-overlay .caption .image-url .url {
+        font-size: 0.75em;
+    }
+}
+@media (max-height: 649px) and (orientation: landscape) {
+    #image-focus-overlay .caption .image-url .url {
+        font-size: 0.70em;
+    }
+}
+#image-focus-overlay .caption .image-url:hover .url {
+    color: var(--SA-image-focus-overlay-image-caption-text-color);
+}
+
+#image-focus-overlay .caption .image-url .icon-container {
+    display: block;
+    position: absolute;
+    width: 0.95em;
+    height: 0.95em;
+    right: 0.55em;
+    top: 0.9em;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+#image-focus-overlay .caption .image-url .icon {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    color: var(--SA-image-focus-overlay-image-url-copy-icon-color);
+    transition:
+        opacity 2s ease-in;
+}
+#image-focus-overlay .caption .image-url:hover .icon {
+    color: currentColor;
+}
+#image-focus-overlay .caption .image-url.copied .icon {
+    transition:
+        left 0.15s ease,
+        opacity 0.15s ease;
+}
+#image-focus-overlay .caption .image-url .icon.normal {
+    left: 0;
+    opacity: 1;
+}
+#image-focus-overlay .caption .image-url.copied .icon.normal {
+    left: -100%;
+    opacity: 0;
+}
+#image-focus-overlay .caption .image-url .icon.copied {
+    left: 100%;
+    opacity: 0;
+}
+#image-focus-overlay .caption .image-url.copied .icon.copied {
+    left: 0;
+    opacity: 1;
+}
+
+#image-focus-overlay .caption .image-url .icon svg {
+    display: block;
+    height: 100%;
+}
+
+/*=--------------=*/
+/*= Help overlay =*/
+/*=--------------=*/
+
+#image-focus-overlay .help-overlay {
+    position: absolute;
+    display: flex;
+    flex-flow: column;
+    z-index: 3;
+    font-family: var(--SA-image-focus-sans-serif-font-stack);
+    font-size: 1.25rem;
+    padding: 1em;
+    border-radius: 10px;
+    bottom: 1em;
+    right: 1em;
+    max-width: calc(100vw - 4em);
+    overflow: hidden;
+    color: transparent;
+    cursor: help;
+    visibility: hidden;
+    transition:
+        visibility 1s ease,
+        color 1s ease,
+        background-color 1s ease,
+        bottom 0.15s ease;
+}
+#image-focus-overlay .help-overlay.open {
+    width: fit-content;
+    background-color: var(--SA-image-focus-overlay-help-box-background-color);
+    color: var(--SA-image-focus-overlay-help-box-text-color);
+    visibility: visible;
+    transition:
+        visibility 0.2s ease 0.3s,
+        color 0.2s ease 0.3s,
+        background-color 0.2s ease 0.3s;
+}
+
+#image-focus-overlay .help-overlay::after {
+    content: "";
+    background-image: url('/static/img/icon/icons.svg#question');
+    background-origin: content-box;
+    background-clip: content-box;
+    position: absolute;
+    width: 1em;
+    height: 1.5em;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+    filter: invert(1) drop-shadow(0 0 4px var(--SA-image-focus-overlay-info-icon-drop-shadow-color));
+    visibility: visible;
+    opacity: 0.85;
+    transition:
+        visibility 1s ease;
+}
+#image-focus-overlay .help-overlay.open::after {
+    visibility: hidden;
+    transition:
+        visibility 0.2s ease 0.3s;
+}
+
+#image-focus-overlay .help-overlay p {
+    margin: 0 0 0.75em 0;
+    text-indent: -2em;
+    padding-left: 2em;
+    max-width: 100%;
+    overflow: hidden;
+}
+#image-focus-overlay .help-overlay p:last-of-type {
+    margin: 0;
+}
+#image-focus-overlay .help-overlay.hidden {
+    bottom: -2.25em;
+}
+
+@media all and (max-width: 1179px) {
+    #image-focus-overlay .help-overlay {
+        bottom: unset;
+        top: 1em;
+    }
+    #image-focus-overlay .help-overlay::after {
+        bottom: unset;
+        top: 0;
+    }
+    #image-focus-overlay .help-overlay.hidden {
+        bottom: unset;
+        top: -2.25em;
+    }
+}
+
+/*=--------------=*/
+/*= Slide number =*/
+/*=--------------=*/
+
+#image-focus-overlay .image-number {
+    position: absolute;
+    z-index: 2;
+    font-family: var(--SA-image-focus-sans-serif-font-stack);
+    font-size: 1.5rem;
+    left: 1em;
+    top: 1em;
+    font-weight: 600;
+    color: var(--SA-image-focus-overlay-image-number-text-color);
+    text-shadow:
+        0 0  2px var(--SA-image-focus-overlay-image-number-text-shadow-color),
+        0 0  4px var(--SA-image-focus-overlay-image-number-text-shadow-color),
+        0 0  6px var(--SA-image-focus-overlay-image-number-text-shadow-color),
+        0 0 10px var(--SA-image-focus-overlay-image-number-text-shadow-color);
+    width: 1.5em;
+    text-align: right;
+    white-space: nowrap;
+    cursor: default;
+    transition: top 0.3s ease;
+}
+#image-focus-overlay .image-number::before {
+    content: "#";
+    opacity: 0.3;
+}
+#image-focus-overlay .image-number::after {
+    content: " of " attr(data-number-of-images);
+    opacity: 0.3;
+}
+#image-focus-overlay .image-number:hover::before,
+#image-focus-overlay .image-number:hover::after {
+    opacity: 1.0;
+}
+#image-focus-overlay .image-number.hidden {
+    top: -1.25em;
+}
+
+/*=-------------------=*/
+/*= Slideshow buttons =*/
+/*=-------------------=*/
+
+#image-focus-overlay .slideshow-buttons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+#image-focus-overlay .slideshow-buttons button {
+    font-size: 3rem;
+    color: var(--SA-image-focus-overlay-slideshow-button-color);
+    border: none;
+    background-color: transparent;
+    position: relative;
+    left: 0;
+    transition:
+        left 0.3s ease;
+    pointer-events: auto;
+    cursor: pointer;
+    width: 4rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-origin: content-box;
+}
+#image-focus-overlay .slideshow-buttons button.next {
+    padding: 0.25em 0.25em 0.25em 0.375em;
+}
+#image-focus-overlay .slideshow-buttons button.previous {
+    padding: 0.25em 0.375em 0.25em 0.25em;
+}
+
+#image-focus-overlay .slideshow-buttons button svg {
+    pointer-events: none;
+    fill: currentColor;
+}
+
+#image-focus-overlay .slideshow-buttons button::selection {
+    background-color: transparent;
+}
+
+@media all and (hover: hover) {
+    #image-focus-overlay .slideshow-buttons button:hover {
+        background-color: var(--SA-image-focus-overlay-slideshow-button-hover-background-color);
+        color: var(--SA-image-focus-overlay-slideshow-button-hover-color);
+    }
+    #image-focus-overlay .slideshow-buttons button:not(:disabled):hover svg {
+        filter:
+            drop-shadow(0 0 1px var(--SA-image-focus-overlay-slideshow-button-hover-drop-shadow-color))
+            drop-shadow(0 0 3px var(--SA-image-focus-overlay-slideshow-button-hover-drop-shadow-color));
+    }
+}
+@media all and (hover: none) {
+    #image-focus-overlay .slideshow-buttons button:not(:disabled) {
+        background-color: var(--SA-image-focus-overlay-slideshow-button-hover-background-color);
+        color: var(--SA-image-focus-overlay-slideshow-button-hover-color);
+    }
+    #image-focus-overlay .slideshow-buttons button:not(:disabled) svg {
+        filter:
+            drop-shadow(0 0 1px var(--SA-image-focus-overlay-slideshow-button-hover-drop-shadow-color))
+            drop-shadow(0 0 3px var(--SA-image-focus-overlay-slideshow-button-hover-drop-shadow-color));
+    }
+}
+#image-focus-overlay .slideshow-buttons button:active {
+    transform: none;
+    color: var(--SA-image-focus-overlay-slideshow-button-active-color);
+}
+#image-focus-overlay .slideshow-buttons button:disabled {
+    text-shadow: none;
+    background-color: transparent;
+    color: var(--SA-image-focus-overlay-slideshow-button-disabled-color);
+    cursor: default;
+    opacity: 0.4;
+}
+
+#image-focus-overlay .slideshow-button.previous.hidden {
+    left: -1.75em;
+}
+#image-focus-overlay .slideshow-button.next.hidden {
+    left: 1.75em;
+}
+
+/*=---------=*/
+/*= Tooltip =*/
+/*=---------=*/
+
+.image-wrapper {
+    position: relative;
+    display: block;
+    margin: auto;
+    max-width: 100%;
+}
+.image-wrapper.focusable::after {
+    content: "Click to enlarge";
+    display: block;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    bottom: 0.5em;
+    padding: 0.3em 0.75em 0.35em 0.75em;
+    font-size: 1rem;
+    font-family: var(--SA-image-focus-sans-serif-font-stack);
+    background-color: var(--SA-image-focus-image-hover-tooltip-background-color);
+    color: var(--SA-image-focus-image-hover-tooltip-text-color);
+    border-radius: 0.25em;
+    opacity: 0.0;
+    transition: opacity 0.15s ease;
+    pointer-events: none;
+}
+.image-wrapper.focusable.small-image::after {
+	content: "";
+    background-color: var(--SA-image-focus-image-hover-tooltip-inverted-background-color);
+	background-image: url('/static/img/icon/icons.svg#magnifying-glass-plus-light');
+	background-size: 56px 56px;
+	background-origin: content-box;
+	background-repeat: no-repeat;
+	background-position: center;
+	filter: invert(1);
+	bottom: 0;
+	height: 100%;
+	width: 100%;
+	padding: 0.5em;
+	box-sizing: border-box;
+	border-radius: 0;
+}
+.image-wrapper,
+.image-wrapper::after {
+    width: fit-content;
+}
+.image-wrapper.focusable:hover::after {
+    opacity: 1.0;
+}
+
+
+/*******************/
+/* FLOATING HEADER */
+/*******************/
+
+#floating-header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: var(--GW-body-background-color);
+    box-sizing: border-box;
+    box-shadow: 0 2px 6px var(--GW-floating-header-box-shadow-color);
+    transition:
+        top 0.2s ease-out;
+}
+
+#floating-header.hidden {
+    top: -2.5em;
+}
+#floating-header.hidden .link-chain .link.page-title {
+    display: none;
+}
+
+#floating-header .link-chain {
+    padding: 3px 6px 4px 6px;
+    font-size: calc(1rem * 8/9);
+    text-align: center;
+}
+#floating-header .link-chain .link {
+    font-weight: 600;
+}
+#floating-header .link-chain .link + .link::before {
+    content: "\200B\2002·\2002"
+}
+#floating-header .link-chain .link.ellipsis::before {
+    content: "\200B\2002";
+}
+#floating-header .link-chain .link.page-title {
+    font-variant-caps: small-caps;
+    font-weight: normal;
+    letter-spacing: -0.25px;
+}
+#floating-header .link-chain.truncate-page-title .link.page-title,
+#floating-header.hidden .link-chain .link.page-title {
+    display: inline-block;
+    white-space: nowrap;
+    max-width: calc(100% - 12px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+}
+
+#floating-header .scroll-indicator {
+    height: 3px;
+    margin: 0 -8px;
+    background-image: linear-gradient(var(--GW-floating-header-scroll-indicator-color),
+                                      var(--GW-floating-header-scroll-indicator-color));
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 0 0;
+}
+
+/*┌─────────────────────────────────────┐*/
+/*│ Desktop version (for wide screens). │*/
+/*└─────────────────────────────────────┘*/
+
+@media (hover: hover) and (max-width: 1760px) {
+    #floating-header {
+        display: none;
+    }
+}
+@media (hover: hover) and (min-width: 1761px) {
+    #floating-header {
+        width: calc(50vw - (var(--GW-body-max-width) / 2 + 64px));
+        max-width: var(--GW-sidenotes-max-width);
+        box-shadow:
+            0 0  0 1px var(--GW-body-background-color),
+            0 0  3px var(--GW-body-background-color),
+            0 0  5px var(--GW-body-background-color),
+            0 0  9px var(--GW-body-background-color),
+            0 0 17px var(--GW-body-background-color);
+        border-bottom: 1px solid var(--GW-floating-header-scroll-indicator-color);
+        pointer-events: none;
+        left: unset;
+        right: calc(50% + (var(--GW-body-max-width) / 2) + 64px);
+    }
+    #floating-header > * {
+        pointer-events: auto;
+    }
+    #floating-header .scroll-indicator {
+        margin: 0;
+    }
+    #floating-header .link-chain {
+        padding: 7px 10px 8px 10px
+    }
+    #floating-header .link-chain .link {
+        display: block;
+    }
+    #floating-header .link-chain .link.page-title {
+        margin: 0 0.75em;
+    }
+    #floating-header .link-chain .link.page-title + .link {
+        margin-top: 0.5em;
+    }
+    #floating-header .link-chain .link:not(.page-title) {
+        text-align: left;
+        padding-left: calc((var(--link-index) - 1) * 1.25em);
+    }
+    #floating-header .link-chain .link:not(.page-title) a {
+        font-size: calc(1em * (1 - (0.05 * (var(--link-index) - 1))));
+    }
+    #floating-header .link-chain .link::before {
+        display: none;
+    }
+
+    /*  No floating header on /index.
+     */
+    body.index #floating-header {
+        display: none;
+    }
+}
+
+
+/***************/
+/* READER MODE */
+/***************/
+
+/*┌───────────────────────────────────────────┐*/
+/*│ Masked links key toggle info alert panel. │*/
+/*└───────────────────────────────────────────┘*/
+
+#masked-links-key-toggle-info-alert {
+    position: absolute;
+    background-color: var(--GW-reader-mode-masked-links-key-toggle-info-alert-panel-background-color);
+    color: var(--GW-reader-mode-masked-links-key-toggle-info-alert-panel-text-color);
+    text-shadow:
+        0 0 1px var(--GW-reader-mode-masked-links-key-toggle-info-alert-panel-text-shadow-color),
+        0 0 3px var(--GW-reader-mode-masked-links-key-toggle-info-alert-panel-text-shadow-color),
+        0 0 5px var(--GW-reader-mode-masked-links-key-toggle-info-alert-panel-text-shadow-color);
+    padding: 0.5em 1em;
+    left: 2px;
+    bottom: 1.5em;
+    font-family: var(--GW-sans-serif-font-stack);
+    font-weight: 700;
+    pointer-events: none;
+}
+#masked-links-key-toggle-info-alert.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition:
+        visibility 0.15s ease,
+        opacity 0.15s ease;
+}
+#masked-links-key-toggle-info-alert .icon {
+    display: inline-flex;
+    width: 1.25em;
+    filter: drop-shadow(0 0 3px var(--GW-reader-mode-masked-links-key-toggle-info-alert-panel-text-shadow-color));
+    margin: 0 0.75em 0 0;
+    position: relative;
+    top: 0.15em;
+}
+#masked-links-key-toggle-info-alert .key {
+    border: 1px solid var(--GW-reader-mode-masked-links-key-toggle-info-alert-panel-key-icon-border-color);
+    padding: 0.05em 0.375em 0.125em 0.375em;
+    display: inline-block;
+    border-radius: 4px;
+    margin: 0 0.1875em 0 0.125em;
+    background-color: var(--GW-reader-mode-masked-links-key-toggle-info-alert-panel-key-icon-background-color);
+    box-shadow:
+        1px 1px 3px 0 var(--GW-reader-mode-masked-links-key-toggle-info-alert-panel-text-shadow-color);
+    font-variant-caps: small-caps;
+}
+
+
+/******************/
+/* MODE SELECTORS */
+/******************/
+
+.mode-selector button:disabled {
+    cursor: default;
+}
+
+/**********************************/
+/*  Mode selectors in page toolbar.
+ */
+
+#page-toolbar .dark-mode-selector {
+    order: 1;
+}
+#page-toolbar .reader-mode-selector {
+    order: 2;
+}
+#page-toolbar .extracts-mode-selector {
+    order: 3;
+}
+#page-toolbar #gcse-search {
+	order: 4;
+}
+
+#page-toolbar .mode-selector button .label {
+    text-underline-position: from-font;
+    text-underline-offset: -1px;
+    text-decoration: none;
+}
+#page-toolbar .mode-selector button.selected .label {
+    text-decoration: underline from-font;
+}
+#page-toolbar .mode-selector button.active .label {
+    text-decoration: dotted underline from-font;
+}
+
+/*  Vertical layout.
+ */
+#page-toolbar.vertical .mode-selector {
+    padding: 2px 0;
+}
+#page-toolbar.vertical .mode-selector button + button {
+    margin-top: 3px;
+}
+
+/*  Mobile layout.
+ */
+#page-toolbar.mobile .mode-selector {
+    padding: 2px 0;
+}
+
+/*  Specific mode selectors & buttons.
+ */
+#page-toolbar.vertical .extracts-mode-selector button.select-mode-on .icon {
+    padding: 5px;
+}
+#page-toolbar.vertical .extracts-mode-selector button.select-mode-off .icon {
+    padding: 2px;
+}
+#page-toolbar.mobile .extracts-mode-selector button.select-mode-on .icon {
+    padding: 7px;
+}
+#page-toolbar.mobile .extracts-mode-selector button.select-mode-off .icon {
+    padding: 4px;
+}
+
+/*************************/
+/*  Inline mode selectors.
+ */
+
+.mode-selector-inline {
+    display: inline-flex;
+    position: relative;
+    padding: 0.25em 0.5em;
+    bottom: -0.15em;
+}
+
+.mode-selector-inline button .icon {
+    width: 1.125em;
+    display: flex;
+    opacity: 0.4;
+}
+@media all and (hover: hover) {
+    .mode-selector-inline button .icon {
+        transition:
+            opacity 0.1s ease;
+    }
+    .mode-selector-inline button:hover .icon {
+        opacity: 1.0;
+    }
+}
+.mode-selector-inline button .label {
+    font-size: 0.75em;
+    margin-left: 0.25em;
+    position: relative;
+}
+.mode-selector-inline button + button {
+    margin-left: 0.625em;
+}
+
+.mode-selector-inline button:hover .label::after,
+.mode-selector-inline button.selected .label::after,
+.mode-selector-inline button.active:not(:hover) .label::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+.mode-selector-inline button:hover .label::after,
+.mode-selector-inline button.selected .label::after {
+    border-bottom: 1px solid currentColor;
+}
+.mode-selector-inline button.active:not(:hover) .label::after {
+    border-bottom: 1px dotted currentColor;
+}
+.mode-selector-inline button:not(:disabled):active .label {
+    transform: translateY(2px);
+}
+.mode-selector-inline button:not(:disabled):active .label::after {
+    transform: translateY(-2px);
+}
+
+
+/*****************/
+/* SEARCH WIDGET */
+/*****************/
+
+#gcse-search a {
+	display: block;
+	color: var(--GW-page-toolbar-button-selected-icon-color);
+}
+#gcse-search a svg {
+	display: block;
+}
+
+
+/******************************/
+/* GENERAL ACTIVITY INDICATOR */
+/******************************/
+
+#general-activity-indicator {
+    position: fixed;
+    width: 1em;
+    bottom: 0.25em;
+    left: 0.25em;
+    visibility: hidden;
+}
+
+#general-activity-indicator svg {
+    display: block;
+    width: 100%;
+}
+
+#general-activity-indicator.on {
+    visibility: visible;
+}
+#general-activity-indicator.on svg {
+    animation: fa-spin 0.75s infinite steps(8);
+}
+
+@keyframes fa-spin {
+      0% { transform: rotate(0deg);   }
+    100% { transform: rotate(360deg); }
+}
+
+@media all and (max-width: 649px) {
+    display: none;
+}
+
+
+/****************/
+/* TRANSCLUSION */
+/****************/
+
+a.include-loading:empty,
+a.include-loading-failed:empty {
+    margin: 0;
+}
+.markdownBody a.include-loading:empty,
+.markdownBody a.include-loading-failed:empty {
+    background: none;
+}
+
+a.include-loading.include-spinner {
+    --spinner-image: url('/static/img/icon/icons.svg#circle-notch-solid');
+
+    pointer-events: none;
+}
+
+/*  Loading spinner.
+ */
+a.include-loading.include-spinner::after {
+    display: inline-block;
+    animation: fa-spin 2s infinite linear;
+    position: relative;
+    opacity: 0.5;
+    top: 0.25em;
+}
+
+a.include-loading.include-spinner:empty::after {
+    content: "";
+    background-image: var(--spinner-image);
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0;
+}
+
+a.include-loading.include-spinner:not(:empty)::after,
+a.include-loading.include-spinner[data-link-icon]:not(:empty)::after {
+    background-image: var(--spinner-image);
+}
+a.include-loading.include-spinner:not(:empty)::after {
+    --spinner-size: 0.9em;
+
+    background-size: var(--spinner-size);
+    content: "";
+    font-size: var(--spinner-size);
+    width: var(--spinner-size);
+    height: var(--spinner-size);
+    margin: 0 0.1em 0 0.2em;
+    top: unset;
+    bottom: 0;
+}
+a.include-loading.include-spinner[data-link-icon]:not(:empty)::after {
+    padding: 0;
+    background-position: 0 0;
+}
+
+/*****************/
+/*  Block context.
+ */
+.markdownBody a.block-context-highlighted,
+.markdownBody a.block-context-highlighted-temp,
+.markdownBody a > span.block-context-highlighted {
+    position: relative;
+    z-index: 2;
+    background-color: var(--background-color);
+    box-shadow:
+         3px 1px 0 2px var(--background-color),
+        -3px 1px 0 2px var(--background-color),
+         3px 1px 0 3px var(--GW-highlighted-link-outline-color),
+        -3px 1px 0 3px var(--GW-highlighted-link-outline-color),
+         3px 1px 0 4px var(--background-color),
+        -3px 1px 0 4px var(--background-color),
+         3px 1px 0 5px var(--GW-highlighted-link-outline-color),
+        -3px 1px 0 5px var(--GW-highlighted-link-outline-color);
+}
+.markdownBody a.block-context-highlighted,
+.markdownBody a > span.block-context-highlighted {
+    margin: 0 8px;
+}
+
+.markdownBody :not(a) > span.block-context-highlighted:not(:empty) {
+    --background-color: var(--GW-block-context-span-highlight-color);
+
+    background-color: var(--background-color);
+    padding: 0 0.25em;
+    box-shadow: 0 0 0 0.1em var(--background-color);
+}
+
+.markdownBody :not(a) > span.block-context-highlighted:empty::before {
+    content: "";
+    background-image: url('/static/img/icon/icons.svg#hand-point-right-regular');
+    background-origin: content-box;
+    background-clip: content-box;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    position: relative;
+    top: 0.1em;
+    margin-right: 0.5em;
+    opacity: 0.75;
+}
+
+
+/****************/
+/* PRINT STYLES */
+/****************/
+
+@media print {
+    :root {
+        --GW-TOC-background-color: transparent;
+        --GW-abstract-background-color: transparent;
+        --GW-code-element-background-color: transparent;
+        --GW-math-block-background-color: transparent;
+    }
+
+    blockquote {
+        --GW-blockquote-background-color: transparent !important;
+    }
+
+	/*	Fix for figure top border spanning page breaks.
+	 */
+	figure {
+		position: relative;
+		top: 2px;
+	}
+	.figure-inner-wrapper {
+		margin: -2px auto 2px auto;
+	}
+
+    #skip-to-content-link,
+    #ui-elements-container,
+    #sidebar,
+    #page-metadata .page-metadata-fields .backlinks,
+    #page-metadata .page-metadata-fields .similars,
+    #page-metadata .page-metadata-fields .link-bibliography,
+    #navigation,
+    #noscript-warning-header,
+    #TOC .toc-collapse-toggle-button,
+    #footer,
+    #footer-decoration-container,
+    .reader-mode-note {
+        display: none;
+    }
+    #link-bibliography-section,
+    .link-bibliography-append {
+    	display: none;
+    }
+    .TOC li:has(#toc-link-bibliography-section) {
+    	display: none;
+    }
+    .similars-list li:has(.similar-links-search) {
+        display: none;
+    }
+
+	/*	Links.
+	 */
+    .markdownBody a:link .indicator-hook,
+    .markdownBody a:link .link-icon-hook {
+    	display: none;
+    }
+    .markdownBody a:link.has-indicator-hook {
+    	padding: 0;
+    	margin: 0;
+    }
+    .markdownBody a:link,
+    .markdownBody a:link * {
+    	text-shadow: none;
+    }
+    .markdownBody a:link,
+    .markdownBody a:link.has-annotation {
+    	background-image: none;
+    }
+	.markdownBody a:link,
+	.markdownBody a:visited {
+    	color: inherit;
+	}
+    .markdownBody p a:link {
+    	text-decoration: underline;
+    	text-decoration-thickness: from-font;
+    	text-underline-position: from-font;
+    	text-underline-offset: -0.05em;
+    }
+
+    /*	Label the page tags, as offline/in-print, they will look quite
+    	mysterious.
+     */
+    #page-metadata .link-tags p::before {
+    	content: "tags: ";
+    	font-style: normal;
+    }
+    body {
+        margin: 0;
+    }
+    main {
+        margin: 1em;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        margin-left: 0;
+    }
+}
+
+/***********/
+/* CONSOLE */
+/***********/
+
+#console {
+    position: absolute;
+    background-color: #fff;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 3px double #000;
+    font-family: var(--GW-monospaced-font-stack);
+    max-height: 50vh;
+    display: flex;
+    flex-flow: column;
+    z-index: 1;
+    opacity: 1;
+    transition:
+        opacity 0.1s ease-out,
+        bottom 0.1s ease-out;
+}
+#console.hidden {
+    transition:
+        opacity 0.1s ease-in,
+        bottom 0.1s ease-in;
+}
+
+#console .console-scroll-view {
+    border-bottom: 1px solid #000;
+    min-height: 2em;
+    overflow-y: scroll;
+    overscroll-behavior: none;
+    display: flex;
+    flex-flow: column;
+}
+
+#console .console-content-view {
+    flex: 1 0 auto;
+    padding: 2px;
+    font-size: 0.8rem;
+    line-height: calc(22/16);
+    tab-size: 4;
+}
+#console .console-content-view p {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+#console .console-command-line {
+    display: flex;
+    height: 1.75em;
+}
+
+#console .console-command-line-prompt {
+    padding: 0 0.5em 0 0.25em;
+    display: flex;
+    line-height: 1.75;
+    font-size: 1rem;
+}
+#console .console-command-line-prompt::after {
+    content: ">";
+    padding: 0 0 0 0.5em;
+    margin: 0 0 0 0.375em;
+    border-left: 1px solid #000;
+}
+
+#console .console-command-line-entry-field {
+    flex: 1 0 auto;
+}
+#console .console-command-line-entry-field input {
+    appearance: none;
+    border: none;
+    background-color: inherit;
+    height: 100%;
+    display: block;
+    width: 100%;
+    padding: 0 0.5em 0 0;
+    font-family: var(--GW-monospaced-font-stack);
+    font-size: 1rem;
+}
+#console .console-command-line-entry-field input:focus {
+    outline: none;
+}

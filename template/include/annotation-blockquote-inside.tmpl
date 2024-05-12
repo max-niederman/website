@@ -1,0 +1,28 @@
+<div class="annotation<{annotationClassSuffix}>">
+	<p class="data-field title <[IF authorDateAux]>author-date-aux<[IFEND]>">
+		<a 
+		   class="<{titleLinkClass}>"
+		   title="Open <{titleLinkHref}> in <{whichTab}> <{tabOrWindow}>"
+		   href="<{titleLinkHref}>"
+		   target="<{linkTarget}>"
+		   <{titleLinkDataAttributes}>
+			   ><{title}></a>\
+		<[IF [ abstract | fileIncludes ] & !authorDateAux ]><span class="data-field-separator">:</span><[IFEND]>\
+		<[IF authorDateAux]><[IF2 author]>,\ <[IF2END]><{authorDateAux}><[IF2 [ abstract | fileIncludes ] ]><span class="data-field-separator">:</span><[IF2END]><[IFEND]>
+	</p>
+	<[IF abstract]>
+	<blockquote class="data-field annotation-abstract">
+		<[IF2 thumbnailFigure]>
+		<{thumbnailFigure}>
+		<[IF2END]>
+		<{abstract}>
+		<[IF2 fileIncludes]>
+		<div class="data-field file-includes"><{fileIncludes}></div>
+		<[IF2END]>
+	</blockquote>
+	<[ELSE]>
+		<[IF2 fileIncludes]>
+		<div class="data-field file-includes"><{fileIncludes}></div>
+		<[IF2END]>
+	<[IFEND]>
+</div>

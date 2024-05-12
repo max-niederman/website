@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# crossref: query a PDF for its metadata, reformat it, strip encryption,
+# check if Crossref can provide a useful abstract, and print out available metadata in the format of a Gwern.net annotation GTX entry,
+# suitable for appending to `/metadata/full.gtx` & editing.
+#
+# Author: Gwern Branwen
+# Date: 2021-01-01
+# When:  Time-stamp: "2023-05-29 10:46:04 gwern"
+# License: CC-0
+#
+# Dependencies: curl, exiftool, jq, gwa/annotation-dump
+
+set -e
+
+. ~/wiki/static/build/bash.sh # for path2file
+
+TARGET_ORIGINAL="$(path2File "$1")"
+URL="$(file2Path "$1")"
+
+if [[ ! -f "$TARGET_ORIGINAL" ]]; then
+    TARGET="/home/gwern/wiki/$TARGET_ORIGINAL"
+    if [[ ! -f "$TARGET" ]]; then
+        echo "Error: arg ('$TARGET') does not exist?" && exit 1
+    fi
+else TARGET="$TARGET_ORIGINAL"; fi
+
+if [ "${*##*.}" = "pdf" ]; then
+    if [[ -a "$TARGET" ]]; then
+
+        # WARNING: unbelievably, 'tr' (still) doesn't support Unicode and does bizarre things with it
+        TITLE=$(exiftool -q -q -printFormat '$Title' -Title "$TARGET" | \
+                    sed -e 's/()//' -e 's/­//g' -e 's/[–—]/-/g' -e "s/\(.\+\)'\(.\+\)'\(.\+\)/\1‘\2’\3/g" -e "s/'/\&\#39\;/g"  -e 's/\([0-9]+\)-\([0-9]+\)/\1–\2/g' -e 's/\(.*\) - \(.*\)/\1—\2/g' -e 's/\([a-z]\)_ /\1: /g' -e 's/^ *//g' -e 's/ *$//g' -e 's/\.$//' -e 's/\&#39\;/’/g' -e 's/â\&#x80\;\&#x99\;/’/g' -e 's/.*PII\: .*//g' | \
+                    tr -d '\n')
+    echo ""
+    echo "---"
+    echo "$URL"
+    echo "$TITLE";
+
+    ## Check if 'Author' is prefix of 'Creator', in which case 'Creator is probably the 'real' list of authors
+    ## (eg in `/doc/psychiatry/alzheimers/2021-huang.pdf`, Author = 'Youtong Huang' but Creator = 'Youtong Huang, Kaisa E. Happonen, Patrick G. Burrola, Carolyn O’Connor, Nasun Hah, Ling Huang, Axel Nimmerjahn, Greg Lemke')
+    clean_maker() {
+        exiftool -q -q -printFormat \$"$1" -"$1" "$TARGET" | \
+            sed -e 's/;/,/g' -e 's/ \([A-Z]\.\)\([A-Z]\.\) / \1 \2 /g' -e 's/, and /, /g' -e 's/ , /, /g' -e 's/^ *//g' \
+                -e 's/ +$//g' -e 's/ & /, /g' -e 's/,,/,/g' -e 's/\n//g' | \
+            tr --squeeze-repeats '[:space:]' | tr -d '\n'
+    }
+    AUTHOR="$(clean_maker Author)"
+    CREATOR="$(clean_maker Creator)"
+    if [[ "$CREATOR" =~ $AUTHOR.* ]]; then echo "$CREATOR"; else echo "$AUTHOR"; fi
+
+    echo "$(exiftool -q -q -dateFormat '%F' -printFormat '$Date' $TARGET | \
+         sed -e "s/^\([1-2][0-9][0-9][0-9]\)$/'\1'/" -e "s/-01$//")"
+    echo "$(date '+%F')" # date-created—which is today/now
+
+    DOI=$(exiftool -q -q -printFormat '$DOI' -DOI "$TARGET" | tr -d '\n' | tr '–—­' '-' | \
+              sed -e 's/^doi://' -e 's/https\:\/\/doi\.org\///' -e 's/https\:\/\/dx\.doi\.org\///')
+    if [[ -z "$DOI" ]]; then echo; else echo "[(\"doi\",\"$DOI\")]"; fi
+
+    echo # empty string for tags (files will inherit a tag, but we still need the empty string explicitly, and may want to add some anyway)
+
+    timeout 8s curl -s -L 'https://api.crossref.org/works/'"$DOI" | jq .message.abstract 2> /dev/null | grep -E -v '^null$' || true
+    echo ""
+
+        ( if [[ -n "$TITLE" ]]; then gwa | grep -F -e "$URL" -e "$TITLE" || true;
+          else gwa "$URL" || true;
+          fi; ) &
+
+    echo "---"
+    exiftool -q -q -Subject "$TARGET"  | tr '\n' ' '; echo ""
+    exiftool -q -q -Keywords "$TARGET" | tr '\n' ' '; echo ""
+    exiftool -q -q -Encryption -printFormat 'Encrypted: $Encryption' "$TARGET"
+    wait
+    else
+        echo "File doesn't exist? $TARGET"
+    fi
+else
+      if [[ "$*" == *.* && -f "$*" ]]; then
+          echo "Error: Tried to call this on an invalid (non-PDF) file?" && exit 2;
+      else
+          # assume that it's a DOI and try querying Crossref
+          timeout 9s curl -s -L 'https://api.crossref.org/works/'"$TARGET" 2> /dev/null | \
+              jq --compact-output '.message.title, .message.author, .message.issued, .message.DOI, .message.abstract' 2> /dev/null || true
+      fi
+fi
