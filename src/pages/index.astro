@@ -2,19 +2,25 @@
 import "~/styles/global.scss";
 
 import BaseLayout from "~/layouts/BaseLayout.astro";
+import CliffordAttractor from "~/components/CliffordAttractor.svelte";
 
 import signature from "~/images/signature.svg";
 ---
 
 <BaseLayout title="Max Niederman">
-		<div class="hero">
-			<div class="hero-content">
-				<h1>
-					<img src={signature.src} alt="Max Niederman" />
-				</h1>
-				<p>Student. Mathematician. Programmer. Engineer.</p>
-			</div>
+	<div class="hero">
+		<div class="hero-bg">
+			<CliffordAttractor client:load />
 		</div>
+
+		<div class="hero-content">
+			<h1>
+				<img src={signature.src} alt="Max Niederman" />
+				 <!-- Max Niederman -->
+			</h1>
+			<p>Student. Mathematician. Programmer. Engineer.</p>
+		</div>
+	</div>
 </BaseLayout>
 
 <style lang="scss">
@@ -29,10 +35,23 @@ import signature from "~/images/signature.svg";
 		}
 	}
 
+	.hero-bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+
+		z-index: -1;
+	}
+
 	.hero-content {
 		max-width: 500px;
 
 		font-size: 1.25rem;
+
+		color: white;
+		mix-blend-mode: exclusion;
 	}
 
 	h1 {
@@ -44,5 +63,4 @@ import signature from "~/images/signature.svg";
 			width: 100%;
 		}
 	}
-
 </style>
