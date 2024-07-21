@@ -1,7 +1,18 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 
+	export let parameters: {
+		a: number;
+		b: number;
+		c: number;
+		d: number;
+		scale: number;
+		offset: [number, number];
+	};
+
 	let canvas: HTMLCanvasElement;
+
+	let mousePosition: [number, number] = [0, 0];
 
 	const NUM_POINTS = 2_000_000;
 
@@ -17,22 +28,29 @@
 		const renderer = new Renderer(gl);
 
 		updater.overwritePositions(
-			new Float32Array(2 * NUM_POINTS).map(() => Math.random()),
+			new Float32Array(2 * NUM_POINTS).map(() => Math.random() * 2 - 1),
 		);
 
 		gl.enable(gl.BLEND);
 		gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+		let lastTime = performance.now();
 
 		function draw(now: DOMHighResTimeStamp) {
 			resizeCanvasToDisplaySize(canvas);
 
 			gl.viewport(0, 0, canvas.width, canvas.height);
 
-			updater.update(-1.4 + Math.sin(now / 3000) * 0.05, 1.6, 1.0, 0.7);
-			renderer.draw(updater.readBuffer, [
-				(canvas.height / canvas.width) * 0.8,
-				0.8,
-			]);
+			const { a, b, c, d, scale, offset } = parameters;
+
+			updater.update(a, b, c, d, mousePosition);
+			renderer.draw(
+				updater.readBuffer,
+				[(canvas.height / canvas.width) * scale, scale],
+				offset,
+			);
+
+			lastTime = now;
 
 			requestAnimationFrame(draw);
 		}
@@ -40,11 +58,27 @@
 		requestAnimationFrame(draw);
 	});
 
+	function onMouseMove(event: MouseEvent) {
+		const { scale } = parameters;
+		const canvasRect = canvas.getBoundingClientRect();
+
+		const clipSpace = [
+			(2 * (event.clientX - canvasRect.left)) / canvasRect.width - 1,
+			(2 * (event.clientY - canvasRect.top)) / canvasRect.height - 1,
+		];
+		const aspect = canvasRect.width / canvasRect.height;
+
+		mousePosition = [(aspect * clipSpace[0]) / scale, -clipSpace[1] / scale];
+	}
+
 	class Updater {
 		#gl: WebGL2RenderingContext;
 
 		#program: WebGLProgram;
-		#uniformLocations: Record<"a" | "b" | "c" | "d", WebGLUniformLocation>;
+		#uniformLocations: Record<
+			"a" | "b" | "c" | "d" | "cursor",
+			WebGLUniformLocation
+		>;
 		#attribLocations: Record<"in_position", number>;
 
 		// Buffers used to store the particle positions.
@@ -65,6 +99,7 @@
 				uniform float b;
 				uniform float c;
 				uniform float d;
+				uniform vec2 cursor;
 
 				in vec2 in_position;
 
@@ -75,8 +110,17 @@
 							+ vec2(c, d) * cos(vec2(a, b) * pos);
 				}
 
+				vec2 cursorEffect(vec2 pos) {
+					vec2 diff = pos - cursor;
+					float dist = length(diff);
+
+					float factor = 0.5 / (dist * dist) - exp(2.0 - dist * dist);
+
+					return pos + 0.005 * factor * diff;
+				}
+
 				void main() {
-					out_position = attract(in_position);
+					out_position = cursorEffect(attract(in_position));
 				}`,
 			);
 
@@ -111,6 +155,7 @@
 				b: gl.getUniformLocation(program, "b"),
 				c: gl.getUniformLocation(program, "c"),
 				d: gl.getUniformLocation(program, "d"),
+				cursor: gl.getUniformLocation(program, "cursor"),
 			};
 			this.#attribLocations = {
 				in_position: gl.getAttribLocation(program, "in_position"),
@@ -129,7 +174,13 @@
 			gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STREAM_DRAW);
 		}
 
-		update(a: number, b: number, c: number, d: number) {
+		update(
+			a: number,
+			b: number,
+			c: number,
+			d: number,
+			cursor: [number, number],
+		) {
 			const gl = this.#gl;
 
 			gl.useProgram(this.#program);
@@ -139,6 +190,7 @@
 			gl.uniform1f(this.#uniformLocations.b, b);
 			gl.uniform1f(this.#uniformLocations.c, c);
 			gl.uniform1f(this.#uniformLocations.d, d);
+			gl.uniform2f(this.#uniformLocations.cursor, cursor[0], cursor[1]);
 
 			// Bind the read buffer.
 			gl.bindBuffer(gl.ARRAY_BUFFER, this.readBuffer);
@@ -179,7 +231,7 @@
 		#gl: WebGL2RenderingContext;
 
 		#program: WebGLProgram;
-		#uniformLocations: Record<"scale", WebGLUniformLocation>;
+		#uniformLocations: Record<"scale" | "offset", WebGLUniformLocation>;
 		#attribLocations: Record<"position", number>;
 
 		constructor(gl: WebGL2RenderingContext) {
@@ -191,11 +243,12 @@
 				`#version 300 es
 
 				uniform vec2 scale;
+				uniform vec2 offset;
 
 				in vec2 position;
 
 				void main() {
-					gl_Position = vec4(position * scale, 0.0, 1.0);
+					gl_Position = vec4(position * scale + offset, 0.0, 1.0);
 				}`,
 			);
 
@@ -225,19 +278,25 @@
 			this.#program = program;
 			this.#uniformLocations = {
 				scale: gl.getUniformLocation(program, "scale"),
+				offset: gl.getUniformLocation(program, "offset"),
 			};
 			this.#attribLocations = {
 				position: gl.getAttribLocation(program, "position"),
 			};
 		}
 
-		draw(positions: WebGLBuffer, scale: [number, number]) {
+		draw(
+			positions: WebGLBuffer,
+			scale: [number, number],
+			offset: [number, number],
+		) {
 			const gl = this.#gl;
 
 			gl.useProgram(this.#program);
 
 			// Set the uniforms.
 			gl.uniform2f(this.#uniformLocations.scale, scale[0], scale[1]);
+			gl.uniform2f(this.#uniformLocations.offset, offset[0], offset[1]);
 
 			// Bind the positions buffer.
 			gl.bindBuffer(gl.ARRAY_BUFFER, positions);
@@ -329,6 +388,8 @@
 		return needResize;
 	}
 </script>
+
+<svelte:document on:mousemove={onMouseMove} />
 
 <canvas bind:this={canvas} />
 
