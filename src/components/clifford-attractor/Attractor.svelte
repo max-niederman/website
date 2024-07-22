@@ -1,20 +1,19 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 
-	export let parameters: {
+	export let dynamics: (now: DOMHighResTimeStamp) => {
 		a: number;
 		b: number;
 		c: number;
 		d: number;
-		scale: number;
-		offset: [number, number];
 	};
+	export let display: (now: DOMHighResTimeStamp) => {
+		scale?: Vec2;
+		offset?: Vec2;
+	};
+	export let numPoints: number = 1_000_000;
 
 	let canvas: HTMLCanvasElement;
-
-	let mousePosition: [number, number] = [0, 0];
-
-	const NUM_POINTS = 2_000_000;
 
 	onMount(() => {
 		const gl = canvas.getContext("webgl2", { antialias: true });
@@ -28,55 +27,32 @@
 		const renderer = new Renderer(gl);
 
 		updater.overwritePositions(
-			new Float32Array(2 * NUM_POINTS).map(() => Math.random() * 2 - 1),
+			new Float32Array(2 * numPoints).map(() => Math.random() * 2 - 1),
 		);
 
 		gl.enable(gl.BLEND);
 		gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
-		let lastTime = performance.now();
 
 		function draw(now: DOMHighResTimeStamp) {
 			resizeCanvasToDisplaySize(canvas);
 
 			gl.viewport(0, 0, canvas.width, canvas.height);
 
-			const { a, b, c, d, scale, offset } = parameters;
+			const { a, b, c, d } = dynamics(now);
+			const { scale = [1, 1], offset = [0, 0] } = display(now);
 
-			updater.update(a, b, c, d, mousePosition);
+			updater.update(a, b, c, d);
 			renderer.draw(
 				updater.readBuffer,
-				[(canvas.height / canvas.width) * scale, scale],
+				listMultiply([canvas.height / canvas.width, 1], scale) as Vec2,
 				offset,
 			);
-
-			lastTime = now;
 
 			requestAnimationFrame(draw);
 		}
 
 		requestAnimationFrame(draw);
 	});
-
-	function onMouseMove(event: MouseEvent) {
-		const { scale, offset } = parameters;
-		const canvasRect = canvas.getBoundingClientRect();
-
-		const clipSpace = [
-			(2 * (event.clientX - canvasRect.left)) / canvasRect.width - 1,
-			(2 * (event.clientY - canvasRect.top)) / canvasRect.height - 1,
-		];
-		const offsetClipSpace = [
-			clipSpace[0] - offset[0],
-			clipSpace[1] - offset[1],
-		];
-		const aspect = canvasRect.width / canvasRect.height;
-
-		mousePosition = [
-			(aspect * offsetClipSpace[0]) / scale,
-			-offsetClipSpace[1] / scale,
-		];
-	}
 
 	class Updater {
 		#gl: WebGL2RenderingContext;
@@ -102,11 +78,12 @@
 				gl.VERTEX_SHADER,
 				`#version 300 es
 
+				precision highp float;
+
 				uniform float a;
 				uniform float b;
 				uniform float c;
 				uniform float d;
-				uniform vec2 cursor;
 
 				in vec2 in_position;
 
@@ -117,17 +94,8 @@
 							+ vec2(c, d) * cos(vec2(a, b) * pos);
 				}
 
-				vec2 cursorEffect(vec2 pos) {
-					vec2 diff = pos - cursor;
-					float dist = length(diff);
-
-					float factor = 0.5 / (dist * dist) - exp(2.0 - dist * dist);
-
-					return pos + 0.005 * factor * diff;
-				}
-
 				void main() {
-					out_position = cursorEffect(attract(in_position));
+					out_position = attract(in_position);
 				}`,
 			);
 
@@ -162,15 +130,14 @@
 				b: gl.getUniformLocation(program, "b"),
 				c: gl.getUniformLocation(program, "c"),
 				d: gl.getUniformLocation(program, "d"),
-				cursor: gl.getUniformLocation(program, "cursor"),
 			};
 			this.#attribLocations = {
 				in_position: gl.getAttribLocation(program, "in_position"),
 			};
 
 			this.#buffers = [
-				createBuffer(gl, 2 * 4 * NUM_POINTS, gl.STREAM_DRAW),
-				createBuffer(gl, 2 * 4 * NUM_POINTS, gl.STREAM_DRAW),
+				createBuffer(gl, 2 * 4 * numPoints, gl.STREAM_DRAW),
+				createBuffer(gl, 2 * 4 * numPoints, gl.STREAM_DRAW),
 			];
 		}
 
@@ -181,13 +148,7 @@
 			gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STREAM_DRAW);
 		}
 
-		update(
-			a: number,
-			b: number,
-			c: number,
-			d: number,
-			cursor: [number, number],
-		) {
+		update(a: number, b: number, c: number, d: number) {
 			const gl = this.#gl;
 
 			gl.useProgram(this.#program);
@@ -197,7 +158,6 @@
 			gl.uniform1f(this.#uniformLocations.b, b);
 			gl.uniform1f(this.#uniformLocations.c, c);
 			gl.uniform1f(this.#uniformLocations.d, d);
-			gl.uniform2f(this.#uniformLocations.cursor, cursor[0], cursor[1]);
 
 			// Bind the read buffer.
 			gl.bindBuffer(gl.ARRAY_BUFFER, this.readBuffer);
@@ -212,7 +172,7 @@
 
 			// Perform the transform feedback operation.
 			gl.beginTransformFeedback(gl.POINTS);
-			gl.drawArrays(gl.POINTS, 0, NUM_POINTS);
+			gl.drawArrays(gl.POINTS, 0, numPoints);
 			gl.endTransformFeedback();
 
 			// Unbind the write buffer.
@@ -264,12 +224,12 @@
 				gl.FRAGMENT_SHADER,
 				`#version 300 es
 
-				precision mediump float;
+				precision lowp float;
 
 				out vec4 fragColor;
 
 				void main() {
-					fragColor = vec4(1.0, 1.0, 1.0, 0.02);
+					fragColor = vec4(0.5, 0.5, 1.0, 0.02);
 				}`,
 			);
 
@@ -315,7 +275,7 @@
 			gl.clear(gl.COLOR_BUFFER_BIT);
 
 			// Finally, draw the points.
-			gl.drawArrays(gl.POINTS, 0, NUM_POINTS);
+			gl.drawArrays(gl.POINTS, 0, numPoints);
 		}
 	}
 
@@ -394,9 +354,15 @@
 
 		return needResize;
 	}
-</script>
 
-<svelte:document on:mousemove={onMouseMove} />
+	type Vec2 = [number, number];
+	function listAdd(a: number[], b: number[]) {
+		return a.map((x, i) => x + b[i]);
+	}
+	function listMultiply(a: number[], b: number[]) {
+		return a.map((x, i) => x * b[i]);
+	}
+</script>
 
 <canvas bind:this={canvas} />
 
