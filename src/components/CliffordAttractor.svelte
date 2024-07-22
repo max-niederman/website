@@ -59,16 +59,23 @@
 	});
 
 	function onMouseMove(event: MouseEvent) {
-		const { scale } = parameters;
+		const { scale, offset } = parameters;
 		const canvasRect = canvas.getBoundingClientRect();
 
 		const clipSpace = [
 			(2 * (event.clientX - canvasRect.left)) / canvasRect.width - 1,
 			(2 * (event.clientY - canvasRect.top)) / canvasRect.height - 1,
 		];
+		const offsetClipSpace = [
+			clipSpace[0] - offset[0],
+			clipSpace[1] - offset[1],
+		];
 		const aspect = canvasRect.width / canvasRect.height;
 
-		mousePosition = [(aspect * clipSpace[0]) / scale, -clipSpace[1] / scale];
+		mousePosition = [
+			(aspect * offsetClipSpace[0]) / scale,
+			-offsetClipSpace[1] / scale,
+		];
 	}
 
 	class Updater {
