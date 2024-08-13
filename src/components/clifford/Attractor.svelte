@@ -15,11 +15,16 @@
 
 	let canvas: HTMLCanvasElement;
 
+	let webglSupported = true;
+
 	onMount(() => {
 		const gl = canvas.getContext("webgl2", { antialias: true });
 
 		if (!gl) {
 			console.error("WebGL2 is not supported.");
+
+			webglSupported = false;
+
 			return;
 		}
 
@@ -364,11 +369,31 @@
 	}
 </script>
 
-<canvas bind:this={canvas} />
+{#if webglSupported}
+	<canvas bind:this={canvas} />
+{:else}
+	<div class="no-webgl2">
+		Your browser does not support WebGL2.
+	</div>
+{/if}
 
 <style lang="scss">
-	canvas {
+	canvas, .no-webgl2 {
 		width: 100%;
 		height: 100%;
+
+		margin-top: 16px;
+	}
+
+	.no-webgl2 {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 2em;
+
+		margin-top: 16px 0 0 0;
+
+		background-color: black;
+		color: white;
 	}
 </style>
