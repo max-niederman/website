@@ -38,4 +38,12 @@ export class Vec2 {
     hademardProd(other: Vec2): Vec2 {
         return new Vec2(this.#x * other.#x, this.#y * other.#y);
     }
+
+    hademardDiv(other: Vec2): Vec2 {
+        return new Vec2(this.#x / other.#x, this.#y / other.#y);
+    }
+
+    componentwise(func: (x: number) => number): Vec2 {
+        return new Vec2(func(this.#x), func(this.#y));
+    }
 }
