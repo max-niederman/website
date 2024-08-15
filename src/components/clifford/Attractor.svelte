@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import { resizeCanvasToDisplaySize } from "~/utils/canvas";
 
 	export let dynamics: (now: DOMHighResTimeStamp) => {
 		a: number;
@@ -345,21 +346,6 @@
 		return null;
 	}
 
-	/** Resize the canvas to match the size at which it is displayed. */
-	function resizeCanvasToDisplaySize(canvas: HTMLCanvasElement): boolean {
-		const width = canvas.clientWidth;
-		const height = canvas.clientHeight;
-
-		const needResize = canvas.width !== width || canvas.height !== height;
-
-		if (needResize) {
-			canvas.width = width;
-			canvas.height = height;
-		}
-
-		return needResize;
-	}
-
 	type Vec2 = [number, number];
 	function listAdd(a: number[], b: number[]) {
 		return a.map((x, i) => x + b[i]);
@@ -381,8 +367,6 @@
 	canvas, .no-webgl2 {
 		width: 100%;
 		height: 100%;
-
-		margin-top: 16px;
 	}
 
 	.no-webgl2 {
