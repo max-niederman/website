@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Vec2 } from "~/utils/math";
 	import Attractor from "./Attractor.svelte";
 
 	let dynamics = {
@@ -55,7 +56,7 @@
 	{#key attractorKey}
 		<Attractor
 			dynamics={() => dynamics}
-			display={() => ({ scale: [0.25, 0.25], offset: [0, 0] })}
+			display={() => ({ scale: new Vec2(0.25), offset: new Vec2() })}
 			{numPoints}
 		/>
 	{/key}

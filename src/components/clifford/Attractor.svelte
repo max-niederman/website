@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import { Vec2 } from "~/utils/math";
 	import { resizeCanvasToDisplaySize } from "~/utils/canvas";
 
 	export let dynamics: (now: DOMHighResTimeStamp) => {
@@ -45,12 +46,12 @@
 			gl.viewport(0, 0, canvas.width, canvas.height);
 
 			const { a, b, c, d } = dynamics(now);
-			const { scale = [1, 1], offset = [0, 0] } = display(now);
+			const { scale = new Vec2(1), offset = new Vec2() } = display(now);
 
 			updater.update(a, b, c, d);
 			renderer.draw(
 				updater.readBuffer,
-				listMultiply([canvas.height / canvas.width, 1], scale) as Vec2,
+				new Vec2(canvas.height / canvas.width, 1).hademardProd(scale),
 				offset,
 			);
 
@@ -258,18 +259,14 @@
 			};
 		}
 
-		draw(
-			positions: WebGLBuffer,
-			scale: [number, number],
-			offset: [number, number],
-		) {
+		draw(positions: WebGLBuffer, scale: Vec2, offset: Vec2) {
 			const gl = this.#gl;
 
 			gl.useProgram(this.#program);
 
 			// Set the uniforms.
-			gl.uniform2f(this.#uniformLocations.scale, scale[0], scale[1]);
-			gl.uniform2f(this.#uniformLocations.offset, offset[0], offset[1]);
+			gl.uniform2f(this.#uniformLocations.scale, scale.x, scale.y);
+			gl.uniform2f(this.#uniformLocations.offset, offset.x, offset.y);
 
 			// Bind the positions buffer.
 			gl.bindBuffer(gl.ARRAY_BUFFER, positions);
@@ -345,26 +342,17 @@
 		gl.deleteProgram(program);
 		return null;
 	}
-
-	type Vec2 = [number, number];
-	function listAdd(a: number[], b: number[]) {
-		return a.map((x, i) => x + b[i]);
-	}
-	function listMultiply(a: number[], b: number[]) {
-		return a.map((x, i) => x * b[i]);
-	}
 </script>
 
 {#if webglSupported}
 	<canvas bind:this={canvas} />
 {:else}
-	<div class="no-webgl2">
-		Your browser does not support WebGL2.
-	</div>
+	<div class="no-webgl2">Your browser does not support WebGL2.</div>
 {/if}
 
 <style lang="scss">
-	canvas, .no-webgl2 {
+	canvas,
+	.no-webgl2 {
 		width: 100%;
 		height: 100%;
 	}
