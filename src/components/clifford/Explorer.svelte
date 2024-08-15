@@ -64,6 +64,8 @@
 <style lang="scss">
 	.display-container {
 		aspect-ratio: 1.618;
+
+		margin-top: 16px;
 	}
 
 	input,
