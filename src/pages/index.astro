@@ -2,7 +2,7 @@
 import "~/styles/global.scss";
 
 import BaseLayout from "~/layouts/BaseLayout.astro";
-import RainTiles from "~/components/RainTiles.svelte";
+import RandomFillingTiles from "~/components/RandomFillingTiles.svelte";
 
 import signature from "~/images/signature.svg";
 ---
@@ -10,7 +10,7 @@ import signature from "~/images/signature.svg";
 <BaseLayout title="Max Niederman">
 	<div class="hero">
 		<div class="hero-bg">
-			<RainTiles client:load />
+			<RandomFillingTiles client:load client:only />
 		</div>
 
 		<div class="hero-content">
