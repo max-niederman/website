@@ -2,23 +2,21 @@
 import "~/styles/global.scss";
 
 import BaseLayout from "~/layouts/BaseLayout.astro";
-import RandomFillingTiles from "~/components/RandomFillingTiles.svelte";
-
-import signature from "~/images/signature.svg";
+import OrbitingRings from "~/components/OrbitingRings.svelte";
 ---
 
 <BaseLayout title="Max Niederman">
 	<div class="hero">
 		<div class="hero-bg">
-			<RandomFillingTiles client:load client:only />
+			<OrbitingRings
+				minRadius={300}
+				arcWidth={30}
+				arcSpacing={60}
+				client:load
+			/>
 		</div>
 
-		<div class="hero-content">
-			<h1>
-				<img src={signature.src} alt="Max Niederman" />
-			</h1>
-			<p>Student. Mathematician. Programmer. Engineer.</p>
-		</div>
+		<h1>Max Niederman</h1>
 	</div>
 </BaseLayout>
 
@@ -26,6 +24,10 @@ import signature from "~/images/signature.svg";
 	.hero {
 		width: 100svw;
 		height: 100svh;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
 		padding: 2rem;
 
@@ -44,22 +46,15 @@ import signature from "~/images/signature.svg";
 		z-index: -1;
 	}
 
-	.hero-content {
-		max-width: 500px;
-
-		font-size: 1.25rem;
-
-		color: white;
-		mix-blend-mode: exclusion;
-	}
-
 	h1 {
 		margin: 0;
+		max-width: 400px;
+		text-align: center;
 
-		font-size: 3.75rem;
+		font-size: 3rem;
 
-		img {
-			width: 100%;
+		@media screen and (min-width: 768px) {
+			font-size: 4rem;
 		}
 	}
 </style>
