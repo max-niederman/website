@@ -14,6 +14,7 @@
     "@astrojs/mdx": "^2.3.1",
     "@astrojs/svelte": "^5.7.0",
     "@fontsource/source-serif-4": "^5.0.18",
+    "alea": "^1.0.1",
     "astro": "^4.6.3",
     "normalize.css": "^8.0.1",
     "sass": "^1.75.0",
