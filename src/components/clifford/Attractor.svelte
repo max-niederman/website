@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { onMount } from "svelte";
+	import { onDestroy, onMount } from "svelte";
 	import { Vec2 } from "~/utils/math";
-	import { resizeCanvasToDisplaySize } from "~/utils/canvas";
+	import { resizeCanvasToPhysicalDisplaySize } from "~/utils/canvas";
 
 	export let dynamics: (now: DOMHighResTimeStamp) => {
 		a: number;
@@ -41,7 +41,7 @@
 		gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
 		function draw(now: DOMHighResTimeStamp) {
-			resizeCanvasToDisplaySize(canvas);
+			resizeCanvasToPhysicalDisplaySize(canvas);
 
 			gl.viewport(0, 0, canvas.width, canvas.height);
 
