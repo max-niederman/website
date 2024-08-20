@@ -1,11 +1,7 @@
 @use "normalize.css";
-@use "@fontsource/source-serif-4";
+@use "@fontsource/ibm-plex-sans/latin.css";
 
 :root {
-	--bg: #f0f0f0;
-	--fg: #000000;
-	--accent: #443d96;
-
 	font-size: 18px;
 }
 
@@ -14,7 +10,7 @@
 }
 
 body {
-	font-family: "Source Serif 4", serif;
+	font-family: "IBM Plex Sans", sans-serif;
 
 	color: var(--fg);
 	background-color: var(--bg);

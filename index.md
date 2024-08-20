@@ -1,0 +1,18 @@
+- Name
+- Blurb
+- Socials
+- About Me
+  - Photo
+  - Biography
+- Projects
+  - Index
+  - Pages
+- Resumé
+  - Preview
+  - Page
+- Blog
+  - Index
+  - Pages
+- Footer
+  - Starry Background
+  - Content
