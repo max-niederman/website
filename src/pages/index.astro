@@ -3,56 +3,91 @@ import "~/styles/global.scss";
 
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import StripeGradient from "~/components/StripeGradient.svelte";
+
+import icon from "~/images/icon.svg";
 ---
 
 <BaseLayout title="Max Niederman">
-	<div class="hero">
-		<div class="hero-bg">
-			<StripeGradient client:load />
-		</div>
-
-		<h1>Max Niederman</h1>
+	<div class="bg">
+		<StripeGradient client:load />
 	</div>
+
+	<header>
+		<div class="title-line">
+			<img src={icon.src} alt="Max Niederman's logo" />
+			<h1>Max Niederman</h1>
+		</div>
+		<p>
+			I am an undergraduate student interested in mathematics, software, and
+			engineering.
+		</p>
+	</header>
+
+	<main>
+		<div class="under-construction">This site is under construction.</div>
+	</main>
 </BaseLayout>
 
 <style lang="scss">
-	.hero {
-		width: 100svw;
-		height: 100svh;
-
-		display: flex;
-		justify-content: center;
-		align-items: center;
-
-		padding: 2rem;
-
-		@media screen and (min-width: 768px) {
-			padding: 4rem;
-		}
-	}
-
-	.hero-bg {
-		position: absolute;
+	.bg {
+		position: fixed;
 		top: 0;
 		left: 0;
-		width: 100%;
-		height: 100%;
-
 		z-index: -1;
+		width: 100svw;
+		height: 100svh;
 	}
 
-	h1 {
-		margin: 0;
-		max-width: 400px;
-		text-align: center;
+	main,
+	header {
+		margin: 0 auto;
+		max-width: 75ch;
 
-		font-size: 3rem;
+		padding: 2rem 0;
+	}
 
-		@media screen and (min-width: 768px) {
-			font-size: 4rem;
+	header {
+		margin-top: 1rem;
+
+		color: hsl(0 0 60%);
+		mix-blend-mode: color-dodge;
+
+		.title-line {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
 		}
 
-		mix-blend-mode: color-dodge;
-		color: #bbb;
+		h1 {
+			margin: 1rem 0;
+			font-weight: 700;
+		}
+
+		img {
+			filter: invert(60%);
+		}
+	}
+
+	main {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-auto-rows: 12rem;
+
+		color: white;
+
+		.under-construction {
+			grid-column: 1 / 4;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			font-size: 2rem;
+
+			background: hsla(0%, 10%, 75%, 0.2);
+			border-radius: 16px;
+			box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+			border: 1px solid hsla(0%, 0%, 100%, 0.3);
+		}
 	}
 </style>

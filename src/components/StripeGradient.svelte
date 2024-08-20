@@ -18,8 +18,6 @@
 		height: 100%;
 
 		--gradient-color-1: #449ce4;
-		--gradient-color-2: #2f8bc1;
-		--gradient-color-3: #ccbeee;
 		--gradient-color-4: #4c57f6;
 	}
 </style>
