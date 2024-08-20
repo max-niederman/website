@@ -6,7 +6,7 @@
 
 	onMount(() => {
 		const gradient = new Gradient();
-		gradient.initGradient(`canvas.${canvas.className}`);
+		gradient.initGradient(canvas);
 	});
 </script>
 
