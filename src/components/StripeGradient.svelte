@@ -19,5 +19,7 @@
 
 		--gradient-color-1: #449ce4;
 		--gradient-color-4: #4c57f6;
+
+		background-color: var(--gradient-color-1);
 	}
 </style>
