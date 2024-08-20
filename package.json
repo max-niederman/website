@@ -14,11 +14,11 @@
     "@astrojs/mdx": "^2.3.1",
     "@astrojs/svelte": "^5.7.0",
     "@fontsource/source-serif-4": "^5.0.18",
-    "alea": "^1.0.1",
     "astro": "^4.6.3",
     "normalize.css": "^8.0.1",
     "sass": "^1.75.0",
     "svelte": "^4.2.18",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.3",
+    "whatamesh": "^0.2.0"
   }
 }
