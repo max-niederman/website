@@ -11,7 +11,8 @@
 
 body {
 	font-family: "IBM Plex Sans", sans-serif;
-
+	text-rendering: optimizeLegibility;
+	
 	color: var(--fg);
 	background-color: var(--bg);
 }
