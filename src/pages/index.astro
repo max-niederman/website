@@ -1,10 +1,13 @@
 ---
+import { Icon } from "astro-icon/components";
+
 import "~/styles/global.scss";
 
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import StripeGradient from "~/components/StripeGradient.svelte";
+import ScrapeObfuscatedLink from "~/components/ScrapeObfuscatedLink.svelte";
 
-import icon from "~/images/favicon.svg";
+import favicon from "~/images/favicon.svg";
 ---
 
 <BaseLayout title="Max Niederman">
@@ -14,17 +17,43 @@ import icon from "~/images/favicon.svg";
 
 	<header>
 		<div class="title-line">
-			<img src={icon.src} alt="Max Niederman's logo" />
+			<img src={favicon.src} alt="Max Niederman's logo" />
 			<h1>Max Niederman</h1>
 		</div>
 		<p>
-			I am an undergraduate student interested in mathematics, software, and
+			I am an undergraduate student at Reed College interested in mathematics, software, and
 			engineering.
 		</p>
+		<ul>
+			<li>
+				<a href="https://github.com/max-niederman" target="_blank">
+					<Icon name="mdi:github" size="2rem" title="GitHub" />
+				</a>
+			</li>
+			<li>
+				<a href="https://www.linkedin.com/in/max-niederman/" target="_blank">
+					<Icon name="mdi:linkedin" size="2rem" title="LinkedIn" />
+				</a>
+			</li>
+			<li>
+				<a href="https://discord.com/users/311324287086624768" target="_blank">
+					<Icon name="ic:baseline-discord" size="2rem" title="LinkedIn" />
+				</a>
+			</li>
+			<li>
+				<ScrapeObfuscatedLink
+					hrefBase64={btoa("mailto://max@maxniederman.com")}
+					target="_blank"
+					client:idle
+				>
+					<Icon name="mdi:email-fast-outline" size="2rem" title="LinkedIn" />
+				</ScrapeObfuscatedLink>
+			</li>
+		</ul>
 	</header>
 
 	<main>
-		<div class="under-construction">This site is under construction.</div>
+		<div class="glass under-construction">This site is under construction.</div>
 	</main>
 </BaseLayout>
 
@@ -40,14 +69,16 @@ import icon from "~/images/favicon.svg";
 
 	main,
 	header {
-		margin: 0 auto;
+		margin-left: auto;
+		margin-right: auto;
 		max-width: 75ch;
 
-		padding: 2rem 0;
+		padding: 0 1rem;
 	}
 
 	header {
-		margin-top: 1rem;
+		margin-top: 2rem;
+		margin-bottom: 2rem;
 
 		color: hsl(0deg 0% 60%);
 		mix-blend-mode: color-dodge;
@@ -58,32 +89,55 @@ import icon from "~/images/favicon.svg";
 			gap: 1rem;
 		}
 
+		img {
+			filter: invert(60%);
+		}
+
 		h1 {
 			margin: 1rem 0;
 			font-weight: 700;
 		}
 
-		img {
-			filter: invert(60%);
+		p {
+			margin-top: 0.5rem;
+		}
+
+		ul {
+			padding: 0;
+
+			display: flex;
+			gap: 0.5rem;
+
+			li {
+				display: block;
+				list-style: none;
+			}
+
+			:global(a, a:visited) {
+				color: inherit;
+			}
 		}
 	}
 
 	main {
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
-		grid-auto-rows: 12rem;
+		grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+		gap: 2rem;
 
 		color: white;
 
 		.under-construction {
-			grid-column: 1 / 4;
+			grid-column: 1 / -1;
 
 			display: flex;
 			align-items: center;
 			justify-content: center;
 
 			font-size: 2rem;
+			text-align: center;
+		}
 
+		.glass {
 			background: hsla(0deg, 10%, 75%, 0.2);
 			border-radius: 16px;
 			box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
