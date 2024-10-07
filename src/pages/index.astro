@@ -11,48 +11,19 @@ import favicon from "~/images/favicon.svg";
 ---
 
 <BaseLayout title="Max Niederman">
-	<div class="bg">
-		<StripeGradient client:load />
-	</div>
-
 	<header>
-		<div class="title-line">
-			<img src={favicon.src} alt="Max Niederman's logo" />
-			<h1>Max Niederman</h1>
-		</div>
-		<p>
-			I am an undergraduate student at Reed College interested in mathematics, software, and
-			engineering.
-		</p>
-		<ul>
-			<li>
-				<a href="https://github.com/max-niederman" target="_blank">
-					<Icon name="mdi:github" size="2rem" title="GitHub" />
-				</a>
-			</li>
-			<li>
-				<a href="https://www.linkedin.com/in/max-niederman/" target="_blank">
-					<Icon name="mdi:linkedin" size="2rem" title="LinkedIn" />
-				</a>
-			</li>
-			<li>
-				<a href="https://discord.com/users/311324287086624768" target="_blank">
-					<Icon name="ic:baseline-discord" size="2rem" title="Discord" />
-				</a>
-			</li>
-			<li>
-				<ScrapeObfuscatedLink
-					hrefBase64={btoa("mailto://max@maxniederman.com")}
-					target="_blank"
-					client:idle
-				>
-					<Icon name="mdi:email-fast-outline" size="2rem" title="Email" />
-				</ScrapeObfuscatedLink>
-			</li>
-		</ul>
+		<h1>Max Niederman</h1>
 	</header>
 
 	<main>
+		<p>
+			I am an undergraduate student at Reed College interested in mathematics and computing.
+		</p>
+
+		<p>
+			You can find me on <a href="https://github.com/max-niederman">GitHub</a> or <a href="https://www.linkedin.com/in/max-niederman/">LinkedIn</a>,
+			and reach me <ScrapeObfuscatedLink hrefBase64={btoa("mailto:max@maxniederman.com")}>via email</ScrapeObfuscatedLink> or <a href="https://discord.com/users/311324287086624768">on Discord</a>.
+		</p>
 	</main>
 </BaseLayout>
 
@@ -71,65 +42,17 @@ import favicon from "~/images/favicon.svg";
 		margin-left: auto;
 		margin-right: auto;
 		max-width: 75ch;
-
-		padding: 0 1rem;
 	}
 
 	header {
 		margin-top: 2rem;
-		margin-bottom: 2rem;
 
-		color: hsl(0deg 0% 60%);
-		mix-blend-mode: color-dodge;
-
-		.title-line {
-			display: flex;
-			align-items: center;
-			gap: 1rem;
-		}
-
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		
 		img {
-			filter: invert(60%);
-		}
-
-		h1 {
-			margin: 1rem 0;
-			font-weight: 700;
-		}
-
-		p {
-			margin-top: 0.5rem;
-		}
-
-		ul {
-			padding: 0;
-
-			display: flex;
-			gap: 0.5rem;
-
-			li {
-				display: block;
-				list-style: none;
-			}
-
-			:global(a, a:visited) {
-				color: inherit;
-			}
-		}
-	}
-
-	main {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-		gap: 2rem;
-
-		color: white;
-
-		.glass {
-			background: hsla(0deg, 10%, 75%, 0.2);
-			border-radius: 16px;
-			box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-			border: 1px solid hsla(0deg, 0%, 100%, 0.3);
+			height: 3em;
 		}
 	}
 </style>
