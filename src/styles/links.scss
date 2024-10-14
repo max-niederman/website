@@ -1,0 +1,20 @@
+a {
+	color: inherit;
+    text-decoration: dotted underline;
+
+    border-radius: 0.25em;
+
+    &::after {
+        content: "°";
+        color: var(--col-accent);
+        text-decoration: var(--col-bg1) underline; // hack to hide the underline
+    }
+
+    &:hover {
+        background-color: var(--col-bg2);
+
+        &::after {
+            text-decoration: var(--col-bg2) underline;
+        }
+    }
+}

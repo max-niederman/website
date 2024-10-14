@@ -12,6 +12,10 @@
     });
 </script>
 
-<a href={href} target={target}>
+<a class="type" href={href} target={target}>
 	<slot />
 </a>
+
+<style lang="scss">
+	@use "~/styles/links.scss";
+</style>

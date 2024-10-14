@@ -1,13 +1,8 @@
 ---
 import { Icon } from "astro-icon/components";
 
-import "~/styles/global.scss";
-
 import BaseLayout from "~/layouts/BaseLayout.astro";
-import StripeGradient from "~/components/StripeGradient.svelte";
 import ScrapeObfuscatedLink from "~/components/ScrapeObfuscatedLink.svelte";
-
-import favicon from "~/images/favicon.svg";
 ---
 
 <BaseLayout title="Max Niederman">
@@ -15,44 +10,66 @@ import favicon from "~/images/favicon.svg";
 		<h1>Max Niederman</h1>
 	</header>
 
-	<main>
+	<main class="type">
 		<p>
-			I am an undergraduate student at Reed College interested in mathematics and computing.
+			Hello! I'm Max. This is my personal website, where I write about things I
+			find interesting and share projects I'm working on.
 		</p>
 
 		<p>
-			You can find me on <a href="https://github.com/max-niederman">GitHub</a> or <a href="https://www.linkedin.com/in/max-niederman/">LinkedIn</a>,
-			and reach me <ScrapeObfuscatedLink hrefBase64={btoa("mailto:max@maxniederman.com")}>via email</ScrapeObfuscatedLink> or <a href="https://discord.com/users/311324287086624768">on Discord</a>.
+			I am an undergraduate student at
+			<a href="https://reed.edu">Reed College</a> interested in mathematics and computing.
+			I am a hobbyist programmer and enjoy contributing to open source projects such as
+			<a href="https://rust-lang.org">the Rust language</a>
+			and <a href="https://github.com/max-niederman/ttyper">ttyper</a>, a TUI
+			typing test I created. I was also programming lead of
+			<a href="https://3636.team"> FRC team 3636 </a>
+			for two years.
 		</p>
+
+		<ul class="links-row">
+			<li>
+				<a href="https://github.com/max-niederman">GitHub</a>
+			</li>
+			<li>
+				<a href="https://www.linkedin.com/in/max-niederman/">LinkedIn</a>
+			</li>
+			<li>
+				<ScrapeObfuscatedLink
+					hrefBase64={btoa("mailto:max@maxniederman.com")}
+					client:load
+				>
+					Email
+				</ScrapeObfuscatedLink>
+			</li>
+			<li>
+				<a href="https://discord.com/users/311324287086624768">Discord</a>
+			</li>
+		</ul>
 	</main>
 </BaseLayout>
 
 <style lang="scss">
-	.bg {
-		position: fixed;
-		top: 0;
-		left: 0;
-		z-index: -1;
-		width: 100svw;
-		height: 100svh;
+	@use "~/styles/links.scss";
+	@use "~/styles/type.scss";
+
+	body {
+		margin: 0 auto;
+		max-width: 80ch;
 	}
 
-	main,
-	header {
-		margin-left: auto;
-		margin-right: auto;
-		max-width: 75ch;
+	h1 {
+		font-size: 2.25rem;
+		font-style: italic;
+		font-weight: 450;
 	}
 
-	header {
-		margin-top: 2rem;
+	.links-row {
+		list-style: none;
+		padding: 0;
 
 		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		
-		img {
-			height: 3em;
-		}
+		flex-wrap: wrap;
+		gap: 1rem;
 	}
 </style>
