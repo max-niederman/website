@@ -1,12 +1,15 @@
 ---
-import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
 
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import ScrapeObfuscatedLink from "~/components/ScrapeObfuscatedLink.svelte";
+import { formatDate } from "~/utils/time";
+
+const posts = await getCollection("posts");
 ---
 
 <BaseLayout title="Max Niederman">
-	<header>
+	<header class="type">
 		<h1>Max Niederman</h1>
 	</header>
 
@@ -30,7 +33,7 @@ import ScrapeObfuscatedLink from "~/components/ScrapeObfuscatedLink.svelte";
 
 		<ul class="links-row">
 			<li>
-				<a href="https://github.com/max-niederman">GitHub</a>
+				<a href="https://github.com/max-niederman" data->GitHub</a>
 			</li>
 			<li>
 				<a href="https://www.linkedin.com/in/max-niederman/">LinkedIn</a>
@@ -47,6 +50,19 @@ import ScrapeObfuscatedLink from "~/components/ScrapeObfuscatedLink.svelte";
 				<a href="https://discord.com/users/311324287086624768">Discord</a>
 			</li>
 		</ul>
+
+		<h2>My Writings</h2>
+
+		<ul class="post-links">
+			{
+				posts.map((post) => (
+					<li>
+						<a href={post.slug}>{post.data.title}</a> —{" "}
+						{formatDate(post.data.published)}
+					</li>
+				))
+			}
+		</ul>
 	</main>
 </BaseLayout>
 
@@ -55,7 +71,7 @@ import ScrapeObfuscatedLink from "~/components/ScrapeObfuscatedLink.svelte";
 	@use "~/styles/type.scss";
 
 	body {
-		margin: 0 auto;
+		margin: 4rem auto;
 		padding: 0 2ch;
 		max-width: 80ch;
 	}
@@ -67,12 +83,14 @@ import ScrapeObfuscatedLink from "~/components/ScrapeObfuscatedLink.svelte";
 		font-feature-settings: "swsh", "calt";
 	}
 
-	.links-row {
+	.links-row, .post-links {
 		list-style: none;
 		padding: 0;
+	}
 
+	.links-row {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 1rem;
+		gap: 1ch;
 	}
 </style>
