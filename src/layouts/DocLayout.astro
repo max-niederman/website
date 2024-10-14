@@ -2,6 +2,7 @@
 import BaseLayout from "./BaseLayout.astro";
 
 import "~/styles/type.scss";
+import "~/styles/links.scss";
 
 export interface Props {
     title: string;
@@ -22,6 +23,7 @@ const { title } = Astro.props;
 <style is:global lang="scss">
     body {
         margin: 0 auto;
-        max-width: 100ch;
+        padding: 0 2ch;
+        max-width: 80ch;
     }
 </style>

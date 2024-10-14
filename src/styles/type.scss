@@ -1,3 +1,4 @@
+/* Basics and inline elements */
 .type {
 	font-family: "Garamond Premier Pro", serif;
 	font-feature-settings: "calt";
@@ -28,6 +29,14 @@
 		font-style: italic;
 	}
 
+	/* Most link styling is in links.scss */
+	a {
+		color: inherit;
+	}
+}
+
+/* Block and structural elements */
+.type {
 	blockquote {
 		font-style: italic;
 
@@ -50,11 +59,6 @@
 		border: none;
 		border-top: 0.5px solid var(--col-fg3);
 	}
-	
-	/* Most link styling is in links.scss */
-	a {
-		color: inherit;
-	}
 
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: 400;
@@ -64,8 +68,6 @@
 	h1 {
 		margin-top: 4rem;
 		margin-bottom: 2rem;
-
-		font-feature-settings: "swsh", "calt";
 	}
 
 	h2 {
