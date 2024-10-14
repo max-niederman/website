@@ -1,15 +1,13 @@
 @use "sass:color";
 
 @use "normalize.css";
-@use "@fontsource-variable/eb-garamond/wght.css";
-@use "@fontsource-variable/eb-garamond/wght-italic.css";
 
 @function srgbify($color) {
 	@return "#" + str-slice(color.ie-hex-str($color), 4);
 }
 
 :root {
-	font-size: 20px;
+	font-size: 22px;
 
 	--col-bg0: #{srgbify(oklch(1.0 0.01 80))};
 	--col-bg1: #{srgbify(oklch(0.97 0.01 80))};
@@ -26,9 +24,33 @@
 }
 
 body {
-	font-family: "EB Garamond Variable", sans-serif;
+	font-family: "Garamond Premier Pro", sans-serif;
 	text-rendering: optimizeLegibility;
 	
 	color: var(--col-fg);
 	background-color: var(--col-bg1);
+}
+
+@font-face {
+    font-family: "Garamond Premier Pro";
+    src: url("/fonts/garamond_premier_pro_regular.woff2") format("woff2"),
+         url("/fonts/garamond_premier_pro_regular.woff") format("woff");
+    font-weight: regular;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Garamond Premier Pro";
+    src: url("/fonts/garamond_premier_pro_italic.woff2") format("woff2"),
+         url("/fonts/garamond_premier_pro_italic.woff") format("woff");
+    font-weight: regular;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Garamond Premier Pro";
+    src: url("/fonts/garamond_premier_pro_bold.woff2") format("woff2"),
+         url("/fonts/garamond_premier_pro_bold.woff") format("woff");
+    font-weight: bold;
+    font-style: normal;
 }

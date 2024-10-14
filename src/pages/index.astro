@@ -19,7 +19,8 @@ import ScrapeObfuscatedLink from "~/components/ScrapeObfuscatedLink.svelte";
 		<p>
 			I am an undergraduate student at
 			<a href="https://reed.edu">Reed College</a> interested in mathematics and computing.
-			I am a hobbyist programmer and enjoy contributing to open source projects such as
+			I am a hobbyist programmer and enjoy contributing to open source projects such
+			as
 			<a href="https://rust-lang.org">the Rust language</a>
 			and <a href="https://github.com/max-niederman/ttyper">ttyper</a>, a TUI
 			typing test I created. I was also programming lead of
@@ -39,8 +40,8 @@ import ScrapeObfuscatedLink from "~/components/ScrapeObfuscatedLink.svelte";
 					hrefBase64={btoa("mailto:max@maxniederman.com")}
 					client:load
 				>
-					Email
-				</ScrapeObfuscatedLink>
+					Email</ScrapeObfuscatedLink
+				>
 			</li>
 			<li>
 				<a href="https://discord.com/users/311324287086624768">Discord</a>
@@ -55,13 +56,15 @@ import ScrapeObfuscatedLink from "~/components/ScrapeObfuscatedLink.svelte";
 
 	body {
 		margin: 0 auto;
+		padding: 0 2ch;
 		max-width: 80ch;
 	}
 
 	h1 {
-		font-size: 2.25rem;
+		font-size: 2.5rem;
 		font-style: italic;
 		font-weight: 450;
+		font-feature-settings: "swsh", "calt";
 	}
 
 	.links-row {
