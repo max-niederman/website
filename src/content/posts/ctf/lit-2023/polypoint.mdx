@@ -11,7 +11,7 @@ We are given two files: `encode.py` and `encoded.txt`.
 
 `encode.py`:
 
-```py
+```python
 from secrets import SystemRandom
 
 gen = SystemRandom()
@@ -38,7 +38,7 @@ for _ in range(10):
 
 Let's analyze this in pieces.
 
-```py
+```python
 from secrets import SystemRandom
 
 gen = SystemRandom()
@@ -47,7 +47,7 @@ gen = SystemRandom()
 This is a cryptographic PRNG,
 so it should probably be treated as truly random for the purposes of the solution.
 
-```py
+```python
 with open("flag.txt", "rb") as f:
     flag = f.read().strip()
 
@@ -57,7 +57,7 @@ c = int.from_bytes(flag)
 
 This is pretty standard for crypto challenges: read the flag and encode it as an integer. We are also given the extra piece of information that the flag is 76 bytes long, which turns out to be useful later.
 
-```py
+```python
 poly = [c]
 for _ in range(10):
     poly.append(gen.randrange(pow(10, 11), pow(10, 12)))
@@ -68,7 +68,7 @@ the first being the integer representation of the flag,
 and the rest being random integers between $10^{11}$ and $10^{12}$.
 I'm going to refer to each of these numbers as $p_1$, $p_2$, and so on up to $p_{11}$, and the whole list as the eleven-dimensional vector $\vec{p}$.
 
-```py
+```python
 for _ in range(10):
     x = gen.randrange(pow(10, 11), pow(10, 12))
     v = 1

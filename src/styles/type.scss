@@ -33,9 +33,19 @@
 	a {
 		color: inherit;
 	}
+
+	code {
+		border-radius: 0.25em;
+
+		font-family: "Fira Code Variable", monospace;
+		font-size: 0.8em;
+
+		background-color: #24273a;
+		color: #cad3f5;
+	}
 }
 
-/* Block and structural elements */
+/* Structural elements */
 .type {
 	blockquote {
 		font-style: italic;
@@ -78,5 +88,42 @@
 	h3 {
 		margin-top: 2rem;
 		margin-bottom: 0.75rem;
+	}
+}
+
+/* Figures */
+.type {
+	.mathematica, .astro-code {
+		width: 100%;
+		border-radius: 0.5rem;
+	}
+
+	.astro-code {
+		padding: 1rem;
+
+		position: relative;
+
+		code {
+			font-size: 0.8rem;
+			background: none;
+		}
+
+		&::after {
+			position: absolute;
+			top: 0;
+			right: 0;
+
+			padding: 0.20rem 0.5rem;
+			border-radius: 0 0 0 0.5rem;
+
+			content: attr(data-language);
+
+			color: #24273a;
+			background-color: #c6a0f6;
+
+			font-family: "Fira Code Variable", monospace;
+			font-size: 0.8rem;
+			text-transform: uppercase;
+		}
 	}
 }
