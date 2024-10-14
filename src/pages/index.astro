@@ -6,6 +6,8 @@ import ScrapeObfuscatedLink from "~/components/ScrapeObfuscatedLink.svelte";
 import { formatDate } from "~/utils/time";
 
 const posts = await getCollection("posts");
+posts.sort((a, b) => a.data.published.getTime() - b.data.published.getTime());
+posts.reverse();
 ---
 
 <BaseLayout title="Max Niederman">
@@ -83,7 +85,8 @@ const posts = await getCollection("posts");
 		font-feature-settings: "swsh", "calt";
 	}
 
-	.links-row, .post-links {
+	.links-row,
+	.post-links {
 		list-style: none;
 		padding: 0;
 	}
