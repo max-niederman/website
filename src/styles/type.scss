@@ -1,10 +1,12 @@
 .type {
 	font-family: "Garamond Premier Pro", serif;
 	font-feature-settings: "calt";
+	font-variant-numeric: oldstyle-nums;
 	font-size: 1rem;
 
 	line-height: 1.3;
 
+	text-align: justify;
 	text-wrap: pretty;
 
 	em {
@@ -32,7 +34,7 @@
 		cite,
 		figcaption {
 			display: block;
-			margin-top: 0.5rem;
+			margin-top: 0.5em;
 
 			text-align: right;
 
@@ -41,8 +43,38 @@
 			}
 		}
 	}
+
+	hr {
+		margin: 1.5em 0;
+
+		border: none;
+		border-top: 0.5px solid var(--col-fg3);
+	}
 	
+	/* Most link styling is in links.scss */
 	a {
 		color: inherit;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-weight: 400;
+		font-style: italic;
+	}
+
+	h1 {
+		margin-top: 4rem;
+		margin-bottom: 2rem;
+
+		font-feature-settings: "swsh", "calt";
+	}
+
+	h2 {
+		margin-top: 3rem;
+		margin-bottom: 1rem;
+	}
+
+	h3 {
+		margin-top: 2rem;
+		margin-bottom: 0.75rem;
 	}
 }
