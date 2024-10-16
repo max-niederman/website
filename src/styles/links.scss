@@ -18,3 +18,13 @@ a {
         }
     }
 }
+
+sup a {
+    font-variant-numeric: normal;
+
+    text-decoration: none;
+
+    &::after {
+        content: none;
+    }
+}
