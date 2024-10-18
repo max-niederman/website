@@ -35,11 +35,11 @@ export class Vec2 {
 		return this.#x * other.#x + this.#y * other.#y;
 	}
 
-	hademardProd(other: Vec2): Vec2 {
+	hadamardProd(other: Vec2): Vec2 {
 		return new Vec2(this.#x * other.#x, this.#y * other.#y);
 	}
 
-	hademardDiv(other: Vec2): Vec2 {
+	hadamardDiv(other: Vec2): Vec2 {
 		return new Vec2(this.#x / other.#x, this.#y / other.#y);
 	}
 

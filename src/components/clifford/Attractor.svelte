@@ -51,7 +51,7 @@
 			updater.update(a, b, c, d);
 			renderer.draw(
 				updater.readBuffer,
-				new Vec2(canvas.height / canvas.width, 1).hademardProd(scale),
+				new Vec2(canvas.height / canvas.width, 1).hadamardProd(scale),
 				offset,
 			);
 
