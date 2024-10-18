@@ -22,6 +22,10 @@
 	--col-accent: #{srgbify(oklch(0.5 0.3 0deg))};
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 * {
 	box-sizing: border-box;
 }
