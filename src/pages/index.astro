@@ -4,13 +4,14 @@ import { getCollection } from "astro:content";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import ScrapeObfuscatedLink from "~/components/ScrapeObfuscatedLink.svelte";
 import { formatDate } from "~/utils/time";
+import PageLayout from "~/layouts/PageLayout.astro";
 
 const posts = await getCollection("posts");
 posts.sort((a, b) => a.data.published.getTime() - b.data.published.getTime());
 posts.reverse();
 ---
 
-<BaseLayout title="Max Niederman">
+<PageLayout title="Max Niederman">
 	<header class="type">
 		<h1>Max Niederman</h1>
 	</header>
@@ -71,12 +72,6 @@ posts.reverse();
 <style lang="scss">
 	@use "~/styles/links.scss";
 	@use "~/styles/type.scss";
-
-	body {
-		margin: 4rem auto;
-		padding: 0 2ch;
-		max-width: 80ch;
-	}
 
 	h1 {
 		font-size: 2.5rem;

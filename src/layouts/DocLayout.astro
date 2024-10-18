@@ -1,5 +1,5 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
+import PageLayout from "./PageLayout.astro";
 
 import "~/styles/type.scss";
 import "~/styles/links.scss";
@@ -9,25 +9,39 @@ import "katex/dist/katex.min.css";
 import "@fontsource-variable/fira-code";
 
 export interface Props {
-    title: string;
+	title: string;
+	published: Date;
+	updated: Date;
 }
-const { title } = Astro.props;
+const { title, published, updated } = Astro.props;
 ---
 
-<BaseLayout {title}>
-    <header class="type">
-        <h1>{title}</h1>
-    </header>
+<PageLayout {title}>
+	<header class="type">
+		<h1>{title}</h1>
 
-    <main class="type">
-        <slot />
-    </main>
-</BaseLayout>
+		<div class="metadata">
+			<time datetime={published.toISOString()} title="Date of publication">
+				{published.toLocaleDateString()}
+			</time>
+			&ndash;
+			<time datetime={updated.toISOString()} title="Date of last update">
+				{updated.toLocaleDateString()}
+			</time>
+		</div>
+	</header>
+
+	<main class="type">
+		<slot />
+	</main>
+</PageLayout>
 
 <style is:global lang="scss">
-    body {
-        margin: 0 auto;
-        padding: 0 2ch;
-        max-width: 80ch;
+
+
+    header.type {
+        h1 {
+            margin-bottom: 1rem;
+        }
     }
 </style>
