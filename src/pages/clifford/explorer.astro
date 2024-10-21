@@ -1,12 +1,12 @@
 ---
-import PostLayout from "~/layouts/DocLayout.astro";
+import DocLayout from "~/layouts/DocLayout.astro";
 
 import CExplorer from "~/components/clifford/Explorer.svelte";
 ---
 
-<PostLayout title="Clifford Attractor Explorer">
+<DocLayout title="Clifford Attractor Explorer" published={new Date("2024-06-24")} updated={new Date("2024-06-24")}>
 	<CExplorer client:load />
-</PostLayout>
+</DocLayout>
 
 <style lang="scss">
 </style>
