@@ -63,7 +63,7 @@ export class Vec2 {
 export function randInterval(
 	min: number,
 	max: number,
-	rng: () => number = Math.random
+	rng: () => number = Math.random,
 ): number {
 	return min + rng() * (max - min);
 }

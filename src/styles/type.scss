@@ -70,7 +70,12 @@
 		border-top: 0.5px solid var(--col-fg3);
 	}
 
-	h1, h2, h3, h4, h5, h6 {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
 		text-align: left;
 		font-weight: 400;
 		font-style: italic;
@@ -94,7 +99,8 @@
 
 /* Figures */
 .type {
-	.mathematica, .astro-code {
+	.mathematica,
+	.astro-code {
 		width: 100%;
 		border-radius: 0.5rem;
 	}
@@ -114,7 +120,7 @@
 			top: 0;
 			right: 0;
 
-			padding: 0.20rem 0.5rem;
+			padding: 0.2rem 0.5rem;
 			border-radius: 0 0 0 0.5rem;
 
 			content: attr(data-language);

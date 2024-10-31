@@ -1,30 +1,30 @@
 a {
 	color: inherit;
-    text-decoration: 1px dotted underline;
+	text-decoration: 1px dotted underline;
 
-    border-radius: 0.25em;
+	border-radius: 0.25em;
 
-    &::after {
-        content: "°";
-        color: var(--col-accent);
-        text-decoration: var(--col-bg1) underline; // hack to hide the underline
-    }
+	&::after {
+		content: "°";
+		color: var(--col-accent);
+		text-decoration: var(--col-bg1) underline; // hack to hide the underline
+	}
 
-    &:hover {
-        background-color: var(--col-bg2);
+	&:hover {
+		background-color: var(--col-bg2);
 
-        &::after {
-            text-decoration: var(--col-bg2) underline;
-        }
-    }
+		&::after {
+			text-decoration: var(--col-bg2) underline;
+		}
+	}
 }
 
 sup a {
-    font-variant-numeric: normal;
+	font-variant-numeric: normal;
 
-    text-decoration: none;
+	text-decoration: none;
 
-    &::after {
-        content: none;
-    }
+	&::after {
+		content: none;
+	}
 }

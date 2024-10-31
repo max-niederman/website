@@ -1,6 +1,6 @@
 /** Resize the canvas to match the size at which it is displayed, in physical pixels. */
 export function resizeCanvasToPhysicalDisplaySize(
-	canvas: HTMLCanvasElement
+	canvas: HTMLCanvasElement,
 ): boolean {
 	const width = canvas.clientWidth * window.devicePixelRatio;
 	const height = canvas.clientHeight * window.devicePixelRatio;
