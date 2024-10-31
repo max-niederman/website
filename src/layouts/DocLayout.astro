@@ -12,8 +12,9 @@ export interface Props {
 	title: string;
 	published: Date;
 	updated: Date;
+	readingTime: number;
 }
-const { title, published, updated } = Astro.props;
+const { title, published, updated, readingTime } = Astro.props;
 ---
 
 <PageLayout {title}>
@@ -28,6 +29,10 @@ const { title, published, updated } = Astro.props;
 			<time datetime={updated.toISOString()} title="Date of last update">
 				{updated.toLocaleDateString()}
 			</time>
+			<span class="sep">&middot;</span>
+			<span class="reading-time" title="Time to read at 200 words per minute">
+				{Math.round(readingTime)} minute read
+			</span>
 		</div>
 	</header>
 
@@ -37,11 +42,17 @@ const { title, published, updated } = Astro.props;
 </PageLayout>
 
 <style is:global lang="scss">
-
-
     header.type {
         h1 {
             margin-bottom: 1rem;
         }
     }
+
+	.metadata {
+		font-size: 0.9em;
+
+		.sep {
+			margin: 0 0.5ch;
+		}
+	}
 </style>

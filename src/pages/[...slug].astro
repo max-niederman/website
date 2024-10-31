@@ -5,20 +5,25 @@ import { getCollection } from "astro:content";
 import PostLayout from "~/layouts/DocLayout.astro";
 
 export const getStaticPaths = (async () => {
-  const posts = await getCollection("posts");
+	const posts = await getCollection("posts");
 
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: { post },
+	}));
 }) satisfies GetStaticPaths;
 
 const { post } = Astro.props;
 
 const { title, published, updated } = post.data;
-const { Content } = await post.render();
+const { Content, remarkPluginFrontmatter } = await post.render();
 ---
 
-<PostLayout {title} {published} {updated}>
-  <Content />
+<PostLayout
+	{title}
+	{published}
+	{updated}
+	readingTime={remarkPluginFrontmatter.readingTime}
+>
+	<Content />
 </PostLayout>
