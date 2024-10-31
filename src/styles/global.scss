@@ -1,9 +1,10 @@
 @use "sass:color";
+@use "sass:string";
 
 @use "normalize.css";
 
 @function srgbify($color) {
-	@return "#" + str-slice(color.ie-hex-str($color), 4);
+	@return "#" + string.slice(color.ie-hex-str($color), 4);
 }
 
 :root {
