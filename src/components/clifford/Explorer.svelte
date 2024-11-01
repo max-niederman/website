@@ -10,6 +10,7 @@
 	};
 	let numPoints = 1_000_000;
 	let attractorKey = {};
+	let scalingFactor = 0.5;
 
 	$: attractorKey = numPoints;
 </script>
@@ -48,6 +49,15 @@
 		max={10_000_000}
 		step={100_000}
 	/>
+
+	Scaling factor: {scalingFactor}
+	<input
+		type="range"
+		bind:value={scalingFactor}
+		min={0.1}
+		max={1}
+		step={0.01}
+	/>
 	Reset the attractor if it has become too noisy.
 	<button type="button" on:click={() => (attractorKey = {})}>Reset</button>
 </form>
@@ -56,7 +66,7 @@
 	{#key attractorKey}
 		<Attractor
 			dynamics={() => dynamics}
-			display={() => ({ scale: new Vec2(0.25), offset: new Vec2() })}
+			display={() => ({ scale: new Vec2(scalingFactor), offset: new Vec2() })}
 			{numPoints}
 		/>
 	{/key}
