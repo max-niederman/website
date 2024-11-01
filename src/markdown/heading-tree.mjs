@@ -10,7 +10,6 @@ const slugger = new GithubSlugger();
 export function remarkHeadingTree() {
 	return function (tree, { data }) {
 		data.astro.frontmatter.headingTree = buildHeadingTree(tree);
-		console.log(data.astro.frontmatter.headingTree);
 	};
 }
 

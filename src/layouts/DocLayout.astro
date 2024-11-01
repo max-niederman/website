@@ -12,7 +12,7 @@ export interface Props {
 	title: string;
 	published: Date;
 	updated: Date;
-	readingTime: number;
+	readingTime?: number;
 }
 const { title, published, updated, readingTime } = Astro.props;
 ---
@@ -29,10 +29,12 @@ const { title, published, updated, readingTime } = Astro.props;
 			<time datetime={updated.toISOString()} title="Date of last update">
 				{updated.toLocaleDateString()}
 			</time>
-			<span class="sep">&middot;</span>
-			<span class="reading-time" title="Time to read at 200 words per minute">
-				{Math.round(readingTime)} minute read
-			</span>
+			{readingTime && (
+				<span class="sep">&middot;</span>
+				<span class="reading-time" title="Time to read at 200 words per minute">
+					{Math.round(readingTime)} minute read
+				</span>
+			)}
 		</div>
 	</header>
 
