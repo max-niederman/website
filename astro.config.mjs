@@ -5,6 +5,7 @@ import mdx from "@astrojs/mdx";
 import icon from "astro-icon";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import { remarkTypedLinks } from "./src/markdown/links.mjs";
 import { remarkReadingTime } from "./src/markdown/reading-time.mjs";
 import { remarkHeadingTree } from "./src/markdown/heading-tree.mjs";
 
@@ -12,7 +13,7 @@ import { remarkHeadingTree } from "./src/markdown/heading-tree.mjs";
 export default defineConfig({
 	integrations: [svelte(), mdx(), icon()],
 	markdown: {
-		remarkPlugins: [remarkMath, remarkReadingTime, remarkHeadingTree],
+		remarkPlugins: [remarkMath, remarkTypedLinks, remarkReadingTime, remarkHeadingTree],
 		rehypePlugins: [rehypeKatex],
 		shikiConfig: {
 			theme: "catppuccin-macchiato",
