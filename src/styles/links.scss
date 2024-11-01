@@ -17,6 +17,18 @@ a {
 			text-decoration: var(--col-bg2) underline;
 		}
 	}
+
+	&:visited {
+		color: inherit;
+	}
+}
+
+a.basic-link {
+	text-decoration: none;
+
+	&::after {
+		content: none;
+	}
 }
 
 sup a {
