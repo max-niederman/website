@@ -4,6 +4,7 @@
 
 	export let hrefBase64: string;
 	export let target: HTMLAttributeAnchorTarget = "_self";
+	export let linkType: string | undefined = undefined;
 
 	let href: string = "";
 
@@ -12,7 +13,7 @@
     });
 </script>
 
-<a class="type" href={href} target={target}>
+<a class="type" {href} {target} data-link-type={linkType}>
 	<slot />
 </a>
 

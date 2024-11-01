@@ -28,7 +28,7 @@ posts.reverse();
 			I am a hobbyist programmer and enjoy contributing to open source projects such
 			as
 			<a href="https://rust-lang.org">the Rust language</a>
-			and <a href="https://github.com/max-niederman/ttyper">ttyper</a>, a TUI
+			and <a href="https://github.com/max-niederman/ttyper" data-link-type="github">ttyper</a>, a TUI
 			typing test I created. I was also programming lead of
 			<a href="https://3636.team"> FRC team 3636 </a>
 			for two years.
@@ -36,21 +36,22 @@ posts.reverse();
 
 		<ul class="links-row">
 			<li>
-				<a href="https://github.com/max-niederman" data->GitHub</a>
+				<a href="https://github.com/max-niederman" data-link-type="github">GitHub</a>
 			</li>
 			<li>
-				<a href="https://www.linkedin.com/in/max-niederman/">LinkedIn</a>
+				<a href="https://www.linkedin.com/in/max-niederman/" data-link-type="linkedin">LinkedIn</a>
 			</li>
 			<li>
 				<ScrapeObfuscatedLink
 					hrefBase64={btoa("mailto:max@maxniederman.com")}
+					linkType="email"
 					client:load
 				>
 					Email</ScrapeObfuscatedLink
 				>
 			</li>
 			<li>
-				<a href="https://discord.com/users/311324287086624768">Discord</a>
+				<a href="https://discord.com/users/311324287086624768" data-link-type="discord">Discord</a>
 			</li>
 		</ul>
 
@@ -60,7 +61,7 @@ posts.reverse();
 			{
 				posts.map((post) => (
 					<li>
-						<a href={post.slug}>{post.data.title}</a> —{" "}
+						<a href={post.slug} data-link-type="internal">{post.data.title}</a> —{" "}
 						{formatDate(post.data.published)}
 					</li>
 				))
