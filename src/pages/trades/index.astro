@@ -1,0 +1,60 @@
+---
+import { getCollection } from "astro:content";
+import { format } from "date-fns";
+
+import PageLayout from "~/layouts/PageLayout.astro";
+
+import "~/styles/type.scss";
+import "~/styles/links.scss";
+
+const trades = await getCollection("trades");
+trades.sort((a, b) => a.data.exit.getTime() - b.data.exit.getTime());
+trades.reverse();
+---
+
+<PageLayout title="Max Niederman's Trades">
+	<header class="type">
+		<h1>My Trades</h1>
+	</header>
+
+	<main class="type">
+		<p>
+			This is a log of my trades. I include my rationale for each trade along
+			with a retrospective analysis.
+		</p>
+
+		<ul class="post-links">
+			{
+				trades.map((trade) => (
+					<li>
+						<a href={`/trades/${trade.slug}`} data-link-type="internal">
+							{trade.data.summary}
+						</a>{" "}
+						— {format(trade.data.exit, "PP")}
+					</li>
+				))
+			}
+		</ul>
+	</main>
+</PageLayout>
+
+<style lang="scss">
+	h1 {
+		font-size: 2.5rem;
+		font-style: italic;
+		font-weight: 450;
+		font-feature-settings: "swsh", "calt";
+	}
+
+	.links-row,
+	.post-links {
+		list-style: none;
+		padding: 0;
+	}
+
+	.links-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1ch;
+	}
+</style>
