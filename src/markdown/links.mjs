@@ -1,7 +1,7 @@
 import { visit } from "unist-util-visit";
 
 export function remarkTypedLinks() {
-    return function (tree, { data }) {
+    return function (tree, _) {
         visit(tree, "link", (node) => {
             let type = typeForLink(new URL(node.url, "https://maxniederman.com"));
             if (type) {
