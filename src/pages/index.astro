@@ -1,9 +1,8 @@
 ---
 import { getCollection } from "astro:content";
+import { format } from "date-fns";
 
-import BaseLayout from "~/layouts/BaseLayout.astro";
 import ScrapeObfuscatedLink from "~/components/ScrapeObfuscatedLink.svelte";
-import { formatDate } from "~/utils/time";
 import PageLayout from "~/layouts/PageLayout.astro";
 
 const posts = await getCollection("posts");
@@ -62,7 +61,7 @@ posts.reverse();
 				posts.map((post) => (
 					<li>
 						<a href={post.slug} data-link-type="internal">{post.data.title}</a> —{" "}
-						{formatDate(post.data.published)}
+						{format(post.data.published, "PPP")}
 					</li>
 				))
 			}
