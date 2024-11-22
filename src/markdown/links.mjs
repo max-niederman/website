@@ -25,7 +25,7 @@ function typeForLink(url) {
             return "phone";
         case "https:":
         case "http:":
-            switch (url.hostname) {
+            switch (url.hostname.replace(/^www\./, "")) {
                 case "maxniederman.com":
                     return "internal";
                 case "github.com":
@@ -36,6 +36,8 @@ function typeForLink(url) {
                 case "discord.gg":
                 case "discordapp.com":
                     return "discord";
+                case "nytimes.com":
+                    return "nytimes";
                 default:
                     return null;
             }
