@@ -1,0 +1,107 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import { format, formatDistance, formatRelative } from "date-fns";
+
+import PageLayout from "~/layouts/PageLayout.astro";
+
+import "~/styles/type.scss";
+import "~/styles/links.scss";
+
+export const getStaticPaths = (async () => {
+	const trades = await getCollection("trades");
+
+	return trades.map((trade) => ({
+		params: { slug: trade.slug },
+		props: { trade },
+	}));
+}) satisfies GetStaticPaths;
+
+const { trade } = Astro.props;
+
+const { summary, instruments, entry, exit, spent, received } = trade.data;
+
+const { Content } = await trade.render();
+
+function instrumentURL({ namespace, ticker }) {
+	switch (namespace) {
+		case "Polymarket":
+			return `https://polymarket.com/event/${ticker}`;
+		case "New York Stock Exchange":
+			return `https://www.nyse.com/quote/${ticker}`;
+	}
+}
+
+const moneyFormatter = new Intl.NumberFormat("en-US", {
+	style: "currency",
+	currency: "USD",
+	trailingZeroDisplay: "stripIfInteger",
+});
+---
+
+<PageLayout title={summary}>
+	<header class="type">
+		<p class="subtitle">Trade</p>
+		<h1>{summary}</h1>
+
+		<div class="metadata">
+			<p>
+				Entered
+				<time datetime={exit.toISOString()} title="Datetime of entry.">
+					{format(entry, "PPPP p")}.
+				</time>
+				<br />
+				Exited
+				{formatDistance(exit, entry)} later on
+				<time datetime={exit.toISOString()} title="Datetime of exit.">
+					{format(exit, "PPPP p")}.
+				</time>
+			</p>
+
+			<p>
+				Spent {moneyFormatter.format(spent)} to enter, and received {moneyFormatter.format(received)} on exit, for a net profit
+				of {moneyFormatter.format(received - spent)} or {(100 * (received - spent)) / spent}% of the investment.
+			</p>
+
+			Instruments traded:
+			<ul>
+				{
+					instruments.map((instrument) => (
+						<li>
+							<a href={instrumentURL(instrument)}>{instrument.name}</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</header>
+
+	<main class="type">
+		<Content />
+	</main>
+</PageLayout>
+
+<style lang="scss">
+	header.type {
+		h1 {
+			font-style: normal;
+			font-weight: normal;
+
+			margin-top: 0;
+			margin-bottom: 1rem;
+		}
+
+		.subtitle {
+			margin-top: 2rem;
+			margin-bottom: 0.25rem;
+
+			font-size: 1.25rem;
+			font-style: italic;
+			font-feature-settings: "swsh";
+		}
+
+		ul {
+			margin: 0;
+		}
+	}
+</style>

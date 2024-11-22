@@ -9,6 +9,25 @@ const postsCollection = defineCollection({
 	}),
 });
 
+const tradesCollection = defineCollection({
+	type: "content",
+	schema: z.object({
+		summary: z.string(),
+		instruments: z
+			.object({
+				namespace: z.enum(["New York Stock Exchange", "Polymarket"]),
+				ticker: z.string().optional(),
+				name: z.string(),
+			})
+			.array(),
+		entry: z.date(),
+		exit: z.date(),
+		spent: z.number(),
+		received: z.number(),
+	}),
+});
+
 export const collections = {
 	posts: postsCollection,
+	trades: tradesCollection,
 };
