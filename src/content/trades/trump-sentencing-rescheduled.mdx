@@ -1,0 +1,61 @@
+---
+summary: "Exploit technicality in market rules in the event that Trump's sentencing is postponed indefinitely rather than rescheduled, or the prosecution is dropped entirely."
+instruments:
+    - namespace: "Polymarket"
+      ticker: "trumps-november-26-sentencing-pushed-back/trumps-november-26-sentencing-pushed-back"
+      name: "Polymarket Contract: Trump's November 26 sentencing pushed back?"
+entry: 2024-11-21T05:52:09Z
+exit: 2024-11-22T10:08:52Z
+spent: 11.19
+received: 0
+---
+
+## Rationale
+
+Although the title of the market suggests that
+any delay of the sentencing triggers a "Yes" resolution,
+the actual rules read thus:
+
+> This market will resolve to "Yes" if Donald Trump's sentencing in "The State of New York vs. Donald Trump" is rescheduled to a date after November 26, 2024 ET. Otherwise, this market will resolve to "No".
+
+This criterion is technically not satisfied by
+an indefinite postponement of the sentencing,
+which I believe is the most likely outcome.
+
+Additionally, a clarification to the rules explicitly states that
+
+> Per the rules, the sentencing must be delayed to a further date for this market to resolve to "Yes". If all charges are dropped before any delay in sentencing is announced, this market will resolve to "No".
+
+It also seems somewhat likely (~10%) to me that the prosecutors will simply drop the case,
+so buying no shares at 5 or 6 cents on the dollar seems very good.
+
+## Execution
+
+I purchased 200 shares at an average price of 5.6¢, for around $11,
+with a sell limit order at 92¢ and no stop loss,
+because Polymarket doesn't support them natively.
+
+In the future I will probably make a bot that can do stop loss orders for me.
+
+## Retrospection
+
+The day after entry,
+[Trump's sentencing was postponed indefinitely](https://www.nytimes.com/2024/11/22/nyregion/trump-sentencing-postponed.html).
+A few hours later, and before I woke up, the market was resolved to "Yes" with no disputes,
+despite the "Yes" criterion being technically unfulfilled.
+
+Although I lost my entire position,
+I don't think this trade was actually a bad one.
+The problem is just that I assumed the rules would be followed to the letter,
+and it seems that's not the case on Polymarket.
+If I had had a significant position, I would perhaps
+try to dispute this either by posting a dispute bond or (maybe?) filing a small claims case against UMA?
+
+However, in the future I will probably just stay away from rules-lawyering arguments like these,
+unless I can get an actual clarification in my favor after entering the position.
+
+The only other thing is that I wasn't aware that
+[prosecutors had already declined to drop the case](https://www.nytimes.com/2024/11/19/nyregion/trump-bragg-manhattan-case.html)
+by the time I entered,
+making the true likelihood of the case being dropped before being delayed much, much lower.
+In the future I need to do more thorough research before betting.
