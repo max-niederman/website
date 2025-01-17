@@ -43,77 +43,87 @@ const moneyFormatter = new Intl.NumberFormat("en-US", {
 	currency: "USD",
 	trailingZeroDisplay: "stripIfInteger",
 });
+
+const MS_PER_YEAR = 365 * 24 * 60 * 60 * 1000;
 ---
 
 <PageLayout title={summary}>
 	<header class="type">
 		<p class="subtitle">
-			<a href="/trades" class="basic-link">Trade</a>
+			<h1>{summary}</h1>
+
+			<div class="metadata">
+				<p>
+					Entered
+					<time datetime={exit.toISOString()} title="Datetime of entry.">
+						{format(entry, "PPPP p")}.
+					</time>
+					<br />
+					Exited
+					{formatDistance(exit, entry)} later on
+					<time datetime={exit.toISOString()} title="Datetime of exit.">
+						{format(exit, "PPPP p")}.
+					</time>
+				</p>
+
+				<p>
+					Spent {moneyFormatter.format(spent)} to enter, and received {
+						moneyFormatter.format(received)
+					} on exit, for a net {received - spent >= 0 ? "profit" : "loss"} of {
+						moneyFormatter.format(Math.abs(received - spent))
+					}
+					or {Math.abs((100 * (received - spent)) / spent).toFixed(2)}% of the
+					investment. The implied annual return is {
+						(
+							100 *
+							Math.pow(
+								received / spent,
+								MS_PER_YEAR / (exit.getTime() - entry.getTime())
+							) - 100
+						).toFixed(2)
+					}%.
+				</p>
+
+				Instruments traded:
+				<ul>
+					{
+						instruments.map((instrument) => (
+							<li>
+								<a href={instrumentURL(instrument)}>{instrument.name}</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
 		</p>
-		<h1>{summary}</h1>
 
-		<div class="metadata">
-			<p>
-				Entered
-				<time datetime={exit.toISOString()} title="Datetime of entry.">
-					{format(entry, "PPPP p")}.
-				</time>
-				<br />
-				Exited
-				{formatDistance(exit, entry)} later on
-				<time datetime={exit.toISOString()} title="Datetime of exit.">
-					{format(exit, "PPPP p")}.
-				</time>
-			</p>
-
-			<p>
-				Spent {moneyFormatter.format(spent)} to enter, and received {
-					moneyFormatter.format(received)
-				} on exit, for a net {received - spent >= 0 ? "profit" : "loss"} of {
-					moneyFormatter.format(Math.abs(received - spent))
-				}
-				or {Math.abs((100 * (received - spent)) / spent).toFixed(2)}% of the investment.
-			</p>
-
-			Instruments traded:
-			<ul>
-				{
-					instruments.map((instrument) => (
-						<li>
-							<a href={instrumentURL(instrument)}>{instrument.name}</a>
-						</li>
-					))
-				}
-			</ul>
-		</div>
+		<main class="type">
+			<Content />
+		</main>
 	</header>
 
-	<main class="type">
-		<Content />
-	</main>
+	<style lang="scss">
+		header.type {
+			h1 {
+				font-style: normal;
+				font-weight: normal;
+
+				margin-top: 0;
+				margin-bottom: 1rem;
+			}
+
+			.subtitle {
+				margin-top: 2rem;
+				margin-bottom: 0.25rem;
+
+				font-size: 1.25rem;
+				font-style: italic;
+				font-feature-settings: "swsh";
+			}
+
+			ul {
+				margin: 0;
+			}
+		}
+	</style>
 </PageLayout>
-
-<style lang="scss">
-	header.type {
-		h1 {
-			font-style: normal;
-			font-weight: normal;
-
-			margin-top: 0;
-			margin-bottom: 1rem;
-		}
-
-		.subtitle {
-			margin-top: 2rem;
-			margin-bottom: 0.25rem;
-
-			font-size: 1.25rem;
-			font-style: italic;
-			font-feature-settings: "swsh";
-		}
-
-		ul {
-			margin: 0;
-		}
-	}
-</style>
