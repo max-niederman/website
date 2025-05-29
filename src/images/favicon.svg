@@ -7,15 +7,15 @@
    viewBox="0 0 12.7 12.7"
    version="1.1"
    id="svg1"
-   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25)"
-   sodipodi:docname="icon.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   sodipodi:docname="favicon.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
      id="namedview1"
-     pagecolor="#505050"
+     pagecolor="#000000"
      bordercolor="#ffffff"
      borderopacity="1"
      inkscape:showpageshadow="0"
@@ -23,32 +23,42 @@
      inkscape:pagecheckerboard="1"
      inkscape:deskcolor="#505050"
      inkscape:document-units="mm"
-     inkscape:zoom="15.180699"
-     inkscape:cx="23.121465"
-     inkscape:cy="18.47741"
-     inkscape:window-width="2560"
-     inkscape:window-height="1440"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
+     inkscape:zoom="7.5903495"
+     inkscape:cx="22.133368"
+     inkscape:cy="9.4857292"
+     inkscape:window-width="1932"
+     inkscape:window-height="1331"
+     inkscape:window-x="26"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     showgrid="false" />
   <defs
      id="defs1" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <path
-       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.309498;stroke-linecap:butt;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
-       d="M 0.02865814,6.8984012 11.597156,6.9890505 9.3371473,3.4747965 9.3646152,11.243721 8.5543693,11.241119 4.3041222,3.9391979 4.3714257,11.238647 3.5048746,11.225186 Z m 8.52603226,2.8609 -0.065828,-8.6469001 4.1672039,6.3201418 -11.5119,-0.084249 2.3683558,2.8645719 -0.062728,-9.176257"
-       id="path12"
-       sodipodi:nodetypes="ccccccccccccccc" />
-    <ellipse
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.420581;stroke-dasharray:none;stroke-opacity:1"
-       id="path13"
-       cx="1.4486204"
-       cy="4.5971041"
-       rx="1.1607896"
-       ry="1.1919307" />
+    <rect
+       style="fill:#ffffff;stroke-width:0.264583"
+       id="rect1"
+       width="12.688"
+       height="12.688261"
+       x="0"
+       y="0"
+       inkscape:label="rect1"
+       rx="3"
+       ry="3" />
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;font-size:7.05556px;font-family:'Garamond Premier Pro';-inkscape-font-specification:'Garamond Premier Pro Medium Italic';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#bb005e;fill-opacity:1;stroke-width:0.264583"
+       x="5.6818314"
+       y="8.6447487"
+       id="text2"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         style="font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;font-size:7.05556px;font-family:'Garamond Premier Pro';-inkscape-font-specification:'Garamond Premier Pro, Medium Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;font-feature-settings:'swsh';fill:#bb005e;fill-opacity:1;stroke-width:0.264583"
+         x="5.6818314"
+         y="8.6447487">M</tspan></text>
   </g>
 </svg>
