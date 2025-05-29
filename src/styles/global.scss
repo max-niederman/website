@@ -21,6 +21,20 @@
 	--col-accent: #{srgbify(oklch(0.5 0.3 0deg))};
 }
 
+@media (prefers-color-scheme: dark) {
+	:root {
+		--col-bg0: #{srgbify(oklch(0.1 0.01 80))};
+		--col-bg1: #{srgbify(oklch(0.175 0.01 80))};
+		--col-bg2: #{srgbify(oklch(0.225 0.01 80))};
+		--col-bg3: #{srgbify(oklch(0.275 0.01 80))};
+
+		--col-fg0: #{srgbify(oklch(0.9 0 0))};
+		--col-fg1: #{srgbify(oklch(0.8 0 0))};
+		--col-fg2: #{srgbify(oklch(0.7 0 0))};
+		--col-fg3: #{srgbify(oklch(0.6 0 0))};
+	}
+}
+
 html {
 	scroll-behavior: smooth;
 }
