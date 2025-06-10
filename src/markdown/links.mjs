@@ -25,7 +25,6 @@ function typeForLink(url) {
             return "phone";
         case "https:":
         case "http:":
-            console.log(url.hostname);
             switch (url.hostname.replace(/^www\./, "")) {
                 case "maxniederman.com":
                     return "internal";

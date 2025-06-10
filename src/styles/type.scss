@@ -103,6 +103,13 @@
 
 /* Figures */
 .type {
+	img {
+		display: block;
+		max-width: 100%;
+		height: auto;
+		margin: 0 auto;
+	}
+
 	.mathematica,
 	.astro-code {
 		width: 100%;
