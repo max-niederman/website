@@ -34,6 +34,8 @@ function typeForLink(url) {
                     return "github";
                 case "linkedin.com":
                     return "linkedin";
+                case "lesswrong.com":
+                    return "lesswrong";
                 case "discord.com":
                 case "discord.gg":
                 case "discordapp.com":

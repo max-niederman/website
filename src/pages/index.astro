@@ -17,27 +17,33 @@ posts.reverse();
 
 	<main class="type">
 		<p>
-			Hello! I'm Max. This is my personal website, where I write about things I
-			find interesting and share projects I'm working on.
+			Hello! I'm Max, an eighteen-year-old computer enthusiast and effective altruist.
+			This is my personal website, where I write about things I find interesting
+			and share projects I'm working on.
 		</p>
 
 		<p>
-			I am currently Chief Scientific Officer at <a href="https://bindwell.ai">Bindwell</a> (YC <span class="lining-nums">W25</span>),
-			on a leave of absence from a math degree at <a href="https://reed.edu">Reed College</a>.
-			I enjoy contributing to open source projects in my free time, such as
-			<a href="https://rust-lang.org">the Rust language</a>
-			and <a href="https://github.com/max-niederman/ttyper" data-link-type="github">ttyper</a>, a TUI
-			typing test I created. I was also programming lead of
-			<a href="https://3636.team"> FRC team 3636 </a>
+			I am currently between jobs and backpacking around Europe. Previously, I
+			was Chief Scientific Officer at <a href="https://bindwell.com">Bindwell</a>
+			(YC <span class="lining-nums">W25</span>), and studied math at <a
+				href="https://reed.edu">Reed College</a
+			>. I was also programming lead of <a href="https://frcteam3636.com">
+				FRC team 3636
+			</a>
 			for two years.
 		</p>
 
 		<ul class="links-row">
 			<li>
-				<a href="https://github.com/max-niederman" data-link-type="github">GitHub</a>
+				<a href="https://github.com/max-niederman" data-link-type="github"
+					>GitHub</a
+				>
 			</li>
 			<li>
-				<a href="https://www.linkedin.com/in/max-niederman/" data-link-type="linkedin">LinkedIn</a>
+				<a
+					href="https://www.linkedin.com/in/max-niederman/"
+					data-link-type="linkedin">LinkedIn</a
+				>
 			</li>
 			<li>
 				<ScrapeObfuscatedLink
@@ -49,7 +55,16 @@ posts.reverse();
 				>
 			</li>
 			<li>
-				<a href="https://discord.com/users/311324287086624768" data-link-type="discord">Discord</a>
+				<a
+					href="https://discord.com/users/311324287086624768"
+					data-link-type="discord">Discord</a
+				>
+			</li>
+			<li>
+				<a
+					href="https://www.lesswrong.com/users/max-niederman-1"
+					data-link-type="lesswrong">LessWrong</a
+				>
 			</li>
 		</ul>
 
@@ -59,14 +74,16 @@ posts.reverse();
 			{
 				posts.map((post) => (
 					<li>
-						<a href={post.slug} data-link-type="internal">{post.data.title}</a> —{" "}
-						{format(post.data.published, "PPP")}
+						<a href={post.slug} data-link-type="internal">
+							{post.data.title}
+						</a>{" "}
+						— {format(post.data.published, "PPP")}
 					</li>
 				))
 			}
 		</ul>
 	</main>
-</BaseLayout>
+</PageLayout>
 
 <style lang="scss">
 	@use "~/styles/links.scss";

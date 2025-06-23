@@ -28,7 +28,11 @@
 	.home {
 		font-size: 1.35rem;
 		font-style: italic;
-		font-feature-settings: "calt", "swsh";
+		
+		font-feature-settings: "calt";
+		&::first-letter {
+			font-feature-settings: "calt", "swsh";
+		}
 	}
 
 	.top-row {
