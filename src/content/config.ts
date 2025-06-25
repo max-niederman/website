@@ -6,6 +6,9 @@ const postsCollection = defineCollection({
 		title: z.string(),
 		published: z.date(),
 		updated: z.date(),
+		crossposts: z.object({
+			lesswrong: z.string().optional(),
+		}),
 	}),
 });
 

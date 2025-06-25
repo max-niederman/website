@@ -12,9 +12,12 @@ export interface Props {
 	title: string;
 	published: Date;
 	updated: Date;
+	crossposts: {
+		lesswrong?: string;
+	};
 	readingTime?: number;
 }
-const { title, published, updated, readingTime } = Astro.props;
+const { title, published, updated, readingTime, crossposts } = Astro.props;
 ---
 
 <PageLayout {title}>
@@ -34,6 +37,12 @@ const { title, published, updated, readingTime } = Astro.props;
 				<span class="reading-time" title="Time to read at 200 words per minute">
 					{Math.round(readingTime)} minute read
 				</span>
+			)}
+			{crossposts?.lesswrong && (
+				<span class="sep">&middot;</span>
+				<a href={`https://lesswrong.com/posts/${crossposts.lesswrong}`} data-link-type="lesswrong" target="_blank">
+					Discuss on LessWrong
+				</a>
 			)}
 		</div>
 	</header>
