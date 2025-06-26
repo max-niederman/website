@@ -12,14 +12,13 @@ export interface Props {
 	title: string;
 	published: Date;
 	updated: Date;
-	crossposts: {
+	crossposts?: {
 		lesswrong?: string;
 	};
 	readingTime?: number;
 }
-const { title, published, updated, readingTime, crossposts } = Astro.props;
+const { title, published, updated, readingTime, crossposts = {} } = Astro.props;
 ---
-
 <PageLayout {title}>
 	<header class="type">
 		<h1>{title}</h1>
