@@ -47,10 +47,6 @@
 		background-color: #24273a;
 		color: #cad3f5;
 	}
-
-	.typst-doc {
-		font-size: 0.9em;
-	}
 }
 
 /* Structural elements */
@@ -112,6 +108,12 @@
 		max-width: 100%;
 		height: auto;
 		margin: 0 auto;
+	}
+
+	.typst-doc {
+		font-size: 0.9em;
+		max-width: 100%;
+		overflow-x: scroll;
 	}
 
 	.mathematica,
