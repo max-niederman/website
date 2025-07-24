@@ -3,7 +3,8 @@ slug: fullrank
 title: "Fullrank: Bayesian Noisy Sorting"
 published: 2025-07-23
 updated: 2025-07-23
-crossposts: {}
+crossposts:
+  lesswrong: ojZL2iSgFnASmRNnN
 ---
 
 Fullrank is an interactive CLI tool for Bayesian inference of list rankings based on noisy comparisons.
@@ -81,7 +82,7 @@ That is, $D_(i j) = 1$ if item $j$ wins comparison $i$, $D_(i j) = -1$ if item $
 
 $$
 p(bold(s)|D) & = p(bold(s)) p(D|bold(s)) / p(D) \
-               & = phi (bold(s); mu, Sigma) (Pr[D bold(s) < bold(z)]) / Pr[D bold(t) < bold(z)]
+             & = phi (bold(s); mu, Sigma) (Pr[D bold(s) < bold(z)]) / Pr[D bold(t) < bold(z)]
 $$
 
 where $bold(t) ~ cal(N)(mu, Sigma)$ and $bold(z) ~ cal(N)(0, I_m)$.
@@ -166,6 +167,5 @@ fullrank stats < comparisons.json
 # compute raw samples in JSONL format for your own processing
 fullrank raw-sample 10000 samples.jsonl < comparisons.json
 ```
-
 
 [^1]: R. B. Arellano-Valle and A. Azzalini, "Some properties of the unified skew-normal distribution," _Statistical Papers_, vol. 63, pp. 461–487, 2022. [doi:10.1007/s00362-021-01235-2](https://doi.org/10.1007/s00362-021-01235-2)
