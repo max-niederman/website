@@ -9,7 +9,7 @@
 		<div class="top-row">
 			<a class="home basic-link" href="/">MN</a>
 			<div class="spacer" />
-			<a class="basic-link" href="/#writing">Writing</a>
+			<a class="basic-link" href="/resume.pdf" target="_blank">Résumé</a>
 		</div>
 	</nav>
 </div>
