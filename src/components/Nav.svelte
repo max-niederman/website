@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { HeadingTree } from "~/markdown/heading-tree";
+	import type { HeadingTree } from "../markdown/heading-tree";
 
 	export let headingTree: HeadingTree | undefined = undefined;
 </script>
@@ -15,7 +15,7 @@
 </div>
 
 <style lang="scss">
-	@use "~/styles/links.scss";
+	@use "../styles/links.scss";
 
 	nav {
 		padding: 0.5rem 1rem;

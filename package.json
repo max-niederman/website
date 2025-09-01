@@ -1,7 +1,16 @@
 {
-  "name": "",
+  "name": "@maxniederman/website",
   "type": "module",
   "version": "0.0.1",
+  "private": false,
+  "sideEffects": [
+    "**/*.scss"
+  ],
+  "files": [
+    "src",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -9,27 +18,68 @@
     "preview": "astro preview",
     "astro": "astro"
   },
+  "exports": {
+    "./layouts/*": "./src/layouts/*",
+    "./components/*": "./src/components/*",
+    "./styles/*": "./src/styles/*",
+    "./markdown/*": "./src/markdown/*",
+    "./images/*": "./src/images/*",
+    "./utils/*": "./src/utils/*"
+  },
+  "peerDependencies": {
+    "astro": "^4.0.0",
+    "@astrojs/svelte": "^5.0.0",
+    "svelte": "^4.0.0",
+    "sass": "^1.62.0"
+  },
   "dependencies": {
-    "@astrojs/check": "^0.5.10",
-    "@astrojs/mdx": "^2.3.1",
-    "@astrojs/svelte": "^5.7.2",
-    "@fontsource-variable/fira-code": "^5.1.0",
-    "@myriaddreamin/rehype-typst": "^0.6.1-rc2",
-    "astro": "^4.16.8",
-    "astro-icon": "^1.1.1",
-    "date-fns": "^4.1.0",
+    "@fontsource-variable/fira-code": "^5.2.6",
     "github-slugger": "^2.0.0",
-    "katex": "^0.16.11",
+    "katex": "^0.16.22",
     "mdast-util-to-string": "^4.0.0",
-    "normalize.css": "^8.0.1",
-    "posthog-js": "^1.249.5",
+    "posthog-js": "^1.261.0",
     "reading-time": "^1.5.0",
-    "rehype-katex": "^7.0.1",
-    "remark-math": "^6.0.0",
-    "sass": "^1.80.5",
-    "svelte": "^4.2.19",
-    "typescript": "^5.6.3",
     "unist-util-visit": "^5.0.0",
     "whatamesh": "max-niederman/whatamesh"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.5.10",
+    "@astrojs/mdx": "^2.3.1",
+    "@astrojs/svelte": "^5.7.3",
+    "@myriaddreamin/rehype-typst": "^0.6.1-rc3",
+    "astro": "^4.16.19",
+    "astro-icon": "^1.1.5",
+    "date-fns": "^4.1.0",
+    "normalize.css": "^8.0.1",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "sass": "^1.91.0",
+    "svelte": "^4.2.20",
+    "typescript": "^5.9.2"
+  },
+  "typesVersions": {
+    "*": {
+      "layouts/*": [
+        "src/layouts/*"
+      ],
+      "components/*": [
+        "src/components/*"
+      ],
+      "styles/*": [
+        "src/styles/*"
+      ],
+      "markdown/*": [
+        "src/markdown/*"
+      ],
+      "images/*": [
+        "src/images/*"
+      ],
+      "utils/*": [
+        "src/utils/*"
+      ]
+    }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

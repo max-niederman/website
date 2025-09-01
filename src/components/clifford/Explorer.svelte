@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Vec2 } from "~/utils/math";
+	import { Vec2 } from "../../utils/math";
 	import Attractor from "./Attractor.svelte";
 
 	let dynamics = {

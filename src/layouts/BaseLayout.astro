@@ -1,8 +1,8 @@
 ---
-import "~/styles/global.scss";
+import "../styles/global.scss";
 
-import favicon from "~/images/favicon.svg";
-import Posthog from "~/components/Posthog.svelte";
+import favicon from "../images/favicon.svg";
+import Posthog from "../components/Posthog.svelte";
 
 export interface Props {
     title: string;
@@ -19,7 +19,6 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-
     <Posthog client:idle />
   </head>
   <body>

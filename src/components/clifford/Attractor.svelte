@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy, onMount } from "svelte";
-	import { Vec2 } from "~/utils/math";
-	import { resizeCanvasToPhysicalDisplaySize } from "~/utils/canvas";
+	import { Vec2 } from "../../utils/math";
+	import { resizeCanvasToPhysicalDisplaySize } from "../../utils/canvas";
 
 	export let dynamics: (now: DOMHighResTimeStamp) => {
 		a: number;

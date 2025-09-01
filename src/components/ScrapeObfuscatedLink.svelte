@@ -18,5 +18,5 @@
 </a>
 
 <style lang="scss">
-	@use "~/styles/links.scss";
+	@use "../styles/links.scss";
 </style>
