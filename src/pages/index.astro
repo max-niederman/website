@@ -79,7 +79,7 @@ posts.reverse();
 			{
 				posts.map((post) => (
 					<li>
-						<a href={post.slug} data-link-type="internal">
+						<a href={post.slug} data-link-type="max">
 							{post.data.title}
 						</a>{" "}
 						— {format(post.data.published, "PPP")}

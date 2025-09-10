@@ -41,7 +41,7 @@ sup a {
 	}
 }
 
-a[data-link-type="internal"]::after {
+a[data-link-type="max"]::after {
 	vertical-align: super;
 	content: "M";
 	font-size: 0.65em;
@@ -57,6 +57,12 @@ a[data-link-type="wikipedia"]::after {
 a[data-link-type="lesswrong"]::after {
 	vertical-align: super;
 	content: "LW";
+	font-size: 0.65em;
+}
+
+a[data-link-type="echoprize"]::after {
+	vertical-align: super;
+	content: "EP";
 	font-size: 0.65em;
 }
 

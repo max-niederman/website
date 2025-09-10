@@ -27,7 +27,7 @@ trades.reverse();
 			{
 				trades.map((trade) => (
 					<li>
-						<a href={`/trades/${trade.slug}`} data-link-type="internal">
+						<a href={`/trades/${trade.slug}`} data-link-type="max">
 							{trade.data.summary}
 						</a>{" "}
 						— {format(trade.data.exit, "PP")}

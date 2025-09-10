@@ -27,7 +27,7 @@ function typeForLink(url) {
         case "http:":
             switch (url.hostname.replace(/^www\./, "")) {
                 case "maxniederman.com":
-                    return "internal";
+                    return "max";
                 case "en.wikipedia.org":
                     return "wikipedia";
                 case "github.com":
