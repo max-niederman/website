@@ -1,85 +1,85 @@
 {
-  "name": "@maxniederman/website",
-  "type": "module",
-  "version": "0.0.1",
-  "private": false,
-  "sideEffects": [
-    "**/*.scss"
-  ],
-  "files": [
-    "src",
-    "LICENSE",
-    "README.md"
-  ],
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "exports": {
-    "./layouts/*": "./src/layouts/*",
-    "./components/*": "./src/components/*",
-    "./styles/*": "./src/styles/*",
-    "./markdown/*": "./src/markdown/*",
-    "./images/*": "./src/images/*",
-    "./utils/*": "./src/utils/*"
-  },
-  "peerDependencies": {
-    "astro": "^4.0.0",
-    "@astrojs/svelte": "^5.0.0",
-    "svelte": "^4.0.0",
-    "sass": "^1.62.0"
-  },
-  "dependencies": {
-    "@fontsource-variable/fira-code": "^5.2.6",
-    "github-slugger": "^2.0.0",
-    "katex": "^0.16.22",
-    "mdast-util-to-string": "^4.0.0",
-    "posthog-js": "^1.261.0",
-    "reading-time": "^1.5.0",
-    "unist-util-visit": "^5.0.0",
-    "whatamesh": "max-niederman/whatamesh"
-  },
-  "devDependencies": {
-    "@astrojs/check": "^0.5.10",
-    "@astrojs/mdx": "^2.3.1",
-    "@astrojs/svelte": "^5.7.3",
-    "@myriaddreamin/rehype-typst": "^0.6.1-rc3",
-    "astro": "^4.16.19",
-    "astro-icon": "^1.1.5",
-    "date-fns": "^4.1.0",
-    "normalize.css": "^8.0.1",
-    "rehype-katex": "^7.0.1",
-    "remark-math": "^6.0.0",
-    "sass": "^1.91.0",
-    "svelte": "^4.2.20",
-    "typescript": "^5.9.2"
-  },
-  "typesVersions": {
-    "*": {
-      "layouts/*": [
-        "src/layouts/*"
-      ],
-      "components/*": [
-        "src/components/*"
-      ],
-      "styles/*": [
-        "src/styles/*"
-      ],
-      "markdown/*": [
-        "src/markdown/*"
-      ],
-      "images/*": [
-        "src/images/*"
-      ],
-      "utils/*": [
-        "src/utils/*"
-      ]
-    }
-  },
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "@maxniederman/website",
+	"type": "module",
+	"version": "0.0.1",
+	"private": false,
+	"sideEffects": [
+		"**/*.scss"
+	],
+	"files": [
+		"src",
+		"LICENSE",
+		"README.md"
+	],
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro check && astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"exports": {
+		"./layouts/*": "./src/layouts/*",
+		"./components/*": "./src/components/*",
+		"./styles/*": "./src/styles/*",
+		"./markdown/*": "./src/markdown/*",
+		"./images/*": "./src/images/*",
+		"./utils/*": "./src/utils/*"
+	},
+	"peerDependencies": {
+		"astro": "^4.0.0",
+		"@astrojs/svelte": "^5.0.0",
+		"svelte": "^4.0.0",
+		"sass": "^1.62.0"
+	},
+	"dependencies": {
+		"@fontsource-variable/fira-code": "^5.2.7",
+		"github-slugger": "^2.0.0",
+		"katex": "^0.16.22",
+		"mdast-util-to-string": "^4.0.0",
+		"posthog-js": "^1.268.1",
+		"reading-time": "^1.5.0",
+		"unist-util-visit": "^5.0.0",
+		"whatamesh": "max-niederman/whatamesh"
+	},
+	"devDependencies": {
+		"@astrojs/check": "0.9.4",
+		"@astrojs/mdx": "^4.3.6",
+		"@astrojs/svelte": "^7.1.1",
+		"@myriaddreamin/rehype-typst": "^0.6.1-rc3",
+		"astro": "^5.13.10",
+		"astro-icon": "^1.1.5",
+		"date-fns": "^4.1.0",
+		"normalize.css": "^8.0.1",
+		"rehype-katex": "^7.0.1",
+		"remark-math": "^6.0.0",
+		"sass": "^1.93.2",
+		"svelte": "^5.39.5",
+		"typescript": "^5.9.2"
+	},
+	"typesVersions": {
+		"*": {
+			"layouts/*": [
+				"src/layouts/*"
+			],
+			"components/*": [
+				"src/components/*"
+			],
+			"styles/*": [
+				"src/styles/*"
+			],
+			"markdown/*": [
+				"src/markdown/*"
+			],
+			"images/*": [
+				"src/images/*"
+			],
+			"utils/*": [
+				"src/utils/*"
+			]
+		}
+	},
+	"publishConfig": {
+		"access": "public"
+	}
 }
