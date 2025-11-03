@@ -15,9 +15,9 @@ export interface Props {
 	crossposts?: {
 		lesswrong?: string;
 	};
-	readingTime?: number;
+	wordCount?: number;
 }
-const { title, published, updated, readingTime, crossposts = {} } = Astro.props;
+const { title, published, updated, wordCount, crossposts = {} } = Astro.props;
 ---
 <PageLayout {title}>
 	<header class="type">
@@ -31,10 +31,10 @@ const { title, published, updated, readingTime, crossposts = {} } = Astro.props;
 			<time datetime={updated.toISOString()} title="Date of last update">
 				{updated.toLocaleDateString()}
 			</time>
-			{readingTime && (
+			{wordCount && (
 				<span class="sep">&middot;</span>
-				<span class="reading-time" title="Time to read at 200 words per minute">
-					{Math.round(readingTime)} minute read
+				<span class="word-count" title="Number of words">
+					{wordCount} words
 				</span>
 			)}
 			{crossposts?.lesswrong && (

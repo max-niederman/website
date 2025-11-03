@@ -20,7 +20,7 @@ const { Content, remarkPluginFrontmatter } = await post.render();
 
 <PostLayout
 	{...post.data}
-	readingTime={remarkPluginFrontmatter.readingTime}
+	wordCount={remarkPluginFrontmatter.wordCount}
 >
 	<Content />
 </PostLayout>
