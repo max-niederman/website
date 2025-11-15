@@ -33,11 +33,11 @@
     "sass": "^1.62.0"
   },
   "dependencies": {
-    "@fontsource-variable/fira-code": "^5.2.6",
+    "@fontsource-variable/fira-code": "^5.2.7",
     "github-slugger": "^2.0.0",
-    "katex": "^0.16.22",
+    "katex": "^0.16.25",
     "mdast-util-to-string": "^4.0.0",
-    "posthog-js": "^1.261.0",
+    "posthog-js": "^1.293.0",
     "reading-time": "^1.5.0",
     "unist-util-visit": "^5.0.0",
     "whatamesh": "max-niederman/whatamesh"
@@ -53,9 +53,9 @@
     "normalize.css": "^8.0.1",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
-    "sass": "^1.91.0",
+    "sass": "^1.94.0",
     "svelte": "^4.2.20",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.3"
   },
   "typesVersions": {
     "*": {
