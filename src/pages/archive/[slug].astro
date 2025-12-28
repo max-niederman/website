@@ -1,0 +1,91 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import { format, formatDistance } from "date-fns";
+
+import PageLayout from "~/layouts/PageLayout.astro";
+
+import "~/styles/type.scss";
+import "~/styles/links.scss";
+
+export const getStaticPaths = (async () => {
+	const archive = await getCollection("archive");
+
+	return archive.map((archive) => ({
+		params: { slug: archive.slug },
+		props: { archive: archive },
+	}));
+}) satisfies GetStaticPaths;
+
+const { archive } = Astro.props;
+
+const { title, authors, published } = archive.data;
+
+const { Content, remarkPluginFrontmatter } = await archive.render();
+const { wordCount } = remarkPluginFrontmatter;
+---
+
+<PageLayout {title}>
+	<header class="type">
+		<p class="subtitle">Archive</p>
+
+		<h1>{title}</h1>
+
+		<div class="metadata">
+			<span class="authors" title="Authors">
+				{authors.join(", ")}
+			</span>
+			<span class="sep">&middot;</span>
+    		<time datetime={published.toISOString()} title="Date of publication">
+    			{published.toLocaleDateString()}
+    		</time>
+      		{Boolean(wordCount) && (
+     			<span class="sep">&middot;</span>
+     			<span class="word-count" title="Number of words">
+      				{wordCount} words
+     			</span>
+    		)}
+		</div>
+
+		<main class="type">
+			<Content />
+		</main>
+	</header>
+
+	<style lang="scss">
+		header.type {
+			h1 {
+				font-style: normal;
+				font-weight: normal;
+
+				margin-top: 0;
+				margin-bottom: 0.5rem;
+			}
+
+			.subtitle {
+				margin-top: 2rem;
+				margin-bottom: 0.25rem;
+
+				font-size: 1.25rem;
+				font-style: italic;
+				font-feature-settings: "swsh";
+			}
+
+			ul {
+				margin: 0;
+			}
+		}
+
+		.metadata {
+			font-size: 0.9em;
+
+			.sep {
+				margin: 0 0.5ch;
+			}
+		}
+
+		main {
+			margin: 2rem 0;
+		}
+	</style>
+</PageLayout>
