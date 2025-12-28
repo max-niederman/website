@@ -54,6 +54,10 @@
 	blockquote {
 		font-style: italic;
 
+		p:nth-last-of-type(1) {
+			margin-bottom: 0;
+		}
+
 		cite,
 		figcaption {
 			display: block;
