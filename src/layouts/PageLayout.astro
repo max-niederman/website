@@ -4,16 +4,16 @@ import BaseLayout from "./BaseLayout.astro";
 import type { HeadingTree } from "../markdown/heading-tree";
 
 export interface Props {
-    title: string;
-    headingTree?: HeadingTree;
+	title: string;
+	headingTree?: HeadingTree;
 }
 const { title, headingTree } = Astro.props;
 ---
 
 <BaseLayout {title}>
-    <Nav {headingTree} />
+	<Nav {headingTree} />
 
-    <slot />
+	<slot />
 </BaseLayout>
 
 <style lang="scss">

@@ -30,7 +30,17 @@ const tradesCollection = defineCollection({
 	}),
 });
 
+const archiveCollection = defineCollection({
+	type: "content",
+	schema: z.object({
+		title: z.string(),
+		authors: z.array(z.string()),
+		published: z.date(),
+	}),
+});
+
 export const collections = {
 	posts: postsCollection,
 	trades: tradesCollection,
+	archive: archiveCollection,
 };
